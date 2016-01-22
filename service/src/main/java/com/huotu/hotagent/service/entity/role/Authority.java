@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Authority {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /**
      * 权限名字,以"ROLE_"开头的字符串

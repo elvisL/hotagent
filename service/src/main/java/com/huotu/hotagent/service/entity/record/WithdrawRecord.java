@@ -2,6 +2,8 @@ package com.huotu.hotagent.service.entity.record;
 
 import com.huotu.hotagent.service.common.AuditStatus;
 import com.huotu.hotagent.service.entity.role.Agent;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +14,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "withdrawRecord")
+@Getter
+@Setter
 public class WithdrawRecord {
 
     @Id
@@ -20,10 +24,10 @@ public class WithdrawRecord {
     private Long id;
 
     /**
-     * 体现金额
+     * 金额
      */
-    @Column(name = "sum")
-    private int sum;
+    @Column(name = "money")
+    private double money;
 
     /**
      * 审核状态
@@ -32,9 +36,10 @@ public class WithdrawRecord {
     private AuditStatus auditStatus;
 
     /**
-     * 创建日期
+     * 创建时间
      */
     @Column(name = "createTime")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 
     /**

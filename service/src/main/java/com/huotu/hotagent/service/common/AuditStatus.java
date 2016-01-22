@@ -5,7 +5,7 @@ package com.huotu.hotagent.service.common;
  */
 public enum AuditStatus {
     APPLYING(0,"申请中"),
-    PROCESSED(1,"已体现");
+    PROCESSED(1,"已审核");
 
     private int value;
     private String name;

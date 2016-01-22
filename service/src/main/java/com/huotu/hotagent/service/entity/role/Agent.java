@@ -43,13 +43,13 @@ public class Agent extends Login {
      * 余额
      */
     @Column(name = "balance")
-    private int balance;
+    private double balance;
 
     /**
      * 佣金
      */
     @Column(name = "commision")
-    private int commision;
+    private double commision;
 
     /**
      * 省
