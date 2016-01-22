@@ -24,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 /**
  * Created by allan on 1/22/16.
@@ -94,7 +95,6 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
 
         SpringResourceTemplateResolver springResourceTemplateResolver = new SpringResourceTemplateResolver();
-        springResourceTemplateResolver.setOrder(1);
         springResourceTemplateResolver.setPrefix("/");
         springResourceTemplateResolver.setSuffix(".html");
         springResourceTemplateResolver.setApplicationContext(applicationContext);
@@ -105,7 +105,6 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
             springResourceTemplateResolver.setCacheable(false);
         springTemplateEngine.setTemplateResolver(springResourceTemplateResolver);
         resolver.setTemplateEngine(springTemplateEngine);
-        resolver.setOrder(1);
         resolver.setCharacterEncoding(StringConstant.UTF8);
         resolver.setContentType("text/html; charset=UTF-8");
         return resolver;
