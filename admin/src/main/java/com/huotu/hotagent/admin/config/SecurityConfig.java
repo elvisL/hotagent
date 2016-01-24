@@ -9,13 +9,10 @@
 
 package com.huotu.hotagent.admin.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
 /**
  * Created by allan on 1/22/16.
  */
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig {
 }

@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.admin.config;
 
+import com.huotu.hotagent.admin.config.thymeleaf.dialects.HotAgentDialect;
 import com.huotu.hotagent.common.constant.StringConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -24,6 +25,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Created by allan on 1/22/16.
@@ -83,6 +88,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         }
     }
 
+
     /**
      * thymeleaf解析器
      *
@@ -99,15 +105,19 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         springResourceTemplateResolver.setSuffix(".html");
         springResourceTemplateResolver.setApplicationContext(applicationContext);
         springResourceTemplateResolver.setCharacterEncoding(StringConstant.UTF8);
+        springResourceTemplateResolver.setTemplateMode(TemplateMode.HTML);
 
         //设置缓存
         if (environment.acceptsProfiles("development"))
             springResourceTemplateResolver.setCacheable(false);
         springTemplateEngine.setTemplateResolver(springResourceTemplateResolver);
+        springTemplateEngine.setAdditionalDialects(new HashSet<>(Arrays.asList(
+                new HotAgentDialect()
+        )));
         resolver.setTemplateEngine(springTemplateEngine);
         resolver.setOrder(1);
         resolver.setCharacterEncoding(StringConstant.UTF8);
-        resolver.setContentType("text/html; charset=UTF-8");
+
         return resolver;
     }
 
