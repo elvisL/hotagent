@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String loginPage = "/index";
     public static final String loginSuccessURL = "/loginSuccess";
@@ -52,34 +51,39 @@ public class SecurityConfig {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
-    @Configuration
-    public static class ClassicWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/assets/**",
+                "/views/**"
+        );
+    }
 
-        @Override
-        public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers(STATIC_RESOURCE_PATH);
-        }
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .headers().frameOptions().sameOrigin()
-                    .and()
-                    .authorizeRequests()
-                    .antMatchers("/")
-                    .permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                    .csrf().disable()
-                    .formLogin()
-                    .loginPage(loginPage)
-                    .defaultSuccessUrl(loginSuccessURL, true)
-                    .failureUrl(loginFailedURL)
-                    .permitAll()
-                    .and()
-                    .logout()
-                    .logoutSuccessUrl(logoutSuccessURL);
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .headers().frameOptions().sameOrigin()
+                .and()
+                .authorizeRequests()
+                .antMatchers(
+                        "/",
+                        "/assets/**",
+                        "/views/**"
+                )
+                .permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .csrf().disable()
+                .formLogin()
+                .loginPage(loginPage)
+                .defaultSuccessUrl(loginSuccessURL, true)
+                .failureUrl(loginFailedURL)
+                .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl(logoutSuccessURL);
 
         }
     }
+
 }

@@ -38,18 +38,13 @@ import java.util.HashSet;
 @ComponentScan(basePackages = {
         "com.huotu.hotagent.admin"
 })
-@Import(SecurityConfig.class)
+//@Import(SecurityConfig.class)
 public class MVCConfig extends WebMvcConfigurerAdapter {
     /**
      * 静态资源处理,加在这里
      */
     private static String[] STATIC_RESOURCE_PATH = {
-            "css",
-            "fonts",
-            "holder.js",
-            "images",
-            "js",
-            "_resources"
+            "assets"
     };
 
     @Autowired
