@@ -9,7 +9,6 @@
 
 package com.huotu.hotagent.service.entity.role;
 
-import com.huotu.hotagent.service.common.AgentLevel;
 import com.huotu.hotagent.service.common.AgentType;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +38,8 @@ public class Agent extends Login {
     /**
      * 代理商级别
      */
-    @Column(name = "level")
+    @ManyToOne
+    @JoinColumn(name = "agentLevel")
     private AgentLevel level;
 
     /**

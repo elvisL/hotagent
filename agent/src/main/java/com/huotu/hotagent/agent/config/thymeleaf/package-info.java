@@ -7,18 +7,8 @@
  * 2013-2016. All rights reserved.
  */
 
-package com.huotu.hotagent.admin.controller;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 /**
+ * thymeleaf相关dialog等
  * Created by allan on 1/24/16.
  */
-@Controller
-public class IndexController {
-    @RequestMapping("/index")
-    public String index() {
-        return "admin/agent/agent_edit";
-    }
-}
+package com.huotu.hotagent.agent.config.thymeleaf;
