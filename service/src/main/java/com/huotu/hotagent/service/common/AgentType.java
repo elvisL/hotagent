@@ -9,21 +9,22 @@
 
 package com.huotu.hotagent.service.common;
 
+import com.huotu.hotagent.common.ienum.ICommonEnum;
+
 /**
  * 代理商类型
  * Created by cwb on 2016/1/21.
  */
-public enum AgentType {
+public enum AgentType implements ICommonEnum{
     NORMAL(0,"普通代理"),
     SOLE(1,"独家代理");
 
+    private int value;
+    private String name;
     AgentType(int value, String name) {
         this.value = value;
         this.name = name;
     }
-
-    private int value;
-    private String name;
 
     public int getValue() {
         return value;

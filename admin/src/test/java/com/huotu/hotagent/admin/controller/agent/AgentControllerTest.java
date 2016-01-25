@@ -11,6 +11,8 @@ package com.huotu.hotagent.admin.controller.agent;
 
 import com.huotu.hotagent.admin.WebTest;
 import com.huotu.hotagent.admin.controller.agent.pages.AgentEditPage;
+import com.huotu.hotagent.common.ienum.EnumHelper;
+import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.Agent;
 import org.junit.Test;
 
@@ -42,7 +44,12 @@ public class AgentControllerTest extends WebTest {
         randomAgent.setCreateTime(now);
         randomAgent.setName(UUID.randomUUID().toString());
         randomAgent.setLevel(initLevel());
-//        randomAgent.setType();
-//        random.nextInt()
+        int agentType = random.nextInt(2);
+        AgentType randomType = EnumHelper.getEnumType(AgentType.class, agentType);
+        randomAgent.setType(randomType);
+        randomAgent.setBalance(random.nextInt(101));
+        randomAgent.setProvince("浙江省");
+        randomAgent.setCity("杭州市");
+        randomAgent.setDistrict("滨江区");
     }
 }
