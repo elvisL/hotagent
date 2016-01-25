@@ -14,13 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{~/assets/images/favicon.png}">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
 
     <title>Bracket Responsive Bootstrap3 Admin</title>
 
-    <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{~/assets/css/style.default.css}"/>
 
-    <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{~/assets/css/bootstrap-fileupload.min.css}"/>
+    <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
 </head>
 
@@ -33,7 +34,7 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="fragment/left :: left (activeMenu='agentEdit')">
+    <div class="leftpanel" th:replace="assets/templates/left :: left (activeMenu='agentEdit')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
@@ -44,7 +45,7 @@
             <!-- This is only visible to small devices -->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media userlogged">
-                    <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object" th:src="@{~/assets/images/photos/loggeduser.png}">
+                    <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
 
                     <div class="media-body">
                         <h4>John Doe</h4>
@@ -135,7 +136,7 @@
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="fragment/header :: header">
+        <div class="headerbar" th:replace="assets/templates/header :: header">
 
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
@@ -145,7 +146,7 @@
                     <li>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <img src="../../assets/images/photos/loggeduser.png" th:src="@{~/assets/images/photos/loggeduser.png}"/>
+                                <img src="../../assets/images/photos/loggeduser.png" th:src="@{/assets/images/photos/loggeduser.png}"/>
                                 John Doe
                                 <span class="caret"></span>
                             </button>
@@ -277,7 +278,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/userprofile.png" th:src="@{~/assets/images/photos/userprofile.png}" class="media-object">
+                                <img alt="" src="../../assets/images/photos/userprofile.png" th:src="@{/assets/images/photos/userprofile.png}" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -289,7 +290,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user1.png" th:src="@{~/assets/images/photos/user1.png}" class="media-object">
+                                <img alt="" src="../../assets/images/photos/user1.png" th:src="@{/assets/images/photos/user1.png}" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -302,7 +303,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{~/assets/images/photos/user2.png}" class="media-object">
+                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{/assets/images/photos/user2.png}" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -314,7 +315,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" th:src="@{~/assets/images/photos/user3.png}" class="media-object">
+                                <img alt="" src="../../assets/images/photos/user3.png" th:src="@{/assets/images/photos/user3.png}" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -326,7 +327,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" th:src="@{~/assets/images/photos/user4.png}" class="media-object">
+                                <img alt="" src="../../assets/images/photos/user4.png" th:src="@{/assets/images/photos/user4.png}" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -344,7 +345,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" th:src="@{~/assets/images/photos/user5.png}" class="media-object">
+                                <img alt="" src="../../assets/images/photos/user5.png" th:src="@{/assets/images/photos/user5.png}" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -356,7 +357,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{~/assets/images/photos/user2.png}" class="media-object">
+                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{/assets/images/photos/user2.png}" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -575,22 +576,22 @@
     </div><!-- rightpanel -->
 
 </section>
-<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{~/assets/js/jquery-1.10.2.min.js}"></script>
-<script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{~/assets/js/jquery-migrate-1.2.1.min.js}"></script>
-<script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{~/assets/js/jquery-ui-1.10.3.min.js}"></script>
-<script src="../../assets/js/bootstrap.min.js" th:src="@{~/assets/js/bootstrap.min.js}"></script>
-<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{~/assets/js/jquery.sparkline.min.js}"></script>
-<script src="../../assets/js/toggles.min.js" th:src="@{~/assets/js/toggles.min.js}"></script>
-<script src="../../assets/js/retina.min.js" th:src="@{~/assets/js/retina.min.js}"></script>
-<script src="../../assets/js/jquery.cookies.js" th:src="@{~/assets/js/jquery.cookies.js}"></script>
+<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
+<script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
+<script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+<script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
+<script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
+<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
-<script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{~/assets/js/bootstrap-fileupload.min.js}"></script>
-<script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{~/assets/js/bootstrap-timepicker.min.js}"></script>
+<script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
+<script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
 
-<script src="../../assets/js/jquery.validate.min.js" th:src="@{~/assets/js/jquery.validate.min.js}"></script>
-<script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{~/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
+<script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
 
-<script src="../../assets/js/custom.js" th:src="@{~/assets/js/custom.js}"></script>
+<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
 <script type="text/javascript">
     $(function () {

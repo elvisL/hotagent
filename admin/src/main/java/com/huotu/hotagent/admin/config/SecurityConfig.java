@@ -47,9 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
-                "/admin/**",
                 "/assets/**",
-                "/fragment/**"
+                "/views/**"
         );
     }
 
@@ -62,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/",
                         "/assets/**",
-                        "/fragment/**"
+                        "/views/**"
                 )
                 .permitAll()
                 .anyRequest().authenticated()

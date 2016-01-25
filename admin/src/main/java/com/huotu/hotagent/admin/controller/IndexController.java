@@ -23,6 +23,6 @@ public class IndexController {
 
     @RequestMapping("/index")
     public String index() {
-        return "admin/agent/agent_edit";
+        return "views/agent/agent_edit";
     }
 }
