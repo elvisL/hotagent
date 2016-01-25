@@ -24,8 +24,12 @@ public class AgentEditPage extends AbstractPage {
     private WebElement submitButton;
     @FindBy(css = "#editForm")
     private WebElement form;
-    @FindBy(css = "input[name='agentName']")
+    @FindBy(css = "input[name='name']")
     private WebElement agentName;
+    @FindBy(css = "input[name='username']")
+    private WebElement username;
+    @FindBy(css = "input[name='password']")
+    private WebElement password;
 
     public AgentEditPage(WebDriver webDriver) {
         super(webDriver);
@@ -39,8 +43,10 @@ public class AgentEditPage extends AbstractPage {
     public void submit(Agent randomAgent) {
         agentName.clear();
         agentName.sendKeys(randomAgent.getName());
-        // TODO: 1/25/16
-
+        username.clear();
+        username.sendKeys(randomAgent.getUsername());
+        password.clear();
+        password.sendKeys(randomAgent.getPassword());
         submitButton.click();
     }
 }

@@ -1,7 +1,7 @@
 package com.huotu.hotagent.service.service.impl;
 
 import com.huotu.hotagent.service.entity.product.Price;
-import com.huotu.hotagent.service.repository.PriceRepository;
+import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

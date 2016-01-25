@@ -1,4 +1,4 @@
-package com.huotu.hotagent.service.repository;
+package com.huotu.hotagent.service.repository.product;
 
 import com.huotu.hotagent.service.entity.product.Price;
 import org.springframework.data.jpa.repository.JpaRepository;

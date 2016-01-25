@@ -1,7 +1,7 @@
 package com.huotu.hotagent.service.service.impl;
 
 import com.huotu.hotagent.service.entity.role.Agent;
-import com.huotu.hotagent.service.repository.AgentRepository;
+import com.huotu.hotagent.service.repository.role.AgentRepository;
 import com.huotu.hotagent.service.service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

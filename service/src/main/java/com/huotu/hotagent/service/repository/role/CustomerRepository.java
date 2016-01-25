@@ -1,4 +1,4 @@
-package com.huotu.hotagent.service.repository;
+package com.huotu.hotagent.service.repository.role;
 
 import com.huotu.hotagent.service.entity.role.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

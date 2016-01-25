@@ -1,15 +1,13 @@
 package com.huotu.hotagent.service.service.impl;
 
 import com.huotu.hotagent.service.entity.role.Login;
-import com.huotu.hotagent.service.repository.LoginRepository;
+import com.huotu.hotagent.service.repository.role.LoginRepository;
 import com.huotu.hotagent.service.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 /**
  * 登录服务

@@ -34,9 +34,11 @@ public class AgentControllerTest extends WebTest {
     private AgentRepository agentRepository;
     private String mockAgentUsername;
     private String mockAgentPassword;
+    private String mockAgentName;
 
     @Before
     public void initData() {
+        mockAgentName = "代理商1";
         mockAgentUsername = UUID.randomUUID().toString();
         mockAgentPassword = UUID.randomUUID().toString();
     }
@@ -57,7 +59,7 @@ public class AgentControllerTest extends WebTest {
         randomAgent.setUsername(mockAgentUsername);
         randomAgent.setPassword(mockAgentPassword);
         randomAgent.setCreateTime(now);
-        randomAgent.setName(UUID.randomUUID().toString());
+        randomAgent.setName(mockAgentName);
         randomAgent.setLevel(initLevel());
         int agentType = random.nextInt(2);
         AgentType randomType = EnumHelper.getEnumType(AgentType.class, agentType);
@@ -77,7 +79,7 @@ public class AgentControllerTest extends WebTest {
         agentEditPage.submit(randomAgent);
 
         Agent agent = agentRepository.findByUsername(mockAgentUsername);
-        Assert.assertEquals(mockAgentPassword,agent.getPassword());
+        Assert.assertEquals(mockAgentName,agent.getName());
         //// TODO: 1/25/16 断言,与数据库进行比较
     }
 }
