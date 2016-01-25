@@ -102,9 +102,9 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         springResourceTemplateResolver.setApplicationContext(applicationContext);
         springResourceTemplateResolver.setCharacterEncoding(StringConstant.UTF8);
         //设置缓存
-        if (environment.acceptsProfiles("development"))
+        if (environment.acceptsProfiles("development")) {
             springResourceTemplateResolver.setCacheable(false);
-
+        }
 
         springTemplateEngine.setTemplateResolver(springResourceTemplateResolver);
         springTemplateEngine.setAdditionalDialects(new HashSet<>(Arrays.asList(
