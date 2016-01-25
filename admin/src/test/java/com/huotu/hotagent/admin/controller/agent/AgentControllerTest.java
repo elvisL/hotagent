@@ -14,16 +14,22 @@ import com.huotu.hotagent.admin.controller.agent.pages.AgentEditPage;
 import com.huotu.hotagent.common.ienum.EnumHelper;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.Agent;
+import com.huotu.hotagent.service.repository.product.ProductRepository;
+import com.huotu.hotagent.service.repository.role.AgentRepository;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
-import java.util.Random;
 import java.util.UUID;
 
 /**
  * Created by allan on 1/25/16.
  */
 public class AgentControllerTest extends WebTest {
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private AgentRepository agentRepository;
 
     @Test
     public void testAgentList() throws Exception {
@@ -32,7 +38,6 @@ public class AgentControllerTest extends WebTest {
 
     @Test
     public void testAgentEdit() throws Exception {
-        final Random random = new Random();
         Date now = new Date();
         webDriver.get("http://localhost:8080/agent/agentEdit");
         AgentEditPage agentEditPage = initPage(AgentEditPage.class);
@@ -51,5 +56,16 @@ public class AgentControllerTest extends WebTest {
         randomAgent.setProvince("浙江省");
         randomAgent.setCity("杭州市");
         randomAgent.setDistrict("滨江区");
+        randomAgent.setContacts(UUID.randomUUID().toString());
+        randomAgent.setPhoneNo(randomMobile());
+        randomAgent.setAddress(UUID.randomUUID().toString());
+        randomAgent.setMail(randomEmailAddress());
+        randomAgent.setQq(randomMobile());
+        randomAgent.setParent(null);
+        randomAgent.setQualifyUri(UUID.randomUUID().toString());
+
+        agentEditPage.submit(randomAgent);
+
+        //// TODO: 1/25/16 断言,与数据库进行比较
     }
 }

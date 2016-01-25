@@ -12,11 +12,21 @@ package com.huotu.hotagent.admin.controller.agent.pages;
 import com.huotu.hotagent.admin.pages.AbstractPage;
 import com.huotu.hotagent.service.entity.role.Agent;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by allan on 1/25/16.
  */
 public class AgentEditPage extends AbstractPage {
+
+    @FindBy(css = "button[class~=btn-primary]")
+    private WebElement submitButton;
+    @FindBy(css = "#editForm")
+    private WebElement form;
+    @FindBy(css = "input[name='agentName']")
+    private WebElement agentName;
+
     public AgentEditPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -27,6 +37,10 @@ public class AgentEditPage extends AbstractPage {
      * @param randomAgent
      */
     public void submit(Agent randomAgent) {
+        agentName.clear();
+        agentName.sendKeys(randomAgent.getName());
+        // TODO: 1/25/16
 
+        submitButton.click();
     }
 }
