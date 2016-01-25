@@ -21,4 +21,5 @@ public class IndexController {
     public String index() {
         return "views/agent/agent_edit";
     }
+
 }

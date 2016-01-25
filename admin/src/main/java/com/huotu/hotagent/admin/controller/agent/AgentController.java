@@ -10,6 +10,9 @@
 package com.huotu.hotagent.admin.controller.agent;
 
 import com.huotu.hotagent.service.entity.role.Agent;
+import com.huotu.hotagent.service.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/agent")
 public class AgentController {
+
+    @Autowired
+    private LoginService loginService;
+
     @RequestMapping(value = "/agentList", method = RequestMethod.GET)
     public String AgentList() {
         return null;
@@ -35,6 +42,7 @@ public class AgentController {
     public String AgentEdit(Agent requestAgent) {
         Agent agent = new Agent();
         agent.setName(requestAgent.getName());
+        loginService.newLogin(agent,requestAgent.getPassword());
         // TODO: 1/25/16
         return "redirect:/agent/agentEdit";
     }

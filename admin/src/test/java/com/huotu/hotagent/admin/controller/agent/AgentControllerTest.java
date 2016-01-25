@@ -16,6 +16,8 @@ import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.Agent;
 import com.huotu.hotagent.service.repository.product.ProductRepository;
 import com.huotu.hotagent.service.repository.role.AgentRepository;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +32,14 @@ public class AgentControllerTest extends WebTest {
     private ProductRepository productRepository;
     @Autowired
     private AgentRepository agentRepository;
+    private String mockAgentUsername;
+    private String mockAgentPassword;
+
+    @Before
+    public void initData() {
+        mockAgentUsername = UUID.randomUUID().toString();
+        mockAgentPassword = UUID.randomUUID().toString();
+    }
 
     @Test
     public void testAgentList() throws Exception {
@@ -44,8 +54,8 @@ public class AgentControllerTest extends WebTest {
 
         //开始构造一个虚拟的agent
         Agent randomAgent = new Agent();
-        randomAgent.setUsername(UUID.randomUUID().toString());
-        randomAgent.setPassword(UUID.randomUUID().toString());
+        randomAgent.setUsername(mockAgentUsername);
+        randomAgent.setPassword(mockAgentPassword);
         randomAgent.setCreateTime(now);
         randomAgent.setName(UUID.randomUUID().toString());
         randomAgent.setLevel(initLevel());
@@ -66,6 +76,8 @@ public class AgentControllerTest extends WebTest {
 
         agentEditPage.submit(randomAgent);
 
+        Agent agent = agentRepository.findByUsername(mockAgentUsername);
+        Assert.assertEquals(mockAgentPassword,agent.getPassword());
         //// TODO: 1/25/16 断言,与数据库进行比较
     }
 }
