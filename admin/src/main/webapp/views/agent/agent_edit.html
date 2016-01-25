@@ -182,7 +182,7 @@
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm" action="agent_edit.html" class="form-horizontal form-bordered">
+                    <form id="editForm" action="agent_edit.html" th:action="@{/agent/agentEdit}" th:method="post" class="form-horizontal form-bordered">
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>

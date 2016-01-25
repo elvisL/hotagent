@@ -10,6 +10,7 @@
 package com.huotu.hotagent.admin;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -25,11 +26,13 @@ import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
+import java.util.Random;
 
 /**
  * Created by allan on 1/25/16.
  */
 public class SpringWebTest {
+    protected final Random random = new Random();
     /**
      * 应用程序上下文
      */
@@ -73,12 +76,16 @@ public class SpringWebTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void initTest() throws Exception {
         //初始化mockMvc
         this.createMockMvc();
         //初始化webClient和driver
-        this.webClient = MockMvcWebClientBuilder.mockMvcSetup(this.mockMvc).build();
-        this.webDriver = MockMvcHtmlUnitDriverBuilder.mockMvcSetup(this.mockMvc).build();
+        this.webClient = MockMvcWebClientBuilder
+                .mockMvcSetup(this.mockMvc)
+                .build();
+        this.webDriver = MockMvcHtmlUnitDriverBuilder
+                .mockMvcSetup(this.mockMvc)
+                .build();
     }
 
     @After
@@ -86,5 +93,29 @@ public class SpringWebTest {
         if (webDriver != null) {
             webDriver.close();
         }
+    }
+
+    /**
+     * <p>位数不足无法保证其唯一性,需要客户端代码自行校验唯一性.</p>
+     * <p>具体的区间是10000000000-19999999999</p>
+     *
+     * @return 获取一个随机的手机号码
+     */
+    protected String randomMobile() {
+        String p1 = String.valueOf(100000 + random.nextInt(100000));
+        //还有5位 而且必须保证5位
+        String p2 = String.format("%05d", random.nextInt(100000));
+        return p1 + p2;
+    }
+
+    /**
+     * @return 获取随机email地址
+     */
+    protected String randomEmailAddress() {
+        return RandomStringUtils.randomAlphabetic(random.nextInt(5) + 3)
+                + "@"
+                + RandomStringUtils.randomAlphabetic(random.nextInt(5) + 3)
+                + "."
+                + RandomStringUtils.randomAlphabetic(random.nextInt(2) + 2);
     }
 }

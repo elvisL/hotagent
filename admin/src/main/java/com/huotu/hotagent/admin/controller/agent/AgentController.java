@@ -32,8 +32,10 @@ public class AgentController {
     }
 
     @RequestMapping(value = "/agentEdit", method = RequestMethod.POST)
-    public String AgentEdit(Agent agent) {
-        
+    public String AgentEdit(Agent requestAgent) {
+        Agent agent = new Agent();
+        agent.setName(requestAgent.getName());
+        // TODO: 1/25/16
         return "redirect:/agent/agentEdit";
     }
 }
