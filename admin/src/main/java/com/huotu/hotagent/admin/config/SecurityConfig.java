@@ -34,6 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String loginFailedURL = "/loginFailed";
     public static final String logoutSuccessURL = "/";
 
+    private static String[] STATIC_RESOURCE_PATH = {
+            "/assets/**",
+            "/views/**"
+    };
+
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -46,10 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(
-                "/assets/**",
-                "/views/**"
-        );
+        web.ignoring().antMatchers(STATIC_RESOURCE_PATH);
     }
 
     @Override
@@ -58,9 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests()
-                .antMatchers(
-                        "/"
-                )
+                .antMatchers("/")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -75,5 +75,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl(logoutSuccessURL);
 
     }
-
 }
+
