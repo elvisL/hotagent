@@ -61,4 +61,10 @@ public class Customer {
     @Column(name = "loginName")
     private String loginName;
 
+    /**
+     * 销售数量
+     */
+    @Column(name = "saleNum")
+    private int saleNum;
+
 }

@@ -57,8 +57,8 @@ public class Agent extends Login {
     /**
      * 佣金
      */
-    @Column(name = "commision")
-    private double commision;
+    @Column(name = "commission")
+    private double commission;
 
     /**
      * 省

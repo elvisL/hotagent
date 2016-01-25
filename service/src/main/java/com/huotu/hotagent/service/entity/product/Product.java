@@ -35,6 +35,6 @@ public class Product {
     /**
      * 产品描述
      */
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "productDesc")
+    private String productDesc;
 }
