@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+  ~ 版权所有:杭州火图科技有限公司
+  ~ 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+  ~
+  ~ (c) Copyright Hangzhou Hot Technology Co., Ltd.
+  ~ Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+  ~ 2013-2016. All rights reserved.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.default.css" th:href="@{/css/style.default.css}"/>
+
+    <script src="../js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="../js/jquery-migrate-1.2.1.min.js" th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../js/retina.min.js" th:src="@{/js/retina.min.js}"></script>
+    <script src="../js/jquery.cookies.js" th:src="@{/js/jquery.cookies.js}"></script>
+
+    <script src="../js/custom.js" th:src="@{/js/custom.js}"></script>
+    <title>代理商后台头部</title>
+</head>
+<body>
+<div class="headerbar" th:fragment="header">
+
+    <a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+
+    <div class="header-right">
+        <ul class="headermenu">
+            <li>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <img src="images/photos/loggeduser.png" alt=""/>
+                        John Doe
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> 修改密码</a></li>
+                        <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i> 注销登录</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div><!-- header-right -->
+
+</div><!-- headerbar -->
+</body>
+</html>

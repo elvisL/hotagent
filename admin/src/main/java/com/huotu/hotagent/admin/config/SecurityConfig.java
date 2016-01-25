@@ -26,12 +26,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
     public static final String loginPage = "/index";
     public static final String loginSuccessURL = "/loginSuccess";
     public static final String loginFailedURL = "/loginFailed";
-    public static final String logoutSeccessURL = "/";
+    public static final String logoutSuccessURL = "/";
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -43,25 +43,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .headers().frameOptions().sameOrigin()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/")
-                .permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .csrf().disable()
-                .formLogin()
-                .loginPage(loginPage)
-                .defaultSuccessUrl(loginSuccessURL, true)
-                .failureUrl(loginFailedURL)
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl(logoutSeccessURL);
+    @Configuration
+    public static class ClassicWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .headers().frameOptions().sameOrigin()
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/")
+                    .permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                    .csrf().disable()
+                    .formLogin()
+                    .loginPage(loginPage)
+                    .defaultSuccessUrl(loginSuccessURL, true)
+                    .failureUrl(loginFailedURL)
+                    .permitAll()
+                    .and()
+                    .logout()
+                    .logoutSuccessUrl(logoutSuccessURL);
 
+        }
     }
 }

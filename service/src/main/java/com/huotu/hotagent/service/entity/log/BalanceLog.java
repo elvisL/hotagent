@@ -14,7 +14,7 @@ import java.util.Date;
  * Created by cwb on 2016/1/22.
  */
 @Entity
-@Table(name = "moneyLog")
+@Table(name = "age_balanceLog")
 @Getter
 @Setter
 public class BalanceLog {

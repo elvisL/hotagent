@@ -22,7 +22,7 @@ import java.util.Date;
  * Created by cwb on 2016/1/22.
  */
 @Entity
-@Table(name = "withdrawRecord")
+@Table(name = "age_withdrawRecord")
 @Getter
 @Setter
 public class WithdrawRecord {

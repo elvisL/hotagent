@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Created by cwb on 2016/1/22.
  */
 @Entity
-@Table(name = "price")
+@Table(name = "age_price")
 @Getter
 @Setter
 public class Price {

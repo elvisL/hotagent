@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Createy cwb on 2016/1/22.
  */
 @Entity
-@Table(name = "product",uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
+@Table(name = "age_product",uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Getter
 @Setter
 public class Product {

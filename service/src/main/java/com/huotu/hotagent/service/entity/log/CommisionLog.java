@@ -13,7 +13,7 @@ import java.util.Date;
  * Created by cwb on 2016/1/22.
  */
 @Entity
-@Table(name = "commisionRecord")
+@Table(name = "age_commisionLog")
 @Getter
 @Setter
 public class CommisionLog {

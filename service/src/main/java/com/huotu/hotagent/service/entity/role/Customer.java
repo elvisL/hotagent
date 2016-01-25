@@ -10,7 +10,7 @@ import javax.persistence.*;
  * Created cwb on 2016/1/22.
  */
 @Entity
-@Table(name = "customer")
+@Table(name = "age_customer")
 @Getter
 @Setter
 public class Customer {
@@ -30,7 +30,6 @@ public class Customer {
      */
     @Column(name = "company")
     private String company;
-
     /**
      * 产品id
      */

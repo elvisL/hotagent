@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -33,6 +34,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 @ComponentScan(basePackages = {
         "com.huotu.hotagent.admin"
 })
+@Import(SecurityConfig.class)
 public class MVCConfig extends WebMvcConfigurerAdapter {
     /**
      * 静态资源处理,加在这里

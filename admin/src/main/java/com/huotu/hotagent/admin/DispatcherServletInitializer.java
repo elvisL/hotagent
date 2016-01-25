@@ -10,6 +10,7 @@
 package com.huotu.hotagent.admin;
 
 import com.huotu.hotagent.admin.config.MVCConfig;
+import com.huotu.hotagent.service.config.ServiceConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -22,7 +23,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{
-                MVCConfig.class
+                MVCConfig.class, ServiceConfig.class
         };
     }
 

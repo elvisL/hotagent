@@ -16,7 +16,7 @@ import javax.persistence.*;
  * Created by cwb on 2016/1/21.
  */
 @Entity
-@Table(name = "age_authority",uniqueConstraints = @UniqueConstraint(columnNames = {"loginName"}))
+@Table(name = "age_authority",uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Authority {
 
     @Id
