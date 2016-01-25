@@ -20,7 +20,7 @@ import java.util.Date;
  * Created by cwb on 2016/1/21.
  */
 @Entity
-@Table(name = "age_login",uniqueConstraints = @UniqueConstraint(columnNames = {"loginName"}))
+@Table(name = "age_login",uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Login implements UserDetails,Serializable {
 

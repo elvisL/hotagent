@@ -38,7 +38,7 @@ import java.util.HashSet;
 @ComponentScan(basePackages = {
         "com.huotu.hotagent.admin"
 })
-//@Import(SecurityConfig.class)
+@Import(SecurityConfig.class)
 public class MVCConfig extends WebMvcConfigurerAdapter {
     /**
      * 静态资源处理,加在这里

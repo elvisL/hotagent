@@ -30,8 +30,8 @@ public class Authority {
     /**
      * 权限描述，前端页面显示的具体描述
      */
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "authDesc")
+    private String authDesc;
 
     public Long getId() {
         return id;
@@ -49,11 +49,11 @@ public class Authority {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getAuthDesc() {
+        return authDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setAuthDesc(String authDesc) {
+        this.authDesc = authDesc;
     }
 }
