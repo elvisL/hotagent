@@ -11,15 +11,15 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:agent="http://agent.io" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/style.default.css" th:href="@{/css/style.default.css}"/>
+    <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
 
-    <script src="../js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
-    <script src="../js/jquery-migrate-1.2.1.min.js" th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
-    <script src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-    <script src="../js/retina.min.js" th:src="@{/js/retina.min.js}"></script>
-    <script src="../js/jquery.cookies.js" th:src="@{/js/jquery.cookies.js}"></script>
+    <script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
+    <script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+    <script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
+    <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
-    <script src="../js/custom.js" th:src="@{/js/custom.js}"></script>
+    <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
     <title>左侧菜单栏</title>
 </head>
@@ -34,7 +34,7 @@
         <!-- This is only visible to small devices -->
         <div class="visible-xs hidden-sm hidden-md hidden-lg">
             <div class="media userlogged">
-                <img alt="" src="images/photos/loggeduser.png" class="media-object">
+                <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
 
                 <div class="media-body">
                     <h4>John Doe</h4>
