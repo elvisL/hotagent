@@ -18,7 +18,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 代理商体现记录
+ * 代理商提现记录
  * Created by cwb on 2016/1/22.
  */
 @Entity
