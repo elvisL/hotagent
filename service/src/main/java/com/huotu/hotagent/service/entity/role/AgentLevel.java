@@ -28,4 +28,5 @@ public class AgentLevel {
     private Long levelId;
     private String levelName;
     private String levelDesc;
+    private int level;//代理商级别 从0开始0代表一级代理，1代表二级代理，依次类推
 }
