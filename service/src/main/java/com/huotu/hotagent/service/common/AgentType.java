@@ -41,4 +41,16 @@ public enum AgentType implements ICommonEnum{
     public void setName(String name) {
         this.name = name;
     }
+
+    public static AgentType valueOf(int code)
+    {
+        switch (code){
+            case 0:
+                return NORMAL;
+            case 1:
+                return SOLE;
+            default:
+                return null;
+        }
+    }
 }

@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +31,7 @@ public class CustomerController {
     @RequestMapping("/addCustomer")
     public ModelAndView addCustomer(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("/view/addCustomer.html");
+        modelAndView.setViewName("/views/addCustomer.html");
         return modelAndView;
     }
 
@@ -39,7 +40,7 @@ public class CustomerController {
     /**
      *±£´æ¿Í»§
      */
-    @RequestMapping("/saveCustomer")
+    @RequestMapping(value = "/saveCustomer",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveCustomer(@RequestParam(value = "id", defaultValue = "0") Long id,
                                     Customer customer) throws Exception{
