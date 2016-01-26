@@ -1,3 +1,12 @@
+/*
+ * 版权所有:杭州火图科技有限公司
+ * 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+ *
+ * (c) Copyright Hangzhou Hot Technology Co., Ltd.
+ * Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+ * 2013-2016. All rights reserved.
+ */
+
 package com.huotu.hotagent.service.entity.product;
 
 import com.huotu.hotagent.service.common.ProductType;
@@ -11,7 +20,7 @@ import javax.persistence.*;
  * Createy cwb on 2016/1/22.
  */
 @Entity
-@Table(name = "age_product",uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
+@Table(name = "age_product", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Getter
 @Setter
 public class Product {
@@ -37,4 +46,7 @@ public class Product {
      */
     @Column(name = "productDesc")
     private String productDesc;
+
+    @Column(precision = 2)
+    private double basePrice;
 }

@@ -16,7 +16,10 @@ import com.huotu.hotagent.common.ienum.ICommonEnum;
  * Created by cwb on 2016/1/22.
  */
 public enum ProductType implements ICommonEnum {
-    HUOBAN_MALL(0, "伙伴商城");
+    HUOBAN_MALL(0, "伙伴商城"),
+    DSP(1, "DSP广告"),
+    HOT_EDU(2, "云商学院"),
+    THIRDPARTNAR(3, "水图代运营");
     // TODO: 1/25/16
     private int value;
     private String name;

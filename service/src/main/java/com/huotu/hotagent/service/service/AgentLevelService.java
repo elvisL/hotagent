@@ -9,20 +9,18 @@
 
 package com.huotu.hotagent.service.service;
 
-import com.huotu.hotagent.service.entity.product.Price;
-import com.huotu.hotagent.service.entity.product.Product;
+import com.huotu.hotagent.service.entity.role.AgentLevel;
 
 import java.util.List;
 
 /**
- * 产品
- * Created by chendeyu on 2016/1/25.
+ * 代理商等级
+ * Created by allan on 1/26/16.
  */
-public interface ProductService {
+public interface AgentLevelService {
+    AgentLevel save(AgentLevel agentLevel);
 
-    List<Price> showProducts(Long id);
+    List<AgentLevel> agentLevelList();
 
-    Product save(Product product);
-
-    boolean exists();
+    boolean exist();
 }
