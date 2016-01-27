@@ -12,6 +12,11 @@ package com.huotu.hotagent.agent.controller;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.common.AgentType;
+import com.huotu.hotagent.service.entity.role.Agent;
+import com.huotu.hotagent.service.entity.role.AgentLevel;
+import com.huotu.hotagent.service.service.AgentLevelService;
+import com.huotu.hotagent.service.service.AgentService;
+import com.huotu.hotagent.service.service.BalanceLogService;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
@@ -40,6 +45,9 @@ public class AgentController {
 
     @Autowired
     AgentLevelService agentLevelService;
+
+    @Autowired
+    BalanceLogService balanceLogService;
 
 
 
@@ -139,6 +147,25 @@ public class AgentController {
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
         }
         return apiResult;
+    }
+
+    /**
+     *
+     */
+    @RequestMapping(value = "/importBl",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult importBl(@RequestParam(value = "id") Long id,double money) throws Exception{
+
+        ApiResult apiResult = null;
+        try {
+            balanceLogService.importBl(id,money);
+            apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
+        }
+        return apiResult;
+
     }
 
 

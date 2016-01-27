@@ -19,7 +19,8 @@ public enum ProductType implements ICommonEnum {
     HUOBAN_MALL(0, "伙伴商城"),
     DSP(1, "DSP广告"),
     HOT_EDU(2, "云商学院"),
-    THIRDPARTNAR(3, "水图代运营");
+    THIRDPARTNAR(3, "水图代运营"),
+    CESHI(4, "测试商品");
     // TODO: 1/25/16
     private int value;
     private String name;

@@ -15,7 +15,7 @@ public enum ResultCodeEnum {
     LOGINNAME_NOT_AVAILABLE(100,"用户名已存在"),
     AUTHORITY_NULL(700,"请设置权限"),
     SAVE_DATA_ERROR(400,"数据保存出错"),
-    SETTLEMENTNO_NULL(251,"结算单编号为空"),
+    IMPORT_ERROR(401,"余额不足"),
     DATA_NULL(500,"没有传输数据");
 
     //todo 其他状态
