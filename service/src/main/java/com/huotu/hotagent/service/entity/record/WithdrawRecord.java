@@ -10,7 +10,7 @@
 package com.huotu.hotagent.service.entity.record;
 
 import com.huotu.hotagent.service.common.AuditStatus;
-import com.huotu.hotagent.service.entity.role.Agent;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import lombok.Getter;
 import lombok.Setter;
 

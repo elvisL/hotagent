@@ -13,15 +13,18 @@ import com.huotu.hotagent.admin.WebTest;
 import com.huotu.hotagent.admin.controller.agent.pages.AgentEditPage;
 import com.huotu.hotagent.common.ienum.EnumHelper;
 import com.huotu.hotagent.service.common.AgentType;
-import com.huotu.hotagent.service.entity.role.Agent;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.repository.product.ProductRepository;
-import com.huotu.hotagent.service.repository.role.AgentRepository;
+import com.huotu.hotagent.service.repository.role.agent.AgentLevelRepository;
+import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -32,6 +35,8 @@ public class AgentControllerTest extends WebTest {
     private ProductRepository productRepository;
     @Autowired
     private AgentRepository agentRepository;
+    @Autowired
+    private AgentLevelRepository levelRepository;
     private String mockAgentUsername;
     private String mockAgentPassword;
     private String mockAgentName;
@@ -53,14 +58,14 @@ public class AgentControllerTest extends WebTest {
         Date now = new Date();
         webDriver.get("http://localhost:8080/agent/agentEdit");
         AgentEditPage agentEditPage = initPage(AgentEditPage.class);
-
+        List<AgentLevel> agentLevels = levelRepository.findAll();
         //开始构造一个虚拟的agent
         Agent randomAgent = new Agent();
         randomAgent.setUsername(mockAgentUsername);
         randomAgent.setPassword(mockAgentPassword);
         randomAgent.setCreateTime(now);
         randomAgent.setName(mockAgentName);
-        randomAgent.setLevel(initLevel());
+        randomAgent.setLevel(agentLevels.get(0));
         int agentType = random.nextInt(2);
         AgentType randomType = EnumHelper.getEnumType(AgentType.class, agentType);
         randomAgent.setType(randomType);
@@ -79,7 +84,8 @@ public class AgentControllerTest extends WebTest {
         agentEditPage.submit(randomAgent);
 
         Agent agent = agentRepository.findByUsername(mockAgentUsername);
-        Assert.assertEquals(mockAgentName,agent.getName());
+        Assert.assertEquals(mockAgentName, agent.getName());
         //// TODO: 1/25/16 断言,与数据库进行比较
+
     }
 }

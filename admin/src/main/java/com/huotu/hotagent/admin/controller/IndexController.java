@@ -11,15 +11,29 @@ package com.huotu.hotagent.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by allan on 1/24/16.
  */
 @Controller
 public class IndexController {
-    @RequestMapping("/index")
-    public String index() {
-        return "views/agent/agent_edit";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 
+    @RequestMapping("/loginError")
+    public String loginError(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("loginError", request.getAttribute("SPRING_SECURITY_LAST_ERROR"));
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = {"", "/", "/index"})
+    public String index() {
+        return "index";
+    }
 }

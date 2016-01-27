@@ -10,7 +10,7 @@
 package com.huotu.hotagent.admin.controller.agent.pages;
 
 import com.huotu.hotagent.admin.pages.AbstractPage;
-import com.huotu.hotagent.service.entity.role.Agent;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

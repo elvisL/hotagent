@@ -11,16 +11,9 @@ package com.huotu.hotagent.admin;
 
 import com.huotu.hotagent.admin.config.MVCConfig;
 import com.huotu.hotagent.admin.pages.AbstractPage;
-import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.config.ServiceConfig;
-import com.huotu.hotagent.service.entity.product.Product;
-import com.huotu.hotagent.service.entity.role.AgentLevel;
-import com.huotu.hotagent.service.repository.product.ProductRepository;
-import com.huotu.hotagent.service.repository.role.AgentLevelRepository;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.support.PageFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -36,10 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(classes = {MVCConfig.class, ServiceConfig.class})
 @Transactional
 public abstract class WebTest extends SpringWebTest {
-    @Autowired
-    private AgentLevelRepository agentLevelRepository;
-    @Autowired
-    private ProductRepository productRepository;
 
     /**
      * 初始化逻辑页面
@@ -52,28 +41,5 @@ public abstract class WebTest extends SpringWebTest {
         T page = PageFactory.initElements(webDriver, clazz);
         page.setTestInstance(this);
         return page;
-    }
-
-    @Before
-    public void initBaseData() throws Exception {
-        initProduct();
-    }
-
-    /**
-     * 初始化一个等级
-     */
-    public AgentLevel initLevel() {
-        AgentLevel agentLevel1 = new AgentLevel();
-        agentLevel1.setLevelName("一级代理");
-        agentLevel1.setLevelDesc("一级代理");
-        return agentLevelRepository.saveAndFlush(agentLevel1);
-    }
-
-    public void initProduct() {
-        Product product1 = new Product();
-        product1.setName("伙伴商城");
-        product1.setProductType(ProductType.HUOBAN_MALL);
-        product1.setProductDesc("伙伴商城");
-        productRepository.saveAndFlush(product1);
     }
 }

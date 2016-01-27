@@ -11,7 +11,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:agent="http://agent.io" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+    <link rel="stylesheet" href="../css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
     <title>左侧菜单栏</title>
 </head>
 <body>
@@ -25,7 +25,7 @@
         <!-- This is only visible to small devices -->
         <div class="visible-xs hidden-sm hidden-md hidden-lg">
             <div class="media userlogged">
-                <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
+                <img alt="" src="../images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
 
                 <div class="media-body">
                     <h4>John Doe</h4>
@@ -44,13 +44,13 @@
 
         <h5 class="sidebartitle">Navigation</h5>
         <ul class="nav nav-pills nav-stacked nav-bracket">
-            <li agent:active="index"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+            <li agent:active="index"><a href="index.html" th:href="@{/index}"><i class="fa fa-home"></i> <span>首页</span></a></li>
             <li agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">
-                    <li agent:active="agentList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 代理商列表</span></a></li>
-                    <li agent:active="agentEdit"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
-                    <li agent:active="agentLevel"><a href="form-validation.html"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
+                    <li agent:active="agentList"><a href="general-forms.html" th:href="@{/agent/agentList}"><i class="fa fa-caret-right"></i> 代理商列表</span></a></li>
+                    <li agent:active="agentEdit"><a href="form-layouts.html" th:href="@{/agent/agentEdit}"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
+                    <li agent:active="agentLevel"><a href="form-validation.html" th:href="@{/agent/agentLevel}"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
                 </ul>
             </li>
             <li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
@@ -117,7 +117,7 @@
 <script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
-<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
-<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+<script src="../js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+<script src="../js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 </body>
 </html>

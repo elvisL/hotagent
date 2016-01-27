@@ -1,12 +1,21 @@
+/*
+ * ç‰ˆæƒæ‰€æœ‰:æ­å·ç«å›¾ç§‘æŠ€æœ‰é™å…¬å¸
+ * åœ°å€:æµ™æ±Ÿçœæ­å·å¸‚æ»¨æ±ŸåŒºè¥¿å…´è¡—é“é˜¡é™Œè·¯æ™ºæ…§Eè°·Bå¹¢4æ¥¼
+ *
+ * (c) Copyright Hangzhou Hot Technology Co., Ltd.
+ * Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+ * 2013-2016. All rights reserved.
+ */
+
 package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.common.AgentType;
-import com.huotu.hotagent.service.entity.role.Agent;
-import com.huotu.hotagent.service.entity.role.AgentLevel;
-import com.huotu.hotagent.service.service.AgentLevelService;
-import com.huotu.hotagent.service.service.AgentService;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
+import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
+import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +44,7 @@ public class AgentController {
 
 
     /**
-     *ÕË»§ĞÅÏ¢
+     *ï¿½Ë»ï¿½ï¿½ï¿½Ï¢
      */
     @RequestMapping("/showAccount")
     public ModelAndView showAccount(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -49,7 +58,7 @@ public class AgentController {
 
 
     /**
-     *ÎÒµÄ´úÀíÉÌÁĞ±í
+     *ï¿½ÒµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
      */
     @RequestMapping("/myAgents")
     public ModelAndView showAgentList(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -63,7 +72,7 @@ public class AgentController {
 
 
     /**
-     *¸öÈË´úÀíÉÌĞÅÏ¢/ĞŞ¸Ä´úÀíÉÌ
+     *ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢/ï¿½Ş¸Ä´ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping("/showAgent")
     public ModelAndView showAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -76,7 +85,7 @@ public class AgentController {
 
 
     /**
-     *ĞÂÔöÏÂ¼¶´úÀíÉÌ
+     *ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping("/addAgent")
     public ModelAndView addAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -86,7 +95,7 @@ public class AgentController {
     }
 
     /**
-     *±£´æ´úÀíÉÌĞÅÏ¢
+     *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      */
     @RequestMapping(value = "/saveAgent",method = RequestMethod.POST)
     @ResponseBody
@@ -108,7 +117,7 @@ public class AgentController {
 
 
     /**
-     *±£´æÏÂ¼¶´úÀíÉÌĞÅÏ¢
+     *ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      */
     @RequestMapping(value = "/saveLowerAg ",method = RequestMethod.POST)
     @ResponseBody
