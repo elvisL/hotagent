@@ -18,4 +18,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AgentLevelRepository extends JpaRepository<AgentLevel, Long> {
+    AgentLevel findByLevel(int level);
 }

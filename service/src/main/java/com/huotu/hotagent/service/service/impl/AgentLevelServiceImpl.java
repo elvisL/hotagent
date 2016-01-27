@@ -36,6 +36,12 @@ public class AgentLevelServiceImpl implements AgentLevelService {
     }
 
     @Override
+    public AgentLevel findByLevel(int level) {
+        AgentLevel agentLevel = agentLevelRepository.findByLevel(level);
+        return agentLevel;
+    }
+
+    @Override
     public boolean exist() {
         return agentLevelRepository.count() > 0;
     }

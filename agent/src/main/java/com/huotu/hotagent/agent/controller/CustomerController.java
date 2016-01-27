@@ -2,7 +2,9 @@ package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
+import com.huotu.hotagent.service.entity.role.Agent;
 import com.huotu.hotagent.service.entity.role.Customer;
+import com.huotu.hotagent.service.service.AgentService;
 import com.huotu.hotagent.service.service.CustomerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +27,9 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
+    @Autowired
+    AgentService agentService;
+
     /**
     * 新增客户
    * */
@@ -43,10 +48,12 @@ public class CustomerController {
     @RequestMapping(value = "/saveCustomer",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveCustomer(@RequestParam(value = "id", defaultValue = "0") Long id,
-                                    Customer customer) throws Exception{
+                                    Customer customer,int price) throws Exception{
 
         ApiResult apiResult =null;
         try {
+            Agent agent = agentService.findById(id);
+            customer.setAgent(agent);
             customerService.save(customer);
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }catch (Exception ex){

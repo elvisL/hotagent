@@ -22,5 +22,7 @@ public interface AgentLevelService {
 
     List<AgentLevel> agentLevelList();
 
+    AgentLevel findByLevel(int level);
+
     boolean exist();
 }

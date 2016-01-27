@@ -5,6 +5,7 @@ import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.Agent;
 import com.huotu.hotagent.service.entity.role.AgentLevel;
+import com.huotu.hotagent.service.service.AgentLevelService;
 import com.huotu.hotagent.service.service.AgentService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +28,9 @@ public class AgentController {
 
     @Autowired
     AgentService agentService;
+
+    @Autowired
+    AgentLevelService agentLevelService;
 
 
 
@@ -109,17 +113,15 @@ public class AgentController {
     @RequestMapping(value = "/saveLowerAg ",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveLowerAg(@RequestParam(value = "id") Long id,
-                               Agent agent,int agentType) throws Exception{
+                               Agent agent,int agentType,int agentLevel,int price) throws Exception{
 
         ApiResult apiResult =null;
         try {
             Agent Higher = agentService.findById(id);
-            AgentLevel agentLevel = new AgentLevel();
-            agentLevel.setLevelId(Long.valueOf(1));
-            agentLevel.setLevelName("二级代理商");
+            AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
             AgentType agentType1 = AgentType.valueOf(agentType);
             agent.setType(agentType1);
-            agent.setLevel(agentLevel);
+            agent.setLevel(aLevel);
             agent.setParent(Higher);
             agentService.save(agent);
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);

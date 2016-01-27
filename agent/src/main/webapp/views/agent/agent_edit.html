@@ -177,18 +177,30 @@
                         <a href="" class="minimize">&minus;</a>
                     </div>
                     <h4 class="panel-title">添加代理商</h4>
-
-                    <p>Individual form controls automatically receive some global styling. All textual elements with <code>.form-control</code> are set to width: 100%; by default. Wrap labels and controls in <code>.form-group</code> for optimum spacing.</p>
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm" action="agent_edit.html" class="form-horizontal form-bordered">
+                    <form id="editForm"  th:action="@{/agent/agentEdit}" th:method="post" class="form-horizontal form-bordered">
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="agentName" title="代理商名称" placeholder="代理商名称" class="form-control"/>
+                                <input type="text" name="name" title="代理商名称" placeholder="代理商名称" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">账号</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" name="username" title="账号" placeholder="账号" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码</label>
+
+                            <div class="col-sm-2">
+                                <input type="password" name="password" title="密码" placeholder="密码" class="form-control"/>
                             </div>
                         </div>
 
@@ -261,319 +273,6 @@
         </div><!-- contentpanel -->
     </div><!-- mainpanel -->
 
-    <div class="rightpanel">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
-            <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
-            <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
-            <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="rp-alluser">
-                <h5 class="sidebartitle">Online Users</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/userprofile.png" th:src="@{/assets/images/photos/userprofile.png}" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user1.png" th:src="@{/assets/images/photos/user1.png}" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <span class="pull-right badge badge-danger">2</span>
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{/assets/images/photos/user2.png}" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" th:src="@{/assets/images/photos/user3.png}" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" th:src="@{/assets/images/photos/user4.png}" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-
-                <div class="mb30"></div>
-
-                <h5 class="sidebartitle">Offline Users</h5>
-                <ul class="chatuserlist">
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" th:src="@{/assets/images/photos/user5.png}" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{/assets/images/photos/user2.png}" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane" id="rp-favorites">
-                <h5 class="sidebartitle">Favorites</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Los Angeles, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user1.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>San Francisco, CA</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Bangkok, Thailand</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Renov Leongal</strong>
-                                <small>Cebu City, Philippines</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Weno Carasbong</strong>
-                                <small>Tokyo, Japan</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane" id="rp-history">
-                <h5 class="sidebartitle">History</h5>
-                <ul class="chatuserlist">
-                    <li class="online">
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Eileen Sideways</strong>
-                                <small>Hi hello, ctc?... would you mind if I go to your...</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Zaham Sindilmaca</strong>
-                                <small>This is to inform you that your product that we...</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
-                            </a>
-
-                            <div class="media-body">
-                                <strong>Nusja Nawancali</strong>
-                                <small>Are you willing to have a long term relat...</small>
-                            </div>
-                        </div><!-- media -->
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane pane-settings" id="rp-settings">
-
-                <h5 class="sidebartitle mb20">Settings</h5>
-
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Offline Users</label>
-
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Enable History</label>
-
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Full Name</label>
-
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle-chat1 toggle-success"></div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-8 control-label">Show Location</label>
-
-                    <div class="col-xs-4 control-label">
-                        <div class="toggle toggle-success"></div>
-                    </div>
-                </div>
-
-            </div><!-- tab-pane -->
-
-        </div><!-- tab-content -->
-    </div><!-- rightpanel -->
 
 </section>
 <script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
@@ -614,14 +313,24 @@
                     $(element).valid();
                 },
                 rules: {
-                    agentName: "required",
+                    agentName: {
+                        required : true
+                    },
                     balance: {
                         required: true,
                         digits: true
                     }
                 },
                 messages: {
-                    agentName: "请填写代理商名称"
+                    agentName:{
+                        required:"请输入名称"
+                    },
+                    balance: {
+                        required:"请输入充值金额",
+                        digits:"请输入数字"
+                    }
+
+
                 }
             });
         },
