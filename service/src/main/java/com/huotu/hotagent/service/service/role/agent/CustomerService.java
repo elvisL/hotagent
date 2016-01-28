@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.service.service.role.agent;
 
+import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 
 /**
@@ -19,4 +20,6 @@ public interface CustomerService {
     Customer findById(Long id);
 
     Customer save(Customer customer);
+
+    ApiResult addCustomer(Long id, Customer customer, int money);
 }

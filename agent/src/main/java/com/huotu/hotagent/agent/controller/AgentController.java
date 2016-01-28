@@ -1,12 +1,11 @@
 /*
- * ç‰ˆæƒæ‰€æœ‰:æ­å·ç«å›¾ç§‘æŠ€æœ‰é™å…¬å¸
- * åœ°å€:æµ™æ±Ÿçœæ­å·å¸‚æ»¨æ±ŸåŒºè¥¿å…´è¡—é“é˜¡é™Œè·¯æ™ºæ…§Eè°·Bå¹¢4æ¥¼
+ * °æÈ¨ËùÓĞ:º¼Öİ»ğÍ¼¿Æ¼¼ÓĞÏŞ¹«Ë¾
+ * µØÖ·:Õã½­Ê¡º¼ÖİÊĞ±õ½­ÇøÎ÷ĞË½ÖµÀÚäÄ°Â·ÖÇ»ÛE¹ÈB´±4Â¥
  *
  * (c) Copyright Hangzhou Hot Technology Co., Ltd.
  * Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
  * 2013-2016. All rights reserved.
  */
-
 package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
@@ -14,7 +13,7 @@ import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
-import com.huotu.hotagent.service.service.BalanceLogService;
+import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.apache.commons.logging.Log;
@@ -48,7 +47,7 @@ public class AgentController {
 
 
     /**
-     *ï¿½Ë»ï¿½ï¿½ï¿½Ï¢
+     *ÕË»§ĞÅÏ¢
      */
     @RequestMapping("/showAccount")
     public ModelAndView showAccount(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -62,7 +61,7 @@ public class AgentController {
 
 
     /**
-     *ï¿½ÒµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
+     *ÎÒµÄ´úÀíÉÌÁĞ±í
      */
     @RequestMapping("/myAgents")
     public ModelAndView showAgentList(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -76,7 +75,7 @@ public class AgentController {
 
 
     /**
-     *ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢/ï¿½Ş¸Ä´ï¿½ï¿½ï¿½ï¿½ï¿½
+     *¸öÈË´úÀíÉÌĞÅÏ¢/ĞŞ¸Ä´úÀíÉÌ
      */
     @RequestMapping("/showAgent")
     public ModelAndView showAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -89,7 +88,7 @@ public class AgentController {
 
 
     /**
-     *ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     *ĞÂÔöÏÂ¼¶´úÀíÉÌ
      */
     @RequestMapping("/addAgent")
     public ModelAndView addAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -99,18 +98,18 @@ public class AgentController {
     }
 
     /**
-     *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+     *±£´æ´úÀíÉÌĞÅÏ¢
      */
     @RequestMapping(value = "/saveAgent",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveAgent(@RequestParam(value = "id") Long id,
-                                       @RequestParam(value = "newPassword") String newPassword) throws Exception{
+                               @RequestParam(value = "newPassword") String newPassword) throws Exception{
 
         ApiResult apiResult =null;
         try {
-        Agent agent = agentService.findById(id);
-        agent.setPassword(newPassword);
-        agentService.save(agent);
+            Agent agent = agentService.findById(id);
+            agent.setPassword(newPassword);
+            agentService.save(agent);
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }catch (Exception ex){
             log.error(ex.getMessage());
@@ -121,12 +120,12 @@ public class AgentController {
 
 
     /**
-     *ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+     *±£´æÏÂ¼¶´úÀíÉÌĞÅÏ¢
      */
     @RequestMapping(value = "/saveLowerAg ",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveLowerAg(@RequestParam(value = "id") Long id,
-                               Agent agent,int agentType,int agentLevel,int price) throws Exception{
+                                 Agent agent,int agentType,int agentLevel,int price) throws Exception{
 
         ApiResult apiResult =null;
         try {
@@ -146,7 +145,7 @@ public class AgentController {
     }
 
     /**
-     *
+     *¸øÏÂ¼¶´úÀíÉÌ³äÖµ
      */
     @RequestMapping(value = "/importBl",method = RequestMethod.POST)
     @ResponseBody
@@ -154,8 +153,7 @@ public class AgentController {
 
         ApiResult apiResult = null;
         try {
-            balanceLogService.importBl(id,money);
-            apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            apiResult=balanceLogService.importBl(id,money);
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);

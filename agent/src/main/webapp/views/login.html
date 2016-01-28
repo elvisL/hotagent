@@ -8,17 +8,17 @@
   ~ 2013-2016. All rights reserved.
   -->
 
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/png">
 
-    <title>代理商后台</title>
+    <title>代理商管理后台登录</title>
 
-    <link href="../../assets/css/style.default.css" rel="stylesheet">
+    <link href="../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -45,7 +45,7 @@
 
                 <div class="signin-info">
                     <div class="logopanel">
-                        <h1><span>[</span> 火图科技 <span>]</span></h1>
+                        <h1><span>[</span> 伙伴plus代理商后台 <span>]</span></h1>
                     </div><!-- logopanel -->
 
                     <div class="mb20"></div>
@@ -59,21 +59,26 @@
                         <li><i class="fa fa-arrow-circle-o-right mr5"></i> 管理代理商只需鼠标点一点，So Eesy!</li>
                     </ul>
                     <div class="mb20"></div>
-                    <strong>还没有账号? <a href="http://www.huobanplus.com" target="_blank">立刻申请</a></strong>
+
                 </div><!-- signin0-info -->
 
             </div><!-- col-sm-7 -->
 
             <div class="col-md-5">
 
-                <form method="post" action="../agent/agent_edit.html">
+                <form id="loginForm" method="post" action="login.html" th:action="@{/login}">
                     <h4 class="nomargin">登陆</h4>
 
-                    <p class="mt5 mb20">火图代理商后台</p>
+                    <p class="mt5 mb20">代理商管理后台登录</p>
 
-                    <input name="username" type="text"  class="form-control uname" placeholder="账号"/>
+                    <input name="username" type="text" class="form-control uname" placeholder="账号"/>
+
                     <input name="password" type="password" class="form-control pword" placeholder="密码"/>
-                    <button class="btn btn-success btn-block">登陆</button>
+
+                    <p></p>
+
+                    <p id="loginError" style="color: #B94A48;" th:text="${loginError}">登录失败</p>
+                    <button onclick="loginHandler.login()" class="btn btn-success btn-block">登录</button>
 
                 </form>
             </div><!-- col-sm-5 -->
@@ -98,9 +103,48 @@
 <script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/modernizr/2.6.2/modernizr.min.js"></script>
+<script src="../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+<script src="../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
 <script src="http://cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
+<script src="../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
-<script src="../../assets/js/custom.js"></script>
+<script src="../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script src="../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
+
+<script src="../assets/js/custom.js" th:href="@{/assets/js/custom.js}"></script>
+<script type="text/javascript">
+    $(function () {
+        loginHandler.initPage();
+    });
+    var loginHandler = {
+        initPage: function () {
+            $("#loginForm").validate({
+                ignoreTitle: true,
+                highlight: function (element) {
+                    $("#")
+                },
+                success: function (element) {
+                    $(element).closest('.form-group').removeClass('has-error');
+                    $(element).remove();
+                },
+                onfocusout: function (element) {
+                    $(element).valid();
+                },
+                rules: {
+                    username: "required",
+                    password: "required"
+                },
+                messages: {
+                    username: "请输入管理员帐号",
+                    password: "请输入登录密码"
+                }
+            });
+        },
+        login: function () {
+            $("#loginForm").submit();
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -36,7 +36,7 @@ public class ProductController {
 
 
     /**
-     * ��Ʒ�б�
+     * 产品列表
      * */
     @RequestMapping("/showProducts")
     public ModelAndView showProducts(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{

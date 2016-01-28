@@ -11,7 +11,6 @@ package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
-import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.CustomerService;
@@ -40,7 +39,7 @@ public class CustomerController {
     AgentService agentService;
 
     /**
-    * �����ͻ�
+    * 添加客户
    * */
     @RequestMapping("/addCustomer")
     public ModelAndView addCustomer(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -52,19 +51,17 @@ public class CustomerController {
 
 
     /**
-     *����ͻ�
+     *保存商户
      */
     @RequestMapping(value = "/saveCustomer",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveCustomer(@RequestParam(value = "id", defaultValue = "0") Long id,
-                                    Customer customer,int price) throws Exception{
+                                    Customer customer,int money) throws Exception{
 
         ApiResult apiResult =null;
         try {
-            Agent agent = agentService.findById(id);
-            customer.setAgent(agent);
-            customerService.save(customer);
-            apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            customer.setAgent(agentService.findById(id));
+            apiResult=  customerService.addCustomer(id,customer,money);
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
