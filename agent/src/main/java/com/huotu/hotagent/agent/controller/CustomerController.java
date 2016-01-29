@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by chendeyu on 2016/1/25.
  */
 @Controller
+@RequestMapping("/customer")
 public class CustomerController {
 
     private static final Log log = LogFactory.getLog(CustomerController.class);

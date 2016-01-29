@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.service.service.role.agent;
 
+import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 
 /**
@@ -20,4 +21,8 @@ public interface AgentService {
     Agent findById(Long id);
 
     Agent save(Agent agent);
+
+    ApiResult delAgent(Long id);
+
+    ApiResult lockAgent(Long id);
 }

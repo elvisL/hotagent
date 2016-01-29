@@ -9,6 +9,8 @@
 
 package com.huotu.hotagent.service.service.role.agent.impl;
 
+import com.huotu.hotagent.common.constant.ApiResult;
+import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
@@ -35,5 +37,24 @@ public class AgentServiceImpl implements AgentService {
     public Agent save(Agent agent) {
         agentRepository.save(agent);
         return null;
+    }
+
+    @Override
+    public ApiResult delAgent(Long id) {
+        ApiResult apiResult =null;
+        agentRepository.delete(id);
+        apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        return apiResult;
+    }
+
+    @Override
+    public ApiResult lockAgent(Long id) {
+
+        ApiResult apiResult =null;
+        Agent agent = agentRepository.findOne(id);
+        agent.setAccountNonLocked(true);
+        agentRepository.save(agent);
+        apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        return apiResult;
     }
 }

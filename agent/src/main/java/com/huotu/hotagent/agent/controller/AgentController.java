@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
 /**
  * Created by chendeyu on 2016/1/25.
  */
@@ -98,6 +100,43 @@ public class AgentController {
     }
 
     /**
+     *删除下级代理商
+     */
+    @RequestMapping(value = "/delAgent",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult delAgent(@RequestParam(value = "id") Long id) throws Exception{
+
+        ApiResult apiResult =null;
+        try {
+            apiResult= agentService.delAgent(id);
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            apiResult = ApiResult.resultWith(ResultCodeEnum.SYSTEM_BAD_REQUEST);
+        }
+        return apiResult;
+    }
+
+
+    /**
+     *冻结下级代理商
+     */
+    @RequestMapping(value = "/lockAgent",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult lockAgent(@RequestParam(value = "id") Long id) throws Exception{
+
+        ApiResult apiResult =null;
+        try {
+            apiResult= agentService.delAgent(id);
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            apiResult = ApiResult.resultWith(ResultCodeEnum.SYSTEM_BAD_REQUEST);
+        }
+        return apiResult;
+    }
+
+
+
+    /**
      *保存代理商信息
      */
     @RequestMapping(value = "/saveAgent",method = RequestMethod.POST)
@@ -129,12 +168,15 @@ public class AgentController {
 
         ApiResult apiResult =null;
         try {
+            Date date = new Date();
             Agent Higher = agentService.findById(id);
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
             AgentType agentType1 = AgentType.valueOf(agentType);
             agent.setType(agentType1);
             agent.setLevel(aLevel);
             agent.setParent(Higher);
+            agent.setExpandable(false);
+            agent.setCreateTime(date);
             agentService.save(agent);
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }catch (Exception ex){
