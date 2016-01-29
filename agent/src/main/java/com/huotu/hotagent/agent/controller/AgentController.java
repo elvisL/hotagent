@@ -137,19 +137,25 @@ public class AgentController {
 
 
     /**
-     *保存代理商信息
+     *修改代理商密码
      */
-    @RequestMapping(value = "/saveAgent",method = RequestMethod.POST)
+    @RequestMapping(value = "/updatePw",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult saveAgent(@RequestParam(value = "id") Long id,
-                               @RequestParam(value = "newPassword") String newPassword) throws Exception{
+    public ApiResult updatePw(@RequestParam(value = "id") Long id,
+                               @RequestParam(value = "password") String password,@RequestParam(value = "newPassword") String newPassword) throws Exception{
 
         ApiResult apiResult =null;
         try {
             Agent agent = agentService.findById(id);
-            agent.setPassword(newPassword);
-            agentService.save(agent);
-            apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            if(password.equals(agent.getPassword())){
+                agent.setPassword(newPassword);
+                agentService.save(agent);
+                apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            }
+            else{
+                apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
+            }
+
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
