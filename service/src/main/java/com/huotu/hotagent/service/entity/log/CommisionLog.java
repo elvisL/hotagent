@@ -11,6 +11,7 @@ package com.huotu.hotagent.service.entity.log;
 
 import com.huotu.hotagent.service.common.LogType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.entity.role.agent.Customer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,6 +46,20 @@ public class CommisionLog {
     @ManyToOne
     @JoinColumn(name = "quarryId")
     private Agent quarry;
+
+    /**
+     * 拨款给哪个二级代理商
+     */
+    @ManyToOne
+    @JoinColumn(name = "supportId")
+    private Agent support;
+
+    /**
+     * 为哪个客户开帐号
+     */
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
 
     /**
      * 金额

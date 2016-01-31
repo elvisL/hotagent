@@ -1,4 +1,4 @@
-package com.huotu.hotagent.service.service;
+package com.huotu.hotagent.service.service.log;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 
