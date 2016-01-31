@@ -35,6 +35,11 @@ public class AgentEditPage extends AbstractPage {
         super(webDriver);
     }
 
+    @Override
+    public void validate() {
+
+    }
+
     /**
      * 提交表单
      *
@@ -44,7 +49,7 @@ public class AgentEditPage extends AbstractPage {
         agentName.clear();
         agentName.sendKeys(randomAgent.getName());
         username.clear();
-        username.sendKeys(randomAgent.getUsername ());
+        username.sendKeys(randomAgent.getUsername());
         password.clear();
         password.sendKeys(randomAgent.getPassword());
         submitButton.click();

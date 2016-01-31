@@ -46,4 +46,9 @@ public class ProductServiceImpl implements ProductService {
     public boolean exists() {
         return productRepository.count() > 0;
     }
+
+    @Override
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
 }

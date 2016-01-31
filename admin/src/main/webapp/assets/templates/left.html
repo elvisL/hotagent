@@ -8,7 +8,10 @@
   ~ 2013-2016. All rights reserved.
   -->
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns:agent="http://agent.io" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:agent="http://agent.io"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
@@ -43,20 +46,22 @@
         </div>
 
         <h5 class="sidebartitle">Navigation</h5>
-        <ul class="nav nav-pills nav-stacked nav-bracket">
+        <ul id="sidebar" class="nav nav-pills nav-stacked nav-bracket">
             <li agent:active="index"><a href="index.html" th:href="@{/index}"><i class="fa fa-home"></i> <span>首页</span></a></li>
-            <li agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
+            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')" agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">
-                    <li agent:active="agentList"><a href="general-forms.html" th:href="@{/agent/agentList}"><i class="fa fa-caret-right"></i> 代理商列表</span></a></li>
+                    <li agent:active="agentList"><a href="general-forms.html" th:href="@{/agent/agentList}"><i class="fa fa-caret-right"></i> 代理商列表</a></li>
                     <li agent:active="agentEdit"><a href="form-layouts.html" th:href="@{/agent/agentEdit}"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
                     <li agent:active="agentLevel"><a href="form-validation.html" th:href="@{/agent/agentLevel}"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
                 </ul>
             </li>
+            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_WITHDRAW')" agent:active="withdraw"><a href="index.html"><i class="fa fa-th-list"></i> <span>提现管理</span></a></li>
+            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')" agent:active="product"><a href="index.html"><i class="fa fa-th-list"></i> <span>产品管理</span></a></li>
             <li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
-            <li agent:activeparent="'operatorList,addOperator'" class="nav-parent">
+            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT')" agent:activeparent="'operatorList,addOperator'" class="nav-parent">
                 <a href=""><i class="fa fa-edit"></i> <span>操作员管理</span></a>
-                <ul class="children">
+                <ul class="children" style="display: block;">
                     <li agent:active="operatorList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 操作员列表</a></li>
                     <li agent:active="addOperator"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加操作员</a></li>
                 </ul>
@@ -75,32 +80,32 @@
             <ul>
                 <li>
                     <div>
-                        <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                        <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo left-new-day">100</h4>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                        <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo left-new-month">100</h4>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                        <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-level1">100</h4>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                        <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-under">100</h4>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                        <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-normal">100</h4>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                        <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-sole">100</h4>
                     </div>
                 </li>
                 <li>

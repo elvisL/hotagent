@@ -7,13 +7,19 @@
  * 2013-2016. All rights reserved.
  */
 
-package com.huotu.hotagent.common.ienum;
+package com.huotu.hotagent.service.jsonmodel;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * Created by liual on 2015-11-03.
+ * Created by allan on 1/29/16.
  */
-public interface ICommonEnum {
-    Object getValue();
-
-    Object getName();
+@Setter
+@Getter
+public class ProPrice {
+    private long productId;
+    private String productName;
+    private int productType;
+    private double productPrice;
 }

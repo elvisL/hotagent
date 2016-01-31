@@ -9,37 +9,28 @@
 
 package com.huotu.hotagent.admin.controller.index;
 
-import com.huotu.hotagent.admin.WebTest;
-import com.huotu.hotagent.admin.controller.index.pages.LoginPage;
+import com.huotu.hotagent.admin.common.AuthenticatedWebTest;
+import com.huotu.hotagent.admin.common.LoginAs;
+import com.huotu.hotagent.admin.controller.index.pages.IndexPage;
+import com.huotu.hotagent.service.service.statistics.StatisticsService;
 import org.junit.Test;
-
-import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Created by allan on 1/27/16.
+ * Created by allan on 1/29/16.
  */
-public class IndexControllerTest extends WebTest {
+public class IndexControllerTest extends AuthenticatedWebTest {
+    @Autowired
+    private StatisticsService statisticsService;
 
     @Test
-    public void testLogin() throws Exception {
-        String randomUsername = UUID.randomUUID().toString();
-        String randomPassword = UUID.randomUUID().toString();
-        String administrator = "administrator";
-        String password = "hot!@#123";
-        String loginError = null;
-        webDriver.get("http://localhost:8080/login");
-        LoginPage loginPage = initPage(LoginPage.class);
-        //无效的用户名
-        loginError = loginPage.submit(randomUsername, UUID.randomUUID().toString());
-    }
-
-    @Test
-    public void testLoginError() throws Exception {
-
-    }
-
-    @Test
+    @LoginAs
     public void testIndex() throws Exception {
+        IndexPage indexPage = initPage(IndexPage.class);
+        //随机构造20个代理商
+        for (int i = 0; i < 20; i++) {
+            agentService.save(mockAgent());
+        }
 
     }
 }

@@ -7,13 +7,15 @@
  * 2013-2016. All rights reserved.
  */
 
-package com.huotu.hotagent.common.ienum;
+package com.huotu.hotagent.common.constant;
 
 /**
- * Created by liual on 2015-11-03.
+ * 系统参数
+ * Created by allan on 1/28/16.
  */
-public interface ICommonEnum {
-    Object getValue();
+public class SysConstant {
+    public static final String ROOT_USER = "administrator";
+    public static final String ROOT_PASS = "hot!@#123";
 
-    Object getName();
+    public static final int DEFALUT_PAGE_SIZE = 20;
 }

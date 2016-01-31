@@ -9,10 +9,12 @@
 
 package com.huotu.hotagent.service.common;
 
+import com.huotu.hotagent.common.ienum.ICommonEnum;
+
 /**
  * Created by allan on 1/27/16.
  */
-public enum Authority {
+public enum Authority implements ICommonEnum {
     MANAGER_ROOT("MANAGER_ROOT", "超级管理员"),
     MANAGER_AGENT("MANAGER_AGENT", "代理商管理"),
     MANAGER_PRODUCT("MANAGER_PRODUCT", "产品管理"),

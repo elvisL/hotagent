@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.admin.boot;
 
+import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.service.common.Authority;
 import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Product;
@@ -18,7 +19,6 @@ import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.manager.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -37,8 +37,6 @@ public class AdminBoot {
     @Autowired
     private ProductService productService;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private ManagerService managerService;
 
     @PostConstruct
@@ -48,29 +46,34 @@ public class AdminBoot {
         if (root == null) {
             root = new Manager();
         }
-        root.setUsername("administrator");
-        root.setPassword(passwordEncoder.encode("hot!@#123"));
+        root.setUsername(SysConstant.ROOT_USER);
+        root.setPassword(SysConstant.ROOT_PASS);
         root.setName("超级管理员");
         root.setRoleName("超级管理员");
         root.setCreateTime(new Date());
         root.setAuthorities(new HashSet<>(Arrays.asList(Authority.MANAGER_ROOT)));
         managerService.save(root);
 
+
         //初始化两个等级,在没有的情况下创建
-        if (!agentLevelService.exist()) {
-            //初始化一级代理商
-            AgentLevel agentLevel1 = new AgentLevel();
-            agentLevel1.setLevelName("一级代理商");
-            agentLevel1.setLevelDesc("一级代理商");
-            agentLevel1.setLevel(0);
-            agentLevelService.save(agentLevel1);
-            //初始化二级代理商
-            AgentLevel agentLevel2 = new AgentLevel();
-            agentLevel2.setLevelName("二级代理商");
-            agentLevel2.setLevelDesc("二级代理商");
-            agentLevel2.setLevel(1);
-            agentLevelService.save(agentLevel2);
+        //初始化一级代理商
+        AgentLevel agentLevel1 = agentLevelService.findByLevel(0);
+        if (agentLevel1 == null) {
+            agentLevel1 = new AgentLevel();
         }
+        agentLevel1.setLevelName("一级代理商");
+        agentLevel1.setLevelDesc("一级代理商");
+        agentLevel1.setLevel(0);
+        agentLevelService.save(agentLevel1);
+        //初始化二级代理商
+        AgentLevel agentLevel2 = agentLevelService.findByLevel(1);
+        if (agentLevel2 == null) {
+            agentLevel2 = new AgentLevel();
+        }
+        agentLevel2.setLevelName("二级代理商");
+        agentLevel2.setLevelDesc("二级代理商");
+        agentLevel2.setLevel(1);
+        agentLevelService.save(agentLevel2);
 
 
         //初始化商品,在没有的情况下创建

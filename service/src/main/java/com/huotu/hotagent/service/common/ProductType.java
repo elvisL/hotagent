@@ -22,20 +22,20 @@ public enum ProductType implements ICommonEnum {
     THIRDPARTNAR(3, "水图代运营"),
     CESHI(4, "测试商品");
     // TODO: 1/25/16
-    private int value;
+    private Integer value;
     private String name;
 
-    ProductType(int value, String name) {
+    ProductType(Integer value, String name) {
         this.value = value;
         this.name = name;
     }
 
     @Override
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

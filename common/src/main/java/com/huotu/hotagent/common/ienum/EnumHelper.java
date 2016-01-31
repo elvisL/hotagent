@@ -16,7 +16,7 @@ package com.huotu.hotagent.common.ienum;
  */
 public class EnumHelper {
 
-    public static String getEnumName(Class<? extends ICommonEnum> cls, int value) {
+    public static Object getEnumName(Class<? extends ICommonEnum> cls, Object value) {
         ICommonEnum ice = getEnumType(cls, value);
         if (ice != null) {
             return ice.getName();
@@ -29,9 +29,9 @@ public class EnumHelper {
         return "";
     }
 
-    public static <T extends ICommonEnum> T getEnumType(Class<T> cls, int value) {
+    public static <T extends ICommonEnum> T getEnumType(Class<T> cls, Object value) {
         for (T item : cls.getEnumConstants()) {
-            if (item.getValue() == value) {
+            if (item.getValue().equals(value)) {
                 return item;
             }
         }

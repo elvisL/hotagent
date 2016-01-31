@@ -9,7 +9,7 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
-import com.huotu.hotagent.admin.WebTest;
+import com.huotu.hotagent.admin.common.WebTest;
 import com.huotu.hotagent.admin.controller.agent.pages.AgentEditPage;
 import com.huotu.hotagent.common.ienum.EnumHelper;
 import com.huotu.hotagent.service.common.AgentType;

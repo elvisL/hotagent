@@ -7,7 +7,7 @@
  * 2013-2016. All rights reserved.
  */
 
-package com.huotu.hotagent.admin;
+package com.huotu.hotagent.admin.common;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.apache.commons.lang3.RandomStringUtils;

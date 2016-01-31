@@ -11,6 +11,7 @@ package com.huotu.hotagent.service.entity.role.agent;
 
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.common.Authority;
+import com.huotu.hotagent.service.entity.product.Price;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * 代理商
@@ -125,8 +127,8 @@ public class Agent extends Login {
     /**
      * 产品价格序列化
      */
-    @Column(name = "priceSerial")
-    private String priceSerial;
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Price> prices;
 
     /**
      * 是否可发展下级代理

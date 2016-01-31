@@ -9,9 +9,14 @@
 
 package com.huotu.hotagent.service.repository.role.agent;
 
+import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 
 /**
  * Created by allan on 1/25/16.
@@ -19,4 +24,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AgentRepository extends JpaRepository<Agent, Long> {
     Agent findByUsername(String mockAgentUsername);
+
+    Page<Agent> findByLevel_level(int level, Pageable pageable);
+
+    long countByLevel_level(int level);
+
+    long countByLevel_levelGreaterThan(int level);
+
+    long countByParent_id(int agentId);
+
+    long countByCreateTimeAfter(Date date);
+
+    long countByType(AgentType type);
 }

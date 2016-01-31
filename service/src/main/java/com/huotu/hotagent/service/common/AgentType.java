@@ -19,30 +19,14 @@ public enum AgentType implements ICommonEnum{
     NORMAL(0,"普通代理"),
     SOLE(1,"独家代理");
 
-    private int value;
+    private Integer value;
     private String name;
-    AgentType(int value, String name) {
+    AgentType(Integer value, String name) {
         this.value = value;
         this.name = name;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public static AgentType valueOf(int code)
+    public static AgentType valueOf(Integer code)
     {
         switch (code){
             case 0:
@@ -52,5 +36,21 @@ public enum AgentType implements ICommonEnum{
             default:
                 return null;
         }
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

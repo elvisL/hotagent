@@ -13,9 +13,9 @@ import com.huotu.hotagent.service.entity.role.manager.Manager;
 import com.huotu.hotagent.service.repository.role.manager.ManagerRepository;
 import com.huotu.hotagent.service.service.role.manager.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,9 +25,12 @@ import org.springframework.stereotype.Service;
 public class ManagerServiceImpl implements ManagerService {
     @Autowired
     private ManagerRepository managerRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Manager save(Manager manager) {
+        manager.setPassword(passwordEncoder.encode(manager.getPassword()));
         return managerRepository.save(manager);
     }
 
@@ -38,14 +41,11 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails userDetails = managerRepository.findByUsername(username);
-        if (userDetails == null) {
+        Manager manager = managerRepository.findByUsername(username);
+        if (manager == null) {
             throw new UsernameNotFoundException("未找到该管理员");
         }
-        if (!userDetails.isAccountNonLocked()) {
-            throw new DisabledException("该管理员帐号已被冻结,请联系超级管理员");
-        }
 
-        return userDetails;
+        return manager;
     }
 }

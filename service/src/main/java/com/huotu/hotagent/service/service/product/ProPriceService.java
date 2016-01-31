@@ -9,22 +9,13 @@
 
 package com.huotu.hotagent.service.service.product;
 
-import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 
 import java.util.List;
 
 /**
- * 产品
- * Created by chendeyu on 2016/1/25.
+ * Created by allan on 1/29/16.
  */
-public interface ProductService {
-
-    List<Price> showProducts(Long id);
-
-    Product save(Product product);
-
-    boolean exists();
-
-    List<Product> findAll();
+public interface ProPriceService {
+    String getPriceSerial(List<Product> products);
 }

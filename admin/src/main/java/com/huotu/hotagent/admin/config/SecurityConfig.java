@@ -36,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static String[] STATIC_RESOURCE_PATH = {
             "/assets/**",
-            "/views/**"
+            "/views/**",
+            "/loginError"
     };
 
     @Autowired
@@ -56,8 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        SecurityFailureHandler securityFailureHandler = new SecurityFailureHandler();
-        securityFailureHandler.setDefaultFailureUrl(LOGIN_ERROR_URL);
+        SecurityFailureHandler securityFailureHandler = new SecurityFailureHandler(LOGIN_ERROR_URL);
 
         http
                 .headers().frameOptions().sameOrigin()
@@ -70,13 +70,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin()
                 .loginPage(LOGIN_PAGE)
-                .successHandler(new SecuritySuccessHandler(LOGIN_SUCCESS_URL))
+                .defaultSuccessUrl(LOGIN_SUCCESS_URL)
                 .failureHandler(securityFailureHandler)
                 .permitAll()
                 .and()
                 .logout()
                 .logoutSuccessUrl(LOGOUT_SUCCESS_URL);
-
     }
 }
 

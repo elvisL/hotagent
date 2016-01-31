@@ -9,10 +9,7 @@
 
 package com.huotu.hotagent.admin.config;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.LockedException;
+import com.huotu.hotagent.admin.common.ExceptionHandler;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -29,9 +26,8 @@ import java.io.IOException;
  * Created by allan on 1/27/16.
  */
 public class SecurityFailureHandler implements AuthenticationFailureHandler {
-    protected final Log logger = LogFactory.getLog(this.getClass());
     private String defaultFailureUrl;
-    private boolean forwardToDestination = true;
+    private boolean forwardToDestination = false;
     private boolean allowSessionCreation = true;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -44,15 +40,12 @@ public class SecurityFailureHandler implements AuthenticationFailureHandler {
 
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         if (this.defaultFailureUrl == null) {
-            this.logger.debug("No failure URL set, sending 401 Unauthorized error");
             response.sendError(401, "Authentication Failed: " + exception.getMessage());
         } else {
             this.saveException(request, exception);
             if (this.forwardToDestination) {
-                this.logger.debug("Forwarding to " + this.defaultFailureUrl);
                 request.getRequestDispatcher(this.defaultFailureUrl).forward(request, response);
             } else {
-                this.logger.debug("Redirecting to " + this.defaultFailureUrl);
                 this.redirectStrategy.sendRedirect(request, response, this.defaultFailureUrl);
             }
         }
@@ -60,13 +53,8 @@ public class SecurityFailureHandler implements AuthenticationFailureHandler {
     }
 
     protected final void saveException(HttpServletRequest request, AuthenticationException exception) {
-        if (exception instanceof BadCredentialsException) {
-            request.setAttribute("SPRING_SECURITY_LAST_ERROR", "用户名密码不匹配");
-        } else if (exception instanceof LockedException) {
-            request.setAttribute("SPRING_SECURITY_LAST_ERROR", "该帐号已被冻结");
-        } else {
-            request.setAttribute("SPRING_SECURITY_LAST_ERROR", exception.getMessage());
-        }
+        ExceptionHandler.securityException(request, exception, this.forwardToDestination);
+
     }
 
     public void setDefaultFailureUrl(String defaultFailureUrl) {

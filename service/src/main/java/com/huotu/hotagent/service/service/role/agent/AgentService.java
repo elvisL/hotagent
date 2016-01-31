@@ -10,6 +10,7 @@
 package com.huotu.hotagent.service.service.role.agent;
 
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import org.springframework.data.domain.Page;
 
 /**
  * 代理商
@@ -20,4 +21,16 @@ public interface AgentService {
     Agent findById(Long id);
 
     Agent save(Agent agent);
+
+    /**
+     * 得到当前等级下的代理商数量
+     *
+     * @param level
+     * @return
+     */
+    long countByLevel(int level);
+
+    Page<Agent> findByLevel(int pageIndex, int pageSize, int level);
+
+    Page<Agent> findByLevelId(int levelId);
 }

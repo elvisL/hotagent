@@ -13,6 +13,9 @@ import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,6 +37,22 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public Agent save(Agent agent) {
         agentRepository.save(agent);
+        return null;
+    }
+
+    @Override
+    public long countByLevel(int level) {
+        return agentRepository.countByLevel_level(level);
+    }
+
+    @Override
+    public Page<Agent> findByLevel(int pageIndex, int pageSize, int level) {
+        return agentRepository.findByLevel_level(level, new PageRequest(pageIndex - 1, pageSize, new Sort(Sort.Direction.DESC, "id")));
+    }
+
+
+    @Override
+    public Page<Agent> findByLevelId(int levelId) {
         return null;
     }
 }

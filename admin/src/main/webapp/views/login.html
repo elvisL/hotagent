@@ -9,6 +9,8 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="loginError" type="java.lang.String"*/-->
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -118,10 +120,12 @@
     });
     var loginHandler = {
         initPage: function () {
+            $("input[name=username]").focus();
+
             $("#loginForm").validate({
                 ignoreTitle: true,
                 highlight: function (element) {
-                    $("#")
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                 },
                 success: function (element) {
                     $(element).closest('.form-group').removeClass('has-error');

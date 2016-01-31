@@ -28,7 +28,8 @@ public class IndexController {
 
     @RequestMapping("/loginError")
     public String loginError(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("loginError", request.getAttribute("SPRING_SECURITY_LAST_ERROR"));
+        redirectAttributes.addFlashAttribute("loginError", request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION"));
+        request.getSession().removeAttribute("SPRING_SECURITY_LAST_EXCEPTION");
         return "redirect:/login";
     }
 

@@ -26,12 +26,12 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         欢迎:
-                        <span th:text="${session.currentManager.name}"></span>
+                        <span id="currentUsername" th:text="${session.currentManager.name}"></span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                         <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> 修改密码</a></li>
-                        <li><a href="signin.html" th:href="@{/logout}"><i class="glyphicon glyphicon-log-out"></i> 注销登录</a></li>
+                        <li><a id="aLogout" href="signin.html" th:href="@{/logout}"><i class="glyphicon glyphicon-log-out"></i> 注销登录</a></li>
                     </ul>
                 </div>
             </li>

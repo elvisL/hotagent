@@ -58,7 +58,7 @@ public class Manager implements UserDetails, Serializable {
      */
     private boolean accountNonLocked = true;
 
-    @Transient
+    @Lob
     private Set<Authority> authorities = new HashSet<>();
     /**
      * 创建时间
