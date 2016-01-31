@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--
+  ~ 版权所有:杭州火图科技有限公司
+  ~ 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+  ~
+  ~ (c) Copyright Hangzhou Hot Technology Co., Ltd.
+  ~ Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+  ~ 2013-2016. All rights reserved.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
+
+    <title>代理商管理后台-首页</title>
+
+
+    <link rel="stylesheet" href="../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
+
+</head>
+
+<body>
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+    <div class="leftpanel" th:replace="../assets/templates/left :: left (activeMenu='index')">
+
+        <div class="logopanel">
+            <h1>代理商管理后台</h1>
+        </div><!-- logopanel -->
+
+        <div class="leftpanelinner">
+
+            <!-- This is only visible to small devices -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media userlogged">
+                    <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
+
+                    <div class="media-body">
+                        <h4>John Doe</h4>
+                        <span>"Life is so..."</span>
+                    </div>
+                </div>
+
+                <h5 class="sidebartitle actitle">Account</h5>
+                <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+                    <li><a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a></li>
+                    <li><a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
+                    <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <h5 class="sidebartitle">导航</h5>
+            <ul class="nav nav-pills nav-stacked nav-bracket">
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="nav-parent nav-active active">
+                    <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
+                    <ul class="children" style="display: block;">
+                        <li class="active"><a href="agent-list.html.html"><i class="fa fa-caret-right"></i> 代理商列表</a></li>
+                        <li><a href="agent_edit.html.html"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
+                        <li><a href="form-validation.html"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
+                <li class="nav-parent">
+                    <a href=""><i class="fa fa-edit"></i> <span>操作员管理</span></a>
+                    <ul class="children" style="display: block;">
+                        <li><a href="general-forms.html"><i class="fa fa-caret-right"></i> 操作员列表</a></li>
+                        <li><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加操作员</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <style>
+                .custom-datainfo {
+                    margin: 0;
+                    font-size: 16px;
+                    color: #fff;
+                    opacity: 0.7;
+                }
+            </style>
+            <div class="infosummary">
+                <h5 class="sidebartitle">Information Summary</h5>
+                <ul>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo left-new-day">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo left-new-month">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-level1">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-under">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-normal">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;" class="custom-datainfo left-agentNum-sole">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <!--暂时不知道是什么-->
+                            <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- infosummary -->
+
+        </div><!-- leftpanelinner -->
+    </div><!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar" th:replace="../assets/templates/header :: header">
+
+            <a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+
+            <div class="header-right">
+                <ul class="headermenu">
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="../../assets/images/photos/loggeduser.png" th:src="@{/assets/images/photos/loggeduser.png}"/>
+                                John Doe
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+                                <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- header-right -->
+
+        </div><!-- headerbar -->
+
+        <div class="pageheader">
+            <h2><i class="fa fa-edit"></i> 首页</h2>
+
+        </div>
+
+        <div class="contentpanel">
+
+            <div class="row">
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel panel-success panel-stat">
+                        <div class="panel-heading">
+
+                            <div class="stat">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img src="../assets/images/is-user.png" alt="">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <small class="stat-label">代理商总数</small>
+                                        <h1 class="index-agentNum-level1">1000</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel panel-success panel-stat">
+                        <div class="panel-heading">
+
+                            <div class="stat">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img src="../assets/images/is-money.png" alt="">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <small class="stat-label">总代理费用</small>
+                                        <h1 class="index-agentNum-under">1000</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel panel-success panel-stat">
+                        <div class="panel-heading">
+
+                            <div class="stat">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img src="../assets/images/is-money.png" alt="">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <small class="stat-label">总返佣</small>
+                                        <h1 class="index-agentNum-normal">1000</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel panel-primary panel-stat">
+                        <div class="panel-heading">
+
+                            <div class="stat">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img src="../assets/images/is-money.png" alt="">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <small class="stat-label">账户余额</small>
+                                        <h1 class="index-new-day">1000</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel panel-primary panel-stat">
+                        <div class="panel-heading">
+
+                            <div class="stat">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img src="../assets/images/is-money.png" alt="">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <small class="stat-label">账户佣金</small>
+                                        <h1 class="index-new-month">1000</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel panel-danger panel-stat">
+                        <div class="panel-heading">
+
+                            <div class="stat">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img src="../assets/images/is-money.png" alt="">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <small class="stat-label">未处理提现申请</small>
+                                        <h1 class="no-handler-withdraw">1000</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- contentpanel -->
+    </div><!-- mainpanel -->
+
+    </div><!-- rightpanel -->
+
+</section>
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+<script src="../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+<script src="../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
+<script src="http://cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
+<script src="../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+
+<script src="../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+
+<script type="text/javascript">
+
+</script>
+
+
+</body>
+</html>
