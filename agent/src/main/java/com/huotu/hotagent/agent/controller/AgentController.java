@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -83,7 +84,7 @@ public class AgentController {
     public ModelAndView showAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        modelAndView.setViewName("/views/showAgent.html");
+        modelAndView.setViewName("views/showAgent.html");
         modelAndView.addObject("agent",agent);
         return modelAndView;
     }
@@ -95,9 +96,11 @@ public class AgentController {
     @RequestMapping("/addAgent")
     public ModelAndView addAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("/views/addAgent.html");
+        modelAndView.setViewName("views/addAgent.html");
         return modelAndView;
     }
+
+
 
     /**
      *删除下级代理商
@@ -135,13 +138,26 @@ public class AgentController {
     }
 
 
-
     /**
      *修改代理商密码
      */
-    @RequestMapping(value = "/updatePw",method = RequestMethod.POST)
+    @RequestMapping(value="/updatePw",method = RequestMethod.GET)
+    public ModelAndView updatePw(HttpServletRequest request) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        Long id = Long.valueOf(request.getParameter("id"));
+        Agent agent = agentService.findById(id);
+        modelAndView.setViewName("views/agent/agentPw_edit");
+        modelAndView.addObject("agent",agent);
+        return modelAndView;
+    }
+
+
+    /**
+     *保存修改代理商密码
+     */
+    @RequestMapping(value = "/savePw",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult updatePw(@RequestParam(value = "id") Long id,
+    public ApiResult savePw(@RequestParam(value = "id") Long id,
                                @RequestParam(value = "password") String password,@RequestParam(value = "newPassword") String newPassword) throws Exception{
 
         ApiResult apiResult =null;

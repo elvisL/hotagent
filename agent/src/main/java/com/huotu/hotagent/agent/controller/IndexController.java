@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        return "/views/login";
+        return "views/login";
     }
 
     @RequestMapping("/loginError")
