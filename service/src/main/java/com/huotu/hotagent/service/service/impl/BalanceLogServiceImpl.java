@@ -2,9 +2,9 @@ package com.huotu.hotagent.service.service.impl;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
-import com.huotu.hotagent.service.entity.role.Agent;
-import com.huotu.hotagent.service.service.AgentService;
-import com.huotu.hotagent.service.service.BalanceLogService;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.service.log.BalanceLogService;
+import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
