@@ -42,9 +42,9 @@ public class ProductController {
     public ModelAndView showProducts(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        String priceSerial = agent.getPriceSerial();
+//        Set<PriceSerial> = agent.getPriceSerial();
         modelAndView.setViewName("/views/showProducts.html");
-        modelAndView.addObject("priceSerial",priceSerial);
+//        modelAndView.addObject("priceSerial",priceSerial);
         return modelAndView;
     }
 }

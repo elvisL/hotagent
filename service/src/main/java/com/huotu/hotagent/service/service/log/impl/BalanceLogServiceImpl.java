@@ -1,7 +1,5 @@
 package com.huotu.hotagent.service.service.log.impl;
 
-import com.huotu.hotagent.common.constant.ApiResult;
-import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.entity.log.BalanceLog;
 import com.huotu.hotagent.service.entity.log.CommisionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
@@ -10,6 +8,7 @@ import com.huotu.hotagent.service.repository.log.CommisionLogRepository;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -17,6 +16,7 @@ import java.util.Date;
 /**
  * Created by chendeyu on 2016/1/27.
  */
+@Service
 public class BalanceLogServiceImpl implements BalanceLogService {
 
     @Autowired
@@ -30,8 +30,7 @@ public class BalanceLogServiceImpl implements BalanceLogService {
 
     @Override
     @Transactional(value = "transactionManager")
-    public ApiResult importBl(Long id, double money) {
-        ApiResult apiResult =null;
+    public Boolean importBl(Long id, double money) {
         Date date = new Date();
         Agent lowAgent=agentService.findById(id);//二级代理
         Agent highAgent=lowAgent.getParent();
@@ -80,13 +79,11 @@ public class BalanceLogServiceImpl implements BalanceLogService {
                 commisionLogRepository.save(commisionLog);
             }
             else {
-                apiResult= ApiResult.resultWith(ResultCodeEnum.IMPORT_ERROR);
-                return apiResult;
+                return false;
             }
         }
         agentService.save(lowAgent);
         agentService.save(highAgent);
-        apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-        return apiResult;
+        return true;
     }
 }

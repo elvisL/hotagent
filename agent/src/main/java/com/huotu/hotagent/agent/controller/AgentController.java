@@ -201,7 +201,13 @@ public class AgentController {
 
         ApiResult apiResult = null;
         try {
-            apiResult=balanceLogService.importBl(id,money);
+            Boolean bl=balanceLogService.importBl(id,money);
+            if(bl==true){
+                apiResult =  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            }
+            else {
+                apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
+            }
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);

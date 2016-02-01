@@ -9,14 +9,15 @@
 
 package com.huotu.hotagent.agent.config;
 
+import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -26,44 +27,57 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String loginPage = "/index";
-    public static final String loginSuccessURL = "/loginSuccess";
-    public static final String loginFailedURL = "/loginFailed";
-    public static final String logoutSuccessURL = "/";
+    public static final String LOGIN_PAGE = "/login";
+    public static final String LOGIN_SUCCESS_URL = "/index";
+    public static final String LOGIN_ERROR_URL = "/loginError";
+    public static final String LOGOUT_SUCCESS_URL = "/";
+
+    private static String[] STATIC_RESOURCE_PATH = {
+            "/assets/**",
+            "/views/**",
+            "/loginError"
+    };
 
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private LoginService loginService;
 
     @Autowired
     public void registerSharedAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(loginService).passwordEncoder(passwordEncoder);
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(STATIC_RESOURCE_PATH);
+    }
+
 
     @Configuration
     public static class ClassicWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+            SecurityFailureHandler securityFailureHandler = new SecurityFailureHandler(LOGIN_ERROR_URL);
             http
                     .headers().frameOptions().sameOrigin()
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/")
+                    .antMatchers(STATIC_RESOURCE_PATH)
                     .permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .csrf().disable()
                     .formLogin()
-                    .loginPage(loginPage)
-                    .defaultSuccessUrl(loginSuccessURL, true)
-                    .failureUrl(loginFailedURL)
+                    .loginPage(LOGIN_PAGE)
+                    .defaultSuccessUrl(LOGIN_SUCCESS_URL)
+                    .failureHandler(securityFailureHandler)
                     .permitAll()
                     .and()
                     .logout()
-                    .logoutSuccessUrl(logoutSuccessURL);
+                    .logoutSuccessUrl(LOGOUT_SUCCESS_URL);
 
         }
     }
