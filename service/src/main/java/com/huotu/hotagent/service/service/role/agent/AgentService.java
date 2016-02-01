@@ -27,6 +27,8 @@ public interface AgentService {
 
     ApiResult lockAgent(Long id);
 
+    Agent findByUsername(String userName);
+
     /**
      * 得到当前等级下的代理商数量
      *

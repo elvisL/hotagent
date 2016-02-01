@@ -76,4 +76,10 @@ public class AgentServiceImpl implements AgentService {
         apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         return apiResult;
     }
+
+    @Override
+    public Agent findByUsername(String userName) {
+        Agent agent =  agentRepository.findByUsername(userName);
+        return  agent;
+    }
 }

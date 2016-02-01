@@ -69,7 +69,7 @@ public class AgentController {
     public ModelAndView showAgentList(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        modelAndView.setViewName("/views/myAgents.html");
+        modelAndView.setViewName("views/myAgents");
         modelAndView.addObject("agent",agent);
         return modelAndView;
     }

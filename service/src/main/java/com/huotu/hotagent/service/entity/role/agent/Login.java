@@ -24,6 +24,7 @@ import java.util.Date;
 @Table(name = "age_login")
 @Setter
 @Getter
+@Inheritance
 public abstract class Login implements UserDetails, Serializable {
 
     private static final long serialVersionUID = -4886674511959360750L;
@@ -38,7 +39,6 @@ public abstract class Login implements UserDetails, Serializable {
     /**
      * 账号密码
      */
-    @Column(length = 50)
     private String password;
     /**
      * 账号是否被冻结
