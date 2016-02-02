@@ -12,7 +12,7 @@ public class ExceptionInterceptor {
     @ExceptionHandler(Throwable.class)
     public String catchExceptions(Throwable e) {
         e.printStackTrace();
-        return "views/error.html";
+        return "views/error";
     }
 
 }

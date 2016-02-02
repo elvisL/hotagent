@@ -19,6 +19,8 @@ import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -46,6 +47,9 @@ public class AgentController {
 
     @Autowired
     BalanceLogService balanceLogService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
 
@@ -142,10 +146,8 @@ public class AgentController {
      *修改代理商密码
      */
     @RequestMapping(value="/updatePw",method = RequestMethod.GET)
-    public ModelAndView updatePw(HttpServletRequest request) throws Exception{
+    public ModelAndView updatePw(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        Long id = Long.valueOf(request.getParameter("id"));
-        Agent agent = agentService.findById(id);
         modelAndView.setViewName("views/agent/agentPw_edit");
         modelAndView.addObject("agent",agent);
         return modelAndView;
@@ -157,14 +159,14 @@ public class AgentController {
      */
     @RequestMapping(value = "/savePw",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult savePw(@RequestParam(value = "id") Long id,
+    public ApiResult savePw(@AuthenticationPrincipal Agent agent,
                                @RequestParam(value = "password") String password,@RequestParam(value = "newPassword") String newPassword) throws Exception{
 
         ApiResult apiResult =null;
         try {
-            Agent agent = agentService.findById(id);
-            if(password.equals(agent.getPassword())){
-                agent.setPassword(newPassword);
+           Boolean bl = passwordEncoder.matches(password,agent.getPassword());
+            if(bl){
+                agent.setPassword(passwordEncoder.encode(newPassword));
                 agentService.save(agent);
                 apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
             }
@@ -213,9 +215,10 @@ public class AgentController {
      */
     @RequestMapping(value = "/importBl",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult importBl(@RequestParam(value = "id") Long id,double money) throws Exception{
+    public ApiResult importBl(@AuthenticationPrincipal Agent agent,double money) throws Exception{
 
         ApiResult apiResult = null;
+        Long id = agent.getId();
         try {
             Boolean bl=balanceLogService.importBl(id,money);
             if(bl==true){

@@ -20,6 +20,9 @@
 
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
 
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
+
+
     <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
 </head>
@@ -179,13 +182,13 @@
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm"  th:action="@{/agent/agentEdit}" th:method="post" class="form-horizontal form-bordered">
+                    <form id="editForm"  th:method="post" class="form-horizontal form-bordered">
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="username">账号</label>
 
                             <div class="col-sm-3">
-                                <input type="text" value="Read Only Input" id="username" name="username" class="form-control" readonly="readonly"/>
+                                <input type="text" th:value="${agent.username}" id="username" name="username" class="form-control" readonly="readonly"/>
                             </div>
                         </div>
 
@@ -235,6 +238,7 @@
 <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
 <script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
 <script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
 
@@ -285,6 +289,35 @@
                         required:"请输入确认密码",
                     }
 
+                },
+                submitHandler: function (form, ev) {
+                    $.ajax({
+                        url: "/savePw",
+                        data: {
+                            password:$("#password").val(),
+                            newPassword: $("#newPassword").val(),
+                        },
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (msg) {
+                            var index=parseInt(msg.code);
+                            switch (index) {
+                                case 200:
+                                    layer.msg("保存成功", {time: 2000});
+                                    $("#password").val("");
+                                    $("#newPassword").val("");
+                                    $("#CnewPassword").val("");
+                                    break;
+                            }
+                        },
+                        error: function () {
+
+                        }
+                    });
+                    return false;
+                },
+                invalidHandler: function () {
+                    return true;
                 }
             });
         },

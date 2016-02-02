@@ -18,6 +18,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -30,6 +33,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by allan on 1/22/16.
@@ -70,6 +74,13 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
             ignoring[startIndex++] = "/" + path + "/**";
         }
         return ignoring;
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON));
+        converters.add(converter);
     }
 
     /**
