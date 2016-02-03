@@ -9,7 +9,6 @@
 
 package com.huotu.hotagent.service.service.product;
 
-import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 
 import java.util.List;
@@ -20,7 +19,11 @@ import java.util.List;
  */
 public interface ProductService {
 
-    List<Price> showProducts(Long id);
+//    List<Price> showProducts(Long id);
+
+    Product findOne(Long id);
+
+    List<Product> findAllProducts(Long id);
 
     Product save(Product product);
 

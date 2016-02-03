@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">账户余额</small>
-                                        <h1 class="index-new-day">1000</h1>
+                                        <h1 class="index-new-day" th:text="${agent.balance}">1000</h1>
                                     </div>
                                 </div>
 
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">账户佣金</small>
-                                        <h1 class="index-new-month">1000</h1>
+                                        <h1 class="index-new-month" th:text="${agent.commission}">1000</h1>
                                     </div>
                                 </div>
 

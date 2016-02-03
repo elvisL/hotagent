@@ -1,8 +1,11 @@
 package com.huotu.hotagent.agent.controller;
 
+import com.huotu.hotagent.service.entity.role.agent.Agent;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +29,10 @@ public class IndexController {
 
 
     @RequestMapping(value = {"", "/", "/index","/loginSuccess"})
-    public String index() {
-        return "views/index";
+    public ModelAndView index(@AuthenticationPrincipal Agent agent) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("views/index");
+        modelAndView.addObject(agent);
+        return  modelAndView;
     }
 }

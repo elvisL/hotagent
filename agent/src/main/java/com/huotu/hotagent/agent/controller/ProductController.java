@@ -9,16 +9,21 @@
 
 package com.huotu.hotagent.agent.controller;
 
+import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.model.AgentProduct;
+import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by chendeyu on 2016/1/25.
@@ -32,6 +37,9 @@ public class ProductController {
     ProductService productService;
 
     @Autowired
+    PriceService priceService;
+
+    @Autowired
     AgentService agentService;
 
 
@@ -39,12 +47,13 @@ public class ProductController {
      * 产品列表
      * */
     @RequestMapping("/showProducts")
-    public ModelAndView showProducts(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
+    public ModelAndView showProducts(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        Agent agent = agentService.findById(id);
+        List<Product> productList = productService.findAll();
+        List<AgentProduct> agentProductList = priceService.productList(productList,agent.getId());
 //        Set<PriceSerial> = agent.getPriceSerial();
-        modelAndView.setViewName("/views/showProducts.html");
-//        modelAndView.addObject("priceSerial",priceSerial);
+        modelAndView.setViewName("views/product/product_List");
+        modelAndView.addObject("agentProductList",agentProductList);
         return modelAndView;
     }
 }
