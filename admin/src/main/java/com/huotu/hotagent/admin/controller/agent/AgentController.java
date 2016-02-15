@@ -29,12 +29,12 @@ public class AgentController {
 
     @RequestMapping(value = "/agentList", method = RequestMethod.GET)
     public String AgentList() {
-        return null;
+        return "agent/agent-list";
     }
 
     @RequestMapping(value = "/agentEdit", method = RequestMethod.GET)
     public String AgentEdit() {
-        return "admin/agent/agent_edit";
+        return "agent/agent_edit";
     }
 
     @RequestMapping(value = "/agentEdit", method = RequestMethod.POST)

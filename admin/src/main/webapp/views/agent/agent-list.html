@@ -38,7 +38,7 @@
 
 <section>
 
-    <div class="leftpanel" th:replace="assets/templates/left :: left (activeMenu='agentEdit')">
+    <div class="leftpanel" th:replace="../assets/templates/left :: left (activeMenu='agentList')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
@@ -140,7 +140,7 @@
 
     <div class="mainpanel">
 
-        <div class="headerbar">
+        <div class="headerbar" th:replace="../assets/templates/header :: header">
 
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
@@ -337,22 +337,10 @@
 
         </div><!-- headerbar -->
 
-        <div class="pageheader">
-            <h2><i class="fa fa-search"></i> Search Results <span>Subtitle goes here...</span></h2>
-        </div>
-
         <div class="contentpanel">
 
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="panel-btns">
-                        <a href="" class="panel-close">&times;</a>
-                        <a href="" class="minimize">&minus;</a>
-                    </div><!-- panel-btns -->
-                    <h3 class="panel-title">Data Tables</h3>
 
-                    <p>DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.</p>
-                </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table" id="table2">
