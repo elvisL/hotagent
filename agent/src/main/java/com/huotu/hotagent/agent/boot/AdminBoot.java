@@ -7,7 +7,7 @@
  * 2013-2016. All rights reserved.
  */
 
-package com.huotu.hotagent.agent.config.boot;
+package com.huotu.hotagent.agent.boot;
 
 import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Product;

@@ -16,10 +16,12 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
 
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>新增客户</title>
 
 
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
 
     <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
@@ -34,12 +36,12 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="assets/templates/left :: left (activeMenu='agentEdit')">
+    <div class="leftpanel" th:replace="templates/left :: left (activeMenu='showProducts')">
     </div><!-- leftpanel -->
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="assets/templates/header :: header">
+        <div class="headerbar" th:replace="templates/header :: header">
 
         </div><!-- headerbar -->
 
@@ -73,16 +75,15 @@
                             <label class="col-sm-3 control-label">公司名称</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="username" title="公司名称" placeholder="公司名称" class="form-control"/>
+                                <input type="text" name="company" id="company" title="公司名称" placeholder="公司名称" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">产品名称</label>
 
                             <div class="col-sm-2">
-                                <select name="agentLevel" title="代理商等级" class="form-control mb10" >
+                                <select name="productId" id="productId" title="产品名称" class="form-control mb10" >
                                     <option th:value="${product.id}" th:text="${product.name}">伙伴商城</option>
-
                                 </select>
                             </div>
                         </div>
@@ -92,7 +93,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="balance" title="充值金额" class="form-control">
+                                    <input type="number" name="money" id="money" title="充值金额" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -101,59 +102,59 @@
                             <label class="col-sm-3 control-label">联系方式</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="username" title="联系方式" placeholder="联系方式" class="form-control"/>
+                                <input type="text" name="phoneNo" id="phoneNo" title="联系方式" placeholder="联系方式" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="username" title="联系人" placeholder="联系人" class="form-control"/>
+                                <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group" th:if="${product.id==1}">
                             <label class="col-sm-3 control-label">伙伴商城登录账号</label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="username" title="登录名" placeholder="登录名" class="form-control"/>
+                                <input type="text" name="loginName" id="loginName" title="登录名" placeholder="登录名" class="form-control"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">邮箱</label>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">邮箱</label>-->
 
-                            <div class="col-sm-6">
-                                <input type="text" name="username" title="邮箱" placeholder="邮箱" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">联系地址</label>
+                            <!--<div class="col-sm-6">-->
+                                <!--<input type="text" name="username" title="邮箱" placeholder="邮箱" class="form-control"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">联系地址</label>-->
 
-                            <div class="col-sm-6">
-                                <input type="text" name="username" title="联系地址" placeholder="联系地址" class="form-control"/>
-                            </div>
-                        </div>
+                            <!--<div class="col-sm-6">-->
+                                <!--<input type="text" name="username" title="联系地址" placeholder="联系地址" class="form-control"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">企业资质</label>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">企业资质</label>-->
 
-                            <div class="col-sm-6">
-                                <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
+                            <!--<div class="col-sm-6">-->
+                                <!--<div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">-->
 
-                                    <div class="input-append">
-                                        <div class="uneditable-input">
-                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                            <span class="fileupload-preview"></span>
-                                        </div>
-                                    <span class="btn btn-default btn-file">
-                                      <span class="fileupload-new">Select file</span>
-                                      <span class="fileupload-exists">Change</span>
-                                      <input type="file">
-                                    </span>
-                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <!--<div class="input-append">-->
+                                        <!--<div class="uneditable-input">-->
+                                            <!--<i class="glyphicon glyphicon-file fileupload-exists"></i>-->
+                                            <!--<span class="fileupload-preview"></span>-->
+                                        <!--</div>-->
+                                    <!--<span class="btn btn-default btn-file">-->
+                                      <!--<span class="fileupload-new">Select file</span>-->
+                                      <!--<span class="fileupload-exists">Change</span>-->
+                                      <!--<input type="file">-->
+                                    <!--</span>-->
+                                        <!--<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
                     </form>
 
@@ -162,7 +163,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button onclick="editHandler.submit()" class="btn btn-primary">Submit</button>
+                            <button onclick="editHandler.submit()" class="btn btn-primary">确认</button>
                         </div>
                     </div>
                 </div><!-- panel-footer -->
@@ -182,6 +183,7 @@
 <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
 <script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
 <script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
 
@@ -211,24 +213,69 @@
                     $(element).valid();
                 },
                 rules: {
-                    agentName: {
-                        required : true
-                    },
-                    balance: {
-                        required: true,
-                        digits: true
-                    }
+//                    password: {
+//                        required : true
+//                    },
+//                    newPassword: {
+//                        required : true
+//                    },
+//                    CnewPassword: {
+//                        required : true,
+//                        equalTo:"#newPassword"
+//                    }
                 },
                 messages: {
-                    agentName:{
-                        required:"请输入名称"
-                    },
-                    balance: {
-                        required:"请输入充值金额",
-                        digits:"请输入数字"
-                    }
+//                    password:{
+//                        required:"请输入原密码"
+//                    },
+//                    newPassword: {
+//                        required:"请输入新密码"
+//                    },
+//                    CnewPassword: {
+//                        required:"请输入确认密码",
+//                        equalTo: "两次输入密码不一致"
+//                    }
 
+                },
+                submitHandler: function (form, ev) {
+                    $.ajax({
+                        url: "/saveCustomer",
+                        data: {
+                            name:$("#name").val(),
+                            company:$("#company").val(),
+                            productId:$("#productId").val(),
+                            money:$("#money").val(),
+                            contacts:$("#contacts").val(),
+                            phoneNo:$("#phoneNo").val(),
+                            loginName:$("#loginName").val()
+                        },
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (msg) {
+                            var index=parseInt(msg.code);
+                            switch (index) {
+                                case 200:
+                                    layer.msg("添加成功,2秒后将自动返回产品页面",{time: 2000});
+                                    setTimeout(function(){
+                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
+                                            }
+                                            ,1000);
+//                                    $("#password").val("");
+                                    break;
+                                case 401:
+                                    layer.msg("您的账户余额不足", {time: 2000});
+                                    $("#money").val("");
+                                    break;
+                            }
+                        },
+                        error: function () {
 
+                        }
+                    });
+                    return false;
+                },
+                invalidHandler: function () {
+                    return true;
                 }
             });
         },

@@ -51,7 +51,6 @@ public class ProductController {
         ModelAndView modelAndView=new ModelAndView();
         List<Product> productList = productService.findAll();
         List<AgentProduct> agentProductList = priceService.productList(productList,agent.getId());
-//        Set<PriceSerial> = agent.getPriceSerial();
         modelAndView.setViewName("views/product/product_List");
         modelAndView.addObject("agentProductList",agentProductList);
         return modelAndView;

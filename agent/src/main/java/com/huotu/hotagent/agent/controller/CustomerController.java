@@ -24,7 +24,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -64,13 +63,13 @@ public class CustomerController {
      */
     @RequestMapping(value = "/saveCustomer",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult saveCustomer(@RequestParam(value = "id", defaultValue = "0") Long id,
+    public ApiResult saveCustomer(@AuthenticationPrincipal Agent agent,
                                     Customer customer,int money) throws Exception{
 
         ApiResult apiResult =null;
         try {
-            customer.setAgent(agentService.findById(id));
-            apiResult=  customerService.addCustomer(id,customer,money);
+            customer.setAgent(agent);
+            apiResult=  customerService.addCustomer(agent.getId(),customer,money);
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);

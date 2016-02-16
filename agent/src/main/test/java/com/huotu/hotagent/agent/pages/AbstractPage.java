@@ -9,14 +9,14 @@
 
 package com.huotu.hotagent.agent.pages;
 
-import com.huotu.hotagent.agent.WebTest;
+import com.huotu.hotagent.agent.common.WebTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 /**
  * Created by allan on 1/25/16.
  */
-public class AbstractPage {
+public abstract class AbstractPage {
     protected WebDriver webDriver;
     /**
      * 单元测试实例
@@ -38,4 +38,9 @@ public class AbstractPage {
         webDriver.navigate().refresh();
         PageFactory.initElements(webDriver, this);
     }
+
+    /**
+     * 页面开始的一些验证工作
+     */
+    public abstract void validate();
 }

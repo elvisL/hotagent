@@ -60,7 +60,7 @@ public class AgentController {
     public ModelAndView showAccount(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        modelAndView.setViewName("/views/showAccount.html");
+        modelAndView.setViewName("/views/agent/showAccount");
         modelAndView.addObject("agent",agent);
         return modelAndView;
     }
@@ -74,7 +74,7 @@ public class AgentController {
     public ModelAndView showAgentList(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        modelAndView.setViewName("views/myAgents");
+        modelAndView.setViewName("views/agent/myAgents");
         modelAndView.addObject("agent",agent);
         return modelAndView;
     }
@@ -88,7 +88,7 @@ public class AgentController {
     public ModelAndView showAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        modelAndView.setViewName("views/showAgent.html");
+        modelAndView.setViewName("views/agent/showAgent");
         modelAndView.addObject("agent",agent);
         return modelAndView;
     }
@@ -100,7 +100,7 @@ public class AgentController {
     @RequestMapping("/addAgent")
     public ModelAndView addAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("views/addAgent.html");
+        modelAndView.setViewName("views/agent/addAgent");
         return modelAndView;
     }
 
@@ -133,7 +133,7 @@ public class AgentController {
 
         ApiResult apiResult =null;
         try {
-            apiResult= agentService.delAgent(id);
+            apiResult= agentService.lockAgent(id);
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SYSTEM_BAD_REQUEST);
