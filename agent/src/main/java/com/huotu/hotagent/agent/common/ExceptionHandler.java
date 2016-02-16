@@ -7,7 +7,7 @@
  * 2013-2016. All rights reserved.
  */
 
-package com.huotu.hotagent.agent.config.common;
+package com.huotu.hotagent.agent.common;
 
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.LockedException;

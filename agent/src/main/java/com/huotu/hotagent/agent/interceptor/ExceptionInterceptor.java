@@ -1,5 +1,7 @@
 package com.huotu.hotagent.agent.interceptor;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -9,10 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionInterceptor {
 
-    @ExceptionHandler(Throwable.class)
-    public String catchExceptions(Throwable e) {
-        e.printStackTrace();
-        return "views/error";
-    }
+    private static final Log log = LogFactory.getLog(ExceptionInterceptor.class);
 
+    @ExceptionHandler
+    public String catchException(Throwable e) {
+        e.printStackTrace();
+        return "assets/email";
+    }
 }

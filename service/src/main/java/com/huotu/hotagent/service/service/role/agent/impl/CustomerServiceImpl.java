@@ -17,6 +17,7 @@ import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 import com.huotu.hotagent.service.repository.log.BalanceLogRepository;
 import com.huotu.hotagent.service.repository.log.CommisionLogRepository;
+import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
 import com.huotu.hotagent.service.repository.role.agent.CustomerRepository;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.CustomerService;
@@ -41,6 +42,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     CommisionLogRepository commisionLogRepository;
+
+    @Autowired
+    AgentRepository agentRepository;
 
 
     @Override
@@ -67,8 +71,10 @@ public class CustomerServiceImpl implements CustomerService {
             highbalanceLog.setAgent(highAgent);
             highbalanceLog.setCustomer(customer);
             highbalanceLog.setCreateTime(date);
-            highbalanceLog.setMoney(highbalanceLog.getMoney()-money);
+            highbalanceLog.setMoney(money);
             highbalanceLog.setExportMoney(money);
+            agentRepository.save(highAgent);
+            customerRepository.save(customer);
             balanceLogRepository.save(highbalanceLog);
         }
         else {
@@ -87,6 +93,8 @@ public class CustomerServiceImpl implements CustomerService {
                 commisionLog.setExportMoney(money-highAgent.getBalance());
                 commisionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
                 commisionLog.setCreateTime(date);
+                agentRepository.save(highAgent);
+                customerRepository.save(customer);
                 balanceLogRepository.save(highbalanceLog);
                 commisionLogRepository.save(commisionLog);
             }
