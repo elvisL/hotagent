@@ -21,23 +21,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by allan on 1/25/16.
  */
 @Controller
-@RequestMapping("/agent")
 public class AgentController {
 
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping(value = "/agentList", method = RequestMethod.GET)
+    /**
+     * 代理商列表
+     * @return
+     */
+    @RequestMapping(value = "/agents", method = RequestMethod.GET)
     public String AgentList() {
         return "agent/agent-list";
     }
 
-    @RequestMapping(value = "/agentEdit", method = RequestMethod.GET)
+    /**
+     * 代理商新增（修改）页面
+     * @return
+     */
+    @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
     public String AgentEdit() {
         return "agent/agent_edit";
     }
 
-    @RequestMapping(value = "/agentEdit", method = RequestMethod.POST)
+    /**
+     * 新增（修改）代理商
+     * @param requestAgent
+     * @return
+     */
+    @RequestMapping(value = "/agents", method = RequestMethod.POST)
     public String AgentEdit(Agent requestAgent) {
         Agent agent = new Agent();
         agent.setName(requestAgent.getName());
