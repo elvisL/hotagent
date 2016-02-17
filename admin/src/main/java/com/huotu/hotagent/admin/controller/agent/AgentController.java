@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
+import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 代理商相关
@@ -41,7 +43,8 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
-    public String AgentEdit() {
+    public String AgentEdit(Model model) {
+        model.addAttribute("agentTypes", AgentType.values());
         return "agent/agent_edit";
     }
 
@@ -51,7 +54,7 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
-    public String AgentEdit(Agent agent) {
+    public String AgentEdit(Agent agent,MultipartFile qualify) {
         if(agent.getId() == null) {
 
         }else {
