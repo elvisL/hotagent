@@ -54,18 +54,27 @@ public class AgentController {
         return dataTableResponse;
     }
 
-    @RequestMapping(value = "/agentEdit", method = RequestMethod.GET)
-
+    /**
+     * 代理商新增（修改）页面
+     * @return
+     */
+    @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
     public String AgentEdit() {
-        return "agent/agent_edit";
+        return "admin/agent/agent_edit";
     }
 
-    @RequestMapping(value = "/agentEdit", method = RequestMethod.POST)
-    public String AgentEdit(Agent requestAgent) {
-        Agent agent = new Agent();
-        agent.setName(requestAgent.getName());
-//        loginService.newLogin(agent,requestAgent.getPassword());
-        // TODO: 1/25/16
+    /**
+     * 新增（修改）代理商
+     * @param agent
+     * @return
+     */
+    @RequestMapping(value = "/agents", method = RequestMethod.POST)
+    public String AgentEdit(Agent agent) {
+        if(agent.getId() == null) {
+
+        }else {
+
+        }
         return "redirect:/agent/agentEdit";
     }
 }

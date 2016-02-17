@@ -9,7 +9,7 @@
 
 package com.huotu.hotagent.agent.config;
 
-import com.huotu.hotagent.agent.config.common.ExceptionHandler;
+import com.huotu.hotagent.agent.common.ExceptionHandler;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;

@@ -34,7 +34,7 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="../templates/left :: left (activeMenu='index')">
+    <div class="leftpanel" th:replace="common/left :: left (activeMenu='index')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
@@ -137,7 +137,7 @@
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="../templates/header :: header">
+        <div class="headerbar" th:replace="common/header :: header">
 
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
@@ -169,8 +169,7 @@
 
         </div>
 
-        <!--/*@thymesVar id="statistics" type="com.huotu.hotagent.admin.model.StatisticsModel"*/-->
-        <div class="contentpanel" th:object="${statistics}">
+        <div class="contentpanel">
 
             <div class="row">
 
@@ -185,7 +184,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">一级代理总数</small>
-                                        <h1 class="index-agentNum-level1" th:text="*{agentNumWithLevel1}">1000</h1>
+                                        <h1 class="index-agentNum-level1">1000</h1>
                                     </div>
                                 </div>
 
@@ -206,7 +205,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">下级代理总数</small>
-                                        <h1 class="index-agentNum-under" th:text="*{agentNumWithUnder}">1000</h1>
+                                        <h1 class="index-agentNum-under">1000</h1>
                                     </div>
                                 </div>
 
@@ -227,7 +226,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">普通代理总数</small>
-                                        <h1 class="index-agentNum-normal" th:text="*{normalAgentNum}">1000</h1>
+                                        <h1 class="index-agentNum-normal">1000</h1>
                                     </div>
                                 </div>
 
@@ -248,7 +247,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">独家代理总数</small>
-                                        <h1 class="index-agentNum-sole" th:text="*{soleAgentNum}">1000</h1>
+                                        <h1 class="index-agentNum-sole">1000</h1>
                                     </div>
                                 </div>
 
@@ -272,7 +271,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">今日新增代理商总数</small>
-                                        <h1 class="index-new-day" th:text="*{newAgentDay}">1000</h1>
+                                        <h1 class="index-new-day">1000</h1>
                                     </div>
                                 </div>
 
@@ -293,7 +292,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">本月新增代理商</small>
-                                        <h1 class="index-new-month" th:text="*{newAgentMonth}">1000</h1>
+                                        <h1 class="index-new-month">1000</h1>
                                     </div>
                                 </div>
 
@@ -317,7 +316,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">未处理提现申请</small>
-                                        <h1 class="no-handler-withdraw" th:text="*{unHandleWithdraw}">1000</h1>
+                                        <h1 class="no-handler-withdraw">1000</h1>
                                     </div>
                                 </div>
 
@@ -645,12 +644,13 @@
     </div><!-- rightpanel -->
 
 </section>
-<script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+<script src="../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
 <script src="../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
-<script src="//cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
+<script src="http://cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
 <script src="../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
 <script src="../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
