@@ -13,6 +13,7 @@ import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -46,15 +47,16 @@ public class AgentController {
 
     /**
      * 新增（修改）代理商
-     * @param requestAgent
+     * @param agent
      * @return
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
-    public String AgentEdit(Agent requestAgent) {
-        Agent agent = new Agent();
-        agent.setName(requestAgent.getName());
-//        loginService.newLogin(agent,requestAgent.getPassword());
-        // TODO: 1/25/16
+    public String AgentEdit(Agent agent) {
+        if(agent.getId() == null) {
+
+        }else {
+
+        }
         return "redirect:/agent/agentEdit";
     }
 }

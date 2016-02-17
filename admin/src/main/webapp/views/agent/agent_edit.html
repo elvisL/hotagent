@@ -229,15 +229,15 @@
 
                             <div id="area">
                                 <div class="col-sm-1">
-                                    <select name="type"  class="form-control input-sm mb10 prov">
+                                    <select name="province"  class="form-control input-sm mb10 prov">
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <select name="type"  class="form-control input-sm mb10 city" >
+                                    <select name="city"  class="form-control input-sm mb10 city" >
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <select name="type" class="form-control input-sm mb10 dist">
+                                    <select name="district" class="form-control input-sm mb10 dist">
                                     </select>
                                 </div>
 
@@ -247,7 +247,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">充值金额</label>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
                                     <input type="number" name="balance" title="充值金额" class="form-control">
@@ -257,11 +257,54 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">佣金</label>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
                                     <input type="number" name="commission" title="佣金" class="form-control" readonly>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系人</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="contacts" placeholder="联系人" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手机号</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="phoneNo"  placeholder="手机号" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系地址</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="address"  placeholder="联系地址" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="mail" placeholder="电子邮箱" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">QQ</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="qq" placeholder="QQ号" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否可发展下级代理</label>
+
+                            <div class="col-sm-3">
+                                <div class="radio-inline"><label><input type="radio" name="expandable">是</label></div>
+                                <div class="radio"><label><input type="radio" name="expandable">否</label></div>
                             </div>
                         </div>
                         <div class="form-group">
