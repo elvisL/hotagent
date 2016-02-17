@@ -77,8 +77,8 @@ public class AgentServiceImpl implements AgentService {
     public Page<Agent> findAll(int pageIndex, int pageSize, AgentSearch agentSearch) {
         Specification<Agent> specification = ((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            if (!StringUtils.isEmpty(agentSearch.getName())) {
-                predicates.add(criteriaBuilder.like(root.get("name").as(String.class), "%" + agentSearch.getName() + "%"));
+            if (!StringUtils.isEmpty(agentSearch.getAgentName())) {
+                predicates.add(criteriaBuilder.like(root.get("name").as(String.class), "%" + agentSearch.getAgentName() + "%"));
             }
             if (!StringUtils.isEmpty(agentSearch.getBeginTime())) {
                 Date beginDate = StringUtil.DateFormat(agentSearch.getBeginTime(), StringConstant.DATE_PATTERN);
