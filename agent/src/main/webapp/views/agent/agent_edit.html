@@ -16,7 +16,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
 
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>修改代理商</title>
 
 
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
@@ -34,13 +34,13 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="assets/templates/left :: left (activeMenu='agentEdit')">
+    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='agentEdit')">
 
     </div><!-- leftpanel -->
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="assets/templates/header :: header">
+        <div class="headerbar" th:replace="views/common/header :: header">
 
 
         </div><!-- headerbar -->
@@ -62,26 +62,26 @@
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm"  th:action="@{/agent/agentEdit}" th:method="post" class="form-horizontal form-bordered">
+                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post" class="form-horizontal form-bordered">
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <input type="text" name="name" title="代理商名称" placeholder="代理商名称" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">账号</label>
 
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <input type="text" name="username" title="账号" placeholder="账号" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">密码</label>
 
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <input type="password" name="password" title="密码" placeholder="密码" class="form-control"/>
                             </div>
                         </div>
@@ -89,8 +89,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商等级</label>
 
-                            <div class="col-sm-5">
-                                <select name="agentLevel" title="代理商等级" class="form-control input-sm mb10" th:remove="all-but-first">
+                            <div class="col-sm-3">
+                                <select name="level" title="代理商等级" class="form-control input-sm mb10" th:remove="all-but-first">
                                     <option>一级代理商</option>
                                     <option>二级代理商</option>
                                 </select>
@@ -99,11 +99,30 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商类型</label>
 
-                            <div class="col-sm-5">
-                                <select name="agentType" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
+                            <div class="col-sm-3">
+                                <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
                                     <option>独家代理</option>
                                     <option>普通代理</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理区域</label>
+
+                            <div id="area">
+                                <div class="col-sm-1">
+                                    <select name="type"  class="form-control input-sm mb10 prov">
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="type"  class="form-control input-sm mb10 city" >
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="type" class="form-control input-sm mb10 dist">
+                                    </select>
+                                </div>
+
                             </div>
                         </div>
 
@@ -114,6 +133,16 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
                                     <input type="number" name="balance" title="充值金额" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">佣金</label>
+
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="commission" title="佣金" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +160,7 @@
                                     <span class="btn btn-default btn-file">
                                       <span class="fileupload-new">Select file</span>
                                       <span class="fileupload-exists">Change</span>
-                                      <input type="file">
+                                      <input type="file" name="qualifyUri">
                                     </span>
                                         <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
                                     </div>
@@ -173,10 +202,15 @@
 <script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
-
+<script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script type="text/javascript">
     $(function () {
         editHandler.pageInit();
+    });
+    $("#area").citySelect({
+        prov:"浙江", //省份
+        city:"杭州", //城市
+        dist:"滨江区"//区县
     });
 
     var editHandler = {

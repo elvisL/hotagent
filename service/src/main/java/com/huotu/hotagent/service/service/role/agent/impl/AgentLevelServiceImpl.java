@@ -13,6 +13,7 @@ import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.repository.role.agent.AgentLevelRepository;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class AgentLevelServiceImpl implements AgentLevelService {
 
     @Override
     public List<AgentLevel> agentLevelList() {
-        return agentLevelRepository.findAll();
+        return agentLevelRepository.findAll(new Sort(Sort.Direction.ASC, "level"));
     }
 
     @Override

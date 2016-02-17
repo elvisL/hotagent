@@ -146,10 +146,10 @@ public abstract class WebTest extends SpringWebTest {
         //先随机一个等级
         AgentLevel randomLevel = randomAgentLevel();
         int parentLevel = randomLevel.getLevel() - 1;
-        Page<Agent> parentAgents = agentService.findByLevel(1, SysConstant.DEFALUT_PAGE_SIZE, parentLevel);
+        Page<Agent> parentAgents = agentService.findByLevel(1, SysConstant.DEFAULT_PAGE_SIZE, parentLevel);
         while (parentAgents.getContent().size() == 0 && randomLevel.getLevel() > 0) {
             randomLevel = randomAgentLevel();
-            parentAgents = agentService.findByLevel(1, SysConstant.DEFALUT_PAGE_SIZE, parentLevel);
+            parentAgents = agentService.findByLevel(1, SysConstant.DEFAULT_PAGE_SIZE, parentLevel);
         }
         Agent randomParent = randomLevel.getLevel() > 0 ? parentAgents.getContent().get(random.nextInt(parentAgents.getSize())) : null;
 

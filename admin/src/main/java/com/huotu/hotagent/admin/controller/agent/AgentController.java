@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
@@ -57,25 +57,25 @@ public class AgentController {
      */
     @RequestMapping(value = "/agents", method = RequestMethod.GET)
     @PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
-    public String AgentList() {
-        return "agent/agent-list";
-    }
-
-    @RequestMapping(value = "/api/agentList", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
-    @ResponseBody
-    public DataTableResponse agentList(DataTableRequest dataTableRequest, AgentSearch agentSearch) {
-        int pageIndex = dataTableRequest.getStart() / dataTableRequest.getLength() + 1;
+    public String AgentList(
+            @RequestParam(required = false, defaultValue = "1") int pageIndex,
+            AgentSearch agentSearch,
+            Model model
+    ) {
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
+        model.addAttribute("agentSearch", agentSearch);
         Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
-        DataTableResponse dataTableResponse = new DataTableResponse();
-        dataTableResponse.setDraw(dataTableRequest.getDraw());
-        dataTableResponse.setRecordsTotal(agents.getTotalElements());
-        dataTableResponse.setRecordsFiltered(agents.getTotalElements());
-        dataTableResponse.setData(agents.getContent());
-        return dataTableResponse;
+        model.addAttribute("totalRecord", agents.getTotalElements());
+        model.addAttribute("agents", agents.getContent());
+        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
+        model.addAttribute("agentLevels", agentLevels);
+        return "agent/agent_list";
     }
 
     /**
      * 代理商新增（修改）页面
+     *
      * @return
      */
     @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
@@ -88,6 +88,7 @@ public class AgentController {
 
     /**
      * 新增（修改）代理商
+     *
      * @param agent
      * @return
      */

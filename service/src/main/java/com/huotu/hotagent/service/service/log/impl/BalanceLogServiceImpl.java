@@ -30,9 +30,8 @@ public class BalanceLogServiceImpl implements BalanceLogService {
 
     @Override
     @Transactional(value = "transactionManager")
-    public Boolean importBl(Long id, double money) {
+    public Boolean importBl(Agent lowAgent, double money) {
         Date date = new Date();
-        Agent lowAgent=agentService.findById(id);//二级代理
         Agent highAgent=lowAgent.getParent();
         if(highAgent.getBalance()-money>0) {//当一级代理商余额足够时
             lowAgent.setBalance(lowAgent.getBalance() + money);
