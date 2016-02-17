@@ -6,7 +6,6 @@
  * Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
  * 2013-2016. All rights reserved.
  */
-
 package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
@@ -17,6 +16,7 @@ import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
+import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +52,13 @@ public class AgentController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    LoginService loginService;
+
 
 
     /**
-     *�˻���Ϣ
+     *账户信息
      */
     @RequestMapping("/showAccount")
     public ModelAndView showAccount(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -69,7 +72,7 @@ public class AgentController {
 
 
     /**
-     *�ҵĴ������б�
+     *我的代理商列表
      */
     @RequestMapping("/myAgents")
     public ModelAndView showAgentList(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -83,7 +86,7 @@ public class AgentController {
 
 
     /**
-     *���˴�������Ϣ/�޸Ĵ�����
+     *个人代理商信息/修改代理商
      */
     @RequestMapping("/showAgent")
     public ModelAndView showAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -96,7 +99,7 @@ public class AgentController {
 
 
     /**
-     *�����¼�������
+     *新增下级代理商
      */
     @RequestMapping("/addAgent")
     public ModelAndView addAgent(@AuthenticationPrincipal Agent agent) throws Exception{
@@ -108,7 +111,7 @@ public class AgentController {
 
 
     /**
-     *ɾ���¼�������
+     *删除下级代理商
      */
     @RequestMapping(value = "/delAgent",method = RequestMethod.POST)
     @ResponseBody
@@ -126,7 +129,7 @@ public class AgentController {
 
 
     /**
-     *�����¼�������
+     *冻结下级代理商
      */
     @RequestMapping(value = "/lockAgent",method = RequestMethod.POST)
     @ResponseBody
@@ -144,7 +147,7 @@ public class AgentController {
 
 
     /**
-     *�޸Ĵ���������
+     *修改代理商密码
      */
     @RequestMapping(value="/updatePw",method = RequestMethod.GET)
     public ModelAndView updatePw(@AuthenticationPrincipal Agent agent) throws Exception{
@@ -156,7 +159,7 @@ public class AgentController {
 
 
     /**
-     *�����޸Ĵ���������
+     *保存修改代理商密码
      */
     @RequestMapping(value = "/savePw",method = RequestMethod.POST)
     @ResponseBody
@@ -184,12 +187,12 @@ public class AgentController {
 
 
     /**
-     *�����¼���������Ϣ
+     *保存下级代理商信息
      */
     @RequestMapping(value = "/saveLowerAg ",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveLowerAg(@AuthenticationPrincipal Agent Higher,
-                                 Agent agent,int agentType,int agentLevel) throws Exception{
+                                 Agent agent,int agentType,int agentLevel,int money) throws Exception{
 
         ApiResult apiResult =null;
         try {
@@ -201,8 +204,14 @@ public class AgentController {
             agent.setParent(Higher);
             agent.setExpandable(false);
             agent.setCreateTime(date);
-            agentService.save(agent);
-            apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            Boolean bl = balanceLogService.importBl(agent, money);
+            if (bl==true){
+                loginService.newLogin(agent,agent.getPassword());
+                apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            }
+            else{
+                apiResult = ApiResult.resultWith(ResultCodeEnum.IMPORT_ERROR);
+            }
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
@@ -211,16 +220,16 @@ public class AgentController {
     }
 
     /**
-     *���¼������̳�ֵ
+     *给下级代理商充值
      */
     @RequestMapping(value = "/importBl",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult importBl(@AuthenticationPrincipal Agent agent,double money) throws Exception{
+    public ApiResult importBl(@AuthenticationPrincipal Agent agent,Long id,double money) throws Exception{
 
         ApiResult apiResult = null;
-        Long id = agent.getId();
+        Agent lowAgent = agentService.findById(id);
         try {
-            Boolean bl=balanceLogService.importBl(id,money);
+            Boolean bl=balanceLogService.importBl(lowAgent,money);
             if(bl==true){
                 apiResult =  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
             }

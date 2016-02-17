@@ -126,15 +126,15 @@
                             <label class="col-sm-3 control-label">代理区域</label>
 
                             <div id="area">
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                     <select name="type" id="province" class="form-control mb10 prov">
                                     </select>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                     <select name="type" id="city"  class="form-control mb10 city" >
                                     </select>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                     <select name="type" id="district" class="form-control  mb10 dist">
                                     </select>
                                 </div>
@@ -294,7 +294,7 @@
                             name:$("#name").val(),
                             agentLevel:$("#agentLevel").val(),
                             agentType:$("#type").val(),
-                            balance:$("#balance").val(),
+                            money:$("#balance").val(),
                             username:$("#username").val(),
                             password:$("#password").val(),
                             contacts:$("#contacts").val(),
@@ -309,16 +309,16 @@
                             var index=parseInt(msg.code);
                             switch (index) {
                                 case 200:
-                                    layer.msg("添加成功,2秒后将自动返回产品页面",{time: 2000});
+                                    layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
                                     setTimeout(function(){
-                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
+//                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
                                             }
                                             ,1000);
 //                                    $("#password").val("");
                                     break;
                                 case 401:
                                     layer.msg("您的账户余额不足", {time: 2000});
-                                    $("#money").val("");
+                                    $("#balance").val("");
                                     break;
                             }
                         },
