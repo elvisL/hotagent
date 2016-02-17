@@ -8,24 +8,26 @@
   ~ 2013-2016. All rights reserved.
   -->
 
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/png">
 
     <title>Bracket Responsive Bootstrap3 Admin</title>
 
+    <link href="../css/style.default.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
-
-    <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
-
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.6.2/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body>
+<body class="horizontal-menu-sidebar">
 
 
 <!-- Preloader -->
@@ -34,18 +36,18 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="common/left :: left (activeMenu='agentEdit')">
+
+    <div class="leftpanel" th:fragment="left (activeMenu)">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
         </div><!-- logopanel -->
 
         <div class="leftpanelinner">
-
             <!-- This is only visible to small devices -->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media userlogged">
-                    <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
+                    <img alt="" src="../images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
 
                     <div class="media-body">
                         <h4>John Doe</h4>
@@ -62,23 +64,23 @@
                 </ul>
             </div>
 
-            <h5 class="sidebartitle">导航</h5>
+            <h5 class="sidebartitle">Navigation</h5>
             <ul class="nav nav-pills nav-stacked nav-bracket">
-                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
-                <li class="nav-parent nav-active active">
+                <li agent:active="index"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
                     <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                     <ul class="children" style="display: block;">
-                        <li class="active"><a href="agent-list.html.html"><i class="fa fa-caret-right"></i> 代理商列表</a></li>
-                        <li><a href="agent_edit.html.html"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
-                        <li><a href="form-validation.html"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
+                        <li agent:active="agentList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 代理商列表</span></a></li>
+                        <li agent:active="agentEdit"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
+                        <li agent:active="agentLevel"><a href="form-validation.html"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
                     </ul>
                 </li>
-                <li><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
-                <li class="nav-parent">
+                <li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
+                <li agent:activeparent="'operatorList,addOperator'" class="nav-parent">
                     <a href=""><i class="fa fa-edit"></i> <span>操作员管理</span></a>
-                    <ul class="children" style="display: block;">
-                        <li><a href="general-forms.html"><i class="fa fa-caret-right"></i> 操作员列表</a></li>
-                        <li><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加操作员</a></li>
+                    <ul class="children">
+                        <li agent:active="operatorList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 操作员列表</a></li>
+                        <li agent:active="addOperator"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加操作员</a></li>
                     </ul>
                 </li>
             </ul>
@@ -136,7 +138,7 @@
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="common/header :: header">
+        <div class="headerbar" th:fragment="header">
 
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
@@ -146,15 +148,13 @@
                     <li>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <img src="../../assets/images/photos/loggeduser.png" th:src="@{/assets/images/photos/loggeduser.png}"/>
+                                <img src="../images/photos/loggeduser.png" alt="" th:src="@{/assets/images/photos/loggeduser.png}"/>
                                 John Doe
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
-                                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a></li>
-                                <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
-                                <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                                <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> 修改密码</a></li>
+                                <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i> 注销登录</a></li>
                             </ul>
                         </div>
                     </li>
@@ -164,185 +164,21 @@
         </div><!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-edit"></i> 代理商管理<span>Subtitle goes here...</span></h2>
+            <h2><i class="fa fa-home"></i> Horizontal Menu <span>Subtitle goes here...</span></h2>
 
+            <div class="breadcrumb-wrapper">
+                <span class="label">You are here:</span>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Bracket</a></li>
+                    <li class="active">Horizontal Menu</li>
+                </ol>
+            </div>
         </div>
 
         <div class="contentpanel">
+            <!-- content goes here... -->
+        </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="panel-btns">
-                        <a href="" class="panel-close">&times;</a>
-                        <a href="" class="minimize">&minus;</a>
-                    </div>
-                    <h4 class="panel-title">添加代理商</h4>
-                </div>
-                <div class="panel-body panel-body-nopadding">
-
-                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post" class="form-horizontal form-bordered">
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代理商名称</label>
-
-                            <div class="col-sm-3">
-                                <input type="text" name="name" title="代理商名称" placeholder="代理商名称" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">账号</label>
-
-                            <div class="col-sm-3">
-                                <input type="text" name="username" title="账号" placeholder="账号" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">密码</label>
-
-                            <div class="col-sm-3">
-                                <input type="password" name="password" title="密码" placeholder="密码" class="form-control"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代理商等级</label>
-
-                            <div class="col-sm-3">
-                                <select name="level" title="代理商等级" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option>一级代理商</option>
-                                    <option>二级代理商</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代理商类型</label>
-
-                            <div class="col-sm-3">
-                                <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option>独家代理</option>
-                                    <option>普通代理</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代理区域</label>
-
-                            <div id="area">
-                                <div class="col-sm-1">
-                                    <select name="province"  class="form-control input-sm mb10 prov">
-                                    </select>
-                                </div>
-                                <div class="col-sm-1">
-                                    <select name="city"  class="form-control input-sm mb10 city" >
-                                    </select>
-                                </div>
-                                <div class="col-sm-1">
-                                    <select name="district" class="form-control input-sm mb10 dist">
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">充值金额</label>
-
-                            <div class="col-sm-2">
-                                <div class="input-group">
-                                    <span class="input-group-addon">¥</span>
-                                    <input type="number" name="balance" title="充值金额" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">佣金</label>
-
-                            <div class="col-sm-2">
-                                <div class="input-group">
-                                    <span class="input-group-addon">¥</span>
-                                    <input type="number" name="commission" title="佣金" class="form-control" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">联系人</label>
-
-                            <div class="col-sm-3">
-                                <input type="text" name="contacts" placeholder="联系人" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">手机号</label>
-
-                            <div class="col-sm-3">
-                                <input type="text" name="phoneNo"  placeholder="手机号" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">联系地址</label>
-
-                            <div class="col-sm-3">
-                                <input type="text" name="address"  placeholder="联系地址" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">邮箱</label>
-
-                            <div class="col-sm-3">
-                                <input type="text" name="mail" placeholder="电子邮箱" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">QQ</label>
-
-                            <div class="col-sm-3">
-                                <input type="text" name="qq" placeholder="QQ号" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">是否可发展下级代理</label>
-
-                            <div class="col-sm-3">
-                                <div class="radio-inline"><label><input type="radio" name="expandable">是</label></div>
-                                <div class="radio"><label><input type="radio" name="expandable">否</label></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">企业资质</label>
-
-                            <div class="col-sm-6">
-                                <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
-
-                                    <div class="input-append">
-                                        <div class="uneditable-input">
-                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                            <span class="fileupload-preview"></span>
-                                        </div>
-                                    <span class="btn btn-default btn-file">
-                                      <span class="fileupload-new">Select file</span>
-                                      <span class="fileupload-exists">Change</span>
-                                      <input type="file" name="qualifyUri">
-                                    </span>
-                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-
-                </div><!-- panel-body -->
-
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <button onclick="editHandler.submit()" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </div><!-- panel-footer -->
-
-            </div><!-- panel -->
-        </div><!-- contentpanel -->
     </div><!-- mainpanel -->
 
     <div class="rightpanel">
@@ -362,7 +198,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/userprofile.png" th:src="@{/assets/images/photos/userprofile.png}" class="media-object">
+                                <img alt="" src="images/photos/userprofile.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -374,7 +210,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user1.png" th:src="@{/assets/images/photos/user1.png}" class="media-object">
+                                <img alt="" src="images/photos/user1.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -387,7 +223,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{/assets/images/photos/user2.png}" class="media-object">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -399,7 +235,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" th:src="@{/assets/images/photos/user3.png}" class="media-object">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -411,7 +247,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" th:src="@{/assets/images/photos/user4.png}" class="media-object">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -429,7 +265,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" th:src="@{/assets/images/photos/user5.png}" class="media-object">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -441,7 +277,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" th:src="@{/assets/images/photos/user2.png}" class="media-object">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -453,7 +289,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -465,7 +301,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -477,7 +313,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -489,7 +325,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -501,7 +337,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -518,7 +354,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" class="media-object">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -530,7 +366,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user1.png" class="media-object">
+                                <img alt="" src="images/photos/user1.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -542,7 +378,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -554,7 +390,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -566,7 +402,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -583,7 +419,7 @@
                     <li class="online">
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -595,7 +431,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user2.png" class="media-object">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -607,7 +443,7 @@
                     <li>
                         <div class="media">
                             <a href="#" class="pull-left media-thumb">
-                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
                             </a>
 
                             <div class="media-body">
@@ -660,61 +496,16 @@
     </div><!-- rightpanel -->
 
 </section>
-<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
-<script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
-<script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
-<script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
-<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
-<script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
-<script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
-<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
-
-<script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
-<script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
-
-<script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
-<script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
-
-<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
-<script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
-<script type="text/javascript">
-    $(function () {
-        editHandler.pageInit();
-    });
-    $("#area").citySelect({
-        prov:"浙江", //省份
-        city:"杭州", //城市
-        dist:"滨江区"//区县
-    });
-    var editHandler = {
-        pageInit: function () {
-            //表单验证初始化
-            $("#editForm").validate({
-                ignoreTitle: true,
-                highlight: function (element) {
-                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                },
-                success: function (element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                    $(element).remove();
-                },
-                onfocusout: function (element) {
-                    $(element).valid();
-                },
-                rules: {
-                    name: "required"
-                },
-                messages: {
-                    name: "请填写代理商名称"
-                }
-            });
-        },
-        submit: function () {
-            $("#editForm").submit();
-        }
-    }
-</script>
 
 
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/modernizr/2.6.2/modernizr.min.js"></script>
+<script src="http://cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js"></script>
+<script src="../js/jquery.cookies.js"></script>
+<script src="../js/custom.js"></script>
 </body>
 </html>

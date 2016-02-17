@@ -16,10 +16,12 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
 
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>添加代理商</title>
 
 
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
 
     <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
@@ -34,13 +36,13 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="assets/templates/left :: left (activeMenu='agentEdit')">
+    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='addAgent')">
 
     </div><!-- leftpanel -->
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="assets/templates/header :: header">
+        <div class="headerbar" th:replace="views/common/header :: header">
 
 
         </div><!-- headerbar -->
@@ -62,12 +64,12 @@
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm" th:method="post" class="form-horizontal form-bordered">
+                    <form id="editForm" th:method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <input type="text" name="name" id="name" title="代理商名称" placeholder="代理商名称" class="form-control"/>
                             </div>
                         </div>
@@ -76,7 +78,7 @@
                             <label class="col-sm-3 control-label">代理商等级</label>
 
                             <div class="col-sm-3">
-                                <select name="agentLevel" title="代理商等级" class="form-control mb10">
+                                <select name="agentLevel" id="agentLevel" title="代理商等级" class="form-control mb10">
                                     <option th:value="1" th:text="二级代理商" >二级代理商</option>
                                 </select>
                             </div>
@@ -86,7 +88,7 @@
                             <label class="col-sm-3 control-label">代理类型</label>
 
                             <div class="col-sm-3">
-                                <select name="type" title="代理类型" class="form-control mb10">
+                                <select name="type" id="type" title="代理类型" class="form-control mb10">
                                     <option th:value="0" th:text="普通代理" >普通代理</option>
                                     <option th:value="1" th:text="独家代理" >独家代理</option>
                                 </select>
@@ -99,7 +101,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="balance" title="充值金额" class="form-control">
+                                    <input type="number" name="balance" id="balance" title="充值金额" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -107,73 +109,81 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">登录名</label>
 
-                            <div class="col-sm-6">
-                                <input type="text" name="username" title="登录名" placeholder="登录名" class="form-control"/>
+                            <div class="col-sm-3">
+                                <input type="text" name="username" id="username" title="登录名" placeholder="登录名" class="form-control"/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">密码</label>
 
-                            <div class="col-sm-6">
-                                <input type="password" name="password" title="密码" placeholder="密码" class="form-control"/>
+                            <div class="col-sm-3">
+                                <input type="password" name="password" id="password" title="密码" placeholder="密码" class="form-control"/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理区域</label>
 
-                            <div class="col-sm-2">
-                                <select name="type" title="省" class="form-control mb10">
-                                    <option th:value="0" th:text="浙江省" >浙江省</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                <select name="type" title="市" class="form-control mb10">
-                                    <option th:value="0" th:text="杭州市" >杭州市</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                <select name="type" title="区" class="form-control mb10">
-                                    <option th:value="0" th:text="滨江区" >滨江区</option>
-                                </select>
+                            <div id="area">
+                                <div class="col-sm-1">
+                                    <select name="type" id="province" class="form-control mb10 prov">
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="type" id="city"  class="form-control mb10 city" >
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="type" id="district" class="form-control  mb10 dist">
+                                    </select>
+                                </div>
+
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人</label>
 
-                            <div class="col-sm-6">
-                                <input type="text" name="username" title="联系人" placeholder="联系人" class="form-control"/>
+                            <div class="col-sm-3">
+                                <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系方式</label>
 
-                            <div class="col-sm-6">
-                                <input type="text" name="username" title="联系方式" placeholder="联系方式" class="form-control"/>
+                            <div class="col-sm-3">
+                                <input type="text" name="phoneNo" id="phoneNo" title="联系方式" placeholder="联系方式" class="form-control"/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系地址</label>
 
-                            <div class="col-sm-6">
-                                <input type="text" name="username" title="联系地址" placeholder="联系地址" class="form-control"/>
+                            <div class="col-sm-3">
+                                <input type="text" name="address" id="address" title="联系地址" placeholder="联系地址" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">邮箱</label>
 
-                            <div class="col-sm-6">
-                                <input type="text" name="username" title="邮箱" placeholder="邮箱" class="form-control"/>
+                            <div class="col-sm-3">
+                                <input type="text" name="mail" id="mail" title="邮箱" placeholder="邮箱" class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">QQ</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="qq" id="qq" title="qq" placeholder="qq" class="form-control"/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">企业资质</label>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
 
                                     <div class="input-append">
@@ -199,7 +209,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button onclick="editHandler.submit()" class="btn btn-primary">Submit</button>
+                            <button onclick="editHandler.submit()" class="btn btn-primary">确认</button>
                         </div>
                     </div>
                 </div><!-- panel-footer -->
@@ -221,14 +231,20 @@
 <script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
 <script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
 
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
 <script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
 <script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
-
+<script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script type="text/javascript">
     $(function () {
         editHandler.pageInit();
+    });
+    $("#area").citySelect({
+        prov:"浙江", //省份
+        city:"杭州", //城市
+        dist:"滨江区"//区县
     });
 
     var editHandler = {
@@ -247,24 +263,73 @@
                     $(element).valid();
                 },
                 rules: {
-                    agentName: {
-                        required : true
-                    },
-                    balance: {
-                        required: true,
-                        digits: true
-                    }
+//                    password: {
+//                        required : true
+//                    },
+//                    newPassword: {
+//                        required : true
+//                    },
+//                    CnewPassword: {
+//                        required : true,
+//                        equalTo:"#newPassword"
+//                    }
                 },
                 messages: {
-                    agentName:{
-                        required:"请输入名称"
-                    },
-                    balance: {
-                        required:"请输入充值金额",
-                        digits:"请输入数字"
-                    }
+//                    password:{
+//                        required:"请输入原密码"
+//                    },
+//                    newPassword: {
+//                        required:"请输入新密码"
+//                    },
+//                    CnewPassword: {
+//                        required:"请输入确认密码",
+//                        equalTo: "两次输入密码不一致"
+//                    }
 
+                },
+                submitHandler: function (form, ev) {
+                    $.ajax({
+                        url: "/saveLowerAg",
+                        data: {
+                            name:$("#name").val(),
+                            agentLevel:$("#agentLevel").val(),
+                            agentType:$("#type").val(),
+                            money:$("#balance").val(),
+                            username:$("#username").val(),
+                            password:$("#password").val(),
+                            contacts:$("#contacts").val(),
+                            phoneNo:$("#phoneNo").val(),
+                            address:$("#address").val(),
+                            mail:$("#mail").val(),
+                            qq:$("#qq").val()
+                        },
+                        type: "POST",
+                        dataType: 'json',
+                        success: function (msg) {
+                            var index=parseInt(msg.code);
+                            switch (index) {
+                                case 200:
+                                    layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
+                                    setTimeout(function(){
+//                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
+                                            }
+                                            ,1000);
+//                                    $("#password").val("");
+                                    break;
+                                case 401:
+                                    layer.msg("您的账户余额不足", {time: 2000});
+                                    $("#balance").val("");
+                                    break;
+                            }
+                        },
+                        error: function () {
 
+                        }
+                    });
+                    return false;
+                },
+                invalidHandler: function () {
+                    return true;
                 }
             });
         },
