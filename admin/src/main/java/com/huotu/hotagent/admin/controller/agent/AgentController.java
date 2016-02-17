@@ -9,12 +9,20 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
+import com.huotu.hotagent.common.constant.SysConstant;
+import com.huotu.hotagent.common.model.DataTableRequest;
+import com.huotu.hotagent.common.model.DataTableResponse;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
-import com.huotu.hotagent.service.service.role.agent.LoginService;
+import com.huotu.hotagent.service.model.AgentSearch;
+import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 /**
  * 代理商相关
@@ -22,19 +30,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/agent")
+@PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
 public class AgentController {
-
     @Autowired
-    private LoginService loginService;
+    private AgentService agentService;
 
     @RequestMapping(value = "/agentList", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
     public String AgentList() {
-        return null;
+        return "agent_list";
+    }
+
+    @RequestMapping(value = "/api/agentList", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public DataTableResponse agentList(DataTableRequest dataTableRequest, AgentSearch agentSearch) {
+        int pageIndex = dataTableRequest.getStart() / dataTableRequest.getLength() + 1;
+        Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
+        DataTableResponse dataTableResponse = new DataTableResponse();
+        dataTableResponse.setDraw(dataTableRequest.getDraw());
+        dataTableResponse.setRecordsTotal(agents.getTotalElements());
+        dataTableResponse.setRecordsFiltered(agents.getTotalElements());
+        dataTableResponse.setData(agents.getContent());
+        return dataTableResponse;
     }
 
     @RequestMapping(value = "/agentEdit", method = RequestMethod.GET)
+
     public String AgentEdit() {
-        return "admin/agent/agent_edit";
+        return "agent/agent_edit";
     }
 
     @RequestMapping(value = "/agentEdit", method = RequestMethod.POST)

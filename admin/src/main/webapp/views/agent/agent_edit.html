@@ -34,7 +34,7 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="assets/templates/left :: left (activeMenu='agentEdit')">
+    <div class="leftpanel" th:replace="../../templates/left :: left (activeMenu='agentEdit')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
@@ -136,7 +136,7 @@
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="assets/templates/header :: header">
+        <div class="headerbar" th:replace="../../templates/header :: header">
 
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
@@ -229,6 +229,16 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">充值金额</label>
+
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="balance" title="充值金额" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">选择时间</label>
 
                             <div class="col-sm-3">
                                 <div class="input-group">
