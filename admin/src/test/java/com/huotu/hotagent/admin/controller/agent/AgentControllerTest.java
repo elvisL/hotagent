@@ -24,6 +24,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -63,9 +64,10 @@ public class AgentControllerTest extends AuthenticatedWebTest {
     }
 
     @Test
+    @LoginAs(isRoot = true)
     public void testAgentEdit() throws Exception {
         Date now = new Date();
-        webDriver.get("http://localhost:8080/agent/agentEdit");
+        webDriver.get("http://localhost:8080/agentEditForm");
         AgentEditPage agentEditPage = initPage(AgentEditPage.class);
         List<AgentLevel> agentLevels = levelRepository.findAll();
         //开始构造一个虚拟的agent
@@ -87,7 +89,6 @@ public class AgentControllerTest extends AuthenticatedWebTest {
         randomAgent.setAddress(UUID.randomUUID().toString());
         randomAgent.setMail(randomEmailAddress());
         randomAgent.setQq(randomMobile());
-        randomAgent.setParent(null);
         randomAgent.setQualifyUri(UUID.randomUUID().toString());
 
         agentEditPage.submit(randomAgent);

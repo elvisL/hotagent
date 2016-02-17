@@ -32,7 +32,6 @@ import java.util.UUID;
 @RunWith(AuthenticatedWebTest.AuthenticatedRunner.class)
 public class AuthenticatedWebTest extends WebTest {
     protected Manager currentManager;
-    private ManagerService managerService;
     private LoginAs loginAs;
 
     @Before

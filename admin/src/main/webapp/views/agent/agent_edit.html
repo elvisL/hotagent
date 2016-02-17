@@ -180,7 +180,7 @@
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post" class="form-horizontal form-bordered">
+                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post" class="form-horizontal form-bordered" >
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>
@@ -219,7 +219,7 @@
 
                             <div class="col-sm-3">
                                 <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentTypes.name}">独家代理</option>
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}">独家代理</option>
                                     <option>普通代理</option>
                                 </select>
                             </div>

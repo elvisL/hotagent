@@ -26,9 +26,9 @@ public enum AgentType implements ICommonEnum{
         this.name = name;
     }
 
-    public static AgentType valueOf(Integer code)
+    public static AgentType getAgentType(Integer value)
     {
-        switch (code){
+        switch (value){
             case 0:
                 return NORMAL;
             case 1:

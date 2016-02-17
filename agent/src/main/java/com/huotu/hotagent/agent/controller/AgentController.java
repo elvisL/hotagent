@@ -196,7 +196,7 @@ public class AgentController {
             Date date = new Date();
             Agent Higher = agentService.findById(id);
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
-            AgentType agentType1 = AgentType.valueOf(agentType);
+            AgentType agentType1 = AgentType.getAgentType(agentType);
             agent.setType(agentType1);
             agent.setLevel(aLevel);
             agent.setParent(Higher);
