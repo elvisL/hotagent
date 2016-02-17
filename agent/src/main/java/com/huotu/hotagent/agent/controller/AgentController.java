@@ -98,9 +98,9 @@ public class AgentController {
      *新增下级代理商
      */
     @RequestMapping("/addAgent")
-    public ModelAndView addAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
+    public ModelAndView addAgent(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("views/agent/addAgent");
+        modelAndView.setViewName("views/agent/agent_add");
         return modelAndView;
     }
 
@@ -187,16 +187,15 @@ public class AgentController {
      */
     @RequestMapping(value = "/saveLowerAg ",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult saveLowerAg(@RequestParam(value = "id") Long id,
-                                 Agent agent,int agentType,int agentLevel,int price) throws Exception{
+    public ApiResult saveLowerAg(@AuthenticationPrincipal Agent Higher,
+                                 Agent agent,int agentType,int agentLevel) throws Exception{
 
         ApiResult apiResult =null;
         try {
             Date date = new Date();
-            Agent Higher = agentService.findById(id);
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
-            AgentType agentType1 = AgentType.valueOf(agentType);
-            agent.setType(agentType1);
+            AgentType type = AgentType.valueOf(agentType);
+            agent.setType(type);
             agent.setLevel(aLevel);
             agent.setParent(Higher);
             agent.setExpandable(false);
