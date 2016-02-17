@@ -11,6 +11,7 @@ package com.huotu.hotagent.service.service.role.agent;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.model.AgentSearch;
 import org.springframework.data.domain.Page;
 
 /**
@@ -40,4 +41,6 @@ public interface AgentService {
     Page<Agent> findByLevel(int pageIndex, int pageSize, int level);
 
     Page<Agent> findByLevelId(int levelId);
+
+    Page<Agent> findAll(int pageIndex, int pageSize, AgentSearch agentSearch);
 }

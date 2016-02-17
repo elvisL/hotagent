@@ -9,8 +9,10 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
-import com.huotu.hotagent.admin.common.WebTest;
+import com.huotu.hotagent.admin.common.AuthenticatedWebTest;
+import com.huotu.hotagent.admin.common.LoginAs;
 import com.huotu.hotagent.admin.controller.agent.pages.AgentEditPage;
+import com.huotu.hotagent.admin.controller.agent.pages.AgentListPage;
 import com.huotu.hotagent.common.ienum.EnumHelper;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
@@ -30,7 +32,7 @@ import java.util.UUID;
 /**
  * Created by allan on 1/25/16.
  */
-public class AgentControllerTest extends WebTest {
+public class AgentControllerTest extends AuthenticatedWebTest {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -49,8 +51,15 @@ public class AgentControllerTest extends WebTest {
     }
 
     @Test
+    @LoginAs(isRoot = true)
     public void testAgentList() throws Exception {
-
+        int agentCount = random.nextInt(50) + 1;
+        //随机构造一些代理商
+        for (int i = 0; i < agentCount; i++) {
+            agentService.save(mockAgent());
+        }
+        webDriver.get("http://localhost/agent/agentList");
+        AgentListPage agentListPage = initPage(AgentListPage.class);
     }
 
     @Test

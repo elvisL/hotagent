@@ -12,7 +12,8 @@ package com.huotu.hotagent.admin.controller.index;
 import com.huotu.hotagent.admin.common.AuthenticatedWebTest;
 import com.huotu.hotagent.admin.common.LoginAs;
 import com.huotu.hotagent.admin.controller.index.pages.IndexPage;
-import com.huotu.hotagent.service.service.statistics.StatisticsService;
+import com.huotu.hotagent.admin.model.StatisticsModel;
+import com.huotu.hotagent.admin.service.AdminService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,16 +22,21 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class IndexControllerTest extends AuthenticatedWebTest {
     @Autowired
-    private StatisticsService statisticsService;
+    private AdminService adminService;
 
     @Test
     @LoginAs
     public void testIndex() throws Exception {
-        IndexPage indexPage = initPage(IndexPage.class);
         //随机构造20个代理商
         for (int i = 0; i < 20; i++) {
             agentService.save(mockAgent());
         }
+        StatisticsModel statisticsModel = adminService.statisticsModel();
 
+        webDriver.get("http://localhost");
+        IndexPage indexPage = initPage(IndexPage.class);
+
+
+        indexPage.validateStatistics(statisticsModel);
     }
 }

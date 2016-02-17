@@ -28,6 +28,7 @@ import com.huotu.hotagent.service.service.role.manager.ManagerService;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.data.domain.Page;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -35,6 +36,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -108,7 +111,7 @@ public abstract class WebTest extends SpringWebTest {
     }
 
     /**
-     * 创建一个没有权限的管理员
+     * 创建一个管理员
      *
      * @return
      */
@@ -135,12 +138,12 @@ public abstract class WebTest extends SpringWebTest {
         //先随机一个等级
         AgentLevel randomLevel = randomAgentLevel();
         int parentLevel = randomLevel.getLevel() - 1;
-        Page<Agent> parentAgents = agentService.findByLevel(1, SysConstant.DEFALUT_PAGE_SIZE, parentLevel);
+        Page<Agent> parentAgents = agentService.findByLevel(1, SysConstant.DEFAULT_PAGE_SIZE, parentLevel);
         while (parentAgents.getContent().size() == 0 && randomLevel.getLevel() > 0) {
             randomLevel = randomAgentLevel();
-            parentAgents = agentService.findByLevel(1, SysConstant.DEFALUT_PAGE_SIZE, parentLevel);
+            parentAgents = agentService.findByLevel(1, SysConstant.DEFAULT_PAGE_SIZE, parentLevel);
         }
-        Agent randomParent = randomLevel.getLevel() > 0 ? parentAgents.getContent().get(random.nextInt(parentAgents.getSize())) : null;
+        Agent randomParent = randomLevel.getLevel() > 0 ? parentAgents.getContent().get(random.nextInt(parentAgents.getContent().size())) : null;
 
         Agent mockAgent = new Agent();
         mockAgent.setUsername(UUID.randomUUID().toString());
@@ -160,6 +163,11 @@ public abstract class WebTest extends SpringWebTest {
         mockAgent.setQq(UUID.randomUUID().toString());
         mockAgent.setParent(randomParent);
         mockAgent.setQualifyUri(UUID.randomUUID().toString());
+        LocalDateTime begin = LocalDate.now().minusMonths(1).withDayOfMonth(1).atStartOfDay();
+        Date beginTime = Jsr310Converters.LocalDateTimeToDateConverter.INSTANCE.convert(begin);
+        LocalDateTime end = LocalDate.now().plusDays(1).atStartOfDay();
+        Date endTime = Jsr310Converters.LocalDateTimeToDateConverter.INSTANCE.convert(end);
+        mockAgent.setCreateTime(randomDate(beginTime, endTime));
 
         //插入产品价格关联表
         List<Product> products = productService.findAll();

@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -117,5 +118,19 @@ public class SpringWebTest {
                 + RandomStringUtils.randomAlphabetic(random.nextInt(5) + 3)
                 + "."
                 + RandomStringUtils.randomAlphabetic(random.nextInt(2) + 2);
+    }
+
+    /**
+     * 随机一个时间
+     *
+     * @return
+     */
+    protected Date randomDate(Date beginTime, Date endTime) {
+        long beginTimestamp = beginTime.getTime();
+        long endTimestamp = endTime.getTime();
+
+        long randomTimestamp = beginTimestamp + (long) (Math.random() * (endTimestamp - beginTimestamp));
+
+        return new Date(randomTimestamp);
     }
 }
