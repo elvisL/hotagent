@@ -12,6 +12,7 @@ package com.huotu.hotagent.admin.controller.agent;
 import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.common.model.DataTableRequest;
 import com.huotu.hotagent.common.model.DataTableResponse;
+import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.model.AgentSearch;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
@@ -19,9 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -29,16 +32,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by allan on 1/25/16.
  */
 @Controller
-@RequestMapping("/agent")
-@PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
 public class AgentController {
+
     @Autowired
     private AgentService agentService;
 
-    @RequestMapping(value = "/agentList", method = RequestMethod.GET)
+    /**
+     * 代理商列表
+     * @return
+     */
+    @RequestMapping(value = "/agents", method = RequestMethod.GET)
     @PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
     public String AgentList() {
-        return "agent_list";
+        return "agent/agent-list";
     }
 
     @RequestMapping(value = "/api/agentList", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
@@ -60,7 +66,7 @@ public class AgentController {
      */
     @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
     public String AgentEdit() {
-        return "admin/agent/agent_edit";
+        return "agent/agent_edit";
     }
 
     /**
@@ -69,7 +75,7 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
-    public String AgentEdit(Agent agent) {
+    public String AgentEdit(Agent agent,MultipartFile qualify) {
         if(agent.getId() == null) {
 
         }else {

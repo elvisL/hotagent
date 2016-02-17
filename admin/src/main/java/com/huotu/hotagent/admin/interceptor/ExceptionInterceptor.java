@@ -25,6 +25,7 @@ public class ExceptionInterceptor {
     //    @ExceptionHandler
     public String catchException(Throwable e) {
         e.printStackTrace();
+        log.error(e.getLocalizedMessage());
         return "assets/email";
     }
 }
