@@ -32,8 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
  * Created by allan on 1/25/16.
  */
 @Controller
-@RequestMapping("/agent")
-@PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
 public class AgentController {
 
     @Autowired
