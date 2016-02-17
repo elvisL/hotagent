@@ -9,7 +9,10 @@
 
 package com.huotu.hotagent.admin.controller;
 
+import com.huotu.hotagent.admin.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,6 +24,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class IndexController {
+    @Autowired
+    private AdminService adminService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
@@ -34,7 +40,8 @@ public class IndexController {
     }
 
     @RequestMapping(value = {"", "/", "/index"})
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("statistics", adminService.statisticsModel());
         return "index";
     }
 }

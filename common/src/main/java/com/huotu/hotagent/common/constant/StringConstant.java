@@ -14,4 +14,5 @@ package com.huotu.hotagent.common.constant;
  */
 public class StringConstant {
     public static final String UTF8 = "UTF-8";
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
 }

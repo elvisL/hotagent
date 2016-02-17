@@ -1,11 +1,12 @@
 /*
- * °æÈ¨ËùÓĞ:º¼Öİ»ğÍ¼¿Æ¼¼ÓĞÏŞ¹«Ë¾
- * µØÖ·:Õã½­Ê¡º¼ÖİÊĞ±õ½­ÇøÎ÷ĞË½ÖµÀÚäÄ°Â·ÖÇ»ÛE¹ÈB´±4Â¥
+ * ç‰ˆæƒæ‰€æœ‰:æ­å·ç«å›¾ç§‘æŠ€æœ‰é™å…¬å¸
+ * åœ°å€:æµ™æ±Ÿçœæ­å·å¸‚æ»¨æ±ŸåŒºè¥¿å…´è¡—é“é˜¡é™Œè·¯æ™ºæ…§Eè°·Bå¹¢4æ¥¼
  *
  * (c) Copyright Hangzhou Hot Technology Co., Ltd.
  * Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
  * 2013-2016. All rights reserved.
  */
+
 package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
@@ -54,7 +55,7 @@ public class AgentController {
 
 
     /**
-     *ÕË»§ĞÅÏ¢
+     *ï¿½Ë»ï¿½ï¿½ï¿½Ï¢
      */
     @RequestMapping("/showAccount")
     public ModelAndView showAccount(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -68,7 +69,7 @@ public class AgentController {
 
 
     /**
-     *ÎÒµÄ´úÀíÉÌÁĞ±í
+     *ï¿½ÒµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
      */
     @RequestMapping("/myAgents")
     public ModelAndView showAgentList(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -82,7 +83,7 @@ public class AgentController {
 
 
     /**
-     *¸öÈË´úÀíÉÌĞÅÏ¢/ĞŞ¸Ä´úÀíÉÌ
+     *ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢/ï¿½Ş¸Ä´ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping("/showAgent")
     public ModelAndView showAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -95,7 +96,7 @@ public class AgentController {
 
 
     /**
-     *ĞÂÔöÏÂ¼¶´úÀíÉÌ
+     *ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping("/addAgent")
     public ModelAndView addAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
@@ -107,7 +108,7 @@ public class AgentController {
 
 
     /**
-     *É¾³ıÏÂ¼¶´úÀíÉÌ
+     *É¾ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping(value = "/delAgent",method = RequestMethod.POST)
     @ResponseBody
@@ -125,7 +126,7 @@ public class AgentController {
 
 
     /**
-     *¶³½áÏÂ¼¶´úÀíÉÌ
+     *ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping(value = "/lockAgent",method = RequestMethod.POST)
     @ResponseBody
@@ -143,7 +144,7 @@ public class AgentController {
 
 
     /**
-     *ĞŞ¸Ä´úÀíÉÌÃÜÂë
+     *ï¿½Ş¸Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping(value="/updatePw",method = RequestMethod.GET)
     public ModelAndView updatePw(@AuthenticationPrincipal Agent agent) throws Exception{
@@ -155,7 +156,7 @@ public class AgentController {
 
 
     /**
-     *±£´æĞŞ¸Ä´úÀíÉÌÃÜÂë
+     *ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @RequestMapping(value = "/savePw",method = RequestMethod.POST)
     @ResponseBody
@@ -183,7 +184,7 @@ public class AgentController {
 
 
     /**
-     *±£´æÏÂ¼¶´úÀíÉÌĞÅÏ¢
+     *ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      */
     @RequestMapping(value = "/saveLowerAg ",method = RequestMethod.POST)
     @ResponseBody
@@ -211,7 +212,7 @@ public class AgentController {
     }
 
     /**
-     *¸øÏÂ¼¶´úÀíÉÌ³äÖµ
+     *ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½Öµ
      */
     @RequestMapping(value = "/importBl",method = RequestMethod.POST)
     @ResponseBody

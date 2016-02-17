@@ -21,19 +21,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by allan on 1/29/16.
  */
 public class IndexPage extends AbstractPage {
-
-    @FindBy(className = "left-new-day")
-    private WebElement leftNewDay;
-    @FindBy(className = "left-new-month")
-    private WebElement leftNewMonth;
-    @FindBy(className = "left-agentNum-level1")
-    private WebElement leftAgentNumWithLevel1;
-    @FindBy(className = "left-agentNum-under")
-    private WebElement leftAgentNumWithUnder;
-    @FindBy(className = "left-agentNum-normal")
-    private WebElement leftAgentNumNormal;
-    @FindBy(className = "left-agentNum-sole")
-    private WebElement leftAgentNumSole;
+//
+//    @FindBy(className = "left-new-day")
+//    private WebElement leftNewDay;
+//    @FindBy(className = "left-new-month")
+//    private WebElement leftNewMonth;
+//    @FindBy(className = "left-agentNum-level1")
+//    private WebElement leftAgentNumWithLevel1;
+//    @FindBy(className = "left-agentNum-under")
+//    private WebElement leftAgentNumWithUnder;
+//    @FindBy(className = "left-agentNum-normal")
+//    private WebElement leftAgentNumNormal;
+//    @FindBy(className = "left-agentNum-sole")
+//    private WebElement leftAgentNumSole;
 
     @FindBy(className = "index-agentNum-level1")
     private WebElement indexAgentNumWithLevel1;
@@ -61,31 +61,31 @@ public class IndexPage extends AbstractPage {
     }
 
     public void validateStatistics(StatisticsModel statisticsModel) {
-        assertThat(leftNewDay.getText())
-                .isEqualTo(statisticsModel.getNewAgentDay());
-        assertThat(leftNewMonth.getText())
+//        assertThat(leftNewDay.getText())
+//                .isEqualTo(statisticsModel.getNewAgentDay());
+//        assertThat(leftNewMonth.getText())
+//                .isEqualTo(statisticsModel.getNewAgentMonth());
+//        assertThat(leftAgentNumWithLevel1.getText())
+//                .isEqualTo(statisticsModel.getAgentNumWithLevel1());
+//        assertThat(leftAgentNumWithUnder.getText())
+//                .isEqualTo(statisticsModel.getAgentNumWithUnder());
+//        assertThat(leftAgentNumNormal.getText())
+//                .isEqualTo(statisticsModel.getNormalAgentNum());
+//        assertThat(leftAgentNumSole.getText())
+//                .isEqualTo(statisticsModel.getSoleAgentNum());
+        assertThat(Long.parseLong(indexNewDay.getText()))
+                .isSameAs(statisticsModel.getNewAgentDay());
+        assertThat(Long.parseLong(indexNewMonth.getText()))
                 .isEqualTo(statisticsModel.getNewAgentMonth());
-        assertThat(leftAgentNumWithLevel1.getText())
+        assertThat(Long.parseLong(indexAgentNumWithLevel1.getText()))
                 .isEqualTo(statisticsModel.getAgentNumWithLevel1());
-        assertThat(leftAgentNumWithUnder.getText())
+        assertThat(Long.parseLong(indexAgentNumWithUnder.getText()))
                 .isEqualTo(statisticsModel.getAgentNumWithUnder());
-        assertThat(leftAgentNumNormal.getText())
+        assertThat(Long.parseLong(indexAgentNumNormal.getText()))
                 .isEqualTo(statisticsModel.getNormalAgentNum());
-        assertThat(leftAgentNumSole.getText())
+        assertThat(Long.parseLong(indexAgentNumSole.getText()))
                 .isEqualTo(statisticsModel.getSoleAgentNum());
-        assertThat(indexNewDay.getText())
-                .isEqualTo(statisticsModel.getNewAgentDay());
-        assertThat(indexNewMonth.getText())
-                .isEqualTo(statisticsModel.getNewAgentMonth());
-        assertThat(indexAgentNumWithLevel1.getText())
-                .isEqualTo(statisticsModel.getAgentNumWithLevel1());
-        assertThat(indexAgentNumWithUnder.getText())
-                .isEqualTo(statisticsModel.getAgentNumWithUnder());
-        assertThat(indexAgentNumNormal.getText())
-                .isEqualTo(statisticsModel.getNormalAgentNum());
-        assertThat(indexAgentNumSole.getText())
-                .isEqualTo(statisticsModel.getSoleAgentNum());
-        assertThat(unHandlerWithdraw.getText())
+        assertThat(Long.parseLong(unHandlerWithdraw.getText()))
                 .isEqualTo(statisticsModel.getUnHandleWithdraw());
     }
 }
