@@ -79,3 +79,177 @@
 2016-02-15 16:03:02,375 - Rolled back transaction for test context [DefaultTestContext@589dfa6f testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@43588265, testMethod = testIndex@IndexControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@4c56644f testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
 2016-02-15 16:03:02,380 - Closing org.springframework.web.context.support.GenericWebApplicationContext@17f62e33: startup date [Mon Feb 15 15:59:21 CST 2016]; root of context hierarchy
 2016-02-15 16:03:02,391 - Closing JPA EntityManagerFactory for persistence unit 'basePu'
+2016-02-17 16:22:54,499 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-17 16:22:54,598 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@31fa1761, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@957e06, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@32502377, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2c1b194a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4dbb42b7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@66f57048]
+2016-02-17 16:22:54,984 - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ca3b418: startup date [Wed Feb 17 16:22:54 CST 2016]; root of context hierarchy
+2016-02-17 16:22:55,491 - Loading XML bean definitions from class path resource [service_config_prod.xml]
+2016-02-17 16:22:55,908 - Loading XML bean definitions from class path resource [service_config_dev.xml]
+2016-02-17 16:22:56,544 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-02-17 16:22:57,488 - Building JPA container EntityManagerFactory for persistence unit 'basePu'
+2016-02-17 16:23:04,693 - Creating filter chain: Ant [pattern='/assets/**'], []
+2016-02-17 16:23:04,694 - Creating filter chain: Ant [pattern='/views/**'], []
+2016-02-17 16:23:04,694 - Creating filter chain: Ant [pattern='/loginerror'], []
+2016-02-17 16:23:04,861 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@69a5c6be, org.springframework.security.web.context.SecurityContextPersistenceFilter@29d070c7, org.springframework.security.web.header.HeaderWriterFilter@78d73b1b, org.springframework.security.web.authentication.logout.LogoutFilter@2c06b113, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@175c5c3a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@44dfdd58, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@75793f17, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@451e2fa9, org.springframework.security.web.session.SessionManagementFilter@34edd065, org.springframework.security.web.access.ExceptionTranslationFilter@6f1fa1d0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1373e3ee]
+2016-02-17 16:23:05,884 - Mapped "{[/agents],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentList()
+2016-02-17 16:23:05,887 - Mapped "{[/api/agentList],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public com.huotu.hotagent.common.model.DataTableResponse com.huotu.hotagent.admin.controller.agent.AgentController.agentList(com.huotu.hotagent.common.model.DataTableRequest,com.huotu.hotagent.service.model.AgentSearch)
+2016-02-17 16:23:05,896 - Mapped "{[/agentEditForm],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit()
+2016-02-17 16:23:05,897 - Mapped "{[/agents],methods=[POST]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit(com.huotu.hotagent.service.entity.role.agent.Agent,org.springframework.web.multipart.MultipartFile)
+2016-02-17 16:23:05,930 - Mapped "{[ || / || /index]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.index(org.springframework.ui.Model)
+2016-02-17 16:23:05,932 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.login()
+2016-02-17 16:23:05,933 - Mapped "{[/loginError]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.loginError(javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-02-17 16:23:06,023 - Mapped URL path [/assets/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-02-17 16:23:06,146 - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@1ca3b418: startup date [Wed Feb 17 16:22:54 CST 2016]; root of context hierarchy
+2016-02-17 16:23:06,570 - Began transaction (1) for test context [DefaultTestContext@6182ffef testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@49e479da, testMethod = testIndex@IndexControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@25470477 testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@1fb6b8fb]; rollback [true]
+2016-02-17 16:23:06,606 - Initializing Spring FrameworkServlet ''
+2016-02-17 16:23:06,606 - FrameworkServlet '': initialization started
+2016-02-17 16:23:06,638 - FrameworkServlet '': initialization completed in 32 ms
+2016-02-17 16:23:11,377 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-17 16:23:12,681 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:12,783 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:12,784 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:12,889 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-17 16:23:12,934 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:12,935 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:12,937 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:12,939 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:12,942 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:13,079 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-17 16:23:13,082 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-17 16:23:13,091 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-17 16:23:13,092 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
+2016-02-17 16:23:13,109 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,115 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,116 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,118 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,119 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,120 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,122 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,122 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,123 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,125 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,134 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,136 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,136 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,137 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,137 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,138 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,139 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,140 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,141 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,142 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,143 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,145 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,147 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,148 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,149 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,150 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:23:13,534 - Bad input type: "tel", creating a text input
+2016-02-17 16:23:13,535 - Bad input type: "url", creating a text input
+2016-02-17 16:23:13,536 - Bad input type: "email", creating a text input
+2016-02-17 16:23:13,538 - Bad input type: "datetime", creating a text input
+2016-02-17 16:23:13,573 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
+2016-02-17 16:23:13,630 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
+2016-02-17 16:23:13,661 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
+2016-02-17 16:23:13,667 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
+2016-02-17 16:23:13,690 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
+2016-02-17 16:23:13,697 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
+2016-02-17 16:23:13,801 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:23:16,310 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-17 16:23:16,351 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
+2016-02-17 16:23:16,490 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-17 16:23:27,890 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-17 16:23:28,953 - Rolled back transaction for test context [DefaultTestContext@6182ffef testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@49e479da, testMethod = testIndex@IndexControllerTest, testException = java.lang.AssertionError: 
+Expecting:
+ <3L>
+and actual:
+ <1000L>
+to refer to the same object, mergedContextConfiguration = [WebMergedContextConfiguration@25470477 testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
+2016-02-17 16:23:28,993 - Closing org.springframework.web.context.support.GenericWebApplicationContext@1ca3b418: startup date [Wed Feb 17 16:22:54 CST 2016]; root of context hierarchy
+2016-02-17 16:23:29,009 - Closing JPA EntityManagerFactory for persistence unit 'basePu'
+2016-02-17 16:24:32,497 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-17 16:24:32,614 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@31fa1761, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@957e06, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@32502377, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2c1b194a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4dbb42b7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@66f57048]
+2016-02-17 16:24:33,462 - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ca3b418: startup date [Wed Feb 17 16:24:33 CST 2016]; root of context hierarchy
+2016-02-17 16:24:34,162 - Loading XML bean definitions from class path resource [service_config_prod.xml]
+2016-02-17 16:24:34,422 - Loading XML bean definitions from class path resource [service_config_dev.xml]
+2016-02-17 16:24:35,014 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-02-17 16:24:35,858 - Building JPA container EntityManagerFactory for persistence unit 'basePu'
+2016-02-17 16:24:42,264 - Creating filter chain: Ant [pattern='/assets/**'], []
+2016-02-17 16:24:42,264 - Creating filter chain: Ant [pattern='/views/**'], []
+2016-02-17 16:24:42,265 - Creating filter chain: Ant [pattern='/loginerror'], []
+2016-02-17 16:24:42,415 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@a91119b, org.springframework.security.web.context.SecurityContextPersistenceFilter@4652c74d, org.springframework.security.web.header.HeaderWriterFilter@72a8361b, org.springframework.security.web.authentication.logout.LogoutFilter@3c18942, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7b8ea1db, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5ea7bc4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@785ed99c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77083e41, org.springframework.security.web.session.SessionManagementFilter@c48b543, org.springframework.security.web.access.ExceptionTranslationFilter@238291d4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@70b48eb3]
+2016-02-17 16:24:43,411 - Mapped "{[/agentEditForm],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit()
+2016-02-17 16:24:43,412 - Mapped "{[/agents],methods=[POST]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit(com.huotu.hotagent.service.entity.role.agent.Agent,org.springframework.web.multipart.MultipartFile)
+2016-02-17 16:24:43,413 - Mapped "{[/api/agentList],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public com.huotu.hotagent.common.model.DataTableResponse com.huotu.hotagent.admin.controller.agent.AgentController.agentList(com.huotu.hotagent.common.model.DataTableRequest,com.huotu.hotagent.service.model.AgentSearch)
+2016-02-17 16:24:43,414 - Mapped "{[/agents],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentList()
+2016-02-17 16:24:43,416 - Mapped "{[ || / || /index]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.index(org.springframework.ui.Model)
+2016-02-17 16:24:43,417 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.login()
+2016-02-17 16:24:43,418 - Mapped "{[/loginError]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.loginError(javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-02-17 16:24:43,465 - Mapped URL path [/assets/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-02-17 16:24:43,554 - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@1ca3b418: startup date [Wed Feb 17 16:24:33 CST 2016]; root of context hierarchy
+2016-02-17 16:24:43,911 - Began transaction (1) for test context [DefaultTestContext@f849027 testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@4a9869a8, testMethod = testIndex@IndexControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@1124910c testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@1d3d76b4]; rollback [true]
+2016-02-17 16:24:43,964 - Initializing Spring FrameworkServlet ''
+2016-02-17 16:24:43,964 - FrameworkServlet '': initialization started
+2016-02-17 16:24:44,000 - FrameworkServlet '': initialization completed in 35 ms
+2016-02-17 16:24:48,512 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-17 16:24:49,502 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:49,772 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:49,775 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:49,927 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-17 16:24:49,959 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:49,961 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:49,962 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:49,962 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:49,964 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:50,118 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-17 16:24:50,122 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-17 16:24:50,135 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-17 16:24:50,136 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
+2016-02-17 16:24:50,146 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,147 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,147 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,148 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,148 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,149 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,151 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,151 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,152 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,153 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,158 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,160 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,161 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,162 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,163 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,164 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,165 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,166 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,166 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,167 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,168 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,169 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,169 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,170 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,171 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,171 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
+2016-02-17 16:24:50,679 - Bad input type: "tel", creating a text input
+2016-02-17 16:24:50,680 - Bad input type: "url", creating a text input
+2016-02-17 16:24:50,680 - Bad input type: "email", creating a text input
+2016-02-17 16:24:50,681 - Bad input type: "datetime", creating a text input
+2016-02-17 16:24:50,698 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
+2016-02-17 16:24:50,761 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
+2016-02-17 16:24:50,786 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
+2016-02-17 16:24:50,795 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
+2016-02-17 16:24:50,816 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
+2016-02-17 16:24:50,830 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
+2016-02-17 16:24:51,009 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
+2016-02-17 16:24:55,164 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-17 16:24:55,204 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
+2016-02-17 16:24:55,430 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-17 16:25:07,020 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-17 16:27:36,523 - Rolled back transaction for test context [DefaultTestContext@f849027 testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@4a9869a8, testMethod = testIndex@IndexControllerTest, testException = java.lang.AssertionError: 
+Expecting:
+ <3L>
+and actual:
+ <1000L>
+to refer to the same object, mergedContextConfiguration = [WebMergedContextConfiguration@1124910c testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
+2016-02-17 16:27:36,541 - Closing org.springframework.web.context.support.GenericWebApplicationContext@1ca3b418: startup date [Wed Feb 17 16:24:33 CST 2016]; root of context hierarchy
+2016-02-17 16:27:36,556 - Closing JPA EntityManagerFactory for persistence unit 'basePu'
