@@ -17,17 +17,17 @@ import lombok.Data;
  */
 @Data
 public class AgentSearch {
-    private String name;
+    private String agentName;
     private String beginTime;
     private String endTime;
     /**
      * 代理商类型,-1表示全部代理商
      */
-    private int agentType;
+    private int agentType = -1;
     /**
      * 代理商等级,-1表示全部代理商
      */
-    private int agentLevel;
+    private int agentLevel = -1;
     /**
      * 上级代理,-1表示全部,0表示搜索一级代理商
      */

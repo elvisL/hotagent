@@ -9,16 +9,19 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="agents" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.Agent>"*/-->
+<!--/*@thymesVar id="agentSearch" type="com.huotu.hotagent.service.model.AgentSearch"*/-->
+<!--/*@thymesVar id="agentLevels" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.AgentLevel>"*/-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png">
 
     <title>代理商总后台</title>
 
-    <link href="../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
+    <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
     <link href="http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -351,106 +354,152 @@
                     </div><!-- panel-btns -->
                     <h3 class="panel-title">搜索</h3>
 
-                    <p>
+                    <form id="searchForm" action="agent_list.html" th:action="@{/agents}" method="get" th:object="${agentSearch}">
+                        <input type="hidden" name="pageIndex" value="1" th:value="${pageIndex}"/>
 
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="input-group">
+                        <p>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="input-group">
                                 <span class="input-group-addon">
                                     代理商姓名
                                 </span>
-                                <input type="text" id="agentName" class="form-control" aria-label="...">
-                            </div><!-- /input-group -->
-                        </div>
-                        <div>
-                            <div class="input-group">
+                                    <input type="text" name="agentName" th:value="*{agentName}" class="form-control" aria-label="...">
+                                </div><!-- /input-group -->
+                            </div>
+                            <div>
+                                <div class="input-group">
                                 <span class="input-group-addon">
                                     创建时间
                                 </span>
-                                <input type="text" class="form-control" placeholder="起始时间" id="beginTime">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                <input type="text" class="form-control" placeholder="结束时间" id="endTime">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            </div><!-- /input-group -->
+                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime" th:value="*{beginTime}">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime" th:value="*{endTime}">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div><!-- /input-group -->
+                            </div>
                         </div>
-                    </div>
 
 
-                    </p>
-                    <p>
+                        </p>
+                        <p>
 
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="input-group">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="input-group">
                                <span class="input-group-addon">
                                     代理商类型
                                 </span>
 
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">请选择 <span class="caret"></span></button>
-                                    <ul id="typeSelect" class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#" type-value="-1">请选择</a></li>
-                                        <li><a href="#" type-value="0">普通代理</a></li>
-                                        <li><a href="#" type-value="1">独家代理</a></li>
-                                    </ul>
-                                    <input type="hidden" id="agentType"/>
-                                </div><!-- /btn-group -->
-                            </div><!-- /input-group -->
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">请选择 <span class="caret"></span></button>
+                                        <ul id="typeSelect" class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" type-value="-1">请选择</a></li>
+                                            <li><a href="#" type-value="0">普通代理</a></li>
+                                            <li><a href="#" type-value="1">独家代理</a></li>
+                                        </ul>
+                                        <input type="hidden" name="agentType" th:value="*{agentType}"/>
+                                    </div><!-- /btn-group -->
+                                </div><!-- /input-group -->
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
                                <span class="input-group-addon">
                                     代理商等级
                                 </span>
 
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" id="levelSelectBtn" style="width: 163px;"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">请选择 <span class="caret"></span></button>
-                                    <ul id="levelSelect" class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#" level-id="-1">请选择</a></li>
-                                        <li><a href="#" level-id="0">一级代理商</a></li>
-                                        <li><a href="#" level-idss="1">二级代理商</a></li>
-                                    </ul>
-                                    <input type="hidden" id="agentLevel"/>
-                                </div><!-- /btn-group -->
-                            </div><!-- /input-group -->
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" id="levelSelectBtn" style="width: 163px;"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">请选择 <span class="caret"></span></button>
+                                        <ul id="levelSelect" class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" level-id="-1">请选择</a></li>
+
+                                            <li th:each="agentLevel:${agentLevels}">
+                                                <a href="#" th:attr="level-id=${agentLevel.levelId}" level-id="0" th:text="${agentLevel.levelName}">一级代理商</a>
+                                            </li>
+                                        </ul>
+
+                                        <input type="hidden" name="agentLevel" th:value="*{agentLevel}"/>
+                                    </div><!-- /btn-group -->
+                                </div><!-- /input-group -->
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn btn-white" href="javascript:$('#searchForm').submit()">查询</a>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <a class="btn btn-white" href="agent_list.html" th:href="@{/agents}">显示全部</a>
+                            </div>
                         </div>
-                        <div class="col-lg-4">
-                            <a class="btn btn-white">查询</a>
-                        </div>
-                    </div>
-                    </p>
+                        </p>
+                    </form>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped mb30">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th></th>
+                                <th>代理商名称</th>
+                                <th>代理商类型</th>
+                                <th>代理商等级</th>
+                                <th>上级代理</th>
+                                <th>区域</th>
+                                <th>账户余额</th>
+                                <th>佣金</th>
+                                <th>创建时间</th>
+                                <th>代理商状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody th:remove="all-but-first">
+
+                            <tr th:each="agent:${agents}">
+                                <td>1</td>
+                                <td th:text="${agent.name}">火图科技</td>
+                                <td th:text="${agent.type.name}">独家代理</td>
+                                <td th:text="${agent.level.levelName}">一级代理商</td>
+                                <td th:text="${agent.parent==null?'总部':agent.parent.name}">总部</td>
+                                <td th:text="${agent.province+'/'+agent.city}">杭州</td>
+                                <td th:text="${agent.balance}">1000</td>
+                                <td th:text="${agent.commission}">88</td>
+                                <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
+                                <td>活动</td>
+                                <td>
+
+                                </td>
+                            </tr>
                             <tr>
                                 <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>火图科技</td>
+                                <td>独家代理</td>
+                                <td>一级代理商</td>
+                                <td>总部</td>
+                                <td>杭州</td>
+                                <td>1000</td>
+                                <td>88</td>
+                                <td>2015-12-12 00:00:00</td>
+                                <td>活动</td>
+                                <td>
+
+                                </td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
+                                <td>1</td>
+                                <td>火图科技</td>
+                                <td>独家代理</td>
+                                <td>一级代理商</td>
+                                <td>总部</td>
+                                <td>杭州</td>
+                                <td>1000</td>
+                                <td>88</td>
+                                <td>2015-12-12 00:00:00</td>
+                                <td>活动</td>
+                                <td>
+
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -801,45 +850,53 @@
 <script src="//cdn.bootcss.com/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
 <script src="//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js"></script>
 <script src="//cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
-<script src="../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
 <!--一些控件-->
 <!--<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>-->
 
 <!--框架基础js-->
-<script src="../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
-<script src="../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
+<script type="application/javascript" src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
+<script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
 
 <script type="application/javascript" th:inline="javascript">
     var ajaxUrl = /*[[@{/agent/api/}]]*/ "";
+    var pageIndex = /*[[${pageIndex}]]*/ 1;
+    var pageSize = /*[[${pageSize}]]*/ 20;
+    var totalRecord = /*[[${totalRecord}]]*/ 3;
 </script>
 
 <script type="application/javascript">
     jQuery(document).ready(function () {
-        Index.LoadPaging($(".paging_full_numbers"), 1, J.PageSize, 57, function (o, p, s, t, callback) {
-            paginate(p);
+        var paginate = new paging($(".pagination"), pageIndex, pageSize, totalRecord, 8);
+        paginate.init(function (p) {
+            $('input[name=pageIndex]').val(p);
+            $('#searchForm').submit();
         });
 
-        function paginate(pageIndex) {
-            $("#pageIndex").val(pageIndex);
-            $("#searchForm").submit();
-        }
-
         // Date Picker
-        $('#beginTime').datepicker({
+        $('input[name=beginTime]').datepicker({
             dateFormat: "yy-mm-dd",
             onClose: function (selectedDate) {
                 $("#endTime").datepicker("option", "minDate", selectedDate);
             }
         });
 
-        $("#endTime").datepicker({
+        $("input[name=endTime]").datepicker({
             dateFormat: "yy-mm-dd",
             onClose: function (selectedDate) {
                 $("#beginTime").datepicker("option", "maxDate", selectedDate);
             }
         });
+
+        var currentLevelId = $("input[name=agentLevel]").val();
+        if (currentLevelId != "" && currentLevelId != null)
+            $("#levelSelectBtn").html($("#levelSelect a[level-id=" + currentLevelId + "]").html());
+        var currentAgentType = $("input[name=agentType]").val();
+        if (currentAgentType != "" && currentAgentType != null);
+        $("#typeSelectBtn").html($("#typeSelect a[type-value=" + currentAgentType + "]").html());
 
         $("#typeSelect li a").click(function () {
             $("#typeSelectBtn").html($(this).html());
