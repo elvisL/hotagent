@@ -10,9 +10,11 @@ package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
+import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
+import com.huotu.hotagent.service.model.AgentSearch;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
@@ -20,9 +22,11 @@ import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chendeyu on 2016/1/25.
@@ -72,15 +77,26 @@ public class AgentController {
 
 
     /**
-     *我的代理商列表
+     * 下级代理商列表
+     *
+     * @return
      */
-    @RequestMapping("/myAgents")
-    public ModelAndView showAgentList(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        Agent agent = agentService.findById(id);
-        modelAndView.setViewName("views/agent/myAgents");
-        modelAndView.addObject("agent",agent);
-        return modelAndView;
+    @RequestMapping(value = "/agentList", method = RequestMethod.GET)
+    public String AgentList(@AuthenticationPrincipal Agent agent,
+            @RequestParam(required = false, defaultValue = "1") int pageIndex,
+            AgentSearch agentSearch,
+            Model model
+    ) {
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
+        model.addAttribute("agentSearch", agentSearch);
+        agentSearch.setParentAgent(Integer.parseInt(agent.getId().toString()));
+        Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
+        model.addAttribute("totalRecord", agents.getTotalElements());
+        model.addAttribute("agents", agents.getContent());
+        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
+        model.addAttribute("agentLevels", agentLevels);
+        return "views/agent/agent_list";
     }
 
 
@@ -198,7 +214,7 @@ public class AgentController {
         try {
             Date date = new Date();
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
-            AgentType type = AgentType.valueOf(agentType);
+            AgentType type = AgentType.getAgentType(agentType);
             agent.setType(type);
             agent.setLevel(aLevel);
             agent.setParent(Higher);
