@@ -466,10 +466,8 @@
                                 <td th:text="${agent.balance}">1000</td>
                                 <td th:text="${agent.commission}">88</td>
                                 <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
-                                <td>活动</td>
-                                <td>
-
-                                </td>
+                                <td th:text="${agent.getStatus()}">活动</td>
+                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a></td>
                             </tr>
                             <tr>
                                 <td>1</td>
@@ -868,7 +866,12 @@
     var pageSize = /*[[${pageSize}]]*/ 20;
     var totalRecord = $("#totalRecordSpan").html();
 </script>
-
+<script>
+    function editAgent(obj) {
+        var id = $(obj).attr("id");
+        location.href = "/agentEditForm?id=" + id;
+    }
+</script>
 <script type="application/javascript">
     jQuery(document).ready(function () {
         var paginate = new paging($(".pagination"), pageIndex, pageSize, totalRecord, 8);

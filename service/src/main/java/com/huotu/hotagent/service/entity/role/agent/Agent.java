@@ -142,4 +142,14 @@ public class Agent extends Login {
                 new SimpleGrantedAuthority("ROLE_" + Authority.AGENT_ROOT.getValue())
         );
     }
+
+    public String getStatus() {
+        if(!isAccountNonLocked()) {
+            return "冻结";
+        }
+        if(!isAccountNonExpired()) {
+            return "过期";
+        }
+        return "正常";
+    }
 }
