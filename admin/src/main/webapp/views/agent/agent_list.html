@@ -41,7 +41,7 @@
 
 <section>
 
-    <div class="leftpanel" th:replace="../templates/left :: left (activeMenu='agentList')">
+    <div class="leftpanel" th:replace="common/left :: left (activeMenu='agentList')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
@@ -143,7 +143,7 @@
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="../templates/header :: header">
+        <div class="headerbar" th:replace="common/header :: header">
 
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
@@ -414,10 +414,10 @@
                                         <button type="button" class="btn btn-default dropdown-toggle" id="levelSelectBtn" style="width: 163px;"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">请选择 <span class="caret"></span></button>
                                         <ul id="levelSelect" class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" level-id="-1">请选择</a></li>
+                                            <li><a href="#" level="-1">请选择</a></li>
 
                                             <li th:each="agentLevel:${agentLevels}">
-                                                <a href="#" th:attr="level-id=${agentLevel.levelId}" level-id="0" th:text="${agentLevel.levelName}">一级代理商</a>
+                                                <a href="#" th:attr="level=${agentLevel.level}" level="0" th:text="${agentLevel.levelName}">一级代理商</a>
                                             </li>
                                         </ul>
 
@@ -426,11 +426,11 @@
                                 </div><!-- /input-group -->
                             </div>
                             <div class="col-lg-2">
-                                <a class="btn btn-white" href="javascript:$('#searchForm').submit()">查询</a>
+                                <a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>
                             </div>
 
                             <div class="col-lg-2">
-                                <a class="btn btn-white" href="agent_list.html" th:href="@{/agents}">显示全部</a>
+                                <a class="btn btn-white resetSearch" href="agent_list.html" th:href="@{/agents}">显示全部</a>
                             </div>
                         </div>
                         </p>
@@ -504,6 +504,7 @@
                             </tbody>
                         </table>
                     </div><!-- table-responsive -->
+                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecord}">100</span>条</p>
                     <ul style="float: right;" class="pagination pagination-split">
                         <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                         <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
@@ -865,7 +866,7 @@
     var ajaxUrl = /*[[@{/agent/api/}]]*/ "";
     var pageIndex = /*[[${pageIndex}]]*/ 1;
     var pageSize = /*[[${pageSize}]]*/ 20;
-    var totalRecord = /*[[${totalRecord}]]*/ 3;
+    var totalRecord = $("#totalRecordSpan").html();
 </script>
 
 <script type="application/javascript">
@@ -893,7 +894,7 @@
 
         var currentLevelId = $("input[name=agentLevel]").val();
         if (currentLevelId != "" && currentLevelId != null)
-            $("#levelSelectBtn").html($("#levelSelect a[level-id=" + currentLevelId + "]").html());
+            $("#levelSelectBtn").html($("#levelSelect a[level=" + currentLevelId + "]").html());
         var currentAgentType = $("input[name=agentType]").val();
         if (currentAgentType != "" && currentAgentType != null);
         $("#typeSelectBtn").html($("#typeSelect a[type-value=" + currentAgentType + "]").html());
@@ -905,7 +906,7 @@
 
         $("#levelSelect li a").click(function () {
             $("#levelSelectBtn").html($(this).html());
-            $("input[name=agentLevel]").val($(this).attr("level-id"));
+            $("input[name=agentLevel]").val($(this).attr("level"));
         });
     });
 </script>

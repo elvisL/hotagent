@@ -52,9 +52,14 @@ public class AgentController {
             AgentSearch agentSearch,
             Model model
     ) {
+        //这里默认应该是显示一级代理商
+        if (agentSearch.getAgentLevel() == -1) {
+            agentSearch.setAgentLevel(0);
+        }
         model.addAttribute("pageIndex", pageIndex);
         model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
         model.addAttribute("agentSearch", agentSearch);
+
         Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
         model.addAttribute("totalRecord", agents.getTotalElements());
         model.addAttribute("agents", agents.getContent());

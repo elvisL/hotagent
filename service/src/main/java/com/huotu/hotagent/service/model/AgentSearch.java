@@ -31,5 +31,5 @@ public class AgentSearch {
     /**
      * 上级代理,-1表示全部,0表示搜索一级代理商
      */
-    private int parentAgent;
+    private long parentAgent = 0;
 }
