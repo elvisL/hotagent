@@ -10,6 +10,8 @@
 package com.huotu.hotagent.admin.controller.agent;
 
 import com.huotu.hotagent.admin.service.StaticResourceService;
+import com.huotu.hotagent.common.constant.ApiResult;
+import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.common.model.DataTableRequest;
 import com.huotu.hotagent.common.model.DataTableResponse;
@@ -24,15 +26,20 @@ import com.sun.jndi.toolkit.url.Uri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -94,18 +101,30 @@ public class AgentController {
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
     public String AgentEdit(Agent agent) throws Exception{
-//        if(qualify!=null) {
-//            String fileName = qualify.getOriginalFilename();
-//            String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
-//            if (!"jpg, jpeg,png,gif,bmp".contains(suffix)) {
-//                throw new Exception("不是图片!");
-//            } else {
-//                String path = StaticResourceService.AGENT_IMG + fileName;
-//                URI uri = staticResourceService.uploadResource(path, qualify.getInputStream());
-//                agent.setQualifyUri(uri.toString());
-//            }
-//        }
         loginService.newLogin(agent,agent.getPassword());
         return "redirect:/agentEditForm";
     }
+
+    @RequestMapping("/uploadImg")
+    @ResponseBody
+    public ApiResult uploadImg(MultipartFile qualify,String srcPath) throws Exception {
+        //delete img
+        if(qualify.getSize()==0) {
+            staticResourceService.deleteResource(srcPath);
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS,"");
+        }
+        if (ImageIO.read(qualify.getInputStream()) == null) {
+            return ApiResult.resultWith(ResultCodeEnum.NOT_IMG);
+        }
+        //change img
+        if(!StringUtils.isEmpty(srcPath)) {
+            staticResourceService.deleteResource(srcPath);
+        }
+        String fileName = qualify.getOriginalFilename();
+        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String path = StaticResourceService.AGENT_IMG + UUID.randomUUID().toString() + "." + suffix;
+        staticResourceService.uploadResource(path, qualify.getInputStream());
+        return ApiResult.resultWith(ResultCodeEnum.SUCCESS,staticResourceService.getResource(path));
+    }
+
 }

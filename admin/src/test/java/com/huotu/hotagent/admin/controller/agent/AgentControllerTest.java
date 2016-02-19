@@ -95,7 +95,5 @@ public class AgentControllerTest extends AuthenticatedWebTest {
 
         Agent agent = agentRepository.findByUsername(mockAgentUsername);
         Assert.assertEquals(mockAgentName, agent.getName());
-        //// TODO: 1/25/16 断言,与数据库进行比较
-
     }
 }

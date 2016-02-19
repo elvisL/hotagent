@@ -25,7 +25,8 @@ public enum ResultCodeEnum {
     AUTHORITY_NULL(7000, "请设置权限"),
     SAVE_DATA_ERROR(4000, "数据保存出错"),
     IMPORT_ERROR(4001, "余额不足"),
-    DATA_NULL(5000, "没有传输数据");
+    DATA_NULL(5000, "没有传输数据"),
+    NOT_IMG(6001,"不是图片");
 
     //todo 其他状态
     private int resultCode;

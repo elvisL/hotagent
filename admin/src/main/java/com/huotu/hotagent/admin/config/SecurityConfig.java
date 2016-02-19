@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static String[] STATIC_RESOURCE_PATH = {
             "/assets/**",
             "/views/**",
+            "/image/**",
             "/loginError"
     };
 
