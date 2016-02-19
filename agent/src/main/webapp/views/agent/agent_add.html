@@ -263,29 +263,40 @@
                     $(element).valid();
                 },
                 rules: {
-//                    password: {
-//                        required : true
-//                    },
-//                    newPassword: {
-//                        required : true
-//                    },
-//                    CnewPassword: {
-//                        required : true,
-//                        equalTo:"#newPassword"
-//                    }
+                    name: {
+                        required : true
+                    },
+                    balance: {
+                        required : true,
+                        digits:true
+                    },
+                    username: {
+                        required : true
+                    },
+                    password: {
+                        required : true
+                    },
+                    mail: {
+                        email:true
+                    }
                 },
                 messages: {
-//                    password:{
-//                        required:"请输入原密码"
-//                    },
-//                    newPassword: {
-//                        required:"请输入新密码"
-//                    },
-//                    CnewPassword: {
-//                        required:"请输入确认密码",
-//                        equalTo: "两次输入密码不一致"
-//                    }
-
+                    name: {
+                        required : "请输入代理商名称"
+                    },
+                    balance: {
+                        required : "请输入充值金额",
+                        digits:"请输入整数"
+                    },
+                    username: {
+                        required : "请输入账号"
+                    },
+                    password: {
+                        required : "请输入密码"
+                    },
+                    mail: {
+                        email:"请输入正确的邮箱"
+                    }
                 },
                 submitHandler: function (form, ev) {
                     $.ajax({

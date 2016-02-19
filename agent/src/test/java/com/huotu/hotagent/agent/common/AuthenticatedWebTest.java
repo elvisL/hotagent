@@ -9,20 +9,14 @@
 
 package com.huotu.hotagent.agent.common;
 
-import com.huotu.hotagent.common.constant.SysConstant;
-import com.huotu.hotagent.service.common.Authority;
+import com.huotu.hotagent.agent.controller.index.pages.LoginPage;
 import com.huotu.hotagent.service.entity.role.manager.Manager;
-import com.huotu.hotagent.service.service.role.manager.ManagerService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * 已登录的web测试基类,需要使用{@link LoginAs}在方法上表明当前登录用户的权限
@@ -31,32 +25,20 @@ import java.util.UUID;
 @RunWith(AuthenticatedWebTest.AuthenticatedRunner.class)
 public class AuthenticatedWebTest extends WebTest {
     protected Manager currentManager;
-    private ManagerService managerService;
     private LoginAs loginAs;
 
     @Before
     public void AuthInit() throws Exception {
-        String username = UUID.randomUUID().toString();
-        String password = UUID.randomUUID().toString();
+        String username = "admin";
+        String password = "admin";
 
         if (loginAs == null) {
             throw new IllegalStateException("未标注LoginAs,无法识别当前登录角色的权限");
         }
 
-        if (loginAs.isRoot()) {
-            username = SysConstant.ROOT_USER;
-            password = SysConstant.ROOT_PASS;
-            currentManager = managerService.findByUsername(SysConstant.ROOT_USER);
-        } else {
-            Set<Authority> authorities = new HashSet<>();
-            for (Authority authority : loginAs.value()) {
-                authorities.add(authority);
-            }
-//            currentManager = mockManager(username, password, authorities);
-        }
         webDriver.get("http://localhost");
-//        LoginPage loginPage = initPage(LoginPage.class);
-//        loginPage.login(username, password);
+        LoginPage loginPage = initPage(LoginPage.class);
+        loginPage.login(username, password);
 
     }
 

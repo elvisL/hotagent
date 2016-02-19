@@ -44,12 +44,12 @@ public class AdminBoot {
         Agent agent = agentService.findByUsername("admin");
         if (agent == null) {
             agent = new Agent();
+            agent.setUsername("admin");
+            agent.setPassword("admin");
+            agent.setName("测试供应商");
+            agent.setCreateTime(new Date());
+            loginService.newLogin(agent,agent.getPassword());
         }
-        agent.setUsername("admin");
-        agent.setPassword("admin");
-        agent.setName("测试供应商");
-        agent.setCreateTime(new Date());
-        loginService.newLogin(agent,agent.getPassword());
 
 
         //初始化两个等级,在没有的情况下创建

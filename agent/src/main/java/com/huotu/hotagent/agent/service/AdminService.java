@@ -9,8 +9,8 @@
 
 package com.huotu.hotagent.agent.service;
 
-import com.huotu.hotagent.agent.model.StatisticsModel;
-import com.huotu.hotagent.service.service.statistics.StatisticsService;
+import com.huotu.hotagent.agent.model.AgentStatistics;
+import com.huotu.hotagent.service.service.statistics.AgentStaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,19 +20,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService {
     @Autowired
-    private StatisticsService statisticsService;
+    private AgentStaService agentStaService;
 
 
-    public StatisticsModel statisticsModel() {
-        StatisticsModel statisticsModel = new StatisticsModel();
-        statisticsModel.setNewAgentDay(statisticsService.newAgentDay());
-        statisticsModel.setNewAgentMonth(statisticsService.newAgentMonth());
-        statisticsModel.setAgentNumWithLevel1(statisticsService.agentNumWithLevel1());
-        statisticsModel.setAgentNumWithUnder(statisticsService.agentNumWithUnder());
-        statisticsModel.setNormalAgentNum(statisticsService.normalAgentNum());
-        statisticsModel.setSoleAgentNum(statisticsService.soleAgentNum());
-        statisticsModel.setUnHandleWithdraw(statisticsService.unHandleWithdraw());
-        
-        return statisticsModel;
+    public AgentStatistics agentStatistics(Long id) {
+        AgentStatistics agentStatistics = new AgentStatistics();
+        agentStatistics.setAgentCommission(agentStaService.countCommission(id));
+        agentStatistics.setAgentCosts(agentStaService.agentCosts(id));
+        agentStatistics.setBalance(agentStaService.balance(id));
+        agentStatistics.setCommission(agentStaService.commission(id));
+        agentStatistics.setAgentNumWithLevel(agentStaService.agentNumWithLevel(id));
+        return agentStatistics;
     }
 }

@@ -1,0 +1,60 @@
+package com.huotu.hotagent.service.service.statistics.impl;
+
+import com.huotu.hotagent.service.entity.log.CommisionLog;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.repository.log.CommisionLogRepository;
+import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
+import com.huotu.hotagent.service.service.statistics.AgentStaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * Created by chendeyu on 2016/2/19.
+ */
+@Service
+public class AgentStaServiceImpl implements AgentStaService {
+
+    @Autowired
+    AgentRepository agentRepository;
+
+    @Autowired
+    CommisionLogRepository commisionLogRepository;
+
+
+
+    @Override
+    public long agentNumWithLevel(Long id) {
+        return agentRepository.countByParent_id(id);
+    }
+
+    @Override
+    public double agentCosts(Long id) {
+        return 10000;
+    }
+
+    @Override
+    public double countCommission(Long id) {
+        List<CommisionLog> commisionLogList = commisionLogRepository.findByAgent_id(Long.valueOf(id));
+        double count=0;
+        if (commisionLogList.size()!=0) {
+            for (CommisionLog commisionLog : commisionLogList) {
+                count = count + commisionLog.getImportMoney();
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public double balance(Long id) {
+        Agent agent = agentRepository.findOne(id);
+        return agent.getBalance();
+    }
+
+    @Override
+    public double commission(Long id) {
+        Agent agent = agentRepository.findOne(id);
+        return agent.getCommission();
+    }
+}
