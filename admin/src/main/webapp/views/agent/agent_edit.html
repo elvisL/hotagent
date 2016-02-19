@@ -180,7 +180,7 @@
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post" class="form-horizontal form-bordered">
+                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post" class="form-horizontal form-bordered" >
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>
@@ -209,7 +209,7 @@
 
                             <div class="col-sm-3">
                                 <select name="level" title="代理商等级" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option>一级代理商</option>
+                                    <option th:each="agentLevel:${agentLevels}" th:value="${agentLevel.level}" th:text="${agentLevel.levelName}">一级代理商</option>
                                     <option>二级代理商</option>
                                 </select>
                             </div>
@@ -219,7 +219,7 @@
 
                             <div class="col-sm-3">
                                 <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option>独家代理</option>
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}">独家代理</option>
                                     <option>普通代理</option>
                                 </select>
                             </div>
@@ -321,7 +321,7 @@
                                     <span class="btn btn-default btn-file">
                                       <span class="fileupload-new">Select file</span>
                                       <span class="fileupload-exists">Change</span>
-                                      <input type="file" name="qualifyUri">
+                                      <input type="file" name="qualify">
                                     </span>
                                         <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
                                     </div>

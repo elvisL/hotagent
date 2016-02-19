@@ -9,12 +9,18 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
+import com.huotu.hotagent.admin.service.StaticResourceService;
 import com.huotu.hotagent.common.constant.SysConstant;
+import com.huotu.hotagent.common.model.DataTableRequest;
+import com.huotu.hotagent.common.model.DataTableResponse;
+import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.model.AgentSearch;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
+import com.huotu.hotagent.service.service.role.agent.LoginService;
+import com.sun.jndi.toolkit.url.Uri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -39,10 +46,13 @@ public class AgentController {
     private AgentService agentService;
     @Autowired
     private AgentLevelService agentLevelService;
+    @Autowired
+    private StaticResourceService staticResourceService;
+    @Autowired
+    private LoginService loginService;
 
     /**
      * 代理商列表
-     *
      * @return
      */
     @RequestMapping(value = "/agents", method = RequestMethod.GET)
@@ -74,7 +84,10 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
-    public String AgentEdit() {
+    public String AgentEdit(Model model) {
+        List<AgentLevel> agentLevels = agentLevelService.findAll();
+        model.addAttribute("agentLevels",agentLevels);
+        model.addAttribute("agentTypes",AgentType.values());
         return "agent/agent_edit";
     }
 
@@ -85,12 +98,19 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
-    public String AgentEdit(Agent agent, MultipartFile qualify) {
-        if (agent.getId() == null) {
-
-        } else {
-
-        }
-        return "redirect:/agent/agentEdit";
+    public String AgentEdit(Agent agent) throws Exception{
+//        if(qualify!=null) {
+//            String fileName = qualify.getOriginalFilename();
+//            String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+//            if (!"jpg, jpeg,png,gif,bmp".contains(suffix)) {
+//                throw new Exception("不是图片!");
+//            } else {
+//                String path = StaticResourceService.AGENT_IMG + fileName;
+//                URI uri = staticResourceService.uploadResource(path, qualify.getInputStream());
+//                agent.setQualifyUri(uri.toString());
+//            }
+//        }
+        loginService.newLogin(agent,agent.getPassword());
+        return "redirect:/agentEditForm";
     }
 }
