@@ -254,7 +254,7 @@
                         success: function (msg) {
                             var index=parseInt(msg.code);
                             switch (index) {
-                                case 200:
+                                case 2000:
                                     layer.msg("添加成功,2秒后将自动返回产品页面",{time: 2000});
                                     setTimeout(function(){
                                                 window.location.href="http://"+window.location.host+"/"+"showProducts";
@@ -262,7 +262,7 @@
                                             ,1000);
 //                                    $("#password").val("");
                                     break;
-                                case 401:
+                                case 4001:
                                     layer.msg("您的账户余额不足", {time: 2000});
                                     $("#money").val("");
                                     break;

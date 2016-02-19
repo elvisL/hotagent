@@ -30,8 +30,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     public static final String loginPage = "/login";
-    public static final String loginSuccessURL = "/loginSuccess";
-    public static final String loginFailedURL = "/loginFailed";
+    public static final String loginSuccessURL = "/index";
+    public static final String loginFailedURL = "/loginError";
     public static final String logoutSuccessURL = "/";
 
     @Autowired
@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .formLogin()
                     .loginPage(loginPage)
                     .defaultSuccessUrl(loginSuccessURL, true)
-                    .failureUrl(loginFailedURL)
+                    .failureHandler(securityFailureHandler)
                     .permitAll()
                     .and()
                     .logout()

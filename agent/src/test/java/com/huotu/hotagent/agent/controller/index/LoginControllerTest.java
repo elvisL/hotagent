@@ -13,9 +13,7 @@ import com.huotu.hotagent.agent.common.WebTest;
 import com.huotu.hotagent.agent.controller.index.pages.LoginPage;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import org.junit.Test;
-
-import java.util.Date;
-import java.util.UUID;
+import org.springframework.test.annotation.Rollback;
 
 
 /**
@@ -23,8 +21,9 @@ import java.util.UUID;
  */
 public class LoginControllerTest extends WebTest {
     @Test
+    @Rollback
     public void testLogin() throws Exception {
-        Agent root = agentService.findByUsername("administrator");
+        Agent root = agentService.findByUsername("admin");
 
         webDriver.get("http://localhost");
         LoginPage loginPage = initPage(LoginPage.class);
@@ -35,15 +34,11 @@ public class LoginControllerTest extends WebTest {
         //默认供应商登录验证
         loginPage.administratorLogin(root);
 
-        //操作员登录验证
-        //创建一个操作员
-        Agent agent = new Agent();
-        agent.setUsername(UUID.randomUUID().toString());
-        String randomPassword = UUID.randomUUID().toString();
-        agent.setPassword(randomPassword);
-        agent.setCreateTime(new Date());
-        loginService.newLogin(agent,agent.getPassword());
-        loginPage.operatorLogin(agent, randomPassword);
+        //新建一个代理商登录
+
+        Agent mockAgent = mockAgent();
+        loginService.newLogin(mockAgent,mockAgent.getPassword());
+        loginPage.login(mockAgent.getUsername(), mockAgent.getPassword());
 
         //锁定的操作员
 //        mockManager.setAccountNonLocked(false);

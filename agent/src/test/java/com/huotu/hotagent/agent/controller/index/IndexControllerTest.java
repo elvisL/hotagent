@@ -29,10 +29,7 @@ public class IndexControllerTest extends AuthenticatedWebTest {
     @Test
     @LoginAs
     public void testIndex() throws Exception {
-        //随机构造20个代理商
-//        for (int i = 0; i < 20; i++) {
-//            agentService.save(mockAgent());
-//        }
+
         Long id = Long.valueOf(8);
         AgentStatistics agentStatistics = adminService.agentStatistics(id);
 

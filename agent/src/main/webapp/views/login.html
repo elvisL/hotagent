@@ -77,7 +77,7 @@
 
                     <p></p>
 
-                    <p id="loginError" style="color: #B94A48;" th:text="${loginError}">登录失败</p>
+                    <p id="loginError"  class="loginError" style="color: #B94A48;" th:text="${loginError}">登录失败</p>
                     <button onclick="loginHandler.login()" class="btn btn-success btn-block">登录</button>
 
                 </form>
@@ -135,7 +135,7 @@
                     password: "required"
                 },
                 messages: {
-                    username: "请输入管理员帐号",
+                    username: "请输入帐号",
                     password: "请输入登录密码"
                 }
             });
