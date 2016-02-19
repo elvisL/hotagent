@@ -45,7 +45,7 @@ public class AgentModelResolver implements HandlerMethodArgumentResolver {
     }
 
     private Agent initAgentModel(HttpServletRequest request) throws Exception{
-        String agentId = request.getParameter("agentId");
+        String agentId = request.getParameter("id");
         Agent agent;
         if(StringUtils.isEmpty(agentId)) {
             agent = new Agent();

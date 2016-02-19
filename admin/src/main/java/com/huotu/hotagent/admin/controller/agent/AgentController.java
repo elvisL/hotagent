@@ -38,6 +38,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -86,7 +87,11 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
-    public String AgentEdit(Model model) {
+    public String AgentEdit(Model model,Long id) {
+        if(id != null) {
+            Agent agent = agentService.findById(id);
+            model.addAttribute("agent",agent);
+        }
         List<AgentLevel> agentLevels = agentLevelService.findAll();
         model.addAttribute("agentLevels",agentLevels);
         model.addAttribute("agentTypes",AgentType.values());
@@ -107,24 +112,25 @@ public class AgentController {
 
     @RequestMapping("/uploadImg")
     @ResponseBody
-    public ApiResult uploadImg(MultipartFile qualify,String srcPath) throws Exception {
+    public ApiResult uploadImg(MultipartFile qualify,String qualifyUri) throws Exception {
         //delete img
         if(qualify.getSize()==0) {
-            staticResourceService.deleteResource(srcPath);
+            staticResourceService.deleteResource(qualifyUri);
             return ApiResult.resultWith(ResultCodeEnum.SUCCESS,"");
         }
         if (ImageIO.read(qualify.getInputStream()) == null) {
             return ApiResult.resultWith(ResultCodeEnum.NOT_IMG);
         }
         //change img
-        if(!StringUtils.isEmpty(srcPath)) {
-            staticResourceService.deleteResource(srcPath);
+        if(!StringUtils.isEmpty(qualifyUri)) {
+            staticResourceService.deleteResource(qualifyUri);
         }
         String fileName = qualify.getOriginalFilename();
         String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
         String path = StaticResourceService.AGENT_IMG + UUID.randomUUID().toString() + "." + suffix;
         staticResourceService.uploadResource(path, qualify.getInputStream());
-        return ApiResult.resultWith(ResultCodeEnum.SUCCESS,staticResourceService.getResource(path));
+        String fullPath = staticResourceService.getResource(path).toString();
+        return ApiResult.resultWith(ResultCodeEnum.SUCCESS,Arrays.asList(path,fullPath).toArray());
     }
 
 }

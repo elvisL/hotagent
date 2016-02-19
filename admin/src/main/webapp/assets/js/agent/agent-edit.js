@@ -6,19 +6,20 @@ $("#qualify").live("change",function() {
     imgUpload();
 });
 function imgUpload() {
-    var srcPath = $("#previewImg").attr("src");
+    var qualifyUri = $("#qualifyUri").val();
     $.ajaxFileUpload
     ({
         url: 'uploadImg',
         fileElementId: 'qualify',
         dataType: 'json',
         data:{
-            srcPath:srcPath
+            qualifyUri:qualifyUri
         },
         type:'post',
         success:function(result){
             if(result.code==2000){
-                $("#previewImg").attr("src",result.data);
+                $("#qualifyUri").val(result.data[0])
+                $("#previewImg").attr("src",result.data[1]);
             }else {
                 alert(result.msg);
             }

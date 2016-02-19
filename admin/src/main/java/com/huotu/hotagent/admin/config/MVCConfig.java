@@ -51,7 +51,8 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
      * 静态资源处理,加在这里
      */
     private static String[] STATIC_RESOURCE_PATH = {
-            "assets"
+            "assets",
+            "image"
     };
 
     @Autowired
