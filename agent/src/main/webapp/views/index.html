@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">代理商总数</small>
-                                        <h1 class="index-agentNum-level1">1000</h1>
+                                        <h1 class="index-agentNum-level1" th:text="${statistics.agentNumWithLevel}">1000</h1>
                                     </div>
                                 </div>
 
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">总代理费用</small>
-                                        <h1 class="index-agentNum-under">1000</h1>
+                                        <h1 class="index-agent-costs" th:text="${statistics.agentCosts}">1000</h1>
                                     </div>
                                 </div>
 
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">总返佣</small>
-                                        <h1 class="index-agentNum-normal">1000</h1>
+                                        <h1 class="index-agent-commission" th:text="${statistics.agentCommission}">1000</h1>
                                     </div>
                                 </div>
 
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">账户余额</small>
-                                        <h1 class="index-new-day" th:text="${agent.balance}">1000</h1>
+                                        <h1 class="index-balance" th:text="${statistics.balance}">1000</h1>
                                     </div>
                                 </div>
 
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">账户佣金</small>
-                                        <h1 class="index-new-month" th:text="${agent.commission}">1000</h1>
+                                        <h1 class="index-commission" th:text="${statistics.commission}">1000</h1>
                                     </div>
                                 </div>
 

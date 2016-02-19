@@ -1,6 +1,8 @@
 package com.huotu.hotagent.agent.controller;
 
+import com.huotu.hotagent.agent.service.AdminService;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class IndexController {
+
+    @Autowired
+    private AdminService adminService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "views/login";
@@ -32,6 +38,7 @@ public class IndexController {
     public ModelAndView index(@AuthenticationPrincipal Agent agent) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("views/index");
+        modelAndView.addObject("statistics", adminService.agentStatistics(agent.getId()));
         modelAndView.addObject(agent);
         return  modelAndView;
     }

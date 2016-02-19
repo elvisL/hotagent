@@ -17,6 +17,7 @@ import com.huotu.hotagent.common.ienum.EnumHelper;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
+import com.huotu.hotagent.service.model.AgentSearch;
 import com.huotu.hotagent.service.repository.product.ProductRepository;
 import com.huotu.hotagent.service.repository.role.agent.AgentLevelRepository;
 import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
@@ -59,8 +60,19 @@ public class AgentControllerTest extends AuthenticatedWebTest {
         for (int i = 0; i < agentCount; i++) {
             agentService.save(mockAgent());
         }
-        webDriver.get("http://localhost/agent/agentList");
+        webDriver.get("http://localhost/agents");
         AgentListPage agentListPage = initPage(AgentListPage.class);
+        List<Agent> agents = agentRepository.findAll();
+        agentListPage.setAgents(agents);
+        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
+        agentListPage.setAgentLevels(agentLevels);
+        agentListPage.validate();
+
+        //测试搜索
+        AgentSearch randomSearch = new AgentSearch();
+        randomSearch.setAgentLevel(randomAgentLevel().getLevel());
+        randomSearch.setAgentType(randomAgentType().getValue());
+        agentListPage.testSearch(randomSearch);
     }
 
     @Test

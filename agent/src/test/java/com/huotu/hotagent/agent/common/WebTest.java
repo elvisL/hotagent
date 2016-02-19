@@ -151,7 +151,7 @@ public abstract class WebTest extends SpringWebTest {
             randomLevel = randomAgentLevel();
             parentAgents = agentService.findByLevel(1, SysConstant.DEFAULT_PAGE_SIZE, parentLevel);
         }
-        Agent randomParent = randomLevel.getLevel() > 0 ? parentAgents.getContent().get(random.nextInt(parentAgents.getSize())) : null;
+        Agent randomParent = randomLevel.getLevel() > 0 ? parentAgents.getContent().get(random.nextInt(parentAgents.getContent().size())) : null;
 
         Agent mockAgent = new Agent();
         mockAgent.setUsername(UUID.randomUUID().toString());

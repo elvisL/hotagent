@@ -51,7 +51,7 @@
             <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')" agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">
-                    <li agent:active="agentList"><a href="general-forms.html" th:href="@{/agent/agentList}"><i class="fa fa-caret-right"></i> 代理商列表</a></li>
+                    <li agent:active="agentList"><a href="general-forms.html" th:href="@{/agents}"><i class="fa fa-caret-right"></i> 代理商列表</a></li>
                     <li agent:active="agentEdit"><a href="form-layouts.html" th:href="@{/agentEditForm}"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
                     <li agent:active="agentLevel"><a href="form-validation.html" th:href="@{/agent/agentLevel}"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
                 </ul>

@@ -13,7 +13,6 @@ import com.huotu.hotagent.admin.controller.index.pages.LoginPage;
 import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.service.common.Authority;
 import com.huotu.hotagent.service.entity.role.manager.Manager;
-import com.huotu.hotagent.service.service.role.manager.ManagerService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.model.FrameworkMethod;

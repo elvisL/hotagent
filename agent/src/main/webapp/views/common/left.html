@@ -51,7 +51,7 @@
             <!--<li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_WITHDRAW')" agent:active="withdraw"><a href="index.html"><i class="fa fa-th-list"></i> <span>提现管理</span></a></li>-->
             <!--<li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')" agent:active="product"><a href="index.html"><i class="fa fa-th-list"></i> <span>产品管理</span></a></li>-->
             <!--<li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>-->
-            <li agent:active="statistics"><a href="index.html"> <i class="fa fa-th-list"></i> <span>个人中心</span></a></li>
+            <li agent:active="personal"><a href="index.html"> <i class="fa fa-th-list"></i> <span>个人中心</span></a></li>
             <li  agent:active="statistics" agent:activeparent="'agentList,addAgent'" class="nav-parent nav-active active">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">
@@ -105,6 +105,7 @@
                 </li>
                 <li>
                     <div>
+                        <!--暂时不知道是什么-->
                         <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
                     </div>
                 </li>

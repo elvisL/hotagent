@@ -37,7 +37,7 @@ public class AgentEditPage extends AbstractPage {
 
     @Override
     public void validate() {
-
+        
     }
 
     /**

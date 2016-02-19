@@ -34,6 +34,8 @@ public interface AgentRepository extends JpaRepository<Agent, Long>, JpaSpecific
 
     long countByParent_id(int agentId);
 
+    long countByParent_id(Long id);
+
     long countByCreateTimeAfter(Date date);
 
     long countByType(AgentType type);
