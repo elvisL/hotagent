@@ -90,7 +90,7 @@
                     opacity: 0.7;
                 }
             </style>
-            <div class="infosummary">
+            <div class="infosummary" >
                 <h5 class="sidebartitle">Information Summary</h5>
                 <ul>
                     <li>
@@ -169,7 +169,7 @@
 
         </div>
 
-        <div class="contentpanel">
+        <div class="contentpanel" th:object="${statistics}">
 
             <div class="row">
 
@@ -184,7 +184,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">一级代理总数</small>
-                                        <h1 class="index-agentNum-level1">1000</h1>
+                                        <h1 class="index-agentNum-level1" th:text="*{agentNumWithLevel1}">1000</h1>
                                     </div>
                                 </div>
 
@@ -205,7 +205,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">下级代理总数</small>
-                                        <h1 class="index-agentNum-under">1000</h1>
+                                        <h1 class="index-agentNum-under" th:text="*{agentNumWithUnder}">1000</h1>
                                     </div>
                                 </div>
 
@@ -226,7 +226,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">普通代理总数</small>
-                                        <h1 class="index-agentNum-normal">1000</h1>
+                                        <h1 class="index-agentNum-normal" th:text="*{normalAgentNum}">1000</h1>
                                     </div>
                                 </div>
 
@@ -247,7 +247,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">独家代理总数</small>
-                                        <h1 class="index-agentNum-sole">1000</h1>
+                                        <h1 class="index-agentNum-sole" th:text="*{soleAgentNum}">1000</h1>
                                     </div>
                                 </div>
 
@@ -271,7 +271,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">今日新增代理商总数</small>
-                                        <h1 class="index-new-day">1000</h1>
+                                        <h1 class="index-new-day" th:text="*{newAgentDay}">1000</h1>
                                     </div>
                                 </div>
 
@@ -292,7 +292,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">本月新增代理商</small>
-                                        <h1 class="index-new-month">1000</h1>
+                                        <h1 class="index-new-month" th:text="*{newAgentMonth}">1000</h1>
                                     </div>
                                 </div>
 
@@ -316,7 +316,7 @@
                                     </div>
                                     <div class="col-xs-8">
                                         <small class="stat-label">未处理提现申请</small>
-                                        <h1 class="no-handler-withdraw">1000</h1>
+                                        <h1 class="no-handler-withdraw" th:text="*{unHandleWithdraw}">1000</h1>
                                     </div>
                                 </div>
 

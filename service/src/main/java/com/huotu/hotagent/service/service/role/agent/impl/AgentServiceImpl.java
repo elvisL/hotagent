@@ -97,12 +97,8 @@ public class AgentServiceImpl implements AgentService {
             if (agentSearch.getAgentLevel() > -1) {
                 predicates.add(criteriaBuilder.equal(root.get("level").get("level").as(Integer.class), agentSearch.getAgentLevel()));
             }
-            if (agentSearch.getParentAgent() > -1) {
-                if (agentSearch.getParentAgent() == 0) {
-                    predicates.add(criteriaBuilder.isNull(root.get("parent").as(Agent.class)));
-                } else {
-                    predicates.add(criteriaBuilder.equal(root.get("parent").get("id").as(Integer.class), agentSearch.getParentAgent()));
-                }
+            if (agentSearch.getParentAgent() > 0) {
+                predicates.add(criteriaBuilder.equal(root.get("parent").get("id").as(Integer.class), agentSearch.getParentAgent()));
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         });

@@ -107,7 +107,7 @@ public class AgentController {
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
     public String AgentEdit(Agent agent) throws Exception{
         loginService.newLogin(agent,agent.getPassword());
-        return "redirect:/agentEditForm";
+        return "redirect:/agents";
     }
 
     @RequestMapping("/uploadImg")

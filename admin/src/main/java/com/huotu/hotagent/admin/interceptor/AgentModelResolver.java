@@ -19,6 +19,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.DoubleSummaryStatistics;
 import java.util.Map;
 
 /**
@@ -73,8 +74,10 @@ public class AgentModelResolver implements HandlerMethodArgumentResolver {
                         Class<?> classType = field.getType();
                         if(classType == String.class) {
                             field.set(agent,paramValues[0]);
-                        }else if(classType == Boolean.class) {
-                            field.set(agent,Boolean.valueOf(paramValues[0]));
+                        }else if("double" == classType.getName()) {
+                            field.set(agent, Double.parseDouble(paramValues[0]));
+                        }else if("boolean" == classType.getName()) {
+                            field.set(agent,Boolean.parseBoolean(paramValues[0]));
                         }else if(classType == AgentLevel.class) {
                             AgentLevel agentLevel = agentLevelService.findByLevel(Integer.parseInt(paramValues[0]));
                             field.set(agent,agentLevel);

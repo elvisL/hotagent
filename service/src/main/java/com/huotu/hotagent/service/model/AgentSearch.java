@@ -29,7 +29,7 @@ public class AgentSearch {
      */
     private int agentLevel = -1;
     /**
-     * 上级代理,-1表示全部,0表示搜索一级代理商
+     * 上级代理id
      */
     private long parentAgent = 0;
 }

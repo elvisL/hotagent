@@ -394,7 +394,7 @@
 
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">请选择 <span class="caret"></span></button>
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="*{agentType}==-1 ? '请选择':(*{agentType}==0 ? '普通代理':'独家代理')">请选择 <span class="caret"></span></button>
                                         <ul id="typeSelect" class="dropdown-menu dropdown-menu-right">
                                             <li><a href="#" type-value="-1">请选择</a></li>
                                             <li><a href="#" type-value="0">普通代理</a></li>
@@ -417,7 +417,7 @@
                                             <li><a href="#" level="-1">请选择</a></li>
 
                                             <li th:each="agentLevel:${agentLevels}">
-                                                <a href="#" th:attr="level=${agentLevel.level}" level="0" th:text="${agentLevel.levelName}">一级代理商</a>
+                                                <a href="#" th:attr="level=${agentLevel.level}" level="0"  th:text="${agentLevel.levelName}">一级代理商</a>
                                             </li>
                                         </ul>
 
@@ -895,10 +895,10 @@
             }
         });
 
-        var currentLevelId = $("input[name=agentLevel]").val();
+        var currentLevelId = $("input[name=level]").val();
         if (currentLevelId != "" && currentLevelId != null)
             $("#levelSelectBtn").html($("#levelSelect a[level=" + currentLevelId + "]").html());
-        var currentAgentType = $("input[name=agentType]").val();
+        var currentAgentType = $("input[name=type]").val();
         if (currentAgentType != "" && currentAgentType != null);
         $("#typeSelectBtn").html($("#typeSelect a[type-value=" + currentAgentType + "]").html());
 
