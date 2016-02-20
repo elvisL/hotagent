@@ -23,13 +23,11 @@ import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -53,6 +51,8 @@ public class AgentController {
     private StaticResourceService staticResourceService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * 代理商列表
@@ -65,10 +65,6 @@ public class AgentController {
             AgentSearch agentSearch,
             Model model
     ) {
-        //这里默认应该是显示一级代理商
-        if (agentSearch.getAgentLevel() == -1) {
-            agentSearch.setAgentLevel(0);
-        }
         model.addAttribute("pageIndex", pageIndex);
         model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
         model.addAttribute("agentSearch", agentSearch);
@@ -79,6 +75,14 @@ public class AgentController {
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
         return "agent/agent_list";
+    }
+
+    @RequestMapping(value = "/agents/{id}",method = RequestMethod.GET)
+    public String showAgentDetail(@PathVariable Long id,Model model) throws Exception {
+        Agent agent = agentService.findById(id);
+        agent.setQualifyUri(staticResourceService.getResource(agent.getQualifyUri()).toString());
+        model.addAttribute("agent",agent);
+        return "agent/agent_detail";
     }
 
     /**

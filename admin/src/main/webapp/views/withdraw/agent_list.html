@@ -22,7 +22,6 @@
     <title>代理商总后台</title>
 
     <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
-    <link href="http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -475,7 +474,7 @@
                                 <td th:text="${agent.commission}">88</td>
                                 <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
                                 <td th:text="${agent.getStatus()}">活动</td>
-                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a><a onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a></td>
+                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a></td>
                             </tr>
                             <tr>
                                 <td>1</td>
@@ -858,6 +857,7 @@
 <script src="//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js"></script>
 <script src="//cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+<script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
 
 <!--一些控件-->
 <!--<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>-->
@@ -865,7 +865,7 @@
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
-<script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
+<script type="application/javascript" src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
 
 <script type="application/javascript" th:inline="javascript">
@@ -878,17 +878,6 @@
     function editAgent(obj) {
         var id = $(obj).attr("id");
         location.href = "/agentEditForm?id=" + id;
-    }
-    function showDetail(obj) {
-        var id = $(obj).attr("id");
-        layer.open({
-            type: 1,
-            skin: 'layui-layer-demo', //样式类名
-            closeBtn: 0, //不显示关闭按钮
-            shift: 2,
-            shadeClose: true, //开启遮罩关闭
-            content: '/agents/'+id
-        });
     }
 </script>
 <script type="application/javascript">

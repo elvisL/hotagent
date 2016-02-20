@@ -66,14 +66,16 @@ public class AgentModelResolver implements HandlerMethodArgumentResolver {
                         agent.getClass().getMethod("setUsername",String.class).invoke(agent, paramValues[0]);
                         break;
                     case "password":
-                        agent.getClass().getMethod("setPassword",String.class).invoke(agent, paramValues[0]);
+                            if(!paramValues[0].equals(agent.getPassword())) {
+                                agent.getClass().getMethod("setPassword", String.class).invoke(agent, paramValues[0]);
+                            }
                         break;
                     default:
                         Field field = agent.getClass().getDeclaredField(entry.getKey());
                         field.setAccessible(true);
                         Class<?> classType = field.getType();
                         if(classType == String.class) {
-                            field.set(agent,paramValues[0]);
+                            field.set(agent, paramValues[0]);
                         }else if("double" == classType.getName()) {
                             field.set(agent, Double.parseDouble(paramValues[0]));
                         }else if("boolean" == classType.getName()) {
