@@ -251,6 +251,7 @@ public class AgentController {
         try {
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
             AgentType type = AgentType.getAgentType(agentType);
+            agent.setCreateTime(agentService.findById(agent.getId()).getCreateTime());
             agent.setType(type);
             agent.setLevel(aLevel);
             agent.setParent(Higher);
