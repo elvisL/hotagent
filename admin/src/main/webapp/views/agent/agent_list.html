@@ -867,6 +867,7 @@
 
 <script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
+<script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
 
 <script type="application/javascript" th:inline="javascript">
     var ajaxUrl = /*[[@{/agent/api/}]]*/ "";
@@ -882,11 +883,11 @@
     function showDetail(obj) {
         var id = $(obj).attr("id");
         layer.open({
-            type: 1,
-            skin: 'layui-layer-demo', //样式类名
-            closeBtn: 0, //不显示关闭按钮
-            shift: 2,
-            shadeClose: true, //开启遮罩关闭
+            type: 2,
+            title: '代理商详情',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['380px', '50%'],
             content: '/agents/'+id
         });
     }

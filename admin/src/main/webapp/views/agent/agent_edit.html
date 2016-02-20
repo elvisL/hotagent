@@ -315,7 +315,7 @@
                                     <div class="row">
                                         <div class="col-xs-6 col-md-3">
                                                 <img src="" id="previewImg" th:src="${agent}!=null ? @{'/'+${agent.qualifyUri}}">
-                                                <input type="hidden" name="qualifyUri" id="qualifyUri">
+                                                <input type="hidden" name="qualifyUri" id="qualifyUri" th:value="${agent.qualifyUri}">
                                         </div>
                                     </div>
                                     <div class="input-append">

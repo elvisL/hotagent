@@ -9,45 +9,45 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <ul style="list-style: none">
+            <ul style="list-style: none" data-th-object="${agent}">
                 <li>
-                    代理商名称：<span>火图科技</span>
+                    代理商名称：<span data-th-text="*{name}">火图科技</span>
                 </li>
                 <li>
-                    代理商级别：<span>一级代理商</span>
+                    代理商级别：<span data-th-text="*{level.levelName}">一级代理商</span>
                 </li>
                 <li>
-                    代理类型：<span>独家代理</span>
+                    代理类型：<span data-th-text="*{type.name}">独家代理</span>
                 </li>
                 <li>
-                    代理区域：<span>浙江省</span>
+                    代理区域：<span data-th-text="*{province+' '+city+' '+district}">浙江省</span>
                 </li>
                 <li>
-                    联系人：<span>何芸</span>
+                    联系人：<span data-th-text="*{contacts}">何芸</span>
                 </li>
                 <li>
-                    联系方式：<span>13205713331</span>
+                    联系方式：<span data-th-text="*{phoneNo}">13205713331</span>
                 </li>
                 <li>
-                    邮箱：<span>13205713331@qq.com</span>
+                    邮箱：<span data-th-text="*{mail}">13205713331@qq.com</span>
                 </li>
                 <li>
-                    联系地址：<span>13205713331@qq.com</span>
+                    联系地址：<span data-th-text="*{address}">13205713331@qq.com</span>
                 </li>
                 <li>
-                    QQ：<span>444444444</span>
+                    QQ：<span data-th-text="*{qq}">444444444</span>
                 </li>
                 <li>
-                    联系地址：<span>13205713331@qq.com</span>
+                    是否可发展下级代理：<span data-th-text="*{expandable==true ? '是':'否'}">是</span>
                 </li>
                 <li>
-                    账户余额：<span style="color: red">10000元</span>
+                    账户余额：<span style="color: red" data-th-text="*{balance}">10000元</span>
                 </li>
                 <li>
-                    账户佣金：<span style="color: red">10000元</span>
+                    账户佣金：<span style="color: red" data-th-text="*{commission}">10000元</span>
                 </li>
                 <li>
-                    企业资质：<img src="img/a.jpg" alt='' />
+                    企业资质：<img src="img/a.jpg" data-th-src="*{qualifyUri}" />
                 </li>
             </ul>
         </div>
