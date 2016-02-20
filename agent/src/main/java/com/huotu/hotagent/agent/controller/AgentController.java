@@ -102,14 +102,17 @@ public class AgentController {
 
 
     /**
-     *个人代理商信息/修改代理商
+     *修改代理商
      */
-    @RequestMapping("/showAgent")
-    public ModelAndView showAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
+    @RequestMapping("/editAgent")
+    public ModelAndView editAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        modelAndView.setViewName("views/agent/showAgent");
+        List<AgentLevel> agentLevels = agentLevelService.findAll();
+        modelAndView.setViewName("views/agent/agent_edit");
         modelAndView.addObject("agent",agent);
+        modelAndView.addObject("agentLevels",agentLevels);
+        modelAndView.addObject("agentTypes",AgentType.values());
         return modelAndView;
     }
 
@@ -203,11 +206,11 @@ public class AgentController {
 
 
     /**
-     *保存下级代理商信息
+     *保存下级代理商信息(新增)
      */
-    @RequestMapping(value = "/saveLowerAg ",method = RequestMethod.POST)
+    @RequestMapping(value = "/saveAddLowerAg ",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult saveLowerAg(@AuthenticationPrincipal Agent Higher,
+    public ApiResult saveAddLowerAg(@AuthenticationPrincipal Agent Higher,
                                  Agent agent,int agentType,int agentLevel,int money) throws Exception{
 
         ApiResult apiResult =null;
@@ -234,6 +237,35 @@ public class AgentController {
         }
         return apiResult;
     }
+
+
+    /**
+     *保存下级代理商信息(修改)
+     */
+    @RequestMapping(value = "/saveEditLowerAg ",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult saveEditLowerAg(@AuthenticationPrincipal Agent Higher,
+                                 Agent agent,int agentLevel,int agentType) throws Exception{
+
+        ApiResult apiResult =null;
+        try {
+            AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
+            AgentType type = AgentType.getAgentType(agentType);
+            agent.setType(type);
+            agent.setLevel(aLevel);
+            agent.setParent(Higher);
+            agent.setExpandable(false);
+            loginService.newLogin(agent,agent.getPassword());
+            apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
+        }
+        return apiResult;
+    }
+
+
 
     /**
      *给下级代理商充值
