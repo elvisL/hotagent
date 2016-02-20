@@ -21,6 +21,8 @@
 
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
 
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
+
     <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
 </head>
@@ -58,31 +60,31 @@
                         <a href="" class="panel-close">&times;</a>
                         <a href="" class="minimize">&minus;</a>
                     </div>
-                    <h4 class="panel-title">添加代理商</h4>
+                    <h4 class="panel-title">修改代理商</h4>
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post" class="form-horizontal form-bordered">
-
+                    <form id="editForm"  th:method="post" class="form-horizontal form-bordered"  enctype="multipart/form-data" >
+                        <input type="hidden" name="id" id="id" th:value="${agent}!=null ? ${agent.id}">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="name" title="代理商名称" placeholder="代理商名称" class="form-control"/>
+                                <input type="text" name="name" id="name" th:value="${agent}!=null ? ${agent.name}" title="代理商名称" placeholder="代理商名称" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">账号</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="username" title="账号" placeholder="账号" class="form-control"/>
+                                <input type="text" name="username" id="username"  th:value="${agent}!=null ? ${agent.username} : ''" th:readonly="${agent}!=null ? readonly" title="账号" placeholder="账号" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">密码</label>
 
                             <div class="col-sm-3">
-                                <input type="password" name="password" title="密码" placeholder="密码" class="form-control"/>
+                                <input type="password" name="password" id="password"  th:value="${agent}!=null ? ${agent.password} : ''" title="密码" placeholder="密码" class="form-control"/>
                             </div>
                         </div>
 
@@ -90,8 +92,8 @@
                             <label class="col-sm-3 control-label">代理商等级</label>
 
                             <div class="col-sm-3">
-                                <select name="level" title="代理商等级" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option>一级代理商</option>
+                                <select name="level" id="level"  title="代理商等级" class="form-control input mb10" th:remove="all-but-first">
+                                    <option th:each="agentLevel:${agentLevels}" th:value="${agentLevel.level}" th:text="${agentLevel.levelName}" th:selected="${agent}!=null ? ${agent.level.level}==${agentLevel.level}">一级代理商</option>
                                     <option>二级代理商</option>
                                 </select>
                             </div>
@@ -100,8 +102,8 @@
                             <label class="col-sm-3 control-label">代理商类型</label>
 
                             <div class="col-sm-3">
-                                <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option>独家代理</option>
+                                <select name="type" id="type"   title="代理商类型" class="form-control input mb10" th:remove="all-but-first">
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}" th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理</option>
                                     <option>普通代理</option>
                                 </select>
                             </div>
@@ -111,15 +113,15 @@
 
                             <div id="area">
                                 <div class="col-sm-1">
-                                    <select name="type"  class="form-control input-sm mb10 prov">
+                                    <select name="province" id="province" class="form-control input mb10 prov">
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <select name="type"  class="form-control input-sm mb10 city" >
+                                    <select name="city" id="city" class="form-control input mb10 city" >
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <select name="type" class="form-control input-sm mb10 dist">
+                                    <select name="district" id="district" class="form-control input mb10 dist">
                                     </select>
                                 </div>
 
@@ -127,31 +129,79 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">充值金额</label>
+                            <label class="col-sm-3 control-label">账户余额</label>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="balance" title="充值金额" class="form-control">
+                                    <input type="number" name="balance" id="balance" th:value="${agent}!=null ? ${agent.balance}" title="充值金额" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">佣金</label>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="commission" title="佣金" class="form-control" readonly>
+                                    <input type="number" name="commission" id="commission" th:value="${agent}!=null ? ${agent.commission}" title="佣金" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系人</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="contacts" id="contacts" th:value="${agent!=null} ? ${agent.contacts}" placeholder="联系人" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手机号</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="phoneNo" id="phoneNo" th:value="${agent!=null} ? ${agent.phoneNo}"  placeholder="手机号" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系地址</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="address"  id="address" th:value="${agent!=null} ? ${agent.address}"  placeholder="联系地址" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="mail"  id="mail" th:value="${agent!=null} ? ${agent.mail}" placeholder="电子邮箱" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">QQ</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="qq" id="qq" th:value="${agent!=null} ? ${agent.qq}" placeholder="QQ号" class="form-control"/>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">是否可发展下级代理</label>-->
+
+                            <!--<div class="col-sm-3">-->
+                                <!--<div class="radio-inline"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? ${agent.expandable}">是</label></div>-->
+                                <!--<div class="radio"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? !${agent.expandable}">否</label></div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">企业资质</label>
 
                             <div class="col-sm-6">
                                 <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
-
+                                    <div class="row">
+                                        <div class="col-xs-6 col-md-3">
+                                            <img src="" id="previewImg" th:src="${agent}!=null ? @{'/'+${agent.qualifyUri}}">
+                                            <input type="hidden" name="qualifyUri" id="qualifyUri">
+                                        </div>
+                                    </div>
                                     <div class="input-append">
                                         <div class="uneditable-input">
                                             <i class="glyphicon glyphicon-file fileupload-exists"></i>
@@ -160,9 +210,8 @@
                                     <span class="btn btn-default btn-file">
                                       <span class="fileupload-new">Select file</span>
                                       <span class="fileupload-exists">Change</span>
-                                      <input type="file" name="qualifyUri">
+                                      <input type="file" name="qualify" id="qualify">
                                     </span>
-                                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +224,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button onclick="editHandler.submit()" class="btn btn-primary">Submit</button>
+                            <button onclick="editHandler.submit()" class="btn btn-primary">确认</button>
                         </div>
                     </div>
                 </div><!-- panel-footer -->
@@ -194,6 +243,7 @@
 <script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
 <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
 
 <script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
 <script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
@@ -203,14 +253,19 @@
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 <script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
-<script type="text/javascript">
+<script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
+<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
+<script th:inline="javascript">
     $(function () {
         editHandler.pageInit();
     });
+    var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
+    var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
+    var dist = /*[[${agent!=null ? agent.district : "滨江区"}]]*/ "滨江区";
     $("#area").citySelect({
-        prov:"浙江", //省份
-        city:"杭州", //城市
-        dist:"滨江区"//区县
+        prov:prov,
+        city:city,
+        dist:dist
     });
 
     var editHandler = {
@@ -229,27 +284,85 @@
                     $(element).valid();
                 },
                 rules: {
-                    agentName: {
+                    name: {
                         required : true
                     },
-                    balance: {
-                        required: true,
-                        digits: true
+                    password: {
+                        required : true
+                    },
+                    qualifyUri: {
+                        required : true
+                    },
+                    mail: {
+                        email:true
                     }
                 },
                 messages: {
-                    agentName:{
-                        required:"请输入名称"
+                    name: {
+                        required : "请输入代理商名称"
                     },
-                    balance: {
-                        required:"请输入充值金额",
-                        digits:"请输入数字"
+                    password: {
+                        required : "请输入密码"
+                    },
+                    qualifyUri: {
+                        required : "请上传图片"
+                    },
+                    mail: {
+                        email:"请输入正确的邮箱"
                     }
-
+                },
+        submitHandler: function (form, ev) {
+            $.ajax({
+                url: "/saveEditLowerAg",
+                data: {
+                    id:$("#id").val(),
+                    name:$("#name").val(),
+                    agentLevel:$("#level").val(),
+                    agentType:$("#type").val(),
+                    balance:$("#balance").val(),
+                    username:$("#username").val(),
+                    password:$("#password").val(),
+                    contacts:$("#contacts").val(),
+                    province:$("#province").val(),
+                    qualifyUri:$("#qualifyUri").val(),
+                    city:$("#city").val(),
+                    district:$("#district").val(),
+                    phoneNo:$("#phoneNo").val(),
+                    address:$("#address").val(),
+                    mail:$("#mail").val(),
+                    qq:$("#qq").val()
+                },
+                type: "POST",
+                dataType: 'json',
+                success: function (msg) {
+                    var index=parseInt(msg.code);
+                    switch (index) {
+                        case 2000:
+                            layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
+                            setTimeout(function(){
+//                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
+                                    }
+                                    ,1000);
+//                                    $("#password").val("");
+                            break;
+                        case 4001:
+                            layer.msg("您的账户余额不足", {time: 2000});
+                            $("#balance").val("");
+                            break;
+                    }
+                },
+                error: function () {
 
                 }
             });
+            return false;
+//            window.console.log($("#qualifyUri").val());
         },
+        invalidHandler: function () {
+            return true;
+        }
+    });
+    },
         submit: function () {
             $("#editForm").submit();
         }
