@@ -40,7 +40,7 @@
 
 <section>
 
-    <div class="leftpanel" th:replace="common/left :: left (activeMenu='agentList')">
+    <div class="leftpanel" th:replace="common/left :: left (activeMenu='withdraw')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
@@ -340,109 +340,109 @@
         </div><!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-search"></i> 代理商列表</h2>
+            <h2><i class="fa fa-search"></i> 提现申请列表</h2>
         </div>
 
         <div class="contentpanel">
 
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="panel-btns">
-                        <a href="" class="panel-close">&times;</a>
-                        <a href="" class="minimize">&minus;</a>
-                    </div><!-- panel-btns -->
-                    <h3 class="panel-title">搜索</h3>
+                <!--<div class="panel-heading">-->
+                    <!--<div class="panel-btns">-->
+                        <!--<a href="" class="panel-close">&times;</a>-->
+                        <!--<a href="" class="minimize">&minus;</a>-->
+                    <!--</div>&lt;!&ndash; panel-btns &ndash;&gt;-->
+                    <!--<h3 class="panel-title">搜索</h3>-->
 
-                    <form id="searchForm" action="agent_list.html" th:action="@{/agents}" method="get" th:object="${agentSearch}">
-                        <input type="hidden" name="pageIndex" value="1" th:value="${pageIndex}"/>
+                    <!--<form id="searchForm" action="agent_list.html" th:action="@{/withdraws}" method="get" th:object="${seacher}">-->
+                        <!--<input type="hidden" name="pageIndex" value="1" th:value="${pageIndex}"/>-->
 
-                        <p>
+                        <!--<p>-->
 
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                <span class="input-group-addon">
-                                    代理商姓名
-                                </span>
-                                    <input type="text" name="agentName" th:value="*{agentName}" class="form-control" aria-label="...">
-                                </div><!-- /input-group -->
-                            </div>
-                            <div>
-                                <div class="input-group">
-                                <span class="input-group-addon">
-                                    创建时间
-                                </span>
-                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime" th:value="*{beginTime}">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime" th:value="*{endTime}">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                </div><!-- /input-group -->
-                            </div>
-                        </div>
+                        <!--<div class="row">-->
+                            <!--<div class="col-lg-4">-->
+                                <!--<div class="input-group">-->
+                                <!--<span class="input-group-addon">-->
+                                    <!--代理商姓名-->
+                                <!--</span>-->
+                                    <!--<input type="text" name="agentName" th:value="*{agentName}" class="form-control" aria-label="...">-->
+                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--<div class="input-group">-->
+                                <!--<span class="input-group-addon">-->
+                                    <!--创建时间-->
+                                <!--</span>-->
+                                    <!--<input type="text" class="form-control" placeholder="起始时间" name="beginTime" th:value="*{beginTime}">-->
+                                    <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                                    <!--<input type="text" class="form-control" placeholder="结束时间" name="endTime" th:value="*{endTime}">-->
+                                    <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
 
 
-                        </p>
-                        <p>
+                        <!--</p>-->
+                        <!--<p>-->
 
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                               <span class="input-group-addon">
-                                    代理商类型
-                                </span>
+                        <!--<div class="row">-->
+                            <!--<div class="col-lg-3">-->
+                                <!--<div class="input-group">-->
+                               <!--<span class="input-group-addon">-->
+                                    <!--代理商类型-->
+                                <!--</span>-->
 
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="*{agentType}==-1 ? '请选择':(*{agentType}==0 ? '普通代理':'独家代理')">请选择 <span class="caret"></span></button>
-                                        <ul id="typeSelect" class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" type-value="-1">请选择</a></li>
-                                            <li><a href="#" type-value="0">普通代理</a></li>
-                                            <li><a href="#" type-value="1">独家代理</a></li>
-                                        </ul>
-                                        <input type="hidden" name="agentType" th:value="*{agentType}"/>
-                                    </div><!-- /btn-group -->
-                                </div><!-- /input-group -->
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                               <span class="input-group-addon">
-                                    代理商等级
-                                </span>
+                                    <!--<div class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"-->
+                                                <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="*{agentType}==-1 ? '请选择':(*{agentType}==0 ? '普通代理':'独家代理')">请选择 <span class="caret"></span></button>-->
+                                        <!--<ul id="typeSelect" class="dropdown-menu dropdown-menu-right">-->
+                                            <!--<li><a href="#" type-value="-1">请选择</a></li>-->
+                                            <!--<li><a href="#" type-value="0">普通代理</a></li>-->
+                                            <!--<li><a href="#" type-value="1">独家代理</a></li>-->
+                                        <!--</ul>-->
+                                        <!--<input type="hidden" name="agentType" th:value="*{agentType}"/>-->
+                                    <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-4">-->
+                                <!--<div class="input-group">-->
+                               <!--<span class="input-group-addon">-->
+                                    <!--代理商等级-->
+                                <!--</span>-->
 
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" id="levelSelectBtn" style="width: 163px;"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <!--/*-->
-                                            请选择
-                                            <!--*/-->
-                                            <!--/*/
-                                            <span th:text="*{agentLevel == -1 ? '请选择' : (agentLevel == 0 ? '一级代理' : '二级代理')}"></span>
-                                            /*/-->
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul id="levelSelect" class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" level="-1">请选择</a></li>
+                                    <!--<div class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-default dropdown-toggle" id="levelSelectBtn" style="width: 163px;"-->
+                                                <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                                            <!--&lt;!&ndash;/*&ndash;&gt;-->
+                                            <!--请选择-->
+                                            <!--&lt;!&ndash;*/&ndash;&gt;-->
+                                            <!--&lt;!&ndash;/*/-->
+                                            <!--<span th:text="*{agentLevel == -1 ? '请选择' : (agentLevel == 0 ? '一级代理' : '二级代理')}"></span>-->
+                                            <!--/*/&ndash;&gt;-->
+                                            <!--<span class="caret"></span>-->
+                                        <!--</button>-->
+                                        <!--<ul id="levelSelect" class="dropdown-menu dropdown-menu-right">-->
+                                            <!--<li><a href="#" level="-1">请选择</a></li>-->
 
-                                            <li th:each="agentLevel:${agentLevels}">
-                                                <a href="#" th:attr="level=${agentLevel.level}" level="0"  th:text="${agentLevel.levelName}">一级代理商</a>
-                                            </li>
-                                        </ul>
+                                            <!--<li th:each="agentLevel:${agentLevels}">-->
+                                                <!--<a href="#" th:attr="level=${agentLevel.level}" level="0"  th:text="${agentLevel.levelName}">一级代理商</a>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
 
-                                        <input type="hidden" name="agentLevel" th:value="*{agentLevel}"/>
-                                    </div><!-- /btn-group -->
-                                </div><!-- /input-group -->
-                            </div>
-                            <div class="col-lg-2">
-                                <a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>
-                            </div>
+                                        <!--<input type="hidden" name="agentLevel" th:value="*{agentLevel}"/>-->
+                                    <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-2">-->
+                                <!--<a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>-->
+                            <!--</div>-->
 
-                            <div class="col-lg-2">
-                                <a class="btn btn-white resetSearch" href="agent_list.html" th:href="@{/agents}">显示全部</a>
-                            </div>
-                        </div>
-                        </p>
-                    </form>
-                </div>
+                            <!--<div class="col-lg-2">-->
+                                <!--<a class="btn btn-white resetSearch" href="agent_list.html" th:href="@{/agents}">显示全部</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--</p>-->
+                    <!--</form>-->
+                <!--</div>-->
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped mb30">
@@ -450,61 +450,30 @@
                             <tr>
                                 <th></th>
                                 <th>代理商名称</th>
-                                <th>代理商类型</th>
-                                <th>代理商等级</th>
-                                <th>上级代理</th>
-                                <th>区域</th>
-                                <th>账户余额</th>
-                                <th>佣金</th>
-                                <th>创建时间</th>
-                                <th>代理商状态</th>
+                                <th>提现金额</th>
+                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
 
-                            <tr th:each="agent:${agents}">
-                                <td>1</td>
-                                <td th:text="${agent.name}">火图科技</td>
-                                <td th:text="${agent.type.name}">独家代理</td>
-                                <td th:text="${agent.level.levelName}">一级代理商</td>
-                                <td th:text="${agent.parent==null?'总部':agent.parent.name}">总部</td>
-                                <td th:text="${agent.province+'/'+agent.city}">杭州</td>
-                                <td th:text="${agent.balance}">1000</td>
-                                <td th:text="${agent.commission}">88</td>
-                                <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
-                                <td th:text="${agent.getStatus()}">活动</td>
-                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a></td>
+                            <tr th:each="withdraw:${withdraws}">
+                                <td th:text="${withdraw.agent.name}">火图科技</td>
+                                <td th:text="${withdraw.money}">100</td>
+                                <td th:text="${withdraw.auditStatus.name}">独家代理</td>
+                                <td><a onclick="editAgent(this)" th:attr="id=${withdraw.id}">查看</a></td>
+                            </tr>
+                            <tr>
+                                <td>火图科技</td>
+                                <td>100</td>
+                                <td>申请中</td>
+                                <td>查看</td>
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>火图科技</td>
                                 <td>独家代理</td>
                                 <td>一级代理商</td>
-                                <td>总部</td>
-                                <td>杭州</td>
-                                <td>1000</td>
-                                <td>88</td>
-                                <td>2015-12-12 00:00:00</td>
-                                <td>活动</td>
-                                <td>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>火图科技</td>
-                                <td>独家代理</td>
-                                <td>一级代理商</td>
-                                <td>总部</td>
-                                <td>杭州</td>
-                                <td>1000</td>
-                                <td>88</td>
-                                <td>2015-12-12 00:00:00</td>
-                                <td>活动</td>
-                                <td>
-
-                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -859,8 +828,6 @@
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
 
-<!--一些控件-->
-<!--<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>-->
 
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
