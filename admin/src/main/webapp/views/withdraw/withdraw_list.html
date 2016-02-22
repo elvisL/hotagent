@@ -460,8 +460,11 @@
                             <tr th:each="withdraw:${withdraws}">
                                 <td th:text="${withdraw.agent.name}">火图科技</td>
                                 <td th:text="${withdraw.money}">100</td>
-                                <td th:text="${withdraw.auditStatus.name}">独家代理</td>
-                                <td><a onclick="editAgent(this)" th:attr="id=${withdraw.id}">查看</a></td>
+                                <td th:text="${withdraw.auditStatus.name}">申请中</td>
+                                <td>
+                                    <a onclick="showDetail(this)" th:attr="id=${withdraw.id}">查看</a>
+                                    <a onclick="changeAuditStatus(this,1)" th:attr="id=${withdraw.id}">通过</a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>火图科技</td>
@@ -837,14 +840,36 @@
 
 <script type="application/javascript" th:inline="javascript">
     var ajaxUrl = /*[[@{/agent/api/}]]*/ "";
-    var pageIndex = /*[[${pageIndex}]]*/ 1;
+    var pageIndex = /*[[${currentPage}]]*/ 1;
     var pageSize = /*[[${pageSize}]]*/ 20;
     var totalRecord = $("#totalRecordSpan").html();
 </script>
 <script>
-    function editAgent(obj) {
+    function changeAuditStatus(obj,status) {
         var id = $(obj).attr("id");
-        location.href = "/agentEditForm?id=" + id;
+        $.ajax({
+            url:"/withdraws/"+id.toString()+"/edit",
+            type:"POST",
+            data:"auditStatus="+status.toString(),
+            dataType:"json",
+            success:function(data) {
+                alert(data.msg);
+            },
+            error:function(e) {
+                console.log(e.toString());
+            }
+        })
+    }
+    function showDetail(obj) {
+        var id = $(obj).attr("id");
+        layer.open({
+            type: 2,
+            title: '提现详情',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['380px', '50%'],
+            content: '/withdraws/'+id
+        });
     }
 </script>
 <script type="application/javascript">

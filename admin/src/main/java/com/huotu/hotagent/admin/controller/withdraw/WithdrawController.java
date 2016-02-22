@@ -1,6 +1,9 @@
 package com.huotu.hotagent.admin.controller.withdraw;
 
+import com.huotu.hotagent.admin.common.AuditStatusEditor;
 import com.huotu.hotagent.common.constant.ApiResult;
+import com.huotu.hotagent.common.constant.ResultCodeEnum;
+import com.huotu.hotagent.service.common.AuditStatus;
 import com.huotu.hotagent.service.entity.record.WithdrawRecord;
 import com.huotu.hotagent.service.model.WithdrawRequestModel;
 import com.huotu.hotagent.service.service.record.WithdrawRecordService;
@@ -60,20 +63,17 @@ public class WithdrawController {
 
     /**
      * 提现记录修改
-     * @param withdrawRecord
+     * @param status
      * @return
      */
     @RequestMapping(value = "/withdraws/{id}/edit",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult changeAuditStatus(@ModelAttribute WithdrawRecord withdrawRecord) {
-        ApiResult apiResult = new ApiResult();
-        return apiResult;
+    public ApiResult changeAuditStatus(@PathVariable Long id, AuditStatus status) {
+        WithdrawRecord record = withdrawRecordService.getSpecifiedRecord(id);
+        record.setAuditStatus(status);
+        return  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 
-    @ModelAttribute
-    public WithdrawRecord editRecord(@PathVariable Long id) {
-        return withdrawRecordService.getSpecifiedRecord(id);
-    }
 
 
 }
