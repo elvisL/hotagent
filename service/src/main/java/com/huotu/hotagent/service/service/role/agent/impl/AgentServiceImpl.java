@@ -114,11 +114,16 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public ApiResult lockAgent(Long id) {
+    public ApiResult lockAgent(Long id,int bl) {
 
         ApiResult apiResult = null;
         Agent agent = agentRepository.findOne(id);
-        agent.setAccountNonLocked(true);
+        if (bl == 1){
+            agent.setAccountNonLocked(false);
+        }
+        else {
+            agent.setAccountNonLocked(true);
+        }
         agentRepository.save(agent);
         apiResult = ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         return apiResult;

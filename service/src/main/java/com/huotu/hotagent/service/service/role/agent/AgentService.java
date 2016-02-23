@@ -26,7 +26,7 @@ public interface AgentService {
 
     ApiResult delAgent(Long id);
 
-    ApiResult lockAgent(Long id);
+    ApiResult lockAgent(Long id,int bl);
 
     Agent findByUsername(String userName);
 

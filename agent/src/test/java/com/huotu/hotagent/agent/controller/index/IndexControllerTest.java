@@ -14,6 +14,7 @@ import com.huotu.hotagent.agent.common.LoginAs;
 import com.huotu.hotagent.agent.controller.index.pages.IndexPage;
 import com.huotu.hotagent.agent.model.AgentStatistics;
 import com.huotu.hotagent.agent.service.AdminService;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,8 +31,8 @@ public class IndexControllerTest extends AuthenticatedWebTest {
     @LoginAs
     public void testIndex() throws Exception {
 
-        Long id = Long.valueOf(8);
-        AgentStatistics agentStatistics = adminService.agentStatistics(id);
+        Agent agent = agentService.findByUsername("admin");
+        AgentStatistics agentStatistics = adminService.agentStatistics(agent.getId());
 
         webDriver.get("http://localhost");
         IndexPage indexPage = initPage(IndexPage.class);
