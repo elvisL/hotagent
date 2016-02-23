@@ -45,12 +45,12 @@ function paging(loadObj, pageIndex, pageSize, totalRecord, btnCount) {
             if (this.pageIndex <= 1) {
                 this.pageIndex = 1;
             }
-
-            //输出首页和上一页按钮
-            this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(1,' + callback + ')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
-            if(this.currentBtnPage > 0){
+            if(this.pageIndex > 1){
+                //输出首页和上一页按钮
+                this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(1,' + callback + ')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
                 this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(' +  (pageIndex - 1) + ',' + callback + ')"><i class="fa fa-angle-left"></i></a></li>');
             }else{
+                this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="#"><span aria-hidden="true">&laquo;</span></a></li>');
                 this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-left"></i></a></li>');
             }
 
@@ -73,12 +73,13 @@ function paging(loadObj, pageIndex, pageSize, totalRecord, btnCount) {
             }
 
             //输出下一页和末页
-            if(this.currentBtnPage == this.pageIndex-1){
+            if(this.pageIndex == pageCount){
                 this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-right"></i></a></li>');
+                this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
             }else{
                 this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + (pageIndex + 1) + ',' + callback + ')"><i class="fa fa-angle-right"></i></a></li>');
+                this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + pageCount + ',' + callback + ')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
             }
-            this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + pageCount + ',' + callback + ')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
         }
     };
 }
