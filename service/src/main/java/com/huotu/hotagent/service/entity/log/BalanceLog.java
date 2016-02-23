@@ -36,21 +36,21 @@ public class BalanceLog {
     /**
      * 所属代理商
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agentId")
     private Agent agent;
 
     /**
      * 拨款给哪个二级代理商
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supportId")
     private Agent support;
 
     /**
      * 为哪个客户开帐号
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerId")
     private Customer customer;
 

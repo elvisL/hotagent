@@ -29,4 +29,9 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
     public WithdrawRecord getSpecifiedRecord(Long id) {
         return withdrawRepository.findOne(id);
     }
+
+    @Override
+    public void save(WithdrawRecord record) {
+        withdrawRepository.save(record);
+    }
 }

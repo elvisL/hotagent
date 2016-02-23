@@ -9,10 +9,13 @@
 
 package com.huotu.hotagent.service.common;
 
+import com.huotu.hotagent.common.ienum.ICommonEnum;
+
 /**
  * Created by Administrator on 2016/1/22.
  */
-public enum AuditStatus {
+public enum AuditStatus implements ICommonEnum {
+
     APPLYING(0,"申请中"),
     PROCESSED(1,"已审核");
 
@@ -22,6 +25,16 @@ public enum AuditStatus {
     AuditStatus(int value, String name) {
         this.value = value;
         this.name = name;
+    }
+
+    @Override
+    public Object getValue() {
+        return value;
+    }
+
+    @Override
+    public Object getName() {
+        return name;
     }
 
 }

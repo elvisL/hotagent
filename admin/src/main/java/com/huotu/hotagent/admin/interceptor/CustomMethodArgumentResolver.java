@@ -11,7 +11,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * data binding
+ * 自定义参数初始化方案
  * Created by cwb on 2016/2/23.
  */
 @Component

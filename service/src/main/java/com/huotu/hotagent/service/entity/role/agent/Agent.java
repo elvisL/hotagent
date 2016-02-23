@@ -127,7 +127,7 @@ public class Agent extends Login {
     /**
      * 产品价格序列化
      */
-    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<Price> prices;
 
     /**

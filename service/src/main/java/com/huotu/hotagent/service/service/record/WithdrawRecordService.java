@@ -11,4 +11,6 @@ public interface WithdrawRecordService {
      Page<WithdrawRecord> searchRecords(int pageNo);
 
     WithdrawRecord getSpecifiedRecord(Long id);
+
+    void save(WithdrawRecord record);
 }
