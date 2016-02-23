@@ -355,7 +355,7 @@
                     <h3 class="panel-title">搜索</h3>
 
                     <form id="searchForm" action="agent_list.html" th:action="@{/agents}" method="get" th:object="${agentSearch}">
-                        <input type="hidden" name="pageIndex" value="1" th:value="${pageIndex}"/>
+                        <input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>
 
                         <p>
 
@@ -510,7 +510,7 @@
                             </tbody>
                         </table>
                     </div><!-- table-responsive -->
-                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecord}">100</span>条</p>
+                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
                     <ul style="float: right;" class="pagination pagination-split">
                         <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                         <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
@@ -870,9 +870,9 @@
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
 
 <script type="application/javascript" th:inline="javascript">
-    var pageIndex = /*[[${pageIndex}]]*/ 1;
-    var pageSize = /*[[${pageSize}]]*/ 20;
-    var totalRecord = $("#totalRecordSpan").html();
+    var pageNo = /*[[${currentPage}]]*/ 1;
+    var totalPages = /*[[${totalPages}]]*/ 2;
+    var totalRecords = /*[[${totalRecords}]]*/ 10;
 </script>
 <script>
     function editAgent(obj) {
@@ -893,9 +893,9 @@
 </script>
 <script type="application/javascript">
     jQuery(document).ready(function () {
-        var paginate = new paging($(".pagination"), pageIndex, pageSize, totalRecord, 8);
+        var paginate = new paging($(".pagination"), pageNo, totalPages, totalRecords, 8);
         paginate.init(function (p) {
-            $('input[name=pageIndex]').val(p);
+            $('input[name=pageNo]').val(p);
             $('#searchForm').submit();
         });
 

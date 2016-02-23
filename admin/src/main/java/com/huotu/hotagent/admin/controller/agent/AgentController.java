@@ -61,17 +61,18 @@ public class AgentController {
     @RequestMapping(value = "/agents", method = RequestMethod.GET)
     @PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
     public String AgentList(
-            @RequestParam(required = false, defaultValue = "1") int pageIndex,
+            @RequestParam(required = false, defaultValue = "1") int pageNo,
             AgentSearch agentSearch,
             Model model
     ) {
-        model.addAttribute("pageIndex", pageIndex);
-        model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
         model.addAttribute("agentSearch", agentSearch);
 
-        Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
-        model.addAttribute("totalRecord", agents.getTotalElements());
+        Page<Agent> agents = agentService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
+        model.addAttribute("pageSize", agents.getSize());
         model.addAttribute("agents", agents.getContent());
+        model.addAttribute("totalRecords", agents.getTotalElements());
+        model.addAttribute("totalPages",agents.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
         return "agent/agent_list";
