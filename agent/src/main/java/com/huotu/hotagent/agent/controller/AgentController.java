@@ -8,6 +8,7 @@
  */
 package com.huotu.hotagent.agent.controller;
 
+import com.huotu.hotagent.agent.service.StaticResourceService;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
@@ -27,10 +28,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -46,16 +44,19 @@ public class AgentController {
     private static final Log log = LogFactory.getLog(AgentController.class);
 
     @Autowired
-    AgentService agentService;
+    private AgentService agentService;
 
     @Autowired
-    AgentLevelService agentLevelService;
+    private AgentLevelService agentLevelService;
 
     @Autowired
-    BalanceLogService balanceLogService;
+    private BalanceLogService balanceLogService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private StaticResourceService staticResourceService;
 
     @Autowired
     LoginService loginService;
@@ -63,16 +64,27 @@ public class AgentController {
 
 
     /**
-     *账户信息
+     *个人账户信息
      */
-    @RequestMapping("/showAccount")
-    public ModelAndView showAccount(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
+    @RequestMapping("/agentDetail")
+    public ModelAndView agentDetail(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        Agent agent = agentService.findById(id);
-        modelAndView.setViewName("/views/agent/showAccount");
+        modelAndView.setViewName("/views/agent/agent_detail");
         modelAndView.addObject("agent",agent);
         return modelAndView;
     }
+
+    /**
+     *下级代理账户信息详情
+     */
+    @RequestMapping(value = "/lowAgentDetail/{id}",method = RequestMethod.GET)
+    public String lowAgentDetai(@PathVariable Long id,Model model) throws Exception {
+        Agent agent = agentService.findById(id);
+        agent.setQualifyUri(staticResourceService.getResource(agent.getQualifyUri()).toString());
+        model.addAttribute("agent",agent);
+        return "/views/agent/agent_detail";
+    }
+
 
 
 
@@ -90,6 +102,7 @@ public class AgentController {
         model.addAttribute("pageIndex", pageIndex);
         model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
         model.addAttribute("agentSearch", agentSearch);
+        agentSearch.setAgentLevel(agent.getLevel().getLevel()+1);
         agentSearch.setParentAgent(Integer.parseInt(agent.getId().toString()));
         Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
         model.addAttribute("totalRecord", agents.getTotalElements());
@@ -148,15 +161,15 @@ public class AgentController {
 
 
     /**
-     *冻结下级代理商
+     *冻结下级代理商/解冻
      */
     @RequestMapping(value = "/lockAgent",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult lockAgent(@RequestParam(value = "id") Long id) throws Exception{
+        public ApiResult lockAgent(@RequestParam(value = "id") Long id,int bl) throws Exception{
 
         ApiResult apiResult =null;
         try {
-            apiResult= agentService.lockAgent(id);
+            apiResult= agentService.lockAgent(id,bl);
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SYSTEM_BAD_REQUEST);

@@ -23,11 +23,12 @@
 
     <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
     <link href="http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="http://cdn.bootcss.com/html5shiv/3.6.2/html5shiv.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.1.0/respond.min.js"></script>
+
     <![endif]-->
 </head>
 
@@ -180,7 +181,11 @@
                                 <td th:text="${agent.commission}">88</td>
                                 <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
                                 <td th:text="${agent.getStatus()}">活动</td>
-                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a></td>
+                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a>
+                                    <a onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a>
+                                    <a th:if="${agent.accountNonLocked}" th:attr="id=${agent.id}" th:value="1" onclick="lockAgent(this)"  th:text="冻结" ></a>
+                                    <a th:if="${agent.accountNonLocked}==false" th:attr="id=${agent.id}" th:value="0" onclick="lockAgent(this)"  th:text="解冻"></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>1</td>
@@ -256,6 +261,7 @@
 
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
 
 <script type="application/javascript" src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
@@ -270,6 +276,42 @@
     function editAgent(obj) {
         var id = $(obj).attr("id");
         location.href = "/editAgent?id=" + id;
+    }
+    //详情
+    function showDetail(obj) {
+        var id = $(obj).attr("id");
+        layer.open({
+            type: 2,
+            title: '代理商详情',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['580px', '50%'],
+            content: '/lowAgentDetail/'+id
+        });
+    }
+
+    //冻结，解冻
+    function lockAgent(obj) {
+
+        var id = $(obj).attr("id");
+        var bl = $(obj).attr("value");
+
+        $.ajax({
+            type: "POST",
+            url: "lockAgent" ,
+            dataType: "json",
+            data:{
+                id:id,
+                bl:bl
+            },
+            success: function (msg) {
+                layer.msg("冻结成功",{time: 2000});
+                setTimeout(function(){
+                            window.location.reload();
+                        }
+                        ,1000);
+            }
+        })
     }
 </script>
 <script type="application/javascript">

@@ -10,7 +10,7 @@
 package com.huotu.hotagent.agent.common;
 
 import com.huotu.hotagent.agent.controller.index.pages.LoginPage;
-import com.huotu.hotagent.service.entity.role.manager.Manager;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.model.FrameworkMethod;
@@ -24,16 +24,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(AuthenticatedWebTest.AuthenticatedRunner.class)
 public class AuthenticatedWebTest extends WebTest {
-    protected Manager currentManager;
     private LoginAs loginAs;
 
     @Before
     public void AuthInit() throws Exception {
-        String username = "admin";
-        String password = "admin";
-
-        if (loginAs == null) {
-            throw new IllegalStateException("未标注LoginAs,无法识别当前登录角色的权限");
+        String username = "testAgent";
+        String password = "testAgent";
+        Agent testAgent = agentService.findByUsername(username);
+        if (testAgent == null){
+            loginService.newLogin(mockAgent(username,password),mockAgent(username,password).getPassword());//保存mockAgent
         }
 
         webDriver.get("http://localhost");

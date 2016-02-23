@@ -42,10 +42,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by allan on 1/25/16.
@@ -118,21 +115,7 @@ public abstract class WebTest extends SpringWebTest {
         return agentLevels.get(randomIndex);
     }
 
-    /**
-     * 创建一个没有权限的管理员
-     *
-     * @return
-     */
-//    protected Manager mockManager(String username, String password, Set<Authority> authorities) {
-//        Manager mockManager = new Manager();
-//        mockManager.setUsername(username);
-//        mockManager.setPassword(password);
-//        mockManager.setRoleName(UUID.randomUUID().toString());
-//        mockManager.setName(UUID.randomUUID().toString());
-//        mockManager.setCreateTime(new Date());
-//        mockManager.setAuthorities(authorities);
-//        return managerService.save(mockManager);
-//    }
+
 
     /**
      * 建立一个代理商
@@ -166,6 +149,7 @@ public abstract class WebTest extends SpringWebTest {
         mockAgent.setDistrict(UUID.randomUUID().toString());
         mockAgent.setContacts(UUID.randomUUID().toString());
         mockAgent.setPhoneNo(randomMobile());
+        mockAgent.setCreateTime(new Date());
         mockAgent.setAddress(UUID.randomUUID().toString());
         mockAgent.setMail(randomEmailAddress());
         mockAgent.setQq(UUID.randomUUID().toString());
@@ -201,4 +185,108 @@ public abstract class WebTest extends SpringWebTest {
 
         return mockAgent;
     }
+
+    /**
+     * 建立一个测试一级代理商
+     *
+     * <p>
+     * 不会返回null
+     *
+     * @return
+     */
+    protected Agent mockAgent(String username,String password) {
+
+
+        AgentLevel level = agentLevelService.findByLevel(0);
+        Agent mockAgent = new Agent();
+        mockAgent.setUsername(username);
+        mockAgent.setPassword(password);
+        mockAgent.setName(UUID.randomUUID().toString());
+        mockAgent.setLevel(level);
+        mockAgent.setType(randomAgentType());
+        mockAgent.setBalance(random.nextDouble());
+        mockAgent.setCommission(random.nextDouble());
+        mockAgent.setProvince(UUID.randomUUID().toString());
+        mockAgent.setCity(UUID.randomUUID().toString());
+        mockAgent.setDistrict(UUID.randomUUID().toString());
+        mockAgent.setContacts(UUID.randomUUID().toString());
+        mockAgent.setPhoneNo(randomMobile());
+        mockAgent.setCreateTime(new Date());
+        mockAgent.setAddress(UUID.randomUUID().toString());
+        mockAgent.setMail(randomEmailAddress());
+        mockAgent.setQq(UUID.randomUUID().toString());
+        mockAgent.setParent(null);
+        mockAgent.setQualifyUri(UUID.randomUUID().toString());
+
+        List<Product> products = productService.findAll();
+        Set<Price> prices = new HashSet<>();
+            //使用基础价格
+            for (Product product : products) {
+                Price price = new Price();
+                price.setAgent(mockAgent);
+                price.setPrice(product.getBasePrice());
+                price.setProduct(product);
+
+                prices.add(price);
+            }
+
+        mockAgent.setPrices(prices);
+
+        return mockAgent;
+    }
+
+
+
+    /**
+     * 建立一个下级代理商
+     *
+     * <p>
+     * 不会返回null
+     *
+     * @return
+     */
+    protected Agent mockLowAgent(Agent higerAgent) {
+
+        int lowLevel = higerAgent.getLevel().getLevel()+1;
+        AgentLevel level = agentLevelService.findByLevel(lowLevel);
+        Agent mockAgent = new Agent();
+        mockAgent.setUsername(UUID.randomUUID().toString());
+        mockAgent.setPassword(UUID.randomUUID().toString());
+        mockAgent.setName(UUID.randomUUID().toString());
+        mockAgent.setLevel(level);
+        mockAgent.setType(randomAgentType());
+        mockAgent.setBalance(random.nextDouble());
+        mockAgent.setCommission(random.nextDouble());
+        mockAgent.setProvince(UUID.randomUUID().toString());
+        mockAgent.setCity(UUID.randomUUID().toString());
+        mockAgent.setDistrict(UUID.randomUUID().toString());
+        mockAgent.setContacts(UUID.randomUUID().toString());
+        mockAgent.setPhoneNo(randomMobile());
+        mockAgent.setCreateTime(new Date());
+        mockAgent.setAddress(UUID.randomUUID().toString());
+        mockAgent.setMail(randomEmailAddress());
+        mockAgent.setQq(UUID.randomUUID().toString());
+        mockAgent.setParent(higerAgent);
+        mockAgent.setQualifyUri(UUID.randomUUID().toString());
+
+        //插入产品价格关联表
+        List<Product> products = productService.findAll();
+        Set<Price> prices = new HashSet<>();
+
+            //比上级代理的价格随机高出一点即是符合期望
+            Set<Price> parentPrices = higerAgent.getPrices();
+            for (Price parentPrice : parentPrices) {
+                Price price = new Price();
+                price.setAgent(mockAgent);
+                price.setPrice(parentPrice.getPrice() + random.nextDouble() + 1);
+                price.setProduct(parentPrice.getProduct());
+
+                prices.add(price);
+            }
+
+        mockAgent.setPrices(prices);
+
+        return mockAgent;
+    }
+
 }

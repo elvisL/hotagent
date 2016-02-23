@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.agent.boot;
 
+import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
@@ -40,16 +41,7 @@ public class AdminBoot {
 
     @PostConstruct
     public void adminBoot() {
-        //初始化一个超级管理员
-        Agent agent = agentService.findByUsername("admin");
-        if (agent == null) {
-            agent = new Agent();
-            agent.setUsername("admin");
-            agent.setPassword("admin");
-            agent.setName("测试供应商");
-            agent.setCreateTime(new Date());
-            loginService.newLogin(agent,agent.getPassword());
-        }
+
 
 
         //初始化两个等级,在没有的情况下创建
@@ -103,6 +95,24 @@ public class AdminBoot {
             thirdpartnar.setProductDesc("代运营");
             thirdpartnar.setBasePrice(1000);
             productService.save(thirdpartnar);
+        }
+        //初始化一个代理商
+        Agent agent = agentService.findByUsername("admin");
+        if (agent == null) {
+            agent = new Agent();
+            agent.setUsername("admin");
+            agent.setPassword("admin");
+            agent.setName("测试供应商");
+            agent.setBalance(10000);
+            agent.setCommission(5000);
+            agent.setExpandable(true);
+            agent.setCity("杭州");
+            agent.setDistrict("滨江区");
+            agent.setProvince("浙江");
+            agent.setType(AgentType.getAgentType(0));
+            agent.setLevel(agentLevelService.findByLevel(0));
+            agent.setCreateTime(new Date());
+            loginService.newLogin(agent,agent.getPassword());
         }
     }
 }
