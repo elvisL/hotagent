@@ -181,6 +181,47 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">伙伴商城价格</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="huobanMall" id="huobanMall" title="伙伴商城价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">DSP广告</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="dsp" id="dsp" title="DSP广告价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">云商学院</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="hotEdu" id="hotEdu" title="云商学院价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代运营</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="thirdPartnar" id="thirdPartnar" title="代运营价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">企业资质</label>
 
                             <div class="col-sm-6">
@@ -279,8 +320,25 @@
                     username: {
                         required : true
                     },
-                    password: {
-                        required : true
+                    huobanMall: {
+                        required : true,
+                        min:5000,
+                        digits:true
+                    },
+                    dsp: {
+                        required : true,
+                        min:1000,
+                        digits:true
+                    },
+                    hotEdu: {
+                        required : true,
+                        min:1000,
+                        digits:true
+                    },
+                    thirdPartnar: {
+                        required : true,
+                        min:1000,
+                        digits:true
                     },
                     qualifyUri: {
                         required : true
@@ -303,6 +361,26 @@
                     password: {
                         required : "请输入密码"
                     },
+                    huobanMall: {
+                        required : "请输入代理价格",
+                        min:"必须大于5000",
+                        digits:"请输入整数"
+                    },
+                    hotEdu: {
+                        required : "请输入代理价格",
+                        min:"必须大于1000",
+                        digits:"请输入整数"
+                    },
+                    dsp: {
+                        required : "请输入代理价格",
+                        min:"必须大于1000",
+                        digits:"请输入整数"
+                    },
+                    thirdPartnar: {
+                        required : "请输入代理价格",
+                        min:"必须大于1000",
+                        digits:"请输入整数"
+                    },
                     qualifyUri: {
                         required : "请上传图片"
                     },
@@ -322,6 +400,10 @@
                             password:$("#password").val(),
                             contacts:$("#contacts").val(),
                             province:$("#province").val(),
+                            huobanMall:$("#huobanMall").val(),
+                            hotEdu:$("#hotEdu").val(),
+                            dsp:$("#dsp").val(),
+                            thirdPartnar:$("#thirdPartnar").val(),
                             qualifyUri:$("#qualifyUri").val(),
                             city:$("#city").val(),
                             district:$("#district").val(),

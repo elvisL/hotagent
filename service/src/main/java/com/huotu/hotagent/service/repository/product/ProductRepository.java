@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.service.repository.product;
 
+import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
+
+    Product findByProductType(ProductType productType);
 
 }

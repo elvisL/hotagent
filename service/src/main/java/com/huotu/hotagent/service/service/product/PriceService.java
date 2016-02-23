@@ -1,7 +1,9 @@
 package com.huotu.hotagent.service.service.product;
 
 import com.huotu.hotagent.service.entity.product.Product;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.model.AgentProduct;
+import com.huotu.hotagent.service.model.ProductPrice;
 
 import java.util.List;
 
@@ -10,4 +12,5 @@ import java.util.List;
  */
 public interface PriceService {
     List<AgentProduct> productList(List<Product> products,Long agentId);
+    Boolean setProduct(Agent agent,ProductPrice productPrice);
 }

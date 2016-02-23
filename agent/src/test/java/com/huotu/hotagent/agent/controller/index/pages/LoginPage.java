@@ -118,12 +118,6 @@ public class LoginPage extends AbstractPage {
         loginBtn.click();
 
         assertThat(webDriver.getCurrentUrl().contains("index"));
-//        List<WebElement> sidebars = webDriver.findElements(By.cssSelector("#sidebar>li"));
-//        assertThat(sidebars.size())
-//                .isEqualTo(manager.getAuthorities().size() + 2);
-//        assertThat(webDriver.findElement(By.id("currentUsername")).getText())
-//                .isEqualTo(manager.getName());
-
         logout();
     }
 

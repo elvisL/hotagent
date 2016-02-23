@@ -16,7 +16,9 @@ import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.model.AgentSearch;
+import com.huotu.hotagent.service.model.ProductPrice;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
+import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
@@ -53,6 +55,9 @@ public class AgentController {
     private BalanceLogService balanceLogService;
 
     @Autowired
+    private PriceService priceService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -81,7 +86,7 @@ public class AgentController {
     public String lowAgentDetai(@PathVariable Long id,Model model) throws Exception {
         Agent agent = agentService.findById(id);
         agent.setQualifyUri(staticResourceService.getResource(agent.getQualifyUri()).toString());
-        model.addAttribute("agent",agent);
+        model.addAttribute("agent", agent);
         return "/views/agent/agent_detail";
     }
 
@@ -224,7 +229,8 @@ public class AgentController {
     @RequestMapping(value = "/saveAddLowerAg ",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveAddLowerAg(@AuthenticationPrincipal Agent Higher,
-                                 Agent agent,int agentType,int agentLevel,int money) throws Exception{
+                                 Agent agent,int agentType,int agentLevel,int money,
+                                  ProductPrice productPrice) throws Exception{
 
         ApiResult apiResult =null;
         try {
@@ -238,6 +244,7 @@ public class AgentController {
             agent.setCreateTime(date);
             Boolean bl = balanceLogService.importBl(agent, money);
             if (bl==true){
+                priceService.setProduct(agent,productPrice);
                 loginService.newLogin(agent,agent.getPassword());
                 apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
             }
@@ -258,7 +265,8 @@ public class AgentController {
     @RequestMapping(value = "/saveEditLowerAg ",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveEditLowerAg(@AuthenticationPrincipal Agent Higher,
-                                 Agent agent,int agentLevel,int agentType) throws Exception{
+                                 Agent agent,int agentLevel,int agentType,
+                                     ProductPrice productPrice) throws Exception{
 
         ApiResult apiResult =null;
         try {
@@ -269,6 +277,7 @@ public class AgentController {
             agent.setLevel(aLevel);
             agent.setParent(Higher);
             agent.setExpandable(false);
+            priceService.setProduct(agent,productPrice);
             loginService.newLogin(agent,agent.getPassword());
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
 

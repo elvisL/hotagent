@@ -11,7 +11,7 @@ package com.huotu.hotagent.agent.controller.agent;
 
 import com.huotu.hotagent.agent.common.AuthenticatedWebTest;
 import com.huotu.hotagent.agent.common.LoginAs;
-import com.huotu.hotagent.agent.controller.agent.pages.AgentEditPage;
+import com.huotu.hotagent.agent.controller.agent.pages.AgentAddPage;
 import com.huotu.hotagent.agent.controller.agent.pages.AgentListPage;
 import com.huotu.hotagent.agent.controller.agent.pages.AgentPwEditPage;
 import com.huotu.hotagent.common.ienum.EnumHelper;
@@ -71,9 +71,10 @@ public class AgentControllerTest extends AuthenticatedWebTest {
         int agentCount = random.nextInt(30) + 1;
          List<Agent> agentList = new ArrayList<>();
         //随机构造一些下级代理商
-        for (int i = 0; i < 5; i++) {
-            loginService.newLogin(mockLowAgent(agent),mockLowAgent(agent).getPassword());
-            agentList.add(mockLowAgent(agent));
+        for (int i = 0; i < agentCount; i++) {
+             Agent agent1 = mockLowAgent(agent);
+            loginService.newLogin(agent1,agent1.getPassword());
+            agentList.add(agent1);
         }
         webDriver.get("http://localhost/agentList");
         AgentListPage agentListPage = initPage(AgentListPage.class);
@@ -123,4 +124,36 @@ public class AgentControllerTest extends AuthenticatedWebTest {
 //        Agent agent = agentRepository.findByUsername(mockAgentUsername);
 //        Assert.assertEquals(mockAgentName, agent.getName());
 //    }
+
+    @Test
+    @LoginAs(isRoot = true)
+    public void testAgentAdd() throws Exception {
+        Agent agent = agentService.findByUsername("testAgent");
+        webDriver.get("http://localhost:8080/addAgent");
+        AgentAddPage agentAddPage = initPage(AgentAddPage.class);
+        List<AgentLevel> agentLevels = levelRepository.findAll();
+        //开始构造一个虚拟的agent
+        Agent randomAgent = new Agent();
+        randomAgent.setUsername(mockAgentUsername);
+        randomAgent.setPassword(mockAgentPassword);
+        randomAgent.setCreateTime(new Date());
+        randomAgent.setName(mockAgentName);
+        randomAgent.setLevel(levelRepository.findByLevel(agent.getLevel().getLevel()+1));
+        randomAgent.setType(randomAgentType());
+        randomAgent.setBalance(random.nextInt(101));
+        randomAgent.setProvince("浙江");
+        randomAgent.setCity("杭州");
+        randomAgent.setDistrict("滨江区");
+        randomAgent.setContacts(UUID.randomUUID().toString());
+        randomAgent.setPhoneNo(randomMobile());
+        randomAgent.setAddress(UUID.randomUUID().toString());
+        randomAgent.setMail(randomEmailAddress());
+        randomAgent.setQq(randomMobile());
+        randomAgent.setQualifyUri(UUID.randomUUID().toString());
+
+        agentAddPage.submit(randomAgent);
+
+        Agent agent1 = agentRepository.findByUsername(mockAgentUsername);
+        Assert.assertEquals(mockAgentName, agent.getName());
+    }
 }

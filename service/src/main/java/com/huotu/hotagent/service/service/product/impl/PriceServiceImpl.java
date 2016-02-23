@@ -1,10 +1,15 @@
 package com.huotu.hotagent.service.service.product.impl;
 
+import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.model.AgentProduct;
+import com.huotu.hotagent.service.model.ProductPrice;
 import com.huotu.hotagent.service.repository.product.PriceRepository;
+import com.huotu.hotagent.service.repository.product.ProductRepository;
 import com.huotu.hotagent.service.service.product.PriceService;
+import com.huotu.hotagent.service.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +23,11 @@ import java.util.List;
 public class PriceServiceImpl implements PriceService {
 
     @Autowired
-    PriceRepository priceRepository;
+    private PriceRepository priceRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ProductService productService;
 
 
     @Override
@@ -33,5 +42,34 @@ public class PriceServiceImpl implements PriceService {
             agentProductList.add(agentProduct);
         }
         return agentProductList;
+    }
+
+    @Override
+    public Boolean setProduct(Agent agent,ProductPrice productPrice) {
+        //1.伙伴商城
+        Price huobanMall = new Price();
+        huobanMall.setProduct(productRepository.findByProductType(ProductType.HUOBAN_MALL));
+        huobanMall.setAgent(agent);
+        huobanMall.setPrice(productPrice.getHuobanMall());
+        priceRepository.save(huobanMall);
+        //DSP广告
+        Price dsp = new Price();
+        dsp.setProduct(productRepository.findByProductType(ProductType.DSP));
+        dsp.setAgent(agent);
+        dsp.setPrice(productPrice.getDsp());
+        priceRepository.save(dsp);
+        //云商学院
+        Price hotEdu = new Price();
+        hotEdu.setProduct(productRepository.findByProductType(ProductType.HOT_EDU));
+        hotEdu.setAgent(agent);
+        hotEdu.setPrice(productPrice.getHotEdu());
+        priceRepository.save(hotEdu);
+        //代运营
+        Price thirdPartnar = new Price();
+        thirdPartnar.setProduct(productRepository.findByProductType(ProductType.THIRDPARTNAR));
+        thirdPartnar.setAgent(agent);
+        thirdPartnar.setPrice(productPrice.getThirdPartnar());
+        priceRepository.save(thirdPartnar);
+        return  true;
     }
 }
