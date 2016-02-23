@@ -106,6 +106,11 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
+    public Agent findByCity(String city) {
+        return agentRepository.findByCity(city);
+    }
+
+    @Override
     public ApiResult delAgent(Long id) {
         ApiResult apiResult = null;
         agentRepository.delete(id);

@@ -43,4 +43,6 @@ public interface AgentService {
     Page<Agent> findByLevelId(int levelId);
 
     Page<Agent> findAll(int pageIndex, int pageSize, AgentSearch agentSearch);
+
+    Agent findByCity(String city);
 }

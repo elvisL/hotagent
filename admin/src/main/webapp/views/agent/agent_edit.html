@@ -215,16 +215,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">代理商类型</label>
-
-                            <div class="col-sm-3">
-                                <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}" th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理</option>
-                                    <option>普通代理</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">代理区域</label>
 
                             <div id="area">
@@ -241,6 +231,16 @@
                                     </select>
                                 </div>
 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理商类型</label>
+
+                            <div class="col-sm-3">
+                                <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}" th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理</option>
+                                    <option>普通代理</option>
+                                </select>
                             </div>
                         </div>
 
@@ -686,6 +686,28 @@
 <script th:inline="javascript">
     $(function () {
         editHandler.pageInit();
+        $("input[name=type]").blur(function() {
+            var city = $("input[name=city]").val();
+            $.ajax({
+                url:"/checkCity",
+                data:"city="+city,
+                dataType:"json",
+                success:function(data) {
+                    if(data.code !=2000) {
+                        layer.alert('墨绿风格，点击确认看深蓝', {
+                            skin: 'layui-layer-molv' //样式类名
+                            ,closeBtn: 0
+                        }, function(){
+                            layer.alert(data.msg, {
+                                skin: 'layui-layer-lan'
+                                ,closeBtn: 0
+                                ,shift: 4 //动画类型
+                            });
+                        });
+                    }
+                }
+            })
+        })
     });
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";

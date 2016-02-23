@@ -115,6 +115,24 @@ public class AgentController {
         return "redirect:/agents";
     }
 
+    /**
+     * 检测指定城市是否已经有独家代理
+     * @param city
+     * @return
+     */
+    @RequestMapping("/checkCity")
+    @ResponseBody
+    public ApiResult checkCity(String city) {
+        Agent agent = agentService.findByCity(city);
+        if(agent==null) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        if(agent.getType() != AgentType.SOLE) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
+    }
+
     @RequestMapping("/uploadImg")
     @ResponseBody
     public ApiResult uploadImg(MultipartFile qualify,String qualifyUri) throws Exception {
