@@ -69,7 +69,7 @@
                     <h3 class="panel-title">搜索</h3>
 
                     <form id="searchForm" action="agent_list.html" th:action="@{/agentList}" method="get" th:object="${agentSearch}">
-                        <input type="hidden" name="pageIndex" value="1" th:value="${pageIndex}"/>
+                        <input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>
 
                         <p>
 

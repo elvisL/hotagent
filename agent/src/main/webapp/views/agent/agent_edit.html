@@ -102,7 +102,7 @@
                             <label class="col-sm-3 control-label">代理商类型</label>
 
                             <div class="col-sm-3">
-                                <select name="type" id="type"   title="代理商类型" class="form-control input mb10" th:remove="all-but-first">
+                                <select name="type" id="type" title="代理商类型" class="form-control input mb10" th:remove="all-but-first">
                                     <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}" th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理</option>
                                     <option>普通代理</option>
                                 </select>
@@ -189,7 +189,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="huobanMall" id="huobanMall" title="伙伴商城价格" class="form-control">
+                                    <input type="number" name="huobanMall" id="huobanMall" th:value="${huobanMall!=null} ? ${huobanMall}" title="伙伴商城价格" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -199,7 +199,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="dsp" id="dsp" title="DSP广告价格" class="form-control">
+                                    <input type="number" name="dsp" id="dsp" th:value="${dsp!=null} ? ${dsp}" title="DSP广告价格" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="hotEdu" id="hotEdu" title="云商学院价格" class="form-control">
+                                    <input type="number" name="hotEdu" id="hotEdu" th:value="${hotEdu!=null} ? ${hotEdu}" title="云商学院价格" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -219,7 +219,7 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="thirdPartnar" id="thirdPartnar" title="代运营价格" class="form-control">
+                                    <input type="number" name="thirdPartnar" th:value="${thirdPartnar!=null} ? ${thirdPartnar}" id="thirdPartnar" title="代运营价格" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
                                     <div class="row">
                                         <div class="col-xs-6 col-md-3">
                                             <img src="" id="previewImg" th:src="${agent}!=null ? @{'/'+${agent.qualifyUri}}">
-                                            <input type="hidden" name="qualifyUri" id="qualifyUri">
+                                            <input type="hidden" name="qualifyUri" id="qualifyUri" th:value="${agent}!=null ? @{${agent.qualifyUri}}">
                                         </div>
                                     </div>
                                     <div class="input-append">
@@ -299,6 +299,28 @@
 <script th:inline="javascript">
     $(function () {
         editHandler.pageInit();
+        $("input[name=type]").blur(function() {
+            var city = $("input[name=city]").val();
+            $.ajax({
+                url:"/checkCity",
+                data:"city="+city,
+                dataType:"json",
+                success:function(data) {
+                    if(data.code !=2000) {
+                        layer.alert('墨绿风格，点击确认看深蓝', {
+                            skin: 'layui-layer-molv' //样式类名
+                            ,closeBtn: 0
+                        }, function(){
+                            layer.alert(data.msg, {
+                                skin: 'layui-layer-lan'
+                                ,closeBtn: 0
+                                ,shift: 4 //动画类型
+                            });
+                        });
+                    }
+                }
+            })
+        })
     });
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
@@ -334,22 +356,18 @@
                     huobanMall: {
                         required : true,
                         min:5000,
-                        digits:true
                     },
                     dsp: {
                         required : true,
                         min:1000,
-                        digits:true
                     },
                     hotEdu: {
                         required : true,
                         min:1000,
-                        digits:true
                     },
                     thirdPartnar: {
                         required : true,
                         min:1000,
-                        digits:true
                     },
                     qualifyUri: {
                         required : true
@@ -371,28 +389,25 @@
                     huobanMall: {
                         required : "请输入代理价格",
                         min:"必须大于5000",
-                        digits:"请输入整数"
                     },
                     hotEdu: {
                         required : "请输入代理价格",
                         min:"必须大于1000",
-                        digits:"请输入整数"
                     },
                     dsp: {
                         required : "请输入代理价格",
                         min:"必须大于1000",
-                        digits:"请输入整数"
                     },
                     thirdPartnar: {
                         required : "请输入代理价格",
                         min:"必须大于1000",
-                        digits:"请输入整数"
                     },
                     mail: {
                         email:"请输入正确的邮箱"
                     }
                 },
         submitHandler: function (form, ev) {
+//            window.console.log($("#type").val());
             $.ajax({
                 url: "/saveEditLowerAg",
                 data: {
@@ -441,7 +456,6 @@
                 }
             });
             return false;
-//            window.console.log($("#qualifyUri").val());
         },
         invalidHandler: function () {
             return true;

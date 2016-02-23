@@ -72,4 +72,22 @@ public class PriceServiceImpl implements PriceService {
         priceRepository.save(thirdPartnar);
         return  true;
     }
+
+    @Override
+    public Boolean updateProduct(Agent agent, ProductPrice productPrice) {
+        Price HUOBAN_MALL =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), productRepository.findByProductType(ProductType.HUOBAN_MALL).getId());
+        HUOBAN_MALL.setPrice(productPrice.getHuobanMall());
+        Price DSP =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), productRepository.findByProductType(ProductType.DSP).getId());
+        DSP.setPrice(productPrice.getDsp());
+        Price HOT_EDU =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), productRepository.findByProductType(ProductType.HOT_EDU).getId());
+        HOT_EDU.setPrice(productPrice.getHotEdu());
+        Price THIRDPARTNAR =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), productRepository.findByProductType(ProductType.THIRDPARTNAR).getId());
+        THIRDPARTNAR.setPrice(productPrice.getThirdPartnar());
+        priceRepository.save(HUOBAN_MALL);
+        priceRepository.save(DSP);
+        priceRepository.save(HOT_EDU);
+        priceRepository.save(THIRDPARTNAR);
+
+        return true;
+    }
 }

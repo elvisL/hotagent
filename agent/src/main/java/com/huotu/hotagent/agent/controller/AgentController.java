@@ -13,10 +13,13 @@ import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.service.common.AgentType;
+import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.model.AgentSearch;
 import com.huotu.hotagent.service.model.ProductPrice;
+import com.huotu.hotagent.service.repository.product.PriceRepository;
+import com.huotu.hotagent.service.repository.product.ProductRepository;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
@@ -56,6 +59,12 @@ public class AgentController {
 
     @Autowired
     private PriceService priceService;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private PriceRepository priceRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -100,23 +109,44 @@ public class AgentController {
      */
     @RequestMapping(value = "/agentList", method = RequestMethod.GET)
     public String AgentList(@AuthenticationPrincipal Agent agent,
-            @RequestParam(required = false, defaultValue = "1") int pageIndex,
+            @RequestParam(required = false, defaultValue = "1") int pageNo,
             AgentSearch agentSearch,
             Model model
     ) {
-        model.addAttribute("pageIndex", pageIndex);
-        model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
+
         model.addAttribute("agentSearch", agentSearch);
         agentSearch.setAgentLevel(agent.getLevel().getLevel()+1);
         agentSearch.setParentAgent(Integer.parseInt(agent.getId().toString()));
-        Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
+        Page<Agent> agents = agentService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
         model.addAttribute("totalRecord", agents.getTotalElements());
         model.addAttribute("agents", agents.getContent());
+        model.addAttribute("totalRecords", agents.getTotalElements());
+        model.addAttribute("totalPages",agents.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
         return "views/agent/agent_list";
     }
 
+
+
+    /**
+     * 检测指定城市是否已经有独家代理
+     * @param city
+     * @return
+     */
+    @RequestMapping("/checkCity")
+    @ResponseBody
+    public ApiResult checkCity(String city) {
+        Agent agent = agentService.findByCity(city);
+        if(agent==null) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        if(agent.getType() != AgentType.SOLE) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
+    }
 
 
     /**
@@ -126,11 +156,19 @@ public class AgentController {
     public ModelAndView editAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        List<AgentLevel> agentLevels = agentLevelService.findAll();
+        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
+        Double huobanMall=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.HUOBAN_MALL).getId()).getPrice();
+        Double dsp=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.DSP).getId()).getPrice();
+        Double hotEdu=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.HOT_EDU).getId()).getPrice();
+        Double thirdPartnar=priceRepository.findByAgent_IdAndProduct_Id(id, productRepository.findByProductType(ProductType.THIRDPARTNAR).getId()).getPrice();
         modelAndView.setViewName("views/agent/agent_edit");
         modelAndView.addObject("agent",agent);
         modelAndView.addObject("agentLevels",agentLevels);
         modelAndView.addObject("agentTypes",AgentType.values());
+        modelAndView.addObject("hotEdu",hotEdu);
+        modelAndView.addObject("huobanMall",huobanMall);
+        modelAndView.addObject("dsp",dsp);
+        modelAndView.addObject("thirdPartnar",thirdPartnar);
         return modelAndView;
     }
 
@@ -277,7 +315,7 @@ public class AgentController {
             agent.setLevel(aLevel);
             agent.setParent(Higher);
             agent.setExpandable(false);
-            priceService.setProduct(agent,productPrice);
+            priceService.updateProduct(agent,productPrice);
             loginService.newLogin(agent,agent.getPassword());
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
 

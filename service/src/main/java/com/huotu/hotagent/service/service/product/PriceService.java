@@ -13,4 +13,6 @@ import java.util.List;
 public interface PriceService {
     List<AgentProduct> productList(List<Product> products,Long agentId);
     Boolean setProduct(Agent agent,ProductPrice productPrice);
+    Boolean updateProduct(Agent agent,ProductPrice productPrice);
+
 }

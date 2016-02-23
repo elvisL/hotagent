@@ -8,10 +8,10 @@ import lombok.Data;
 @Data
 public class ProductPrice {
 
-    private int huobanMall;
-    private int dsp;
-    private int hotEdu;
-    private int thirdPartnar;
+    private double huobanMall;
+    private double dsp;
+    private double hotEdu;
+    private double thirdPartnar;
 
 
 }

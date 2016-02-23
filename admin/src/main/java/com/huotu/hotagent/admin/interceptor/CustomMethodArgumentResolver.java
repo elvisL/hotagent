@@ -11,7 +11,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 鑷畾涔夊弬鏁板垵濮嬪寲鏂规
+ * 自定义参数初始化方案
  * Created by cwb on 2016/2/23.
  */
 @Component
