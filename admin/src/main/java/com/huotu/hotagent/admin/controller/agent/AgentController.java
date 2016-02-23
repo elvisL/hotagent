@@ -97,7 +97,7 @@ public class AgentController {
             Agent agent = agentService.findById(id);
             model.addAttribute("agent",agent);
         }
-        List<AgentLevel> agentLevels = agentLevelService.findAll();
+        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels",agentLevels);
         model.addAttribute("agentTypes",AgentType.values());
         return "agent/agent_edit";

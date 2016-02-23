@@ -12,7 +12,7 @@ package com.huotu.hotagent.service.service.role.agent.impl;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.entity.log.BalanceLog;
-import com.huotu.hotagent.service.entity.log.CommisionLog;
+import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 import com.huotu.hotagent.service.repository.log.BalanceLogRepository;
@@ -82,21 +82,21 @@ public class CustomerServiceImpl implements CustomerService {
                 highAgent.setBalance(0);
                 highAgent.setCommission(highAgent.getBalance()+highAgent.getCommission()-money);
                 BalanceLog highbalanceLog = new BalanceLog();
-                CommisionLog commisionLog = new CommisionLog();
+                CommissionLog commissionLog = new CommissionLog();
                 highbalanceLog.setAgent(highAgent);
                 highbalanceLog.setCreateTime(date);
                 highbalanceLog.setMoney(0);
                 highbalanceLog.setExportMoney(highbalanceLog.getMoney());
-                commisionLog.setAgent(highAgent);
-                commisionLog.setCustomer(customer);
-                commisionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
-                commisionLog.setExportMoney(money-highAgent.getBalance());
-                commisionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
-                commisionLog.setCreateTime(date);
+                commissionLog.setAgent(highAgent);
+                commissionLog.setCustomer(customer);
+                commissionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
+                commissionLog.setExportMoney(money-highAgent.getBalance());
+                commissionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
+                commissionLog.setCreateTime(date);
                 agentRepository.save(highAgent);
                 customerRepository.save(customer);
                 balanceLogRepository.save(highbalanceLog);
-                commisionLogRepository.save(commisionLog);
+                commisionLogRepository.save(commissionLog);
             }
             else {
                 apiResult= ApiResult.resultWith(ResultCodeEnum.IMPORT_ERROR);

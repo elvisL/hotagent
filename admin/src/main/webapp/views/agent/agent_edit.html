@@ -250,7 +250,7 @@
                             <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="balance" th:value="${agent}!=null ? ${agent.balance}" title="充值金额" class="form-control">
+                                    <input type="number" name="balance" th:value="${agent}!=null ? ${agent.balance} : 0" title="充值金额" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -260,7 +260,7 @@
                             <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="commission" th:value="${agent}!=null ? ${agent.commission}" title="佣金" class="form-control" readonly>
+                                    <input type="number" name="commission" th:value="${agent}!=null ? ${agent.commission} : 0" title="佣金" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +303,7 @@
                             <label class="col-sm-3 control-label">是否可发展下级代理</label>
 
                             <div class="col-sm-3">
-                                <div class="radio-inline"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? ${agent.expandable}" value="true">是</label></div>
+                                <div class="radio-inline"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? ${agent.expandable} : true" value="true">是</label></div>
                                 <div class="radio"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? !${agent.expandable}" value="false">否</label></div>
                             </div>
                         </div>
