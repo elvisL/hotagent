@@ -314,8 +314,8 @@
                                 <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
                                     <div class="row">
                                         <div class="col-xs-6 col-md-3">
-                                                <img src="" id="previewImg" th:src="${agent}!=null ? @{'/'+${agent.qualifyUri}}">
-                                                <input type="hidden" name="qualifyUri" id="qualifyUri" th:value="${agent.qualifyUri}">
+                                                <img src="" id="previewImg" th:src="${agent}!=null ? (${agent.qualifyUri!=null} ? @{'/'+${agent.qualifyUri}} : '')">
+                                                <input type="hidden" name="qualifyUri" id="qualifyUri" th:value="${agent}!=null ? ${agent.qualifyUri} : ''">
                                         </div>
                                     </div>
                                     <div class="input-append">

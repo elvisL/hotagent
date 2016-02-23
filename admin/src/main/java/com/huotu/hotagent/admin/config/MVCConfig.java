@@ -11,6 +11,7 @@ package com.huotu.hotagent.admin.config;
 
 import com.huotu.hotagent.admin.config.thymeleaf.dialects.HotAgentDialect;
 import com.huotu.hotagent.admin.interceptor.AgentModelResolver;
+import com.huotu.hotagent.admin.interceptor.CustomMethodArgumentResolver;
 import com.huotu.hotagent.common.constant.StringConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -63,6 +64,8 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     private ThymeleafViewResolver thymeleafViewResolver;
     @Autowired
     private AgentModelResolver agentModelResolver;
+    @Autowired
+    private CustomMethodArgumentResolver customMethodArgumentResolver;
 
     @SuppressWarnings("Duplicates")
     public String[] staticResourcePathPatterns() {
@@ -84,7 +87,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(agentModelResolver);
-
+        argumentResolvers.add(customMethodArgumentResolver);
     }
 
     /**

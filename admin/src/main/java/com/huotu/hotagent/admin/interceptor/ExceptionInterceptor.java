@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 /**
- * �쳣ͳһ����
+ * 异常统一处理
  * Created by cwb on 2016/1/25.
  */
 @ControllerAdvice
