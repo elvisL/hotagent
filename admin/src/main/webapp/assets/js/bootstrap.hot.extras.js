@@ -48,7 +48,11 @@ function paging(loadObj, pageIndex, pageSize, totalRecord, btnCount) {
 
             //输出首页和上一页按钮
             this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(1,' + callback + ')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
-            this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + (pageIndex - 1) + ',' + callback + ')"><i class="fa fa-angle-left"></i></a></li>');
+            if(this.currentBtnPage > 0){
+                this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(' +  (pageIndex - 1) + ',' + callback + ')"><i class="fa fa-angle-left"></i></a></li>');
+            }else{
+                this.obj.append('<li ' + (this.pageIndex == 1 ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-left"></i></a></li>');
+            }
 
             var btnPageCount = pageCount % this.btnCount == 0 ? parseInt(pageCount / this.btnCount) : parseInt(pageCount / this.btnCount + 1);//按钮页数
             var btnStart = parseInt(this.btnCount / 2) + 1;//从哪个索引开始变换
@@ -69,7 +73,11 @@ function paging(loadObj, pageIndex, pageSize, totalRecord, btnCount) {
             }
 
             //输出下一页和末页
-            this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + (pageIndex + 1) + ',' + callback + ')"><i class="fa fa-angle-right"></i></a></li>');
+            if(this.currentBtnPage == this.pageIndex-1){
+                this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-right"></i></a></li>');
+            }else{
+                this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + (pageIndex + 1) + ',' + callback + ')"><i class="fa fa-angle-right"></i></a></li>');
+            }
             this.obj.append('<li ' + (pageIndex == pageCount ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + pageCount + ',' + callback + ')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
         }
     };
