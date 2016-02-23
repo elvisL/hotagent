@@ -16,4 +16,5 @@ public interface ICommonEnum {
     Object getValue();
 
     Object getName();
+
 }

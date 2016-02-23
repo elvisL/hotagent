@@ -1,7 +1,7 @@
 package com.huotu.hotagent.service.service.log.impl;
 
 import com.huotu.hotagent.service.entity.log.BalanceLog;
-import com.huotu.hotagent.service.entity.log.CommisionLog;
+import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.repository.log.BalanceLogRepository;
 import com.huotu.hotagent.service.repository.log.CommisionLogRepository;
@@ -57,7 +57,7 @@ public class BalanceLogServiceImpl implements BalanceLogService {
                 lowAgent.setBalance(lowAgent.getBalance()+money);
                 BalanceLog lowbalanceLog = new BalanceLog();
                 BalanceLog highbalanceLog = new BalanceLog();
-                CommisionLog commisionLog = new CommisionLog();
+                CommissionLog commissionLog = new CommissionLog();
                 lowbalanceLog.setAgent(lowAgent);
                 lowbalanceLog.setCreateTime(date);
                 lowbalanceLog.setImportMoney(money);
@@ -67,15 +67,15 @@ public class BalanceLogServiceImpl implements BalanceLogService {
                 highbalanceLog.setCreateTime(date);
                 highbalanceLog.setMoney(0);
                 highbalanceLog.setExportMoney(highbalanceLog.getMoney());
-                commisionLog.setAgent(highAgent);
-                commisionLog.setSupport(lowAgent);
-                commisionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
-                commisionLog.setExportMoney(money-highAgent.getBalance());
-                commisionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
-                commisionLog.setCreateTime(date);
+                commissionLog.setAgent(highAgent);
+                commissionLog.setSupport(lowAgent);
+                commissionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
+                commissionLog.setExportMoney(money-highAgent.getBalance());
+                commissionLog.setMoney(highAgent.getCommission()+highAgent.getBalance()-money);
+                commissionLog.setCreateTime(date);
                 balanceLogRepository.save(lowbalanceLog);
                 balanceLogRepository.save(highbalanceLog);
-                commisionLogRepository.save(commisionLog);
+                commisionLogRepository.save(commissionLog);
             }
             else {
                 return false;

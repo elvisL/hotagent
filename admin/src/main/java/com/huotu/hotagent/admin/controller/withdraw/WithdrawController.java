@@ -1,25 +1,16 @@
 package com.huotu.hotagent.admin.controller.withdraw;
 
-import com.huotu.hotagent.admin.common.AuditStatusEditor;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.common.AuditStatus;
 import com.huotu.hotagent.service.entity.record.WithdrawRecord;
-import com.huotu.hotagent.service.model.WithdrawRequestModel;
 import com.huotu.hotagent.service.service.record.WithdrawRecordService;
-import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * 提现管理
@@ -41,6 +32,7 @@ public class WithdrawController {
         ModelAndView mv = new ModelAndView();
         Page<WithdrawRecord> withdrawRecords = withdrawRecordService.searchRecords(pageNo);
         mv.addObject("records",withdrawRecords.getContent());
+        mv.addObject("totalRecords",withdrawRecords.getTotalElements());
         mv.addObject("totalPages",withdrawRecords.getTotalPages());
         mv.addObject("currentPage",pageNo);
         mv.setViewName("withdraw/withdraw_list");
@@ -71,6 +63,7 @@ public class WithdrawController {
     public ApiResult changeAuditStatus(@PathVariable Long id, AuditStatus status) {
         WithdrawRecord record = withdrawRecordService.getSpecifiedRecord(id);
         record.setAuditStatus(status);
+        withdrawRecordService.save(record);
         return  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 

@@ -26,7 +26,7 @@ import java.util.Date;
 @Table(name = "age_commissionLog")
 @Getter
 @Setter
-public class CommisionLog {
+public class CommissionLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

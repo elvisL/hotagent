@@ -346,109 +346,11 @@
         <div class="contentpanel">
 
             <div class="panel panel-default">
-                <!--<div class="panel-heading">-->
-                    <!--<div class="panel-btns">-->
-                        <!--<a href="" class="panel-close">&times;</a>-->
-                        <!--<a href="" class="minimize">&minus;</a>-->
-                    <!--</div>&lt;!&ndash; panel-btns &ndash;&gt;-->
-                    <!--<h3 class="panel-title">搜索</h3>-->
-
-                    <!--<form id="searchForm" action="agent_list.html" th:action="@{/withdraws}" method="get" th:object="${seacher}">-->
-                        <!--<input type="hidden" name="pageIndex" value="1" th:value="${pageIndex}"/>-->
-
-                        <!--<p>-->
-
-                        <!--<div class="row">-->
-                            <!--<div class="col-lg-4">-->
-                                <!--<div class="input-group">-->
-                                <!--<span class="input-group-addon">-->
-                                    <!--代理商姓名-->
-                                <!--</span>-->
-                                    <!--<input type="text" name="agentName" th:value="*{agentName}" class="form-control" aria-label="...">-->
-                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<div class="input-group">-->
-                                <!--<span class="input-group-addon">-->
-                                    <!--创建时间-->
-                                <!--</span>-->
-                                    <!--<input type="text" class="form-control" placeholder="起始时间" name="beginTime" th:value="*{beginTime}">-->
-                                    <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
-                                    <!--<input type="text" class="form-control" placeholder="结束时间" name="endTime" th:value="*{endTime}">-->
-                                    <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
-                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-
-                        <!--</p>-->
-                        <!--<p>-->
-
-                        <!--<div class="row">-->
-                            <!--<div class="col-lg-3">-->
-                                <!--<div class="input-group">-->
-                               <!--<span class="input-group-addon">-->
-                                    <!--代理商类型-->
-                                <!--</span>-->
-
-                                    <!--<div class="input-group-btn">-->
-                                        <!--<button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"-->
-                                                <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="*{agentType}==-1 ? '请选择':(*{agentType}==0 ? '普通代理':'独家代理')">请选择 <span class="caret"></span></button>-->
-                                        <!--<ul id="typeSelect" class="dropdown-menu dropdown-menu-right">-->
-                                            <!--<li><a href="#" type-value="-1">请选择</a></li>-->
-                                            <!--<li><a href="#" type-value="0">普通代理</a></li>-->
-                                            <!--<li><a href="#" type-value="1">独家代理</a></li>-->
-                                        <!--</ul>-->
-                                        <!--<input type="hidden" name="agentType" th:value="*{agentType}"/>-->
-                                    <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
-                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
-                            <!--</div>-->
-                            <!--<div class="col-lg-4">-->
-                                <!--<div class="input-group">-->
-                               <!--<span class="input-group-addon">-->
-                                    <!--代理商等级-->
-                                <!--</span>-->
-
-                                    <!--<div class="input-group-btn">-->
-                                        <!--<button type="button" class="btn btn-default dropdown-toggle" id="levelSelectBtn" style="width: 163px;"-->
-                                                <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                                            <!--&lt;!&ndash;/*&ndash;&gt;-->
-                                            <!--请选择-->
-                                            <!--&lt;!&ndash;*/&ndash;&gt;-->
-                                            <!--&lt;!&ndash;/*/-->
-                                            <!--<span th:text="*{agentLevel == -1 ? '请选择' : (agentLevel == 0 ? '一级代理' : '二级代理')}"></span>-->
-                                            <!--/*/&ndash;&gt;-->
-                                            <!--<span class="caret"></span>-->
-                                        <!--</button>-->
-                                        <!--<ul id="levelSelect" class="dropdown-menu dropdown-menu-right">-->
-                                            <!--<li><a href="#" level="-1">请选择</a></li>-->
-
-                                            <!--<li th:each="agentLevel:${agentLevels}">-->
-                                                <!--<a href="#" th:attr="level=${agentLevel.level}" level="0"  th:text="${agentLevel.levelName}">一级代理商</a>-->
-                                            <!--</li>-->
-                                        <!--</ul>-->
-
-                                        <!--<input type="hidden" name="agentLevel" th:value="*{agentLevel}"/>-->
-                                    <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
-                                <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
-                            <!--</div>-->
-                            <!--<div class="col-lg-2">-->
-                                <!--<a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>-->
-                            <!--</div>-->
-
-                            <!--<div class="col-lg-2">-->
-                                <!--<a class="btn btn-white resetSearch" href="agent_list.html" th:href="@{/agents}">显示全部</a>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--</p>-->
-                    <!--</form>-->
-                <!--</div>-->
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped mb30">
                             <thead>
                             <tr>
-                                <th></th>
                                 <th>代理商名称</th>
                                 <th>提现金额</th>
                                 <th>状态</th>
@@ -457,7 +359,7 @@
                             </thead>
                             <tbody th:remove="all-but-first">
 
-                            <tr th:each="withdraw:${withdraws}">
+                            <tr th:each="withdraw:${records}">
                                 <td th:text="${withdraw.agent.name}">火图科技</td>
                                 <td th:text="${withdraw.money}">100</td>
                                 <td th:text="${withdraw.auditStatus.name}">申请中</td>
@@ -481,7 +383,7 @@
                             </tbody>
                         </table>
                     </div><!-- table-responsive -->
-                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecord}">100</span>条</p>
+                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
                     <ul style="float: right;" class="pagination pagination-split">
                         <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                         <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
@@ -834,15 +736,13 @@
 
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
-
-<script type="application/javascript" src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
+<script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
 
 <script type="application/javascript" th:inline="javascript">
-    var ajaxUrl = /*[[@{/agent/api/}]]*/ "";
-    var pageIndex = /*[[${currentPage}]]*/ 1;
-    var pageSize = /*[[${pageSize}]]*/ 20;
-    var totalRecord = $("#totalRecordSpan").html();
+    var pageNo = /*[[${currentPage}]]*/ 1;
+    var totalPages = /*[[${totalPages}]]*/ 2;
+    var totalRecords = /*[[${totalRecords}]]*/ 10;
 </script>
 <script>
     function changeAuditStatus(obj,status) {
@@ -853,7 +753,12 @@
             data:"auditStatus="+status.toString(),
             dataType:"json",
             success:function(data) {
-                alert(data.msg);
+                if(data.code == 2000) {
+                    location.reload();
+                }else {
+                    alert(data.msg);
+                }
+
             },
             error:function(e) {
                 console.log(e.toString());
@@ -874,10 +779,9 @@
 </script>
 <script type="application/javascript">
     jQuery(document).ready(function () {
-        var paginate = new paging($(".pagination"), pageIndex, pageSize, totalRecord, 8);
+        var paginate = new paging($(".pagination"), pageNo, totalPages, totalRecords, 8);
         paginate.init(function (p) {
-            $('input[name=pageIndex]').val(p);
-            $('#searchForm').submit();
+            location.href = "/withdraws?pageNo="+p;
         });
 
         // Date Picker
@@ -913,6 +817,5 @@
         });
     });
 </script>
-
 </body>
 </html>

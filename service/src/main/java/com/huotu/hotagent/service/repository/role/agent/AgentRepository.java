@@ -39,4 +39,6 @@ public interface AgentRepository extends JpaRepository<Agent, Long>, JpaSpecific
     long countByCreateTimeAfter(Date date);
 
     long countByType(AgentType type);
+
+    Agent findByCity(String city);
 }

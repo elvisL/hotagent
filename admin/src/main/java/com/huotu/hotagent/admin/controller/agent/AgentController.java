@@ -61,17 +61,18 @@ public class AgentController {
     @RequestMapping(value = "/agents", method = RequestMethod.GET)
     @PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')")
     public String AgentList(
-            @RequestParam(required = false, defaultValue = "1") int pageIndex,
+            @RequestParam(required = false, defaultValue = "1") int pageNo,
             AgentSearch agentSearch,
             Model model
     ) {
-        model.addAttribute("pageIndex", pageIndex);
-        model.addAttribute("pageSize", SysConstant.DEFAULT_PAGE_SIZE);
         model.addAttribute("agentSearch", agentSearch);
 
-        Page<Agent> agents = agentService.findAll(pageIndex, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
-        model.addAttribute("totalRecord", agents.getTotalElements());
+        Page<Agent> agents = agentService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
+        model.addAttribute("pageSize", agents.getSize());
         model.addAttribute("agents", agents.getContent());
+        model.addAttribute("totalRecords", agents.getTotalElements());
+        model.addAttribute("totalPages",agents.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
         return "agent/agent_list";
@@ -96,7 +97,7 @@ public class AgentController {
             Agent agent = agentService.findById(id);
             model.addAttribute("agent",agent);
         }
-        List<AgentLevel> agentLevels = agentLevelService.findAll();
+        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels",agentLevels);
         model.addAttribute("agentTypes",AgentType.values());
         return "agent/agent_edit";
@@ -112,6 +113,24 @@ public class AgentController {
     public String AgentEdit(Agent agent) throws Exception{
         loginService.newLogin(agent,agent.getPassword());
         return "redirect:/agents";
+    }
+
+    /**
+     * 检测指定城市是否已经有独家代理
+     * @param city
+     * @return
+     */
+    @RequestMapping("/checkCity")
+    @ResponseBody
+    public ApiResult checkCity(String city) {
+        Agent agent = agentService.findByCity(city);
+        if(agent==null) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        if(agent.getType() != AgentType.SOLE) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
     }
 
     @RequestMapping("/uploadImg")

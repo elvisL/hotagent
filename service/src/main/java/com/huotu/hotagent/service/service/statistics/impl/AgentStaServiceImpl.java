@@ -1,6 +1,6 @@
 package com.huotu.hotagent.service.service.statistics.impl;
 
-import com.huotu.hotagent.service.entity.log.CommisionLog;
+import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.repository.log.CommisionLogRepository;
 import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
@@ -36,11 +36,11 @@ public class AgentStaServiceImpl implements AgentStaService {
 
     @Override
     public double countCommission(Long id) {
-        List<CommisionLog> commisionLogList = commisionLogRepository.findByAgent_id(Long.valueOf(id));
+        List<CommissionLog> commissionLogList = commisionLogRepository.findByAgent_id(Long.valueOf(id));
         double count=0;
-        if (commisionLogList.size()!=0) {
-            for (CommisionLog commisionLog : commisionLogList) {
-                count = count + commisionLog.getImportMoney();
+        if (commissionLogList.size()!=0) {
+            for (CommissionLog commissionLog : commissionLogList) {
+                count = count + commissionLog.getImportMoney();
             }
         }
         return count;

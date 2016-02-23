@@ -54,7 +54,7 @@ public class AgentModelResolver implements HandlerMethodArgumentResolver {
         }else {
             agent = agentService.findById(Long.parseLong(agentId));
             if(agent == null) {
-                throw new Exception("´úÀíÉÌ±àºÅ´íÎó!");
+                throw new Exception("ä»£ç†å•†ç¼–å·é”™è¯¯!");
             }
         }
         Map<String,String[]> params = request.getParameterMap();
@@ -90,7 +90,6 @@ public class AgentModelResolver implements HandlerMethodArgumentResolver {
             }catch (NoSuchFieldException e) {
                 continue;
             }
-
         }
         return agent;
     }

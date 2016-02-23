@@ -47,8 +47,4 @@ public class AgentLevelServiceImpl implements AgentLevelService {
         return agentLevelRepository.count() > 0;
     }
 
-    @Override
-    public List<AgentLevel> findAll() {
-        return agentLevelRepository.findAll();
-    }
 }

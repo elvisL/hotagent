@@ -215,16 +215,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">代理商类型</label>
-
-                            <div class="col-sm-3">
-                                <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
-                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}" th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理</option>
-                                    <option>普通代理</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">代理区域</label>
 
                             <div id="area">
@@ -243,6 +233,16 @@
 
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理商类型</label>
+
+                            <div class="col-sm-3">
+                                <select name="type" title="代理商类型" class="form-control input-sm mb10" th:remove="all-but-first">
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}" th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理</option>
+                                    <option>普通代理</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">充值金额</label>
@@ -250,7 +250,7 @@
                             <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="balance" th:value="${agent}!=null ? ${agent.balance}" title="充值金额" class="form-control">
+                                    <input type="number" name="balance" th:value="${agent}!=null ? ${agent.balance} : 0" title="充值金额" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -260,7 +260,7 @@
                             <div class="col-sm-2">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="commission" th:value="${agent}!=null ? ${agent.commission}" title="佣金" class="form-control" readonly>
+                                    <input type="number" name="commission" th:value="${agent}!=null ? ${agent.commission} : 0" title="佣金" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +303,7 @@
                             <label class="col-sm-3 control-label">是否可发展下级代理</label>
 
                             <div class="col-sm-3">
-                                <div class="radio-inline"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? ${agent.expandable}" value="true">是</label></div>
+                                <div class="radio-inline"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? ${agent.expandable} : true" value="true">是</label></div>
                                 <div class="radio"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? !${agent.expandable}" value="false">否</label></div>
                             </div>
                         </div>
@@ -686,6 +686,28 @@
 <script th:inline="javascript">
     $(function () {
         editHandler.pageInit();
+        $("input[name=type]").blur(function() {
+            var city = $("input[name=city]").val();
+            $.ajax({
+                url:"/checkCity",
+                data:"city="+city,
+                dataType:"json",
+                success:function(data) {
+                    if(data.code !=2000) {
+                        layer.alert('墨绿风格，点击确认看深蓝', {
+                            skin: 'layui-layer-molv' //样式类名
+                            ,closeBtn: 0
+                        }, function(){
+                            layer.alert(data.msg, {
+                                skin: 'layui-layer-lan'
+                                ,closeBtn: 0
+                                ,shift: 4 //动画类型
+                            });
+                        });
+                    }
+                }
+            })
+        })
     });
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";

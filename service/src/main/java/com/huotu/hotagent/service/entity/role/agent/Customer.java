@@ -49,7 +49,7 @@ public class Customer {
     /**
      * 所属代理商
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agentId")
     private Agent agent;
 

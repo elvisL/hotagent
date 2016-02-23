@@ -27,7 +27,7 @@ import java.util.Set;
  * Created by cwb on 2016/1/21.
  */
 @Entity
-@Table(name = "age_agent")
+@Table(name = "age_agent",uniqueConstraints = @UniqueConstraint(columnNames ={"city"}))
 @Getter
 @Setter
 public class Agent extends Login {
@@ -127,7 +127,7 @@ public class Agent extends Login {
     /**
      * 产品价格序列化
      */
-    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<Price> prices;
 
     /**
