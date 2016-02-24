@@ -151,7 +151,7 @@ public class AgentController {
         agentSearch.setAgentLevel(agent.getLevel().getLevel()+1);
         agentSearch.setParentAgent(Integer.parseInt(agent.getId().toString()));
         Page<Agent> agents = agentService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
-        model.addAttribute("totalRecord", agents.getTotalElements());
+        model.addAttribute("pageSize", agents.getSize());
         model.addAttribute("agents", agents.getContent());
         model.addAttribute("totalRecords", agents.getTotalElements());
         model.addAttribute("totalPages",agents.getTotalPages());

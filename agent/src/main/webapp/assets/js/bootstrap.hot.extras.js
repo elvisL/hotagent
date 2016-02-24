@@ -106,7 +106,7 @@ function paging(loadObj, pageNo, totalPages, totalRecords, btnCount) {
             }
 
 
-            if(this.pageIndex > 1){
+            if(this.pageNo > 1){
                 //输出首页和上一页按钮
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(1,' + callback + ')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(' +  (pageNo - 1) + ',' + callback + ')"><i class="fa fa-angle-left"></i></a></li>');
