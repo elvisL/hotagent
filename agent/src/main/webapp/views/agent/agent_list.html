@@ -183,6 +183,7 @@
                                 <td th:text="${agent.getStatus()}">活动</td>
                                 <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a>
                                     <a onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a>
+                                    <a onclick="Import(this)" th:attr="id=${agent.id}">充值</a>
                                     <a th:if="${agent.accountNonLocked}" th:attr="id=${agent.id}" th:value="1" onclick="lockAgent(this)"  th:text="冻结" ></a>
                                     <a th:if="${agent.accountNonLocked}==false" th:attr="id=${agent.id}" th:value="0" onclick="lockAgent(this)"  th:text="解冻"></a>
                                 </td>
@@ -289,6 +290,20 @@
             content: '/lowAgentDetail/'+id
         });
     }
+
+    //充值
+    function Import(obj) {
+        var id = $(obj).attr("id");
+        layer.open({
+            type: 2,
+            title: '代理商充值',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['998px', '666px'],
+            content: '/agentImport/'+id
+        });
+    }
+
 
     //冻结，解冻
     function lockAgent(obj) {

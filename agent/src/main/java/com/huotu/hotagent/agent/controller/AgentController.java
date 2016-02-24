@@ -104,6 +104,23 @@ public class AgentController {
     }
 
     /**
+     *代理商充值
+     */
+    @RequestMapping(value = "/agentImport/{id}",method = RequestMethod.GET)
+    public ModelAndView agentImport(@AuthenticationPrincipal Agent agent,@PathVariable Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("/views/agent/agent_import");
+        modelAndView.addObject("id",id);
+        Double balance = agentService.findById(agent.getId()).getBalance();
+        Double commission = agentService.findById(agent.getId()).getCommission();
+        modelAndView.addObject("balance",balance);
+        modelAndView.addObject("commission",commission);
+        return  modelAndView;
+
+    }
+
+
+    /**
      *代理商提现
      */
     @RequestMapping(value = "/withdraw",method = RequestMethod.GET)
@@ -200,6 +217,7 @@ public class AgentController {
         }
         return apiResult;
     }
+
 
 
     /**
