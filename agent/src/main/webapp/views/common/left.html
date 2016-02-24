@@ -52,7 +52,7 @@
             <!--<li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')" agent:active="product"><a href="index.html"><i class="fa fa-th-list"></i> <span>产品管理</span></a></li>-->
             <!--<li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>-->
             <li agent:active="personal"><a href="index.html"> <i class="fa fa-th-list"></i> <span>个人中心</span></a></li>
-            <li agent:active="withdraw"><a href="index.html" th:href="@{/withdraws}"><i class="fa fa-th-list"></i> <span>提现管理</span></a></li>
+            <li agent:active="withdraw"><a href="index.html" th:href="@{/withdraw}"><i class="fa fa-th-list"></i> <span>提现管理</span></a></li>
             <li  agent:active="statistics" agent:activeparent="'agentList,addAgent'" class="nav-parent nav-active active">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">

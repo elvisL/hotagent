@@ -25,6 +25,7 @@ public enum ResultCodeEnum {
     AUTHORITY_NULL(7000, "请设置权限"),
     SAVE_DATA_ERROR(4000, "数据保存出错"),
     IMPORT_ERROR(4001, "余额不足"),
+    WITHDRAW_ERROR(4002, "提现次数已达上限"),
     DATA_NULL(5000, "没有传输数据"),
     NOT_IMG(6001,"不是图片"),
     CITY_NOT_AVALIABLE(6002,"该地区已经有独家代理了");

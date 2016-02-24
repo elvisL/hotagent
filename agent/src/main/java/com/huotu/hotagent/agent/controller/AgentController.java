@@ -22,6 +22,7 @@ import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.repository.product.ProductRepository;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.product.PriceService;
+import com.huotu.hotagent.service.service.record.WithdrawRecordService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
@@ -70,6 +71,9 @@ public class AgentController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private WithdrawRecordService withdrawRecordService;
+
+    @Autowired
     private StaticResourceService staticResourceService;
 
     @Autowired
@@ -98,6 +102,18 @@ public class AgentController {
         model.addAttribute("agent", agent);
         return "/views/agent/agent_detail";
     }
+
+    /**
+     *代理商提现
+     */
+    @RequestMapping(value = "/withdraw",method = RequestMethod.GET)
+    public ModelAndView withdraw(@AuthenticationPrincipal Agent agent) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("/views/withdraw/withdraw");
+        modelAndView.addObject("commission",agent.getCommission());
+        return  modelAndView;
+    }
+
 
 
 
@@ -130,23 +146,6 @@ public class AgentController {
 
 
 
-    /**
-     * 检测指定城市是否已经有独家代理
-     * @param city
-     * @return
-     */
-    @RequestMapping("/checkCity")
-    @ResponseBody
-    public ApiResult checkCity(String city) {
-        Agent agent = agentService.findByCity(city);
-        if(agent==null) {
-            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-        }
-        if(agent.getType() != AgentType.SOLE) {
-            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-        }
-        return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
-    }
 
 
     /**
@@ -353,7 +352,47 @@ public class AgentController {
 
     }
 
+    /**
+     *代理商提现申请
+     */
+    @RequestMapping(value = "/applyWithdraw",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult applyWithdraw(@AuthenticationPrincipal Agent agent,double money,String message) throws Exception{
+        ApiResult apiResult = null;
+        try {
+            Boolean bl=withdrawRecordService.withdraw(agent, money ,message);
+            if(bl==true){
+                apiResult =  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+            }
+            else {
+                apiResult = ApiResult.resultWith(ResultCodeEnum.WITHDRAW_ERROR);
+            }
 
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
+        }
+        return apiResult;
+
+    }
+
+    /**
+     * 检测指定城市是否已经有独家代理
+     * @param city
+     * @return
+     */
+    @RequestMapping("/checkCity")
+    @ResponseBody
+    public ApiResult checkCity(String city) {
+        Agent agent = agentService.findByCity(city);
+        if(agent==null) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        if(agent.getType() != AgentType.SOLE) {
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
+    }
 
 
 

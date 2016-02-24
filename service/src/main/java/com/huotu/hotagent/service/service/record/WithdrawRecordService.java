@@ -1,6 +1,7 @@
 package com.huotu.hotagent.service.service.record;
 
 import com.huotu.hotagent.service.entity.record.WithdrawRecord;
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import org.springframework.data.domain.Page;
 
 /**
@@ -13,4 +14,6 @@ public interface WithdrawRecordService {
     WithdrawRecord getSpecifiedRecord(Long id);
 
     void save(WithdrawRecord record);
+
+    Boolean withdraw(Agent agent,double money,String message);
 }
