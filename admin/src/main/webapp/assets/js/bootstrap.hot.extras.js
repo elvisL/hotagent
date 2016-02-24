@@ -106,7 +106,7 @@ function paging(loadObj, pageNo, totalPages, totalRecords, btnCount) {
             }
 
 
-            if(this.pageIndex > 1){
+            if(this.pageNo > 1){
                 //输出首页和上一页按钮
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(1,' + callback + ')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(' +  (pageNo - 1) + ',' + callback + ')"><i class="fa fa-angle-left"></i></a></li>');
@@ -130,7 +130,7 @@ function paging(loadObj, pageNo, totalPages, totalRecords, btnCount) {
 
             //输出中间八个按钮
             for (var i = this.currentBtnPage + 1; i <= this.btnCount + this.currentBtnPage; i++) {
-                this.obj.append('<li ' + (this.pageIndex == i ? 'class="active"' : '') + '><a href="javascript:goTo(' + i + ',' + callback + ')">' + i + '</a></li>');
+                this.obj.append('<li ' + (this.pageNo == i ? 'class="active"' : '') + '><a href="javascript:goTo(' + i + ',' + callback + ')">' + i + '</a></li>');
             }
 
             //输出下一页和末页

@@ -16,7 +16,7 @@ import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 import com.huotu.hotagent.service.repository.log.BalanceLogRepository;
-import com.huotu.hotagent.service.repository.log.CommisionLogRepository;
+import com.huotu.hotagent.service.repository.log.CommissionLogRepository;
 import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
 import com.huotu.hotagent.service.repository.role.agent.CustomerRepository;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     BalanceLogRepository balanceLogRepository;
 
     @Autowired
-    CommisionLogRepository commisionLogRepository;
+    CommissionLogRepository commissionLogRepository;
 
     @Autowired
     AgentRepository agentRepository;
@@ -96,7 +96,7 @@ public class CustomerServiceImpl implements CustomerService {
                 agentRepository.save(highAgent);
                 customerRepository.save(customer);
                 balanceLogRepository.save(highbalanceLog);
-                commisionLogRepository.save(commissionLog);
+                commissionLogRepository.save(commissionLog);
             }
             else {
                 apiResult= ApiResult.resultWith(ResultCodeEnum.IMPORT_ERROR);

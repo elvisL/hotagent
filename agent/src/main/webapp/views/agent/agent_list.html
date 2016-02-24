@@ -100,7 +100,7 @@
                         <p>
 
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <div class="input-group">
                                <span class="input-group-addon">
                                     代理商类型
@@ -139,13 +139,13 @@
                                     <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
                                 <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
                             <!--</div>-->
-                            <div class="col-lg-2">
+                            <!--<div class="col-lg-1">-->
                                 <a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>
-                            </div>
+                            <!--</div>-->
 
-                            <div class="col-lg-2">
+                            <!--<div class="col-lg-1">-->
                                 <a class="btn btn-white resetSearch" href="agent_list.html" th:href="@{/agentList}">显示全部</a>
-                            </div>
+                            <!--</div>-->
                         </div>
                         </p>
                     </form>
@@ -170,8 +170,8 @@
                             </thead>
                             <tbody th:remove="all-but-first">
 
-                            <tr th:each="agent:${agents}">
-                                <td>1</td>
+                            <tr th:each="agent,agentStat:${agents}">
+                                <td th:text="${agentStat.index+1}"></td>
                                 <td th:text="${agent.name}">火图科技</td>
                                 <td th:text="${agent.type.name}">独家代理</td>
                                 <td th:text="${agent.level.levelName}">一级代理商</td>

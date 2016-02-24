@@ -2,7 +2,7 @@ package com.huotu.hotagent.service.service.statistics.impl;
 
 import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
-import com.huotu.hotagent.service.repository.log.CommisionLogRepository;
+import com.huotu.hotagent.service.repository.log.CommissionLogRepository;
 import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
 import com.huotu.hotagent.service.service.statistics.AgentStaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class AgentStaServiceImpl implements AgentStaService {
     AgentRepository agentRepository;
 
     @Autowired
-    CommisionLogRepository commisionLogRepository;
+    CommissionLogRepository commissionLogRepository;
 
 
 
@@ -36,7 +36,7 @@ public class AgentStaServiceImpl implements AgentStaService {
 
     @Override
     public double countCommission(Long id) {
-        List<CommissionLog> commissionLogList = commisionLogRepository.findByAgent_id(Long.valueOf(id));
+        List<CommissionLog> commissionLogList = commissionLogRepository.findByAgent_id(Long.valueOf(id));
         double count=0;
         if (commissionLogList.size()!=0) {
             for (CommissionLog commissionLog : commissionLogList) {
