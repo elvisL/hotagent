@@ -59,7 +59,7 @@
                 </ul>
             </li>
             <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_WITHDRAW')" agent:active="withdraw"><a href="index.html" th:href="@{/withdraws}"><i class="fa fa-th-list"></i> <span>提现管理</span></a></li>
-            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')" agent:active="product"><a href="index.html"><i class="fa fa-th-list"></i> <span>产品管理</span></a></li>
+            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')" agent:active="product"><a href="index.html" th:href="@{/showProducts}"><i class="fa fa-th-list"></i> <span>产品管理</span></a></li>
             <li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
             <li sec:authorize="hasAnyAuthority('MANAGER_ROOT')" agent:activeparent="'operatorList,addOperator'" class="nav-parent">
                 <a href=""><i class="fa fa-edit"></i> <span>操作员管理</span></a>

@@ -135,6 +135,7 @@ public class AgentController {
 
     @RequestMapping("/uploadImg")
     @ResponseBody
+    @SuppressWarnings("Duplicates")
     public ApiResult uploadImg(MultipartFile qualify,String qualifyUri) throws Exception {
         //delete img
         if(qualify.getSize()==0) {
