@@ -9,9 +9,6 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<!--/*@thymesVar id="agents" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.Agent>"*/-->
-<!--/*@thymesVar id="agentSearch" type="com.huotu.hotagent.service.model.AgentSearch"*/-->
-<!--/*@thymesVar id="agentLevels" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.AgentLevel>"*/-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -22,6 +19,7 @@
     <title>代理商总后台</title>
 
     <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
+    <link href="http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -40,7 +38,7 @@
 
 <section>
 
-    <div class="leftpanel" th:replace="common/left :: left (activeMenu='withdraw')">
+    <div class="leftpanel" th:replace="common/left :: left (activeMenu='product')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
@@ -340,64 +338,113 @@
         </div><!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-search"></i> 提现申请列表</h2>
+            <h2><i class="fa fa-search"></i> 产品列表</h2>
         </div>
 
         <div class="contentpanel">
 
             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">搜索</h3>
+
+                    <form id="searchForm" action="withdraw_list.html" th:action="@{/showProducts}" method="get">
+                        <!--<input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>-->
+
+                        <!--<p>
+
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <span class="input-group-addon">代理商姓名</span>
+                                    <input type="text" name="agentName" th:value="*{agentName}" class="form-control"
+                                           aria-label="...">
+                                </div>
+                            </div>
+                            &lt;!&ndash;<div class="col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">二级代理商姓名</span>
+                                    <input type="text" name="supportName" th:value="*{supportName}" class="form-control"
+                                           aria-label="...">
+                                </div>
+                            </div>&ndash;&gt;
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <span class="input-group-addon">客户姓名</span>
+                                    <input type="text" name="customerName" th:value="*{customerName}"
+                                           class="form-control"
+                                           aria-label="...">
+                                </div>
+                            </div>
+                            &lt;!&ndash; /input-group &ndash;&gt;
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">创建时间</span>
+                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime"
+                                           th:value="*{beginTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime"
+                                           th:value="*{endTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                &lt;!&ndash; /input-group &ndash;&gt;
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn btn-white submitSearch"
+                                   href="javascript:$('#searchForm').submit()">查询</a>
+                                <a class="btn btn-white resetSearch" href="balanceLog_list.html"
+                                   th:href="@{/balanceLogs}">显示全部</a>
+                            </div>
+                        </div>
+                        </p>-->
+                    </form>
+                </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped mb30">
                             <thead>
                             <tr>
-                                <th>代理商名称</th>
-                                <th>提现金额</th>
-                                <th>状态</th>
+                                <th></th>
+                                <th>产品名称</th>
+                                <th>产品类型</th>
+                                <th>单价</th>
+                                <th>产品描述</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
-
-                            <tr th:each="withdraw:${records}">
-                                <td th:text="${withdraw.agent.name}">火图科技</td>
-                                <td th:text="${withdraw.money}">100</td>
-                                <td th:text="${withdraw.auditStatus.name}">申请中</td>
-                                <td>
-                                    <a onclick="showDetail(this)" th:attr="id=${withdraw.id}">查看</a>
-                                    <a onclick="changeAuditStatus(this,1)" th:attr="id=${withdraw.id}">通过</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>火图科技</td>
-                                <td>100</td>
-                                <td>申请中</td>
-                                <td>查看</td>
+                            <!--/*-->
+                            <!--@thymesVar id="products" type="java.util.List<com.huotu.hotagent.service.entity.product.Product>"-->
+                            <!--*/-->
+                            <tr th:each="product,productStat:${products}">
+                                <td th:text="${productStat.index+1}">1</td>
+                                <td th:text="${product.name}">产品A</td>
+                                <td th:text="${product.productType.name}">产品类型</td>
+                                <td th:text="${product.basePrice}">金额</td>
+                                <td th:text="${product.productDesc}">产品A描述信息</td>
+                                <td><a onclick="editProduct(this)" data-toggle="modal"  data-target="editProduct" th:attr="id=${product.id}">修改</a></td>
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td>火图科技</td>
-                                <td>独家代理</td>
-                                <td>一级代理商</td>
+                                <td>产品A</td>
+                                <td>类型1</td>
+                                <td>100</td>
+                                <td>产品A-类型1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>产品B</td>
+                                <td>类型2</td>
+                                <td>20000</td>
+                                <td>产品B-类型2</td>
                             </tr>
                             </tbody>
                         </table>
                     </div><!-- table-responsive -->
-                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
-                    <ul style="float: right;" class="pagination pagination-split">
-                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                        <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                    </ul>
+                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${products.size()}">100</span>条</p>
                 </div><!-- panel-body -->
             </div><!-- panel -->
 
@@ -721,6 +768,52 @@
 
 </section>
 
+<div id="editProduct" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h4 class="modal-title">修改产品</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm"  th:method="post" class="form-horizontal form-bordered" >
+                    <input type="hidden" name="id" id="edit_id">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">产品名称</label>
+
+                        <div class="col-sm-3">
+                            <input type="text" name="name" id="edit_name" title="代理商名称" placeholder="代理商名称" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">单价</label>
+
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">¥</span>
+                                <input type="number" style="width: 165px;" name="basePrice" id="edit_basePrice" title="单价" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">产品描述</label>
+
+                        <div class="col-sm-7">
+                            <textarea class="form-control" name="productDesc" id="edit_productDesc" rows="3" style="width: 80%;"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="saveEdit" onclick="submitEdit()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--基本js-->
 <script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
 <script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
@@ -731,59 +824,138 @@
 <script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
 <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
-<script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
+<script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
 
+<!--一些控件-->
+<!--<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>-->
 
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+
 <script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
+<script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
 
 <script type="application/javascript" th:inline="javascript">
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var productUrl = /*[[@{/}]]*/"/";
 </script>
-<script>
-    function changeAuditStatus(obj,status) {
+<script type="text/javascript">
+    $().ready(function(){
+        pageInit();
+        $("#editProduct").on('hide.bs.modal',function(){
+            var validator = $( "#editProduct" ).validate();
+            validator.resetForm();
+            $("#editProduct div[class*='has-error']").removeClass('has-error');
+            $("#editProduct div[class*='has-success']").removeClass('has-success');
+        })
+    })
+    function editProduct(obj){
         var id = $(obj).attr("id");
         $.ajax({
-            url:"/withdraws/"+id.toString()+"/edit",
-            type:"POST",
-            data:"auditStatus="+status.toString(),
-            dataType:"json",
-            success:function(data) {
-                if(data.code == 2000) {
-                    location.reload();
-                }else {
-                    alert(data.msg);
+            url: productUrl + "showProduct/" + id,
+            dataType: "json",
+            success: function (result) {
+                if(result.code == 2000){
+//                    alert(result.data.id);
+                    $("#edit_id").val(result.data.id);
+                    $("#edit_name").val(result.data.name);
+                    $("#edit_basePrice").val(result.data.basePrice);
+                    $("#edit_productDesc").val(result.data.productDesc);
+                    $("#editProduct").modal("show");
                 }
+            }
+        });
+    }
 
+    function submitEdit(){
+        var dataPara = getFormJson($("#editProductForm"));
+        layer.load();
+        $.ajax({
+            type: "POST",
+            url:productUrl + "editPrudcut",
+            data: dataPara,
+            dataType: "json",
+            success:function(result){
+                if(result.code == 2000){
+                    layer.msg('保存成功');
+                    $("#searchForm").submit();
+                    $("#editProduct").modal("hide");
+                }else{
+                    layer.msg('保存失败');
+                }
+            }
+        });
+    }
+
+    function pageInit() {
+        //表单验证初始化
+        $("#editProductForm").validate({
+            ignoreTitle: true,
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
             },
-            error:function(e) {
-                console.log(e.toString());
+            success: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+                $(element).remove();
+            },
+            onfocusout: function (element) {
+                $(element).valid();
+            },
+            rules:{
+                name:{
+                    required:true,
+                    maxlength:250
+                },
+                basePrice:{
+                    required:true,
+                    min:0,
+                    digits:true
+                },
+                productDesc:{
+                    required:true,
+                    maxlength:250
+                }
+            },
+            messages:{
+                name:{
+                    required:'请输入产品名称',
+                    maxlength:'长度不能超过250'
+                },
+                basePrice:{
+                    required:'请输入产品价格',
+                    min:'产品价格必须大于0',
+                    digits:'请输入整数'
+                },
+                productDesc:{
+                    maxlength:'长度不能超过250'
+                }
             }
         })
     }
-    function showDetail(obj) {
-        var id = $(obj).attr("id");
-        layer.open({
-            type: 2,
-            title: '提现详情',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['380px', '50%'],
-            content: '/withdraws/'+id
+
+
+    //将form中的值转换为键值对。
+    function getFormJson(frm) {
+        var o = {};
+        var a = $(frm).serializeArray();
+        $.each(a, function () {
+            if (o[this.name] != undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
         });
+        return o;
     }
 </script>
 <script type="application/javascript">
     jQuery(document).ready(function () {
-        var paginate = new paging($(".pagination"), pageNo, totalPages, totalRecords, 8);
-        paginate.init(function (p) {
-            location.href = "/withdraws?pageNo="+p;
-        });
-
         // Date Picker
         $('input[name=beginTime]').datepicker({
             dateFormat: "yy-mm-dd",
@@ -798,24 +970,8 @@
                 $("#beginTime").datepicker("option", "maxDate", selectedDate);
             }
         });
-
-        var currentLevelId = $("input[name=level]").val();
-        if (currentLevelId != "" && currentLevelId != null)
-            $("#levelSelectBtn").html($("#levelSelect a[level=" + currentLevelId + "]").html());
-        var currentAgentType = $("input[name=type]").val();
-        if (currentAgentType != "" && currentAgentType != null);
-        $("#typeSelectBtn").html($("#typeSelect a[type-value=" + currentAgentType + "]").html());
-
-        $("#typeSelect li a").click(function () {
-            $("#typeSelectBtn").html($(this).html());
-            $("input[name=agentType]").val($(this).attr("type-value"));
-        });
-
-        $("#levelSelect li a").click(function () {
-            $("#levelSelectBtn").html($(this).html());
-            $("input[name=agentLevel]").val($(this).attr("level"));
-        });
     });
 </script>
+
 </body>
 </html>
