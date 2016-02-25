@@ -357,14 +357,14 @@
                             <label class="col-sm-3 control-label">企业资质</label>
 
                             <div class="col-sm-6">
-                                <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
 
                                     <div class="row">
                                         <div class="col-xs-6 col-md-3">
                                             <img src="" id="previewImg"
                                                  th:src="${agent}!=null ? (${agent.qualifyUri!=null} ? @{'/'+${agent.qualifyUri}} : '')">
                                             <input type="hidden" name="qualifyUri" id="qualifyUri"
-                                                   th:value="${agent}!=null ? ${agent.qualifyUri}:''">
+                                                   th:value="${agent}!=null?${agent.qualifyUri}:''">
                                         </div>
                                     </div>
                                     <div class="input-append">
@@ -768,34 +768,10 @@
 <script src="../../assets/js/cityselect/jquery.cityselect.js"
         th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
-<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
+<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}">
+</script>
 <script th:inline="javascript">
-    $("select[name=type]").blur(checkAreaAvaliable);
-    function checkAreaAvaliable() {
-        var type = $("select[name=type]").val();
-        if (type == 1) {
-            var city = $("select[name=city]").val();
-            $.ajax({
-                url: "/checkCity",
-                data: "city=" + encodeURI(city),
-                dataType: "json",
-                success: function (data) {
-                    if (data.code != 2000) {
-                        layer.alert(data.msg);
-                        $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
-                        return false;
-                    } else {
-                        $("select[name=type]").closest('.form-group').removeClass('has-error');
-                        return true;
-                    }
-                }
-            })
-        } else {
-            $("select[name=type]").closest('.form-group').removeClass('has-error');
-            return true;
-        }
-    }
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
     var dist = /*[[${agent!=null ? agent.district : "滨江区"}]]*/ "滨江区";
@@ -804,86 +780,6 @@
         city: city,
         dist: dist
     });
-
-    $("#editForm").validate({
-        ignoreTitle: true,
-        highlight: function (element) {
-            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-        },
-        success: function (element) {
-            $(element).closest('.form-group').removeClass('has-error');
-            $(element).remove();
-        },
-        onfocusout: function (element) {
-            $(element).valid();
-        },
-        debug: true,
-        rules: {
-            name: "required",
-            username: {
-                required: true,
-                maxlength: 50
-            },
-            password: {
-                required: true,
-                minlength: 3
-            },
-            level: "required",
-            province: "required",
-            city: "required",
-            district: "required",
-            type: "required",
-            balance: {
-                required: true,
-                number: true
-            },
-            contacts: {
-                required: true,
-                maxlength: 50
-            },
-            phoneNo: {
-                required: true,
-                mobile: true
-            },
-            address: {
-                required: true,
-                maxlength: 100
-            },
-            mail: {
-                required: true,
-                email: true
-            },
-            qq: {
-                required: true,
-                number: true
-            },
-            expandable: "required",
-            qualifyUri: {
-                required:function() {
-                    var qualifyUri = $("input[name=qualifyUri]").val();
-                    return qualifyUri == '';
-                }
-            }
-        },
-        messages:{
-            qualifyUri:"请上传图片"
-        },
-        errorPlacement:function(error,element) {
-            if(element.attr("name")=="qualifyUri") {
-                error.insertAfter("#balance");
-            }else {
-                error.insertAfter(element);
-            }
-        }
-
-
-    });
-    function submit() {
-        $("#editForm").submit();
-    }
-
 </script>
-
-
 </body>
 </html>
