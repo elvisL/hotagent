@@ -512,8 +512,8 @@
                     </div><!-- table-responsive -->
                     <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
                     <ul class="pagination nomargin pull-right">
-                        <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo='+${currentPage-1}">上一页</a></li>
-                        <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo=1'">首页</a></li>
+                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo='+${currentPage-1}">上一页</a></li>
+                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo=1'">首页</a></li>
                         <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#" th:href="'?pageNo='+${page}" th:text="${page}">1</a></li>
                         <!--/*-->
                         <li class="active"><a href="#">2</a></li>

@@ -375,6 +375,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
                         <ul class="pagination nomargin pull-right">
                             <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo='+${currentPage-1}">上一页</a></li>
                             <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo=1'">首页</a></li>
