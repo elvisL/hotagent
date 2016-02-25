@@ -31,8 +31,6 @@
 </head>
 
 <body>
-
-
 <!-- Preloader -->
 <div id="preloader">
     <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
@@ -377,11 +375,22 @@
                             </tr>
                             </tbody>
                         </table>
+                        <ul class="pagination nomargin pull-right">
+                            <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo='+${currentPage-1}">上一页</a></li>
+                            <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo=1'">首页</a></li>
+                            <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#" th:href="'?pageNo='+${page}" th:text="${page}">1</a></li>
+                            <!--/*-->
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <!--*/-->
+                            <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? '?pageNo='+${totalPages}">尾页</a></li>
+                            <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? '?pageNo='+${currentPage+1}">下一页</a></li>
+                        </ul>
                     </div><!-- table-responsive -->
-                    <div id="pages"></div>
                 </div><!-- panel-body -->
             </div><!-- panel -->
-
         </div><!-- contentpanel -->
 
     </div><!-- mainpanel -->
@@ -699,7 +708,6 @@
 
         </div><!-- tab-content -->
     </div><!-- rightpanel -->
-
 </section>
 
 <!--基本js-->
@@ -717,23 +725,11 @@
 
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
-<script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
-<script src="../../assets/laypage/laypage.js" th:src="@{/assets/laypage/laypage.js}"></script>
 <script th:inline="javascript">
     var currentPage = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
-    var totalRecords = /*[[${totalRecords}]]*/ 10;
-    laypage({
-        cont: 'pages',
-        pages: totalPages,
-        curr: currentPage,
-        jump: function(e, first){
-            if(!first){
-                location.href = '?page='+e.curr;
-            }
-        }
-    });
+
 </script>
 </body>
 </html>

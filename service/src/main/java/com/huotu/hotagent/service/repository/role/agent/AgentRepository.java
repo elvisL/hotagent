@@ -18,6 +18,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by allan on 1/25/16.
@@ -40,5 +41,5 @@ public interface AgentRepository extends JpaRepository<Agent, Long>, JpaSpecific
 
     long countByType(AgentType type);
 
-    Agent findByCityAndType(String city,AgentType type);
+    List<Agent> findByCity(String city);
 }

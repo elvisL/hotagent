@@ -16,6 +16,6 @@ package com.huotu.hotagent.common.constant;
 public class SysConstant {
     public static final String ROOT_USER = "administrator";
     public static final String ROOT_PASS = "hot!@#123";
-
+    public static final int DEFAULT_PAGE_BUTTON_NUM = 5;
     public static final int DEFAULT_PAGE_SIZE = 20;
 }

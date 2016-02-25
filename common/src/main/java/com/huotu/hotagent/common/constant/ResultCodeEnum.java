@@ -28,7 +28,8 @@ public enum ResultCodeEnum {
     WITHDRAW_ERROR(4002, "提现次数已达上限"),
     DATA_NULL(5000, "没有传输数据"),
     NOT_IMG(6001,"不是图片"),
-    CITY_NOT_AVALIABLE(6002,"该地区已经有独家代理了");
+    HAS_SOLE_ALREADY(6002,"该地区已经有独家代理"),
+    IS_NORMAL_AGENT_AREA(6003,"该地区只可设置普通代理");
 
     //todo 其他状态
     private int resultCode;

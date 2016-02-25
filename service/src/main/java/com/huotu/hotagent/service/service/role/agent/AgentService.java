@@ -15,6 +15,8 @@ import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.model.AgentSearch;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 /**
  * 代理商
  * Created by chendeyu on 2016/1/25.
@@ -45,5 +47,5 @@ public interface AgentService {
 
     Page<Agent> findAll(int pageIndex, int pageSize, AgentSearch agentSearch);
 
-    Agent findByCityAndType(String city,AgentType type);
+    List<Agent> findByCity(String city);
 }

@@ -13,6 +13,7 @@ import com.huotu.hotagent.admin.service.StaticResourceService;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
+import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -66,15 +68,25 @@ public class AgentController {
             Model model
     ) {
         model.addAttribute("agentSearch", agentSearch);
-
         Page<Agent> agents = agentService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
+        int totalPages = agents.getTotalPages();
         model.addAttribute("pageSize", agents.getSize());
         model.addAttribute("agents", agents.getContent());
         model.addAttribute("totalRecords", agents.getTotalElements());
-        model.addAttribute("totalPages",agents.getTotalPages());
+        model.addAttribute("totalPages",totalPages);
         model.addAttribute("currentPage", pageNo);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
+        model.addAttribute("hasNext",agents.hasNext());
+        model.addAttribute("hasPrevious",agents.hasPrevious());
+        int pageBtnNum = totalPages > SysConstant.DEFAULT_PAGE_BUTTON_NUM ? SysConstant.DEFAULT_PAGE_BUTTON_NUM : totalPages;
+        int startPageNo = CommonUtils.calculateStartPageNo(pageNo, pageBtnNum, totalPages);
+        List<Integer> pageNos = new ArrayList<>();
+        for(int i=1;i<=pageBtnNum;i++) {
+            pageNos.add(startPageNo);
+            startPageNo++;
+        }
+        model.addAttribute("pageNos", pageNos);
         return "agent/agent_list";
     }
 
@@ -116,18 +128,21 @@ public class AgentController {
     }
 
     /**
-     * 检测指定城市是否已经有独家代理
+     * 检测指定城市是否可设置独家代理
      * @param city
      * @return
      */
     @RequestMapping("/checkCity")
     @ResponseBody
     public ApiResult checkCity(String city) {
-        Agent agent = agentService.findByCityAndType(city,AgentType.SOLE);
-        if(agent==null) {
+        List<Agent> agents = agentService.findByCity(city);
+        if(agents.size()==0) {
             return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }
-        return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
+        if(agents.size()==1) {
+            return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+        }
+        return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
     }
 
     @RequestMapping("/uploadImg")

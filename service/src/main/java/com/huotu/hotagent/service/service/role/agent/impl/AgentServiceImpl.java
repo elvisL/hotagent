@@ -106,8 +106,8 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public Agent findByCityAndType(String city,AgentType type) {
-        return agentRepository.findByCityAndType(city,type);
+    public List<Agent> findByCity(String city) {
+        return agentRepository.findByCity(city);
     }
 
     @Override

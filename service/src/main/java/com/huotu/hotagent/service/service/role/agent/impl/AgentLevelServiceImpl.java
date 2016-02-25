@@ -53,7 +53,7 @@ public class AgentLevelServiceImpl implements AgentLevelService {
 
     @Override
     public Page<AgentLevel> findAgentLevels(int pageNo) {
-        return agentLevelRepository.findAll(new PageRequest(pageNo-1, SysConstant.DEFAULT_PAGE_SIZE,new Sort(Sort.Direction.DESC,"id")));
+        return agentLevelRepository.findAll(new PageRequest(pageNo-1, 1,new Sort(Sort.Direction.DESC,"levelId")));
     }
 
 }

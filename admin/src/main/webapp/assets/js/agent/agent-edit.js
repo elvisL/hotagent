@@ -29,27 +29,35 @@ function imgUpload() {
 $("select[name=type]").blur(checkAreaAvaliable);
 function checkAreaAvaliable() {
     var type = $("select[name=type]").val();
-    if (type == 1) {
-        var city = $("select[name=city]").val();
-        $.ajax({
-            url: "/checkCity",
-            data: "city=" + encodeURI(city),
-            dataType: "json",
-            success: function (data) {
-                if (data.code != 2000) {
+    var city = $("select[name=city]").val();
+    var avaliable = true;
+    $.ajax({
+        url: "/checkCity",
+        data: "city=" + encodeURI(city),
+        dataType: "json",
+        async:false,
+        success: function (data) {
+            if (data.code == 2000) {
+                $("select[name=type]").closest('.form-group').removeClass('has-error');
+                avaliable = true;
+            } else if(data.code == 6002) {
+                layer.alert(data.msg);
+                $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
+                avaliable = false;
+            }else if(data.code == 6003) {
+                if(type==1) {
                     layer.alert(data.msg);
                     $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
-                    return false;
-                } else {
+                    avaliable = false;
+                }else {
                     $("select[name=type]").closest('.form-group').removeClass('has-error');
-                    return true;
+                    avaliable = true;
                 }
             }
-        })
-    } else {
-        $("select[name=type]").closest('.form-group').removeClass('has-error');
-        return true;
-    }
+        }
+
+    });
+    return avaliable;
 }
 $("#editForm").validate({
     ignoreTitle: true,
@@ -64,7 +72,7 @@ $("#editForm").validate({
     onfocusout: function (element) {
         $(element).valid();
     },
-    debug: true,
+    debug: false,
     rules: {
         name: "required",
         username: {
