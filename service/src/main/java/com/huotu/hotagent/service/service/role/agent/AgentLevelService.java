@@ -10,6 +10,7 @@
 package com.huotu.hotagent.service.service.role.agent;
 
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -26,4 +27,5 @@ public interface AgentLevelService {
 
     boolean exist();
 
+    Page<AgentLevel> findAgentLevels(int pageNo);
 }
