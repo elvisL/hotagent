@@ -301,7 +301,7 @@ public class AgentController {
             agent.setCreateTime(date);
             Boolean bl = balanceLogService.importBl(agent, money);
             if (bl==true){
-                Set<Price> priceSet = priceService.updateProduct(agent,productPrice);
+                Set<Price> priceSet = priceService.setProduct(agent,productPrice);
                 agent.setPrices(priceSet);
                 loginService.newLogin(agent,agent.getPassword());
                 apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);

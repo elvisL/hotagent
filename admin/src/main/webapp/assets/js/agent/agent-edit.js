@@ -64,7 +64,7 @@ $("#editForm").validate({
     onfocusout: function (element) {
         $(element).valid();
     },
-    debug: true,
+    debug: false,
     rules: {
         name: "required",
         username: {

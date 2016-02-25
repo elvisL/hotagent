@@ -17,4 +17,6 @@ public interface PriceService {
     Set<Price> setProduct(Agent agent,ProductPrice productPrice);
     Set<Price> updateProduct(Agent agent,ProductPrice productPrice);
 
+
+
 }
