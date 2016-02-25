@@ -9,10 +9,14 @@
 
 package com.huotu.hotagent.service.service.role.agent.impl;
 
+import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.repository.role.agent.AgentLevelRepository;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +49,11 @@ public class AgentLevelServiceImpl implements AgentLevelService {
     @Override
     public boolean exist() {
         return agentLevelRepository.count() > 0;
+    }
+
+    @Override
+    public Page<AgentLevel> findAgentLevels(int pageNo) {
+        return agentLevelRepository.findAll(new PageRequest(pageNo-1, SysConstant.DEFAULT_PAGE_SIZE,new Sort(Sort.Direction.DESC,"id")));
     }
 
 }
