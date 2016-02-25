@@ -98,16 +98,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代理商类型</label>
 
-                            <div class="col-sm-3">
-                                <select name="type" id="type" title="代理商类型" class="form-control input mb10" th:remove="all-but-first">
-                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}" th:text="${agentType.name}" th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理</option>
-                                    <option>普通代理</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理区域</label>
 
@@ -125,6 +116,20 @@
                                     </select>
                                 </div>
 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理商类型</label>
+
+                            <div class="col-sm-3">
+                                <select name="type" id="type" title="代理商类型" class="form-control input mb10"
+                                        th:remove="all-but-first">
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}"
+                                            th:text="${agentType.name}"
+                                            th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理
+                                    </option>
+                                    <option>普通代理</option>
+                                </select>
                             </div>
                         </div>
 
@@ -223,40 +228,34 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">是否可发展下级代理</label>-->
-
-                            <!--<div class="col-sm-3">-->
-                                <!--<div class="radio-inline"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? ${agent.expandable}">是</label></div>-->
-                                <!--<div class="radio"><label><input type="radio" name="expandable" th:checked="${agent}!=null ? !${agent.expandable}">否</label></div>-->
-                            <!--</div>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">企业资质</label>
 
-                            <div class="col-sm-6">
-                                <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
-                                    <div class="row">
-                                        <div class="col-xs-6 col-md-3">
-                                            <img src="" id="previewImg" th:src="${agent}!=null ? @{'/'+${agent.qualifyUri}}">
-                                            <input type="hidden" name="qualifyUri" id="qualifyUri" th:value="${agent}!=null ? @{${agent.qualifyUri}}">
-                                        </div>
+                        <div class="col-sm-6">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-3">
+                                        <img src="" id="previewImg"
+                                             th:src="${agent}!=null ? (${agent.qualifyUri!=null} ? @{'/'+${agent.qualifyUri}} : '')">
+                                        <input type="hidden" name="qualifyUri" id="qualifyUri"
+                                               th:value="${agent}!=null?${agent.qualifyUri}:''">
                                     </div>
-                                    <div class="input-append">
-                                        <div class="uneditable-input">
-                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
-                                            <span class="fileupload-preview"></span>
-                                        </div>
+                                </div>
+                                <div class="input-append">
+                                    <div class="uneditable-input">
+                                        <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                        <span class="fileupload-preview"></span>
+                                    </div>
                                     <span class="btn btn-default btn-file">
                                       <span class="fileupload-new">Select file</span>
                                       <span class="fileupload-exists">Change</span>
                                       <input type="file" name="qualify" id="qualify">
                                     </span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+                            </div>
 
                     </form>
 
@@ -297,30 +296,31 @@
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
 <script th:inline="javascript">
+//    $("select[name=type]").blur(checkAreaAvaliable);
+//    function checkAreaAvaliable() {
+//        var type = $("select[name=type]").val();
+//        if (type == 1) {
+//            var city = $("select[name=city]").val();
+//            $.ajax({
+//                url: "/checkCity",
+//                data: "city=" + encodeURI(city),
+//                dataType: "json",
+//                success: function (data) {
+//                    if (data.code != 2000) {
+//                        layer.alert("此城市已经有代理，无法设为独家代理");
+//                    } else {
+////                        $("select[name=type]").closest('.form-group').removeClass('has-error');
+//                        return false;
+//                    }
+//                }
+//            })
+//        } else {
+//            $("select[name=type]").closest('.form-group').removeClass('has-error');
+//            return true;
+//        }
+//    }
     $(function () {
         editHandler.pageInit();
-        $("input[name=type]").blur(function() {
-            var city = $("input[name=city]").val();
-            $.ajax({
-                url:"/checkCity",
-                data:"city="+city,
-                dataType:"json",
-                success:function(data) {
-                    if(data.code !=2000) {
-                        layer.alert('墨绿风格，点击确认看深蓝', {
-                            skin: 'layui-layer-molv' //样式类名
-                            ,closeBtn: 0
-                        }, function(){
-                            layer.alert(data.msg, {
-                                skin: 'layui-layer-lan'
-                                ,closeBtn: 0
-                                ,shift: 4 //动画类型
-                            });
-                        });
-                    }
-                }
-            })
-        })
     });
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
@@ -369,9 +369,6 @@
                         required : true,
                         min:1000,
                     },
-                    qualifyUri: {
-                        required : true
-                    },
                     mail: {
                         email:true
                     }
@@ -382,9 +379,6 @@
                     },
                     password: {
                         required : "请输入密码"
-                    },
-                    qualifyUri: {
-                        required : "请上传图片"
                     },
                     huobanMall: {
                         required : "请输入代理价格",
@@ -406,65 +400,86 @@
                         email:"请输入正确的邮箱"
                     }
                 },
-        submitHandler: function (form, ev) {
-//            window.console.log($("#type").val());
-            $.ajax({
-                url: "/saveEditLowerAg",
-                data: {
-                    id:$("#id").val(),
-                    name:$("#name").val(),
-                    agentLevel:$("#level").val(),
-                    agentType:$("#type").val(),
-                    balance:$("#balance").val(),
-                    username:$("#username").val(),
-                    password:$("#password").val(),
-                    contacts:$("#contacts").val(),
-                    huobanMall:$("#huobanMall").val(),
-                    hotEdu:$("#hotEdu").val(),
-                    dsp:$("#dsp").val(),
-                    thirdPartnar:$("#thirdPartnar").val(),
-                    province:$("#province").val(),
-                    qualifyUri:$("#qualifyUri").val(),
-                    city:$("#city").val(),
-                    district:$("#district").val(),
-                    phoneNo:$("#phoneNo").val(),
-                    address:$("#address").val(),
-                    mail:$("#mail").val(),
-                    qq:$("#qq").val()
-                },
-                type: "POST",
-                dataType: 'json',
-                success: function (msg) {
-                    var index=parseInt(msg.code);
-                    switch (index) {
-                        case 2000:
-                            layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
-                            setTimeout(function(){
-//                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
-                                    }
-                                    ,1000);
-//                                    $("#password").val("");
-                            break;
-                        case 4001:
-                            layer.msg("您的账户余额不足", {time: 2000});
-                            $("#balance").val("");
-                            break;
+                errorPlacement:function(error,element) {
+                    if(element.attr("name")=="qualifyUri") {
+                        error.insertAfter(".input-append");
+                    }else {
+                        error.insertAfter(element);
                     }
                 },
-                error: function () {
+                submitHandler: function (form, ev) {
+                    if($("#qualifyUri").val() == ''||$("#qualifyUri").val()==null)
+                    {
+                        layer.msg("请上传图片", {time: 2000});
+                    }
+                    else{
+                        submitAgent()
+                        return false;
+                    }
 
+                },
+                invalidHandler: function () {
+                    return true;
                 }
             });
-            return false;
         },
-        invalidHandler: function () {
-            return true;
-        }
-    });
-    },
         submit: function () {
-            $("#editForm").submit();
+//            var av = checkAreaAvaliable();
+//            if(av) {
+                $("#editForm").submit();
+//            }
         }
+    }
+</script>
+
+<script>
+    function submitAgent(){
+        $.ajax({
+            url: "/saveEditLowerAg",
+            data: {
+                id:$("#id").val(),
+                name:$("#name").val(),
+                agentLevel:$("#level").val(),
+                agentType:$("#type").val(),
+                balance:$("#balance").val(),
+                username:$("#username").val(),
+                password:$("#password").val(),
+                contacts:$("#contacts").val(),
+                huobanMall:$("#huobanMall").val(),
+                hotEdu:$("#hotEdu").val(),
+                dsp:$("#dsp").val(),
+                thirdPartnar:$("#thirdPartnar").val(),
+                province:$("#province").val(),
+                qualifyUri:$("#qualifyUri").val(),
+                city:$("#city").val(),
+                district:$("#district").val(),
+                phoneNo:$("#phoneNo").val(),
+                address:$("#address").val(),
+                mail:$("#mail").val(),
+                qq:$("#qq").val()
+            },
+            type: "POST",
+            dataType: 'json',
+            success: function (msg) {
+                var index=parseInt(msg.code);
+                switch (index) {
+                    case 2000:
+                        layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
+                        setTimeout(function(){
+                                    window.location.href="http://"+window.location.host+"/"+"agentList";
+                                }
+                                ,1000);
+                        break;
+                    case 4001:
+                        layer.msg("您的账户余额不足", {time: 2000});
+                        $("#balance").val("");
+                        break;
+                }
+            },
+            error: function () {
+
+            }
+        });
     }
 </script>
 

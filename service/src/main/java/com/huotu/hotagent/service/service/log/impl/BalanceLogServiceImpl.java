@@ -47,7 +47,7 @@ public class BalanceLogServiceImpl implements BalanceLogService {
     public Boolean importBl(Agent lowAgent, double money) {
         Date date = new Date();
         Agent highAgent = lowAgent.getParent();
-        if (highAgent.getBalance() - money > 0) {//当一级代理商余额足够时
+        if (highAgent.getBalance() - money >= 0) {//当一级代理商余额足够时
             lowAgent.setBalance(lowAgent.getBalance() + money);
             highAgent.setBalance(highAgent.getBalance() - money);
             BalanceLog lowbalanceLog = new BalanceLog();
@@ -56,17 +56,17 @@ public class BalanceLogServiceImpl implements BalanceLogService {
             lowbalanceLog.setCreateTime(date);
             lowbalanceLog.setImportMoney(money);
             lowbalanceLog.setMoney(money);
-            lowbalanceLog.setMemo("一级代理商 "+highAgent.getName()+" 向您充值 "+money);
+            lowbalanceLog.setMemo("一级代理商 "+highAgent.getName()+" 向 "+lowAgent.getName()+ " 充值 "+money);
             highbalanceLog.setAgent(highAgent);
             highbalanceLog.setSupport(lowAgent);
             highbalanceLog.setCreateTime(date);
             highbalanceLog.setMoney(-money);
             highbalanceLog.setExportMoney(money);
-            highbalanceLog.setMemo("您向二级代理商 "+lowAgent.getName()+" 充值 "+money);
+            highbalanceLog.setMemo(highAgent.getName()+" 向二级代理商 "+lowAgent.getName()+" 充值 "+money);
             balanceLogRepository.save(lowbalanceLog);
             balanceLogRepository.save(highbalanceLog);
         } else {
-            if (highAgent.getBalance() + highAgent.getCommission() - money > 0) {//当余额+佣金大于充值金额时
+            if (highAgent.getBalance() + highAgent.getCommission() - money >= 0) {//当余额+佣金大于充值金额时
                 BalanceLog lowbalanceLog = new BalanceLog();
                 BalanceLog highbalanceLog = new BalanceLog();
                 CommissionLog commissionLog = new CommissionLog();
@@ -74,19 +74,19 @@ public class BalanceLogServiceImpl implements BalanceLogService {
                 lowbalanceLog.setCreateTime(date);
                 lowbalanceLog.setImportMoney(money);
                 lowbalanceLog.setMoney(money);
-                lowbalanceLog.setMemo("一级代理商 "+highAgent.getName()+" 向您充值 "+money);
+                lowbalanceLog.setMemo("一级代理商 "+highAgent.getName()+" 向 "+lowAgent.getName()+" 充值 "+money);
                 highbalanceLog.setAgent(highAgent);
                 highbalanceLog.setSupport(lowAgent);
                 highbalanceLog.setCreateTime(date);
                 highbalanceLog.setExportMoney(highAgent.getBalance());
                 highbalanceLog.setMoney(-highAgent.getBalance());
-                highbalanceLog.setMemo("您向二级代理商 "+lowAgent.getName()+" 充值 "+highAgent.getBalance());
+                highbalanceLog.setMemo(highAgent.getName()+" 向二级代理商 "+lowAgent.getName()+" 充值 "+highAgent.getBalance());
                 commissionLog.setAgent(highAgent);
                 commissionLog.setSupport(lowAgent);
                 commissionLog.setMoney(highAgent.getBalance()-money);
                 commissionLog.setExportMoney(money - highAgent.getBalance());
                 commissionLog.setCreateTime(date);
-                commissionLog.setMemo("您向二级代理商 "+lowAgent.getName()+" 充值 "+commissionLog.getExportMoney());
+                commissionLog.setMemo(highAgent.getName()+" 向二级代理商 "+lowAgent.getName()+" 充值 "+commissionLog.getExportMoney());
                 highAgent.setCommission(highAgent.getBalance() + highAgent.getCommission() - money);
                 highAgent.setBalance(0);
                 lowAgent.setBalance(lowAgent.getBalance() + money);

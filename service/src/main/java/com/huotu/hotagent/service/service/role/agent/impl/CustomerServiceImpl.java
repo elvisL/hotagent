@@ -17,6 +17,7 @@ import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 import com.huotu.hotagent.service.repository.log.BalanceLogRepository;
 import com.huotu.hotagent.service.repository.log.CommissionLogRepository;
+import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.repository.product.ProductRepository;
 import com.huotu.hotagent.service.repository.role.agent.AgentRepository;
 import com.huotu.hotagent.service.repository.role.agent.CustomerRepository;
@@ -24,6 +25,7 @@ import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -35,20 +37,23 @@ import java.util.Date;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    AgentService agentService;
+    private  AgentService agentService;
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
     @Autowired
-    BalanceLogRepository balanceLogRepository;
+    private BalanceLogRepository balanceLogRepository;
 
     @Autowired
-    CommissionLogRepository commissionLogRepository;
+    private CommissionLogRepository commissionLogRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    AgentRepository agentRepository;
+    private PriceRepository priceRepository;
+
+    @Autowired
+    private AgentRepository agentRepository;
 
 
     @Override
@@ -64,47 +69,46 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-
-    public ApiResult addCustomer(Long id, Customer customer, int money) {
+    @Transactional(value = "transactionManager")
+    public ApiResult addCustomer(Long id, Customer customer, int count ) {
         ApiResult apiResult = null;
-        Agent highAgent = agentService.findById(id);
+        Agent agent = agentService.findById(id);
         Date date = new Date();
-        if(highAgent.getBalance()-money>0) {//当一级代理商余额足够时
+        Double price =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(),customer.getProductId()).getPrice();//代理商每件产品的价格
+        Double money = count*price;
+        if(agent.getBalance()-money>=0) {//当一级代理商余额足够时
             BalanceLog highbalanceLog = new BalanceLog();
-            CommissionLog commissionLog = new CommissionLog();
-            highbalanceLog.setAgent(highAgent);
+            highbalanceLog.setAgent(agent);
             highbalanceLog.setCustomer(customer);
             highbalanceLog.setCreateTime(date);
             highbalanceLog.setMoney(-money);
             highbalanceLog.setExportMoney(money);
-//            commissionLog.setAgent(highAgent);
-//            commissionLog.setCreateTime(date);
-            highbalanceLog.setMemo(customer.getName()+" 向您购买产品 "+productRepository.findOne(customer.getProductId()).getName()+" 花费余额 "+money );
-            highAgent.setBalance(highAgent.getBalance() - money);
-            agentRepository.save(highAgent);
+            highbalanceLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+productRepository.findOne(customer.getProductId()).getName()+" 花费余额 "+money );
+            agent.setBalance(agent.getBalance() - money);
+            agentRepository.save(agent);
             customerRepository.save(customer);
             balanceLogRepository.save(highbalanceLog);
         }
         else {
-            if(highAgent.getBalance()+highAgent.getCommission()-money>0){//当余额+佣金大于充值金额时
+            if(agent.getBalance()+agent.getCommission()-money>=0){//当余额+佣金大于充值金额时
 
                 BalanceLog highbalanceLog = new BalanceLog();
                 CommissionLog commissionLog = new CommissionLog();
-                highbalanceLog.setAgent(highAgent);
+                highbalanceLog.setAgent(agent);
                 highbalanceLog.setCreateTime(date);
                 highbalanceLog.setCustomer(customer);
-                highbalanceLog.setMoney(-highAgent.getBalance());
-                highbalanceLog.setExportMoney(highAgent.getBalance());
-                highbalanceLog.setMemo(customer.getName()+" 向您购买产品 "+productRepository.findOne(customer.getProductId()).getName()+" 花费余额 "+highAgent.getBalance() );
-                commissionLog.setAgent(highAgent);
+                highbalanceLog.setMoney(-agent.getBalance());
+                highbalanceLog.setExportMoney(agent.getBalance());
+                highbalanceLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+productRepository.findOne(customer.getProductId()).getName()+" 花费余额 "+agent.getBalance() );
+                commissionLog.setAgent(agent);
                 commissionLog.setCustomer(customer);
-                commissionLog.setMoney(highAgent.getBalance()-money);
-                commissionLog.setExportMoney(money-highAgent.getBalance());
-                commissionLog.setMemo(customer.getName()+" 向您购买产品 "+productRepository.findOne(customer.getProductId()).getName()+" 花费佣金 "+commissionLog.getExportMoney() );
+                commissionLog.setMoney(agent.getBalance()-money);
+                commissionLog.setExportMoney(money-agent.getBalance());
+                commissionLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+productRepository.findOne(customer.getProductId()).getName()+" 花费佣金 "+commissionLog.getExportMoney() );
                 commissionLog.setCreateTime(date);
-                highAgent.setBalance(0);
-                highAgent.setCommission(highAgent.getBalance()+highAgent.getCommission()-money);
-                agentRepository.save(highAgent);
+                agent.setCommission(agent.getBalance() + agent.getCommission() - money);
+                agent.setBalance(0);
+                agentRepository.save(agent);
                 customerRepository.save(customer);
                 balanceLogRepository.save(highbalanceLog);
                 commissionLogRepository.save(commissionLog);
@@ -114,14 +118,19 @@ public class CustomerServiceImpl implements CustomerService {
                 return apiResult;
             }
         }
-        if (highAgent.getLevel().getLevel()==1){
-            Agent agent = highAgent.getParent();
-            agent.setCommission(agent.getCommission()+money);
+        //返佣处理
+        if (agent.getLevel().getLevel()==1){
+            Agent lowAgent = agentService.findById(id);
+            Agent highagent = agent.getParent();
+            Double highAgentPrice =priceRepository.findByAgent_IdAndProduct_Id(highagent.getId(),customer.getProductId()).getPrice();//上级代理商每件产品的价格
+            //返佣为代理产品价格的差额
+            Double commission = money-count*highAgentPrice;
+            highagent.setCommission(highagent.getCommission()+commission);
             CommissionLog commissionLog = new CommissionLog();
-            commissionLog.setAgent(agent);
-            commissionLog.setMoney(money);
-            commissionLog.setImportMoney(money);
-            commissionLog.setMemo("二级代理商 "+highAgent.getName()+ "向您返佣 "+money );
+            commissionLog.setAgent(highagent);
+            commissionLog.setMoney(commission);
+            commissionLog.setImportMoney(commission);
+            commissionLog.setMemo("二级代理商 "+lowAgent.getName()+ "向 "+highagent.getName()+" 返佣 "+commission );
             commissionLog.setCreateTime(date);
             commissionLogRepository.save(commissionLog);
             agentRepository.save(agent);

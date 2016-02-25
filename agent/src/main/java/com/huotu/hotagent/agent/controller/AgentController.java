@@ -14,6 +14,7 @@ import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.common.ProductType;
+import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.model.AgentSearch;
@@ -39,6 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by chendeyu on 2016/1/25.
@@ -299,7 +301,8 @@ public class AgentController {
             agent.setCreateTime(date);
             Boolean bl = balanceLogService.importBl(agent, money);
             if (bl==true){
-                priceService.setProduct(agent,productPrice);
+                Set<Price> priceSet = priceService.setProduct(agent,productPrice);
+                agent.setPrices(priceSet);
                 loginService.newLogin(agent,agent.getPassword());
                 apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
             }
@@ -332,7 +335,8 @@ public class AgentController {
             agent.setLevel(aLevel);
             agent.setParent(Higher);
             agent.setExpandable(false);
-            priceService.updateProduct(agent,productPrice);
+            Set<Price> priceSet = priceService.updateProduct(agent,productPrice);
+            agent.setPrices(priceSet);
             loginService.newLogin(agent,agent.getPassword());
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
 
@@ -370,29 +374,7 @@ public class AgentController {
 
     }
 
-    /**
-     *代理商提现申请
-     */
-    @RequestMapping(value = "/applyWithdraw",method = RequestMethod.POST)
-    @ResponseBody
-    public ApiResult applyWithdraw(@AuthenticationPrincipal Agent agent,double money,String message) throws Exception{
-        ApiResult apiResult = null;
-        try {
-            Boolean bl=withdrawRecordService.withdraw(agent, money ,message);
-            if(bl==true){
-                apiResult =  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-            }
-            else {
-                apiResult = ApiResult.resultWith(ResultCodeEnum.WITHDRAW_ERROR);
-            }
 
-        }catch (Exception ex){
-            log.error(ex.getMessage());
-            apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
-        }
-        return apiResult;
-
-    }
 
     /**
      * 检测指定城市是否已经有独家代理

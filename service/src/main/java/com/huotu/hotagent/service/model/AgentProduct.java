@@ -11,5 +11,8 @@ import lombok.Setter;
 public class AgentProduct {
     private long productId;
     private String productName;
+    //产品单价
     private double productPrice;
+    //销售总额
+    private double account;
 }

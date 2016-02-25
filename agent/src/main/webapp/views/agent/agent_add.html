@@ -14,20 +14,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png"
+          th:href="@{/assets/images/favicon.png}">
 
     <title>添加代理商</title>
 
 
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
 
-    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css"
+          th:href="@{/assets/libs/layer/skin/layer.css}"/>
 
-    <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
+    <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css"
+          th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
 </head>
-
-<body>
 
 
 <!-- Preloader -->
@@ -38,14 +39,16 @@
 <section>
     <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='addAgent')">
 
-    </div><!-- leftpanel -->
+    </div>
+    <!-- leftpanel -->
 
     <div class="mainpanel">
 
         <div class="headerbar" th:replace="views/common/header :: header">
 
 
-        </div><!-- headerbar -->
+        </div>
+        <!-- headerbar -->
 
         <div class="pageheader">
             <h2><i class="fa fa-edit"></i> 代理商管理<span>Subtitle goes here...</span></h2>
@@ -64,13 +67,15 @@
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
-                    <form id="editForm" th:method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                    <form id="editForm" th:method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商名称</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="name" id="name" title="代理商名称" placeholder="代理商名称" class="form-control"/>
+                                <input type="text" name="name" id="name" title="代理商名称" placeholder="代理商名称"
+                                       class="form-control"/>
                             </div>
                         </div>
 
@@ -79,7 +84,7 @@
 
                             <div class="col-sm-3">
                                 <select name="agentLevel" id="agentLevel" title="代理商等级" class="form-control mb10">
-                                    <option th:value="1" th:text="二级代理商" >二级代理商</option>
+                                    <option th:value="1" th:text="二级代理商">二级代理商</option>
                                 </select>
                             </div>
                         </div>
@@ -89,8 +94,8 @@
 
                             <div class="col-sm-3">
                                 <select name="type" id="type" title="代理类型" class="form-control mb10">
-                                    <option th:value="0" th:text="普通代理" >普通代理</option>
-                                    <option th:value="1" th:text="独家代理" >独家代理</option>
+                                    <option th:value="0" th:text="普通代理">普通代理</option>
+                                    <option th:value="1" th:text="独家代理">独家代理</option>
                                 </select>
                             </div>
                         </div>
@@ -110,7 +115,8 @@
                             <label class="col-sm-3 control-label">登录名</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="username" id="username" title="登录名" placeholder="登录名" class="form-control"/>
+                                <input type="text" name="username" id="username" title="登录名" placeholder="登录名"
+                                       class="form-control"/>
                             </div>
                         </div>
 
@@ -118,7 +124,8 @@
                             <label class="col-sm-3 control-label">密码</label>
 
                             <div class="col-sm-3">
-                                <input type="password" name="password" id="password" title="密码" placeholder="密码" class="form-control"/>
+                                <input type="password" name="password" id="password" title="密码" placeholder="密码"
+                                       class="form-control"/>
                             </div>
                         </div>
 
@@ -131,7 +138,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <select name="type" id="city"  class="form-control mb10 city" >
+                                    <select name="type" id="city" class="form-control mb10 city">
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
@@ -146,14 +153,16 @@
                             <label class="col-sm-3 control-label">联系人</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" class="form-control"/>
+                                <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系方式</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="phoneNo" id="phoneNo" title="联系方式" placeholder="联系方式" class="form-control"/>
+                                <input type="text" name="phoneNo" id="phoneNo" title="联系方式" placeholder="联系方式"
+                                       class="form-control"/>
                             </div>
                         </div>
 
@@ -161,14 +170,16 @@
                             <label class="col-sm-3 control-label">联系地址</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="address" id="address" title="联系地址" placeholder="联系地址" class="form-control"/>
+                                <input type="text" name="address" id="address" title="联系地址" placeholder="联系地址"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">邮箱</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="mail" id="mail" title="邮箱" placeholder="邮箱" class="form-control"/>
+                                <input type="text" name="mail" id="mail" title="邮箱" placeholder="邮箱"
+                                       class="form-control"/>
                             </div>
                         </div>
 
@@ -182,16 +193,19 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">伙伴商城价格</label>
+
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="huobanMall" id="huobanMall" title="伙伴商城价格" class="form-control">
+                                    <input type="number" name="huobanMall" id="huobanMall" title="伙伴商城价格"
+                                           class="form-control">
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">DSP广告</label>
+
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
@@ -202,6 +216,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">云商学院</label>
+
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
@@ -212,10 +227,12 @@
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代运营</label>
+
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="thirdPartnar" id="thirdPartnar" title="代运营价格" class="form-control">
+                                    <input type="number" name="thirdPartnar" id="thirdPartnar" title="代运营价格"
+                                           class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -226,9 +243,11 @@
 
                             <div class="col-sm-6">
                                 <div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">
+
                                     <div class="row">
                                         <div class="col-xs-6 col-md-3">
-                                            <img src="" id="previewImg" th:src="${agent}!=null ? @{'/'+${agent.qualifyUri}}">
+                                            <img src="" id="previewImg"
+                                                 th:src="${agent}!=null ? @{'/'+${agent.qualifyUri}}">
                                             <input type="hidden" name="qualifyUri" id="qualifyUri">
                                         </div>
                                     </div>
@@ -249,7 +268,8 @@
 
                     </form>
 
-                </div><!-- panel-body -->
+                </div>
+                <!-- panel-body -->
 
                 <div class="panel-footer">
                     <div class="row">
@@ -257,10 +277,14 @@
                             <button onclick="editHandler.submit()" class="btn btn-primary">确认</button>
                         </div>
                     </div>
-                </div><!-- panel-footer -->
-            </div><!-- panel -->
-        </div><!-- contentpanel -->
-    </div><!-- mainpanel -->
+                </div>
+                <!-- panel-footer -->
+            </div>
+            <!-- panel -->
+        </div>
+        <!-- contentpanel -->
+    </div>
+    <!-- mainpanel -->
 
 
 </section>
@@ -278,20 +302,20 @@
 
 <script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
 <script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
-<script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
-<script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
+<script src="../../assets/js/cityselect/jquery.cityselect.js"
+        th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
-<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
+<script src="../../assets/js/agent/agent-add.js" th:src="@{/assets/js/agent/agent-add.js}"></script>
 <script type="text/javascript">
     $(function () {
         editHandler.pageInit();
     });
     $("#area").citySelect({
-        prov:"浙江", //省份
-        city:"杭州", //城市
-        dist:"滨江区"//区县
+        prov: "浙江", //省份
+        city: "杭州", //城市
+        dist: "滨江区"//区县
     });
 
     var editHandler = {
@@ -311,131 +335,74 @@
                 },
                 rules: {
                     name: {
-                        required : true
+                        required: true
+                    },
+                    password: {
+                        required: true
                     },
                     balance: {
-                        required : true,
-                        digits:true
-                    },
-                    username: {
-                        required : true
+                        required: true,
+                        min: 0,
                     },
                     huobanMall: {
-                        required : true,
-                        min:5000,
-                        digits:true
+                        required: true,
+                        min: 5000,
                     },
                     dsp: {
-                        required : true,
-                        min:1000,
-                        digits:true
+                        required: true,
+                        min: 1000,
                     },
                     hotEdu: {
-                        required : true,
-                        min:1000,
-                        digits:true
+                        required: true,
+                        min: 1000,
                     },
                     thirdPartnar: {
-                        required : true,
-                        min:1000,
-                        digits:true
-                    },
-                    qualifyUri: {
-                        required : true
+                        required: true,
+                        min: 1000,
                     },
                     mail: {
-                        email:true
+                        email: true
                     }
                 },
                 messages: {
                     name: {
-                        required : "请输入代理商名称"
-                    },
-                    balance: {
-                        required : "请输入充值金额",
-                        digits:"请输入整数"
-                    },
-                    username: {
-                        required : "请输入账号"
+                        required: "请输入代理商名称"
                     },
                     password: {
-                        required : "请输入密码"
+                        required: "请输入密码"
+                    },
+                    balance: {
+                        required: "请输入充值金额",
+                        min: "必须大于0",
                     },
                     huobanMall: {
-                        required : "请输入代理价格",
-                        min:"必须大于5000",
-                        digits:"请输入整数"
+                        required: "请输入代理价格",
+                        min: "必须大于5000",
                     },
                     hotEdu: {
-                        required : "请输入代理价格",
-                        min:"必须大于1000",
-                        digits:"请输入整数"
+                        required: "请输入代理价格",
+                        min: "必须大于1000",
                     },
                     dsp: {
-                        required : "请输入代理价格",
-                        min:"必须大于1000",
-                        digits:"请输入整数"
+                        required: "请输入代理价格",
+                        min: "必须大于1000",
                     },
                     thirdPartnar: {
-                        required : "请输入代理价格",
-                        min:"必须大于1000",
-                        digits:"请输入整数"
-                    },
-                    qualifyUri: {
-                        required : "请上传图片"
+                        required: "请输入代理价格",
+                        min: "必须大于1000",
                     },
                     mail: {
-                        email:"请输入正确的邮箱"
+                        email: "请输入正确的邮箱"
                     }
                 },
                 submitHandler: function (form, ev) {
-                    $.ajax({
-                        url: "/saveAddLowerAg",
-                        data: {
-                            name:$("#name").val(),
-                            agentLevel:$("#agentLevel").val(),
-                            agentType:$("#type").val(),
-                            money:$("#balance").val(),
-                            username:$("#username").val(),
-                            password:$("#password").val(),
-                            contacts:$("#contacts").val(),
-                            province:$("#province").val(),
-                            huobanMall:$("#huobanMall").val(),
-                            hotEdu:$("#hotEdu").val(),
-                            dsp:$("#dsp").val(),
-                            thirdPartnar:$("#thirdPartnar").val(),
-                            qualifyUri:$("#qualifyUri").val(),
-                            city:$("#city").val(),
-                            district:$("#district").val(),
-                            phoneNo:$("#phoneNo").val(),
-                            address:$("#address").val(),
-                            mail:$("#mail").val(),
-                            qq:$("#qq").val()
-                        },
-                        type: "POST",
-                        dataType: 'json',
-                        success: function (msg) {
-                            var index=parseInt(msg.code);
-                            switch (index) {
-                                case 2000:
-                                    layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
-                                    setTimeout(function(){
-//                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
-                                            }
-                                            ,1000);
-//                                    $("#password").val("");
-                                    break;
-                                case 4001:
-                                    layer.msg("您的账户余额不足", {time: 2000});
-                                    $("#balance").val("");
-                                    break;
-                            }
-                        },
-                        error: function () {
-
-                        }
-                    });
-                    return false;
+                    if ($("#qualifyUri").val() == '' || $("#qualifyUri").val() == null) {
+                        layer.msg("请上传图片", {time: 2000});
+                    }
+                    else {
+                        submitAgent();
+                        return false;
+                    }
                 },
                 invalidHandler: function () {
                     return true;
@@ -448,6 +415,54 @@
     }
 </script>
 
+<script>
+    function submitAgent() {
+        $.ajax({
+            url: "/saveAddLowerAg",
+            data: {
+                name: $("#name").val(),
+                agentLevel: $("#agentLevel").val(),
+                agentType: $("#type").val(),
+                money: $("#balance").val(),
+                username: $("#username").val(),
+                password: $("#password").val(),
+                contacts: $("#contacts").val(),
+                province: $("#province").val(),
+                huobanMall: $("#huobanMall").val(),
+                hotEdu: $("#hotEdu").val(),
+                dsp: $("#dsp").val(),
+                thirdPartnar: $("#thirdPartnar").val(),
+                qualifyUri: $("#qualifyUri").val(),
+                city: $("#city").val(),
+                district: $("#district").val(),
+                phoneNo: $("#phoneNo").val(),
+                address: $("#address").val(),
+                mail: $("#mail").val(),
+                qq: $("#qq").val()
+            },
+            type: "POST",
+            dataType: 'json',
+            success: function (msg) {
+                var index = parseInt(msg.code);
+                switch (index) {
+                    case 2000:
+                        layer.msg("添加成功,2秒后将自动代理商列表", {time: 2000});
+                        setTimeout(function () {
+                                    window.location.href = "http://" + window.location.host + "/" + "agentList";
+                                }
+                                , 1000);
+                        break;
+                    case 4001:
+                        layer.msg("您的账户余额不足", {time: 2000});
+                        $("#balance").val("");
+                        break;
+                }
+            },
+            error: function () {
 
+            }
+        });
+    }
+</script>
 </body>
 </html>

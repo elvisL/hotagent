@@ -12,8 +12,11 @@ package com.huotu.hotagent.service.repository.role.agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * Created by chendeyu on 2016/1/25.
  */
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
+    List<Customer> findByAgent_IdAndProductId(Long agentId,Long productId);
 }

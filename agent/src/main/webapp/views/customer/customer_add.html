@@ -63,16 +63,18 @@
                 <div class="panel-body panel-body-nopadding">
 
                     <form id="editForm" th:method="post" class="form-horizontal form-bordered">
-
+                        <input type="hidden" name="balance" id="balance" th:value="${balance}" value="0">
+                        <input type="hidden" name="flag" id="flag" th:value="${flag}" value="0">
+                        <input type="hidden" name="price" id="price" th:value="${price}" value="0">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">客户名称</label>
+                            <label class="col-sm-3 control-label">客户名称<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
                                 <input type="text" name="name" id="name" title="客户名称" placeholder="客户名称" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">公司名称</label>
+                            <label class="col-sm-3 control-label">公司名称<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
                                 <input type="text" name="company" id="company" title="公司名称" placeholder="公司名称" class="form-control"/>
@@ -88,74 +90,37 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">销售金额</label>
+                            <label class="col-sm-3 control-label">需求量<span class="asterisk">*</span></label>
 
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">¥</span>
-                                    <input type="number" name="money" id="money" title="销售金额" class="form-control">
+                                    <input type="number" name="count" id="count" title="需求量" class="form-control">
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">联系方式</label>
+                            <label class="col-sm-3 control-label">联系方式<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
                                 <input type="text" name="phoneNo" id="phoneNo" title="联系方式" placeholder="联系方式" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">联系人</label>
+                            <label class="col-sm-3 control-label">联系人<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
                                 <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group" th:if="${product.id==1}">
-                            <label class="col-sm-3 control-label">伙伴商城登录账号</label>
+                            <label class="col-sm-3 control-label">伙伴商城登录账号<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="loginName" id="loginName" title="登录名" placeholder="登录名" class="form-control"/>
+                                <input type="text" name="loginName" id="loginName" title="登录名" placeholder="登录账号，多个账号用;隔开" class="form-control"/>
                             </div>
                         </div>
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">邮箱</label>-->
-
-                            <!--<div class="col-sm-6">-->
-                                <!--<input type="text" name="username" title="邮箱" placeholder="邮箱" class="form-control"/>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">联系地址</label>-->
-
-                            <!--<div class="col-sm-6">-->
-                                <!--<input type="text" name="username" title="联系地址" placeholder="联系地址" class="form-control"/>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="form-group">-->
-                            <!--<label class="col-sm-3 control-label">企业资质</label>-->
-
-                            <!--<div class="col-sm-6">-->
-                                <!--<div class="fileupload fileupload-new" data-provides="fileupload"><input type="hidden">-->
-
-                                    <!--<div class="input-append">-->
-                                        <!--<div class="uneditable-input">-->
-                                            <!--<i class="glyphicon glyphicon-file fileupload-exists"></i>-->
-                                            <!--<span class="fileupload-preview"></span>-->
-                                        <!--</div>-->
-                                    <!--<span class="btn btn-default btn-file">-->
-                                      <!--<span class="fileupload-new">Select file</span>-->
-                                      <!--<span class="fileupload-exists">Change</span>-->
-                                      <!--<input type="file">-->
-                                    <!--</span>-->
-                                        <!--<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
                     </form>
 
                 </div><!-- panel-body -->
@@ -213,65 +178,56 @@
                     $(element).valid();
                 },
                 rules: {
-                    password: {
+                    name: {
                         required : true
                     },
-//                    newPassword: {
-//                        required : true
-//                    },
-//                    CnewPassword: {
-//                        required : true,
-//                        equalTo:"#newPassword"
-//                    }
+                    company: {
+                        required : true
+                    },
+                    count: {
+                        required : true
+                    },
+                    phoneNo: {
+                        required : true
+                    },
+                    contacts: {
+                        required : true
+                    }
                 },
                 messages: {
-//                    password:{
-//                        required:"请输入原密码"
-//                    },
-//                    newPassword: {
-//                        required:"请输入新密码"
-//                    },
-//                    CnewPassword: {
-//                        required:"请输入确认密码",
-//                        equalTo: "两次输入密码不一致"
-//                    }
+                    name: {
+                        required : "请输入客户名称",
+                    },
+                    company: {
+                        required : "请输入公司名称",
+                    },
+                    count: {
+                        required : "请输入需求量",
+                    },
+                    phoneNo: {
+                        required : "请输入联系方式",
+                    },
+                    contacts: {
+                        required : "请输入联系人",
+                    }
 
                 },
                 submitHandler: function (form, ev) {
-                    $.ajax({
-                        url: "/saveCustomer",
-                        data: {
-                            name:$("#name").val(),
-                            company:$("#company").val(),
-                            productId:$("#productId").val(),
-                            money:$("#money").val(),
-                            contacts:$("#contacts").val(),
-                            phoneNo:$("#phoneNo").val(),
-                            loginName:$("#loginName").val()
-                        },
-                        type: "POST",
-                        dataType: 'json',
-                        success: function (msg) {
-                            var index=parseInt(msg.code);
-                            switch (index) {
-                                case 2000:
-                                    layer.msg("添加成功,2秒后将自动返回产品页面",{time: 2000});
-                                    setTimeout(function(){
-                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
-                                            }
-                                            ,1000);
-//                                    $("#password").val("");
-                                    break;
-                                case 4001:
-                                    layer.msg("您的账户余额不足", {time: 2000});
-                                    $("#money").val("");
-                                    break;
-                            }
-                        },
-                        error: function () {
-
+                    if($("#flag").val()==0){//一级代理商
+                        if($("#balance").val()<($("#count").val()*$("#price").val())){
+                            layer.msg('余额不足，确定用佣金购买吗', {
+                                time: 0 //不自动关闭
+                                ,btn: ['确认', '否']
+                                ,yes: function(index){
+                                    layer.close(index);
+                                    Import();
+                                }
+                            });
                         }
-                    });
+                    }
+                    else{
+                        Import();
+                    }
                     return false;
                 },
                 invalidHandler: function () {
@@ -284,7 +240,44 @@
         }
     }
 </script>
+<script>
 
+    function Import(){
+        $.ajax({
+            url: "/saveCustomer",
+            data: {
+                name:$("#name").val(),
+                company:$("#company").val(),
+                productId:$("#productId").val(),
+                count:$("#count").val(),
+                contacts:$("#contacts").val(),
+                phoneNo:$("#phoneNo").val(),
+                loginName:$("#loginName").val()
+            },
+            type: "POST",
+            dataType: 'json',
+            success: function (msg) {
+                var index=parseInt(msg.code);
+                switch (index) {
+                    case 2000:
+                        layer.msg("添加成功,2秒后将自动返回产品页面",{time: 2000});
+                        setTimeout(function(){
+                                    window.location.href="http://"+window.location.host+"/"+"showProducts";
+                                }
+                                ,1000);
+                        break;
+                    case 4001:
+                        layer.msg("您的账户余额不足", {time: 2000});
+                        $("#count").val("");
+                        break;
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

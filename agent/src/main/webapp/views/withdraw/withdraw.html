@@ -155,14 +155,14 @@
                     money: {
                         required : true,
                         min:0,
-                        max:"#commission"
+                        minTo:"#commission"
                     }
                 },
                 messages: {
                     money:{
                         required:"请输入提现金额",
                         min:"金额必须大于0",
-                        max:"提现金额不许大于佣金余额"
+                        minTo:"提现金额不许大于佣金余额"
                     }
 
                 },
@@ -179,9 +179,11 @@
                             var index=parseInt(msg.code);
                             switch (index) {
                                 case 2000:
-                                    layer.msg("提交成功", {time: 2000});
-                                    $("#money").val("");
-                                    $("#messgae").val("");
+                                    layer.msg("提交申请成功", {time: 2000});
+                                    setTimeout(function(){
+                                                window.location.href="http://"+window.location.host+"/"+"withdraw";
+                                            }
+                                            ,1000);
                                     break;
                                 case 4000:
                                     layer.msg("申请失败，请联系管理员", {time: 2000});
