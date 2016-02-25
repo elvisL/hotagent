@@ -84,7 +84,7 @@ public class Agent extends Login {
     /**
      * 联系人
      */
-    @Column(name = "contacts")
+    @Column(name = "contacts",length = 50)
     private String contacts;
 
     /**

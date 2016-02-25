@@ -59,6 +59,25 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product update(Product product) {
+        //如果ID为空，则返回null(产品不能新增)；否则修改产品
+        Product old;
+        if(product.getId() == null){
+            return null;
+        }else{
+            old = productRepository.findOne(product.getId());
+            if(old == null){
+                return null;
+            }
+            old.setName(product.getName());
+            old.setBasePrice(product.getBasePrice());
+            old.setProductDesc(product.getProductDesc());
+            old = productRepository.save(old);
+        }
+        return old;
+    }
+
+    @Override
     public List<Product> findAll() {
         return productRepository.findAll();
     }

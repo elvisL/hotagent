@@ -1,424 +1,430 @@
-2016-02-25 14:54:05,174 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2016-02-25 14:54:05,211 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5db45159, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6107227e, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7c417213, org.springframework.test.context.support.DirtiesContextTestExecutionListener@15761df8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6ab7a896, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@327b636c]
-2016-02-25 14:54:05,385 - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7b227d8d: startup date [Thu Feb 25 14:54:05 CST 2016]; root of context hierarchy
-2016-02-25 14:54:05,803 - Loading XML bean definitions from class path resource [service_config_prod.xml]
-2016-02-25 14:54:05,995 - Loading XML bean definitions from class path resource [service_config_dev.xml]
-2016-02-25 14:54:06,738 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016-02-25 14:54:07,492 - Building JPA container EntityManagerFactory for persistence unit 'basePu'
-2016-02-25 14:54:15,367 - Creating filter chain: Ant [pattern='/assets/**'], []
-2016-02-25 14:54:15,368 - Creating filter chain: Ant [pattern='/views/**'], []
-2016-02-25 14:54:15,368 - Creating filter chain: Ant [pattern='/image/**'], []
-2016-02-25 14:54:15,368 - Creating filter chain: Ant [pattern='/loginerror'], []
-2016-02-25 14:54:15,455 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4b039c6d, org.springframework.security.web.context.SecurityContextPersistenceFilter@177515d1, org.springframework.security.web.header.HeaderWriterFilter@3291b443, org.springframework.security.web.authentication.logout.LogoutFilter@1b7a52dd, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4601203a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4c2af006, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e49ce2b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7f5b9db, org.springframework.security.web.session.SessionManagementFilter@77865933, org.springframework.security.web.access.ExceptionTranslationFilter@2975a9e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@26bbe604]
-2016-02-25 14:54:15,653 - Mapped URL path [/assets/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2016-02-25 14:54:15,653 - Mapped URL path [/image/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2016-02-25 14:54:16,002 - Mapped "{[/checkCity]}" onto public com.huotu.hotagent.common.constant.ApiResult com.huotu.hotagent.admin.controller.agent.AgentController.checkCity(java.lang.String)
-2016-02-25 14:54:16,003 - Mapped "{[/uploadImg]}" onto public com.huotu.hotagent.common.constant.ApiResult com.huotu.hotagent.admin.controller.agent.AgentController.uploadImg(org.springframework.web.multipart.MultipartFile,java.lang.String) throws java.lang.Exception
-2016-02-25 14:54:16,003 - Mapped "{[/agentEditForm],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit(org.springframework.ui.Model,java.lang.Long)
-2016-02-25 14:54:16,004 - Mapped "{[/agents],methods=[POST]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit(com.huotu.hotagent.service.entity.role.agent.Agent) throws java.lang.Exception
-2016-02-25 14:54:16,004 - Mapped "{[/agents],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentList(int,com.huotu.hotagent.service.model.AgentSearch,org.springframework.ui.Model)
-2016-02-25 14:54:16,005 - Mapped "{[/agents/{id}],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.showAgentDetail(java.lang.Long,org.springframework.ui.Model) throws java.lang.Exception
-2016-02-25 14:54:16,006 - Mapped "{[ || / || /index]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.index(org.springframework.ui.Model)
-2016-02-25 14:54:16,007 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.login()
-2016-02-25 14:54:16,007 - Mapped "{[/loginError]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.loginError(javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
-2016-02-25 14:54:16,008 - Mapped "{[/commissionLogs],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.log.LogController.commissionLogList(int,com.huotu.hotagent.service.model.LogSearch,org.springframework.ui.Model)
-2016-02-25 14:54:16,008 - Mapped "{[/balanceLogs],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.log.LogController.balanceLogList(int,com.huotu.hotagent.service.model.LogSearch,org.springframework.ui.Model)
-2016-02-25 14:54:16,009 - Mapped "{[/withdraws],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.huotu.hotagent.admin.controller.withdraw.WithdrawController.showWithdrawRecords(int)
-2016-02-25 14:54:16,010 - Mapped "{[/withdraws/{id}/edit],methods=[POST]}" onto public com.huotu.hotagent.common.constant.ApiResult com.huotu.hotagent.admin.controller.withdraw.WithdrawController.changeAuditStatus(java.lang.Long,com.huotu.hotagent.service.common.AuditStatus)
-2016-02-25 14:54:16,010 - Mapped "{[/withdraws/{id}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.huotu.hotagent.admin.controller.withdraw.WithdrawController.showRecordDetail(java.lang.Long)
-2016-02-25 14:54:16,040 - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@7b227d8d: startup date [Thu Feb 25 14:54:05 CST 2016]; root of context hierarchy
-2016-02-25 14:54:16,225 - Began transaction (1) for test context [DefaultTestContext@2b6a0ea9 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@4dde8976, testMethod = testAgentEdit@AgentControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3408f695 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@ed2f2f6]; rollback [true]
-2016-02-25 14:54:16,242 - Initializing Spring FrameworkServlet ''
-2016-02-25 14:54:16,242 - FrameworkServlet '': initialization started
-2016-02-25 14:54:16,259 - FrameworkServlet '': initialization completed in 17 ms
-2016-02-25 14:54:19,195 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:20,120 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,178 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,179 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,276 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:20,333 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,334 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,335 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,336 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,337 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:20,505 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:20,508 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:20,521 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:20,521 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
-2016-02-25 14:54:20,536 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,538 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,538 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,539 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,540 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,541 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,542 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,543 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,543 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,544 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,560 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,561 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,561 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,562 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,563 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,563 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,564 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,564 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,565 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,566 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,566 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,566 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,567 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,567 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,567 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,568 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:20,646 - Bad input type: "tel", creating a text input
-2016-02-25 14:54:20,648 - Bad input type: "url", creating a text input
-2016-02-25 14:54:20,649 - Bad input type: "email", creating a text input
-2016-02-25 14:54:20,650 - Bad input type: "datetime", creating a text input
-2016-02-25 14:54:20,685 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
-2016-02-25 14:54:20,998 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
-2016-02-25 14:54:21,035 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
-2016-02-25 14:54:21,062 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
-2016-02-25 14:54:21,125 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
-2016-02-25 14:54:21,148 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
-2016-02-25 14:54:21,250 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:22,865 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:22,952 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
-2016-02-25 14:54:23,059 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:24,132 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery-1.10.2.min.js', but got ''.
-2016-02-25 14:54:24,187 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://localhost:8080/assets/js/jquery-1.10.2.min.js] line=[390] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:24,223 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery-migrate-1.2.1.min.js', but got ''.
-2016-02-25 14:54:24,240 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery-ui-1.10.3.min.js', but got ''.
-2016-02-25 14:54:24,567 - CSS error: 'http://localhost:8080/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:24,639 - CSS error: 'http://localhost:8080/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:24,640 - CSS error: 'http://localhost:8080/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:24,728 - CSS error: 'http://localhost:8080/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:24,759 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:24,760 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:24,761 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:24,763 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:24,764 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:25,057 - CSS error: 'http://localhost:8080/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:25,059 - CSS error: 'http://localhost:8080/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:25,067 - CSS error: 'http://localhost:8080/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:25,068 - CSS warning: 'http://localhost:8080/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
-2016-02-25 14:54:25,096 - CSS error: 'http://localhost:8080/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,100 - CSS error: 'http://localhost:8080/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,101 - CSS error: 'http://localhost:8080/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,102 - CSS error: 'http://localhost:8080/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,103 - CSS error: 'http://localhost:8080/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,103 - CSS error: 'http://localhost:8080/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,108 - CSS error: 'http://localhost:8080/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,109 - CSS error: 'http://localhost:8080/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,110 - CSS error: 'http://localhost:8080/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,111 - CSS error: 'http://localhost:8080/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,126 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,127 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,128 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,129 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,130 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,131 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,131 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,132 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,133 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,134 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,134 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,135 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,140 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,141 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,143 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,144 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:25,152 - CSS error: 'http://localhost:8080/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:25,279 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap.min.js', but got ''.
-2016-02-25 14:54:25,317 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery.sparkline.min.js', but got ''.
-2016-02-25 14:54:25,362 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/toggles.min.js', but got ''.
-2016-02-25 14:54:25,379 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/retina.min.js', but got ''.
-2016-02-25 14:54:25,391 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery.cookies.js', but got ''.
-2016-02-25 14:54:25,410 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap-fileupload.min.js', but got ''.
-2016-02-25 14:54:25,433 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap-timepicker.min.js', but got ''.
-2016-02-25 14:54:25,460 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery.validate.min.js', but got ''.
-2016-02-25 14:54:25,491 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
-2016-02-25 14:54:25,507 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/custom.js', but got ''.
-2016-02-25 14:54:25,538 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/cityselect/jquery.cityselect.js', but got ''.
-2016-02-25 14:54:25,582 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/ajaxfileupload.js', but got ''.
-2016-02-25 14:54:25,598 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/agent/agent-edit.js', but got ''.
-2016-02-25 14:54:25,620 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/layer/layer.js', but got ''.
-2016-02-25 14:54:25,653 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:5] Error in style rule. (Invalid token "html". Was expecting one of: <S>, <LBRACE>, ".", ":", "[", <COMMA>, <HASH>, <S>.)
-2016-02-25 14:54:25,653 - CSS warning: 'http://localhost:8080/assets/layer/skin/layer.css' [7:5] Ignoring the following declarations in this rule.
-2016-02-25 14:54:25,654 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:315] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:25,659 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:1237] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:25,659 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:1253] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:25,666 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:6361] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:25,667 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:7350] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:25,670 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:10203] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:26,581 - Request method 'HEAD' not supported
-2016-02-25 14:54:28,436 - Unhandled CSS condition type '7'. Accepting it silently.
-2016-02-25 14:54:30,378 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:34,083 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:556] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:34,100 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8221] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:34,101 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8801] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:34,111 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:12443] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:34,291 - Bad input type: "tel", creating a text input
-2016-02-25 14:54:34,291 - Bad input type: "url", creating a text input
-2016-02-25 14:54:34,292 - Bad input type: "email", creating a text input
-2016-02-25 14:54:34,293 - Bad input type: "datetime", creating a text input
-2016-02-25 14:54:34,533 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap.hot.extras.js', but got ''.
-2016-02-25 14:54:34,618 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/hot/jquery.utils.js', but got ''.
-2016-02-25 14:54:36,134 - No mapping found for HTTP request with URI [/images/photos/userprofile@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,135 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,138 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,140 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,141 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,143 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,144 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,146 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,148 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,150 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,151 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,152 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,154 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,155 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,159 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,161 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,162 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,164 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,165 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,167 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:36,376 - Rolled back transaction for test context [DefaultTestContext@2b6a0ea9 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@4dde8976, testMethod = testAgentEdit@AgentControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3408f695 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
-2016-02-25 14:54:36,379 - Began transaction (1) for test context [DefaultTestContext@2b6a0ea9 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@65b7678a, testMethod = testAgentList@AgentControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3408f695 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@ed2f2f6]; rollback [true]
-2016-02-25 14:54:36,380 - Initializing Spring FrameworkServlet ''
-2016-02-25 14:54:36,380 - FrameworkServlet '': initialization started
-2016-02-25 14:54:36,382 - FrameworkServlet '': initialization completed in 2 ms
-2016-02-25 14:54:36,618 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:37,170 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:37,284 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:37,285 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:37,686 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:37,746 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:37,747 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:37,753 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:37,753 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:37,754 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:38,238 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:38,240 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:38,253 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:38,256 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
-2016-02-25 14:54:38,346 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,347 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,348 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,348 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,349 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,350 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,350 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,351 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,352 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,353 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,371 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,371 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,372 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,373 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,380 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,381 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,382 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,382 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,383 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,384 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,385 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,387 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,388 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,389 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,390 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,391 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:38,456 - Bad input type: "tel", creating a text input
-2016-02-25 14:54:38,456 - Bad input type: "url", creating a text input
-2016-02-25 14:54:38,456 - Bad input type: "email", creating a text input
-2016-02-25 14:54:38,457 - Bad input type: "datetime", creating a text input
-2016-02-25 14:54:38,482 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
-2016-02-25 14:54:38,651 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
-2016-02-25 14:54:38,763 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
-2016-02-25 14:54:38,794 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
-2016-02-25 14:54:38,822 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
-2016-02-25 14:54:38,934 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
-2016-02-25 14:54:39,129 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:41,000 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:41,063 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
-2016-02-25 14:54:41,184 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:51,623 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:52,232 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:556] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,244 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8221] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,245 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8801] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,253 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:12443] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,301 - Bad input type: "tel", creating a text input
-2016-02-25 14:54:52,301 - Bad input type: "url", creating a text input
-2016-02-25 14:54:52,301 - Bad input type: "email", creating a text input
-2016-02-25 14:54:52,302 - Bad input type: "datetime", creating a text input
-2016-02-25 14:54:52,359 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/bootstrap.hot.extras.js', but got ''.
-2016-02-25 14:54:52,381 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/hot/jquery.utils.js', but got ''.
-2016-02-25 14:54:52,409 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/layer/layer.js', but got ''.
-2016-02-25 14:54:52,426 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:5] Error in style rule. (Invalid token "html". Was expecting one of: <S>, <LBRACE>, ".", ":", "[", <COMMA>, <HASH>, <S>.)
-2016-02-25 14:54:52,426 - CSS warning: 'http://localhost/assets/layer/skin/layer.css' [7:5] Ignoring the following declarations in this rule.
-2016-02-25 14:54:52,426 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:315] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:52,427 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:1237] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,427 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:1253] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,431 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:6361] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,434 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:7350] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,437 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:10203] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:52,994 - No mapping found for HTTP request with URI [/images/photos/userprofile@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:52,996 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:52,999 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,001 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,002 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,004 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,006 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,007 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,008 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,009 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,010 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,012 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,017 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,019 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,020 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,020 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,021 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,022 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,023 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,024 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
-2016-02-25 14:54:53,444 - Rolled back transaction for test context [DefaultTestContext@2b6a0ea9 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@65b7678a, testMethod = testAgentList@AgentControllerTest, testException = org.openqa.selenium.NoSuchElementException: Returned node was not a DOM element
+2016-02-24 17:03:39,598 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-24 17:03:39,609 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@475e586c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@657c8ad9, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@436a4e4b, org.springframework.test.context.support.DirtiesContextTestExecutionListener@f2f2cc1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3a079870, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3b2cf7ab]
+2016-02-24 17:03:39,838 - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@37918c79: startup date [Wed Feb 24 17:03:39 CST 2016]; root of context hierarchy
+2016-02-24 17:03:40,137 - Loading XML bean definitions from class path resource [service_config_prod.xml]
+2016-02-24 17:03:40,347 - Loading XML bean definitions from class path resource [service_config_dev.xml]
+2016-02-24 17:03:40,780 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-02-24 17:03:41,216 - Building JPA container EntityManagerFactory for persistence unit 'basePu'
+2016-02-24 17:03:46,701 - Creating filter chain: Ant [pattern='/assets/**'], []
+2016-02-24 17:03:46,701 - Creating filter chain: Ant [pattern='/views/**'], []
+2016-02-24 17:03:46,701 - Creating filter chain: Ant [pattern='/image/**'], []
+2016-02-24 17:03:46,701 - Creating filter chain: Ant [pattern='/loginerror'], []
+2016-02-24 17:03:46,768 - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@53c6f96d, org.springframework.security.web.context.SecurityContextPersistenceFilter@1f53481b, org.springframework.security.web.header.HeaderWriterFilter@c2584d3, org.springframework.security.web.authentication.logout.LogoutFilter@12704e15, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@44032fde, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@27e7c77f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@33063f5b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@435cc7f9, org.springframework.security.web.session.SessionManagementFilter@51ec2856, org.springframework.security.web.access.ExceptionTranslationFilter@58740366, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4d18b73a]
+2016-02-24 17:03:47,112 - Mapped "{[/uploadImg]}" onto public com.huotu.hotagent.common.constant.ApiResult com.huotu.hotagent.admin.controller.agent.AgentController.uploadImg(org.springframework.web.multipart.MultipartFile,java.lang.String) throws java.lang.Exception
+2016-02-24 17:03:47,113 - Mapped "{[/agents/{id}],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.showAgentDetail(java.lang.Long,org.springframework.ui.Model) throws java.lang.Exception
+2016-02-24 17:03:47,113 - Mapped "{[/agents],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentList(int,com.huotu.hotagent.service.model.AgentSearch,org.springframework.ui.Model)
+2016-02-24 17:03:47,114 - Mapped "{[/agentEditForm],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit(org.springframework.ui.Model,java.lang.Long)
+2016-02-24 17:03:47,114 - Mapped "{[/agents],methods=[POST]}" onto public java.lang.String com.huotu.hotagent.admin.controller.agent.AgentController.AgentEdit(com.huotu.hotagent.service.entity.role.agent.Agent) throws java.lang.Exception
+2016-02-24 17:03:47,114 - Mapped "{[/checkCity]}" onto public com.huotu.hotagent.common.constant.ApiResult com.huotu.hotagent.admin.controller.agent.AgentController.checkCity(java.lang.String)
+2016-02-24 17:03:47,115 - Mapped "{[ || / || /index]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.index(org.springframework.ui.Model)
+2016-02-24 17:03:47,115 - Mapped "{[/loginError]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.loginError(javax.servlet.http.HttpServletRequest,org.springframework.web.servlet.mvc.support.RedirectAttributes)
+2016-02-24 17:03:47,115 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.IndexController.login()
+2016-02-24 17:03:47,116 - Mapped "{[/balanceLogs],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.log.LogController.balanceLogList(int,com.huotu.hotagent.service.model.LogSearch,org.springframework.ui.Model)
+2016-02-24 17:03:47,116 - Mapped "{[/commissionLogs],methods=[GET]}" onto public java.lang.String com.huotu.hotagent.admin.controller.log.LogController.commissionLogList(int,com.huotu.hotagent.service.model.LogSearch,org.springframework.ui.Model)
+2016-02-24 17:03:47,117 - Mapped "{[/withdraws/{id}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.huotu.hotagent.admin.controller.withdraw.WithdrawController.showRecordDetail(java.lang.Long)
+2016-02-24 17:03:47,117 - Mapped "{[/withdraws],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView com.huotu.hotagent.admin.controller.withdraw.WithdrawController.showWithdrawRecords(int)
+2016-02-24 17:03:47,117 - Mapped "{[/withdraws/{id}/edit],methods=[POST]}" onto public com.huotu.hotagent.common.constant.ApiResult com.huotu.hotagent.admin.controller.withdraw.WithdrawController.changeAuditStatus(java.lang.Long,com.huotu.hotagent.service.common.AuditStatus)
+2016-02-24 17:03:47,134 - Mapped URL path [/assets/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-02-24 17:03:47,134 - Mapped URL path [/image/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-02-24 17:03:47,450 - Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@37918c79: startup date [Wed Feb 24 17:03:39 CST 2016]; root of context hierarchy
+2016-02-24 17:03:47,670 - Began transaction (1) for test context [DefaultTestContext@687e6293 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@6870c3c2, testMethod = testAgentEdit@AgentControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@483b0690 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@74606204]; rollback [true]
+2016-02-24 17:03:47,688 - Initializing Spring FrameworkServlet ''
+2016-02-24 17:03:47,688 - FrameworkServlet '': initialization started
+2016-02-24 17:03:47,707 - FrameworkServlet '': initialization completed in 18 ms
+2016-02-24 17:03:50,757 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:03:52,093 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,170 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,172 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,279 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:03:52,466 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,467 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,468 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,468 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,469 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:52,860 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:52,863 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:03:53,004 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:03:53,004 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
+2016-02-24 17:03:53,016 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,017 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,018 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,018 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,019 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,020 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,020 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,021 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,022 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,022 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,026 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,027 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,027 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,028 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,028 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,029 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,029 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,030 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,031 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,031 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,032 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,033 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,033 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,034 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,034 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,035 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:53,285 - Bad input type: "tel", creating a text input
+2016-02-24 17:03:53,285 - Bad input type: "url", creating a text input
+2016-02-24 17:03:53,286 - Bad input type: "email", creating a text input
+2016-02-24 17:03:53,286 - Bad input type: "datetime", creating a text input
+2016-02-24 17:03:53,385 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
+2016-02-24 17:03:53,434 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
+2016-02-24 17:03:53,485 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
+2016-02-24 17:03:53,494 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
+2016-02-24 17:03:53,543 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
+2016-02-24 17:03:53,560 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
+2016-02-24 17:03:54,127 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:55,678 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:03:55,708 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
+2016-02-24 17:03:55,787 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:56,461 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery-1.10.2.min.js', but got ''.
+2016-02-24 17:03:56,502 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://localhost:8080/assets/js/jquery-1.10.2.min.js] line=[390] lineSource=[null] lineOffset=[0]
+2016-02-24 17:03:56,520 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery-migrate-1.2.1.min.js', but got ''.
+2016-02-24 17:03:56,532 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery-ui-1.10.3.min.js', but got ''.
+2016-02-24 17:03:56,745 - CSS error: 'http://localhost:8080/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,808 - CSS error: 'http://localhost:8080/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,809 - CSS error: 'http://localhost:8080/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,857 - CSS error: 'http://localhost:8080/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:03:56,868 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,869 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,869 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,870 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,870 - CSS error: 'http://localhost:8080/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:03:56,997 - CSS error: 'http://localhost:8080/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:56,998 - CSS error: 'http://localhost:8080/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:03:57,005 - CSS error: 'http://localhost:8080/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:03:57,005 - CSS warning: 'http://localhost:8080/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
+2016-02-24 17:03:57,012 - CSS error: 'http://localhost:8080/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,012 - CSS error: 'http://localhost:8080/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,013 - CSS error: 'http://localhost:8080/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,013 - CSS error: 'http://localhost:8080/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,014 - CSS error: 'http://localhost:8080/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,014 - CSS error: 'http://localhost:8080/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,015 - CSS error: 'http://localhost:8080/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,016 - CSS error: 'http://localhost:8080/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,016 - CSS error: 'http://localhost:8080/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,017 - CSS error: 'http://localhost:8080/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,021 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,022 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,023 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,023 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,024 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,025 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,025 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,026 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,027 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,028 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,029 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,029 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,030 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,032 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,032 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,033 - CSS error: 'http://localhost:8080/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:03:57,038 - CSS error: 'http://localhost:8080/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:57,097 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap.min.js', but got ''.
+2016-02-24 17:03:57,116 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery.sparkline.min.js', but got ''.
+2016-02-24 17:03:57,133 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/toggles.min.js', but got ''.
+2016-02-24 17:03:57,138 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/retina.min.js', but got ''.
+2016-02-24 17:03:57,142 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery.cookies.js', but got ''.
+2016-02-24 17:03:57,146 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap-fileupload.min.js', but got ''.
+2016-02-24 17:03:57,152 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap-timepicker.min.js', but got ''.
+2016-02-24 17:03:57,159 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/jquery.validate.min.js', but got ''.
+2016-02-24 17:03:57,185 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
+2016-02-24 17:03:57,189 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/custom.js', but got ''.
+2016-02-24 17:03:57,195 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/cityselect/jquery.cityselect.js', but got ''.
+2016-02-24 17:03:57,234 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/ajaxfileupload.js', but got ''.
+2016-02-24 17:03:57,252 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/agent/agent-edit.js', but got ''.
+2016-02-24 17:03:57,260 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/layer/layer.js', but got ''.
+2016-02-24 17:03:57,283 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:5] Error in style rule. (Invalid token "html". Was expecting one of: <S>, <LBRACE>, ".", ":", "[", <COMMA>, <HASH>, <S>.)
+2016-02-24 17:03:57,283 - CSS warning: 'http://localhost:8080/assets/layer/skin/layer.css' [7:5] Ignoring the following declarations in this rule.
+2016-02-24 17:03:57,284 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:315] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:03:57,285 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:1237] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:57,285 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:1253] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:57,292 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:6361] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:57,294 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:7350] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:57,297 - CSS error: 'http://localhost:8080/assets/layer/skin/layer.css' [7:10203] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:03:57,741 - Request method 'HEAD' not supported
+2016-02-24 17:03:58,308 - Unhandled CSS condition type '7'. Accepting it silently.
+2016-02-24 17:03:59,499 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://localhost:8080/assets/js/jquery-1.10.2.min.js] line=[390] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:00,152 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:556] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:00,158 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8221] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:00,159 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8801] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:00,162 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:12443] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:00,201 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/modernizr.min.js', but got ''.
+2016-02-24 17:04:00,226 - Bad input type: "tel", creating a text input
+2016-02-24 17:04:00,227 - Bad input type: "url", creating a text input
+2016-02-24 17:04:00,227 - Bad input type: "email", creating a text input
+2016-02-24 17:04:00,227 - Bad input type: "datetime", creating a text input
+2016-02-24 17:04:00,235 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/bootstrap.hot.extras.js', but got ''.
+2016-02-24 17:04:00,239 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost:8080/assets/js/hot/jquery.utils.js', but got ''.
+2016-02-24 17:04:01,228 - No mapping found for HTTP request with URI [/images/photos/userprofile@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,230 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,232 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,233 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,235 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,236 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,237 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,238 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,239 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,242 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,243 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,244 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,245 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,246 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,248 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,249 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,250 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,251 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,253 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,254 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:01,358 - Rolled back transaction for test context [DefaultTestContext@687e6293 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@6870c3c2, testMethod = testAgentEdit@AgentControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@483b0690 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
+2016-02-24 17:04:01,365 - Began transaction (1) for test context [DefaultTestContext@687e6293 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@1df2e767, testMethod = testAgentList@AgentControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@483b0690 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@74606204]; rollback [true]
+2016-02-24 17:04:01,366 - Initializing Spring FrameworkServlet ''
+2016-02-24 17:04:01,366 - FrameworkServlet '': initialization started
+2016-02-24 17:04:01,367 - FrameworkServlet '': initialization completed in 1 ms
+2016-02-24 17:04:01,555 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:01,787 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:01,838 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:01,838 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:01,882 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:01,894 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:01,894 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:01,894 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:01,895 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:01,895 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:02,004 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:02,005 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:02,011 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:02,012 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
+2016-02-24 17:04:02,016 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,016 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,017 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,017 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,018 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,018 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,018 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,019 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,020 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,020 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,024 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,024 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,026 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,026 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,027 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,028 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,028 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,029 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,030 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,030 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,031 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,031 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,032 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,033 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,033 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,034 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:02,055 - Bad input type: "tel", creating a text input
+2016-02-24 17:04:02,056 - Bad input type: "url", creating a text input
+2016-02-24 17:04:02,056 - Bad input type: "email", creating a text input
+2016-02-24 17:04:02,056 - Bad input type: "datetime", creating a text input
+2016-02-24 17:04:02,066 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
+2016-02-24 17:04:02,082 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
+2016-02-24 17:04:02,100 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
+2016-02-24 17:04:02,105 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
+2016-02-24 17:04:02,115 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
+2016-02-24 17:04:02,119 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
+2016-02-24 17:04:02,160 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:03,106 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:03,127 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
+2016-02-24 17:04:03,260 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:21,931 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-1.10.2.min.js', but got ''.
+2016-02-24 17:04:21,957 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://localhost/assets/js/jquery-1.10.2.min.js] line=[390] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:21,966 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-migrate-1.2.1.min.js', but got ''.
+2016-02-24 17:04:22,348 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:556] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,354 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8221] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,381 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:8801] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,384 - CSS error: 'http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' [1:12443] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,408 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/bootstrap.min.js', but got ''.
+2016-02-24 17:04:22,418 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/modernizr.min.js', but got ''.
+2016-02-24 17:04:22,433 - Bad input type: "tel", creating a text input
+2016-02-24 17:04:22,437 - Bad input type: "url", creating a text input
+2016-02-24 17:04:22,438 - Bad input type: "email", creating a text input
+2016-02-24 17:04:22,438 - Bad input type: "datetime", creating a text input
+2016-02-24 17:04:22,443 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/retina.min.js', but got ''.
+2016-02-24 17:04:22,454 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/bootstrap.hot.extras.js', but got ''.
+2016-02-24 17:04:22,456 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/hot/jquery.utils.js', but got ''.
+2016-02-24 17:04:22,476 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/layer/layer.js', but got ''.
+2016-02-24 17:04:22,491 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:5] Error in style rule. (Invalid token "html". Was expecting one of: <S>, <LBRACE>, ".", ":", "[", <COMMA>, <HASH>, <S>.)
+2016-02-24 17:04:22,491 - CSS warning: 'http://localhost/assets/layer/skin/layer.css' [7:5] Ignoring the following declarations in this rule.
+2016-02-24 17:04:22,491 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:315] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:22,493 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:1237] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,493 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:1253] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,498 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:6361] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,499 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:7350] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:22,502 - CSS error: 'http://localhost/assets/layer/skin/layer.css' [7:10203] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:23,221 - No mapping found for HTTP request with URI [/images/photos/userprofile@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,223 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,224 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,225 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,226 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,227 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,228 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,229 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,230 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,230 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,231 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,232 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,233 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,234 - No mapping found for HTTP request with URI [/images/photos/user1@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,235 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,236 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,237 - No mapping found for HTTP request with URI [/images/photos/user5@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,238 - No mapping found for HTTP request with URI [/images/photos/user4@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,239 - No mapping found for HTTP request with URI [/images/photos/user2@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,240 - No mapping found for HTTP request with URI [/images/photos/user3@2x.png] in DispatcherServlet with name ''
+2016-02-24 17:04:23,696 - Rolled back transaction for test context [DefaultTestContext@687e6293 testClass = AgentControllerTest, testInstance = com.huotu.hotagent.admin.controller.agent.AgentControllerTest@1df2e767, testMethod = testAgentList@AgentControllerTest, testException = org.openqa.selenium.NoSuchElementException: Returned node was not a DOM element
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '2.48.2', revision: '41bccdd10cf2c0560f637404c2d96164b67d9d67', time: '2015-10-09 13:08:06'
-System info: host: 'WIN-20150819TZO', ip: '192.168.1.201', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_60'
-Driver info: driver.version: HtmlUnitDriver, mergedContextConfiguration = [WebMergedContextConfiguration@3408f695 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
-2016-02-25 14:54:53,461 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2016-02-25 14:54:53,462 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@249fa2cb, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4c6ebaf2, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@9063080, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1bb21ec1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@42626e86, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7be2f512]
-2016-02-25 14:54:53,528 - Began transaction (1) for test context [DefaultTestContext@48971262 testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@19d043a8, testMethod = testIndex@IndexControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@435848de testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@ed2f2f6]; rollback [true]
-2016-02-25 14:54:53,533 - Initializing Spring FrameworkServlet ''
-2016-02-25 14:54:53,533 - FrameworkServlet '': initialization started
-2016-02-25 14:54:53,537 - FrameworkServlet '': initialization completed in 4 ms
-2016-02-25 14:54:55,025 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:55,219 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,261 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,262 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,316 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:55,338 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,338 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,338 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,339 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,339 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:55,477 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:54:55,478 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:55,484 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:54:55,484 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
-2016-02-25 14:54:55,493 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,494 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,494 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,494 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,495 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,495 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,495 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,496 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,496 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,496 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,510 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,510 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,510 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,511 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,511 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,511 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,512 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,512 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,513 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,513 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,514 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,514 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,514 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,516 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,517 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,517 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:54:55,529 - Bad input type: "tel", creating a text input
-2016-02-25 14:54:55,529 - Bad input type: "url", creating a text input
-2016-02-25 14:54:55,530 - Bad input type: "email", creating a text input
-2016-02-25 14:54:55,530 - Bad input type: "datetime", creating a text input
-2016-02-25 14:54:55,534 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
-2016-02-25 14:54:55,555 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
-2016-02-25 14:54:55,859 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
-2016-02-25 14:54:55,877 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
-2016-02-25 14:54:55,900 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
-2016-02-25 14:54:55,920 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
-2016-02-25 14:54:55,962 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:54:58,374 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:54:58,414 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
-2016-02-25 14:54:58,480 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:55:08,438 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:55:09,154 - Rolled back transaction for test context [DefaultTestContext@48971262 testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@19d043a8, testMethod = testIndex@IndexControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@435848de testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
-2016-02-25 14:55:09,158 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2016-02-25 14:55:09,158 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@65263248, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6816b0cb, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6f6d2847, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7fc8930f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2b284acc, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@76e5278a]
-2016-02-25 14:55:09,171 - Began transaction (1) for test context [DefaultTestContext@4b27a3fc testClass = LoginControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.LoginControllerTest@22b0fe7e, testMethod = testLogin@LoginControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@70cc0601 testClass = LoginControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@ed2f2f6]; rollback [true]
-2016-02-25 14:55:09,238 - Initializing Spring FrameworkServlet ''
-2016-02-25 14:55:09,238 - FrameworkServlet '': initialization started
-2016-02-25 14:55:09,243 - FrameworkServlet '': initialization completed in 5 ms
-2016-02-25 14:55:09,383 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:55:09,817 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:09,891 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:09,891 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:09,948 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:55:09,978 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:09,979 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:09,979 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:09,980 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:09,980 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:10,139 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:55:10,140 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:55:10,145 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
-2016-02-25 14:55:10,145 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
-2016-02-25 14:55:10,159 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,159 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,160 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,160 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,160 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,160 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,161 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,161 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,161 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,162 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,174 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,174 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,175 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,175 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,175 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,176 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,176 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,176 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,177 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,177 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,178 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,178 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,178 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,179 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,179 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,179 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
-2016-02-25 14:55:10,195 - Bad input type: "tel", creating a text input
-2016-02-25 14:55:10,195 - Bad input type: "url", creating a text input
-2016-02-25 14:55:10,195 - Bad input type: "email", creating a text input
-2016-02-25 14:55:10,195 - Bad input type: "datetime", creating a text input
-2016-02-25 14:55:10,200 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
-2016-02-25 14:55:10,221 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
-2016-02-25 14:55:10,241 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
-2016-02-25 14:55:10,250 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
-2016-02-25 14:55:10,264 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
-2016-02-25 14:55:10,272 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
-2016-02-25 14:55:10,311 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
-2016-02-25 14:55:11,236 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:55:11,271 - Bad input type: "tel", creating a text input
-2016-02-25 14:55:11,271 - Bad input type: "url", creating a text input
-2016-02-25 14:55:11,271 - Bad input type: "email", creating a text input
-2016-02-25 14:55:11,271 - Bad input type: "datetime", creating a text input
-2016-02-25 14:55:12,232 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
-2016-02-25 14:55:12,314 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
-2016-02-25 14:55:12,440 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
-2016-02-25 14:55:12,970 - Rolled back transaction for test context [DefaultTestContext@4b27a3fc testClass = LoginControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.LoginControllerTest@22b0fe7e, testMethod = testLogin@LoginControllerTest, testException = java.lang.AssertionError: 
+System info: host: 'admin-PC', ip: '192.168.1.14', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_65'
+Driver info: driver.version: HtmlUnitDriver, mergedContextConfiguration = [WebMergedContextConfiguration@483b0690 testClass = AgentControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
+2016-02-24 17:04:23,706 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-24 17:04:23,707 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@f7a19c4, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@36f93ea3, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2c48eb31, org.springframework.test.context.support.DirtiesContextTestExecutionListener@323fa578, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6d543ec2, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@12a719ed]
+2016-02-24 17:04:23,740 - Began transaction (1) for test context [DefaultTestContext@368617cd testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@7ae88df1, testMethod = testIndex@IndexControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@79dd79eb testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@74606204]; rollback [true]
+2016-02-24 17:04:23,741 - Initializing Spring FrameworkServlet ''
+2016-02-24 17:04:23,741 - FrameworkServlet '': initialization started
+2016-02-24 17:04:23,742 - FrameworkServlet '': initialization completed in 1 ms
+2016-02-24 17:04:23,924 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:24,120 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,189 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,189 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,242 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:24,276 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,277 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,277 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,277 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,278 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:24,387 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:24,388 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:24,393 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:24,393 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
+2016-02-24 17:04:24,396 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,396 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,397 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,397 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,397 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,398 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,398 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,398 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,398 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,399 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,401 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,401 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,401 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,402 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,402 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,402 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,402 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,403 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,403 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,404 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,404 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,404 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,405 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,405 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,405 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,406 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:24,417 - Bad input type: "tel", creating a text input
+2016-02-24 17:04:24,417 - Bad input type: "url", creating a text input
+2016-02-24 17:04:24,417 - Bad input type: "email", creating a text input
+2016-02-24 17:04:24,417 - Bad input type: "datetime", creating a text input
+2016-02-24 17:04:24,422 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
+2016-02-24 17:04:24,429 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
+2016-02-24 17:04:24,448 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
+2016-02-24 17:04:24,453 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
+2016-02-24 17:04:24,457 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
+2016-02-24 17:04:24,460 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
+2016-02-24 17:04:24,502 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:25,554 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:25,569 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
+2016-02-24 17:04:25,618 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:36,716 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:37,193 - Rolled back transaction for test context [DefaultTestContext@368617cd testClass = IndexControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.IndexControllerTest@7ae88df1, testMethod = testIndex@IndexControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@79dd79eb testClass = IndexControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
+2016-02-24 17:04:37,197 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-02-24 17:04:37,197 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6cee6eb7, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b29f03e, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@1d891373, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2ae6cde4, org.springframework.test.context.transaction.TransactionalTestExecutionListener@356285d9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@314e2b4b]
+2016-02-24 17:04:37,210 - Began transaction (1) for test context [DefaultTestContext@789cdc12 testClass = LoginControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.LoginControllerTest@59f1c295, testMethod = testLogin@LoginControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6409a49a testClass = LoginControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@74606204]; rollback [true]
+2016-02-24 17:04:37,210 - Initializing Spring FrameworkServlet ''
+2016-02-24 17:04:37,210 - FrameworkServlet '': initialization started
+2016-02-24 17:04:37,212 - FrameworkServlet '': initialization completed in 2 ms
+2016-02-24 17:04:37,359 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:37,548 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [3331:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,605 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5962:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,605 - CSS error: 'http://localhost/assets/css/bootstrap.min.css' [5971:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,647 - CSS error: 'http://localhost/assets/css/jquery-ui-1.10.3.css' [704:27] Error in expression. (Invalid token "/". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:37,660 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [156:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,660 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [165:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,661 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [174:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,661 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [183:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,661 - CSS error: 'http://localhost/assets/css/font-awesome.min.css' [192:19] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:37,769 - CSS error: 'http://localhost/assets/css/chosen.css' [17:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:37,771 - CSS error: 'http://localhost/assets/css/chosen.css' [83:34] Error in expression. (Invalid token ".". Was expecting one of: <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, ")", ":", "-", "=", <PLUS>, <COMMA>, <HASH>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:37,779 - CSS error: 'http://localhost/assets/css/chosen.css' [412:1] Error in style rule. (Invalid token "(". Was expecting one of: <EOF>, <S>, <NUMBER>, "inherit", <IDENT>, <STRING>, "}", ";", "/", "-", <PLUS>, <COMMA>, <HASH>, <IMPORTANT_SYM>, <EMS>, <EXS>, <LENGTH_PX>, <LENGTH_CM>, <LENGTH_MM>, <LENGTH_IN>, <LENGTH_PT>, <LENGTH_PC>, <ANGLE_DEG>, <ANGLE_RAD>, <ANGLE_GRAD>, <TIME_MS>, <TIME_S>, <FREQ_HZ>, <FREQ_KHZ>, <RESOLUTION_DPI>, <RESOLUTION_DPCM>, <PERCENTAGE>, <DIMENSION>, <URI>, <FUNCTION>.)
+2016-02-24 17:04:37,779 - CSS warning: 'http://localhost/assets/css/chosen.css' [412:1] Ignoring the following declarations in this rule.
+2016-02-24 17:04:37,795 - CSS error: 'http://localhost/assets/css/lato.css' [15:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,795 - CSS error: 'http://localhost/assets/css/lato.css' [18:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,796 - CSS error: 'http://localhost/assets/css/lato.css' [21:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,796 - CSS error: 'http://localhost/assets/css/lato.css' [24:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,797 - CSS error: 'http://localhost/assets/css/lato.css' [27:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,797 - CSS error: 'http://localhost/assets/css/lato.css' [30:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,798 - CSS error: 'http://localhost/assets/css/lato.css' [33:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,798 - CSS error: 'http://localhost/assets/css/lato.css' [36:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,799 - CSS error: 'http://localhost/assets/css/lato.css' [39:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,799 - CSS error: 'http://localhost/assets/css/lato.css' [42:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,804 - CSS error: 'http://localhost/assets/css/roboto.css' [13:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,804 - CSS error: 'http://localhost/assets/css/roboto.css' [16:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,805 - CSS error: 'http://localhost/assets/css/roboto.css' [19:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,805 - CSS error: 'http://localhost/assets/css/roboto.css' [22:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,806 - CSS error: 'http://localhost/assets/css/roboto.css' [25:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,806 - CSS error: 'http://localhost/assets/css/roboto.css' [28:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,807 - CSS error: 'http://localhost/assets/css/roboto.css' [31:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,809 - CSS error: 'http://localhost/assets/css/roboto.css' [34:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,810 - CSS error: 'http://localhost/assets/css/roboto.css' [37:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,810 - CSS error: 'http://localhost/assets/css/roboto.css' [40:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,811 - CSS error: 'http://localhost/assets/css/roboto.css' [43:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,811 - CSS error: 'http://localhost/assets/css/roboto.css' [46:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,812 - CSS error: 'http://localhost/assets/css/roboto.css' [49:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,812 - CSS error: 'http://localhost/assets/css/roboto.css' [52:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,812 - CSS error: 'http://localhost/assets/css/roboto.css' [55:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,813 - CSS error: 'http://localhost/assets/css/roboto.css' [58:18] Error in expression; ':' found after identifier "http".
+2016-02-24 17:04:37,833 - Bad input type: "tel", creating a text input
+2016-02-24 17:04:37,833 - Bad input type: "url", creating a text input
+2016-02-24 17:04:37,833 - Bad input type: "email", creating a text input
+2016-02-24 17:04:37,833 - Bad input type: "datetime", creating a text input
+2016-02-24 17:04:37,838 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.sparkline.min.js', but got ''.
+2016-02-24 17:04:37,849 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/toggles.min.js', but got ''.
+2016-02-24 17:04:37,862 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.cookies.js', but got ''.
+2016-02-24 17:04:37,865 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery.validate.min.js', but got ''.
+2016-02-24 17:04:37,871 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/msgresource/jquery.validation.message-zh_cn.js', but got ''.
+2016-02-24 17:04:37,874 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/custom.js', but got ''.
+2016-02-24 17:04:37,916 - CSS error: 'http://localhost/login' [1:156] Error in expression; ':' found after identifier "progid".
+2016-02-24 17:04:38,401 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:38,421 - Bad input type: "tel", creating a text input
+2016-02-24 17:04:38,421 - Bad input type: "url", creating a text input
+2016-02-24 17:04:38,421 - Bad input type: "email", creating a text input
+2016-02-24 17:04:38,421 - Bad input type: "datetime", creating a text input
+2016-02-24 17:04:39,128 - runtimeError: message=[An invalid or illegal selector was specified (selector: '*,:x' error: Invalid selector: *:x).] sourceName=[http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js] line=[4] lineSource=[null] lineOffset=[0]
+2016-02-24 17:04:39,155 - Expected content type of 'application/javascript' or 'application/ecmascript' for remotely loaded JavaScript element at 'http://localhost/assets/js/jquery-ui-1.10.3.min.js', but got ''.
+2016-02-24 17:04:39,224 - CSS error: 'http://localhost/assets/css/bootstrap-fileupload.min.css' [10:5] Error in declaration. '*' is not allowed as first char of a property.
+2016-02-24 17:04:39,609 - Rolled back transaction for test context [DefaultTestContext@789cdc12 testClass = LoginControllerTest, testInstance = com.huotu.hotagent.admin.controller.index.LoginControllerTest@59f1c295, testMethod = testLogin@LoginControllerTest, testException = java.lang.AssertionError: 
 Expecting:
  <"http://localhost/">
 to contain:
- <"index"> , mergedContextConfiguration = [WebMergedContextConfiguration@70cc0601 testClass = LoginControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
-2016-02-25 14:55:12,973 - Closing org.springframework.web.context.support.GenericWebApplicationContext@7b227d8d: startup date [Thu Feb 25 14:54:05 CST 2016]; root of context hierarchy
-2016-02-25 14:55:12,990 - Closing JPA EntityManagerFactory for persistence unit 'basePu'
+ <"index"> , mergedContextConfiguration = [WebMergedContextConfiguration@6409a49a testClass = LoginControllerTest, locations = '{}', classes = '{class com.huotu.hotagent.admin.config.MVCConfig, class com.huotu.hotagent.service.config.ServiceConfig}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]].
+2016-02-24 17:04:39,619 - Closing org.springframework.web.context.support.GenericWebApplicationContext@37918c79: startup date [Wed Feb 24 17:03:39 CST 2016]; root of context hierarchy
+2016-02-24 17:04:39,634 - Closing JPA EntityManagerFactory for persistence unit 'basePu'

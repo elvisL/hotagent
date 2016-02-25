@@ -40,5 +40,5 @@ public interface AgentRepository extends JpaRepository<Agent, Long>, JpaSpecific
 
     long countByType(AgentType type);
 
-    Agent findByCity(String city);
+    Agent findByCityAndType(String city,AgentType type);
 }

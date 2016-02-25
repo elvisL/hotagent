@@ -1,28 +1,110 @@
 /**
- * –¬‘ˆªÚ–ﬁ∏ƒ¥˙¿Ì…Ã
+ * Êñ∞Â¢ûÊàñ‰øÆÊîπ‰ª£ÁêÜÂïÜ
  * Created by cwb on 2016/2/18.
  */
-$("#qualify").live("change",function() {
-    imgUpload();
-});
-function imgUpload() {
-    var qualifyUri = $("#qualifyUri").val();
-    $.ajaxFileUpload
-    ({
-        url: 'uploadImg',
-        fileElementId: 'qualify',
-        dataType: 'json',
-        data:{
-            qualifyUri:qualifyUri
+$("select[name=type]").blur(checkAreaAvaliable);
+function checkAreaAvaliable() {
+    var type = $("select[name=type]").val();
+    if (type == 1) {
+        var city = $("select[name=city]").val();
+        $.ajax({
+            url: "/checkCity",
+            data: "city=" + encodeURI(city),
+            dataType: "json",
+            success: function (data) {
+                if (data.code != 2000) {
+                    layer.alert(data.msg);
+                    $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
+                    return false;
+                } else {
+                    $("select[name=type]").closest('.form-group').removeClass('has-error');
+                    return true;
+                }
+            }
+        })
+    } else {
+        $("select[name=type]").closest('.form-group').removeClass('has-error');
+        return true;
+    }
+}
+$("#editForm").validate({
+    ignoreTitle: true,
+    ignore:"",
+    highlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+        $(element).remove();
+    },
+    onfocusout: function (element) {
+        $(element).valid();
+    },
+    debug: true,
+    rules: {
+        name: "required",
+        username: {
+            required: true,
+            maxlength: 50
         },
-        type:'post',
-        success:function(result){
-            if(result.code==2000){
-                $("#qualifyUri").val(result.data[0])
-                $("#previewImg").attr("src",result.data[1]);
-            }else {
-                alert(result.msg);
+        password: {
+            required: true,
+            minlength: 3
+        },
+        level: "required",
+        province: "required",
+        city: "required",
+        district: "required",
+        type: "required",
+        balance: {
+            required: true,
+            number: true
+        },
+        contacts: {
+            required: true,
+            maxlength: 50
+        },
+        phoneNo: {
+            required: true,
+            mobile: true
+        },
+        address: {
+            required: true,
+            maxlength: 100
+        },
+        mail: {
+            required: true,
+            email: true
+        },
+        qq: {
+            required: true,
+            number: true
+        },
+        expandable: "required",
+        qualifyUri: {
+            required:function() {
+                return $("#qualifyUri").val() == '';
             }
         }
-    });
+    },
+    messages:{
+        qualifyUri:{
+            required:"ËØ∑‰∏ä‰º†ÂõæÁâá"
+        }
+    },
+    errorPlacement:function(error,element) {
+        if(element.attr("name")=="qualifyUri") {
+            error.insertAfter(".input-append");
+        }else {
+            error.insertAfter(element);
+        }
+    }
+
+
+});
+function submit() {
+    var av = checkAreaAvaliable();
+    if(av) {
+        $("#editForm").submit();
+    }
 }

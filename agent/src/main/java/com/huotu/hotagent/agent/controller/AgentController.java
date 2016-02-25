@@ -384,7 +384,7 @@ public class AgentController {
     @RequestMapping("/checkCity")
     @ResponseBody
     public ApiResult checkCity(String city) {
-        Agent agent = agentService.findByCity(city);
+        Agent agent = agentService.findByCityAndType(city);
         if(agent==null) {
             return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }

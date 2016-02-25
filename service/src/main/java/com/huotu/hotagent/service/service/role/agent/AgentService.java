@@ -10,6 +10,7 @@
 package com.huotu.hotagent.service.service.role.agent;
 
 import com.huotu.hotagent.common.constant.ApiResult;
+import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.model.AgentSearch;
 import org.springframework.data.domain.Page;
@@ -44,5 +45,5 @@ public interface AgentService {
 
     Page<Agent> findAll(int pageIndex, int pageSize, AgentSearch agentSearch);
 
-    Agent findByCity(String city);
+    Agent findByCityAndType(String city,AgentType type);
 }

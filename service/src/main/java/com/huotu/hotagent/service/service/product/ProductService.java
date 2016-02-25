@@ -10,6 +10,7 @@
 package com.huotu.hotagent.service.service.product;
 
 import com.huotu.hotagent.service.entity.product.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -29,5 +30,9 @@ public interface ProductService {
 
     boolean exists();
 
+    Product update(Product product);
+
     List<Product> findAll();
+
+
 }

@@ -123,11 +123,8 @@ public class AgentController {
     @RequestMapping("/checkCity")
     @ResponseBody
     public ApiResult checkCity(String city) {
-        Agent agent = agentService.findByCity(city);
+        Agent agent = agentService.findByCityAndType(city,AgentType.SOLE);
         if(agent==null) {
-            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-        }
-        if(agent.getType() != AgentType.SOLE) {
             return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }
         return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
@@ -135,6 +132,7 @@ public class AgentController {
 
     @RequestMapping("/uploadImg")
     @ResponseBody
+    @SuppressWarnings("Duplicates")
     public ApiResult uploadImg(MultipartFile qualify,String qualifyUri) throws Exception {
         //delete img
         if(qualify.getSize()==0) {
