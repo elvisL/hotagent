@@ -12,5 +12,4 @@ public interface PriceRepository extends JpaRepository<Price,Long> {
 
 
 
-
 }

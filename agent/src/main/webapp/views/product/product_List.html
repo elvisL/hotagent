@@ -67,8 +67,7 @@
                         <th>产品Id</th>
                         <th>产品名称</th>
                         <th>代理价格</th>
-                        <th>已售出</th>
-                        <th>销售额</th>
+                        <th>销售总额</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -77,8 +76,7 @@
                         <th th:text="${agentProduct.productId}" >产品Id</th>
                         <th th:text="${agentProduct.productName}" >产品名称</th>
                         <th th:text="${agentProduct.productPrice}">代理价格</th>
-                        <td>8套</td>
-                        <td>8000</td>
+                        <th th:text="${agentProduct.account}">销售总额</th>
                         <td><a th:href="@{addCustomer(id=${agentProduct.productId})}"><i class="fa fa-plus"></i>新增客户</a></td>
                     </tr>
                     </tbody>

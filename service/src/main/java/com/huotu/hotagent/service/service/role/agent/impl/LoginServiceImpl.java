@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 登录服务
@@ -31,6 +32,7 @@ public class LoginServiceImpl implements LoginService {
     private PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional(value = "transactionManager")
     public <T extends Login> T newLogin(T login, CharSequence password) {
         login.setPassword(passwordEncoder.encode(password));
         return loginRepository.saveAndFlush(login);

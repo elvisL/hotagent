@@ -14,6 +14,7 @@ import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
+import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.CustomerService;
@@ -36,13 +37,16 @@ public class CustomerController {
     private static final Log log = LogFactory.getLog(CustomerController.class);
 
     @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
 
     @Autowired
-    AgentService agentService;
+    private AgentService agentService;
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
+
+    @Autowired
+    private PriceRepository priceRepository;
 
     /**
     * 添加客户
@@ -51,8 +55,14 @@ public class CustomerController {
     public ModelAndView addCustomer(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/customer_add");
+        Double balance = agentService.findById(agent.getId()).getBalance();//账户总额
+        int flag = agent.getLevel().getLevel();//0为一级，1为2级
         Product product = productService.findOne(id);
+        Double price = priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), id).getPrice();
         modelAndView.addObject("product",product);
+        modelAndView.addObject("price",price);
+        modelAndView.addObject("balance",balance);
+        modelAndView.addObject("flag",flag);
         return modelAndView;
     }
 
@@ -64,12 +74,14 @@ public class CustomerController {
     @RequestMapping(value = "/saveCustomer",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveCustomer(@AuthenticationPrincipal Agent agent,
-                                    Customer customer,int money) throws Exception{
+                                    Customer customer,int count) throws Exception{
 
         ApiResult apiResult =null;
         try {
             customer.setAgent(agent);
-            apiResult=  customerService.addCustomer(agent.getId(),customer,money);
+            customer.setSaleNum(count);
+            apiResult=  customerService.addCustomer(agent.getId(),customer,count);
+
         }catch (Exception ex){
             log.error(ex.getMessage());
             apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);

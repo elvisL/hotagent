@@ -21,5 +21,5 @@ public interface CustomerService {
 
     Customer save(Customer customer);
 
-    ApiResult addCustomer(Long id, Customer customer, int money);
+    ApiResult addCustomer(Long id, Customer customer, int count);
 }

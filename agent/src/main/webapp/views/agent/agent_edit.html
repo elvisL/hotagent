@@ -297,30 +297,33 @@
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
 <script th:inline="javascript">
-    $(function () {
-        editHandler.pageInit();
-        $("input[name=type]").blur(function() {
-            var city = $("input[name=city]").val();
+    $("select[name=type]").blur(checkAreaAvaliable);
+    function checkAreaAvaliable() {
+        var type = $("select[name=type]").val();
+        if(type==1) {
+            var city = $("select[name=city]").val();
             $.ajax({
-                url:"/checkCity",
-                data:"city="+city,
-                dataType:"json",
-                success:function(data) {
-                    if(data.code !=2000) {
-                        layer.alert('墨绿风格，点击确认看深蓝', {
-                            skin: 'layui-layer-molv' //样式类名
-                            ,closeBtn: 0
-                        }, function(){
-                            layer.alert(data.msg, {
-                                skin: 'layui-layer-lan'
-                                ,closeBtn: 0
-                                ,shift: 4 //动画类型
-                            });
-                        });
+                url: "/checkCity",
+                data: "city=" + encodeURI(city),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code != 2000) {
+                        layer.alert(data.msg);
+                        $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
+                        return false;
+                    }else {
+                        $("select[name=type]").closest('.form-group').removeClass('has-error');
+                        return true;
                     }
                 }
             })
-        })
+        }else {
+            $("select[name=type]").closest('.form-group').removeClass('has-error');
+            return true;
+        }
+    }
+    $(function () {
+        editHandler.pageInit();
     });
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
@@ -440,7 +443,7 @@
                         case 2000:
                             layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
                             setTimeout(function(){
-//                                                window.location.href="http://"+window.location.host+"/"+"showProducts";
+                                                window.location.href="http://"+window.location.host+"/"+"agentList";
                                     }
                                     ,1000);
 //                                    $("#password").val("");
