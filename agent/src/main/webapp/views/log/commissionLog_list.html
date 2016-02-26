@@ -379,7 +379,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <a class="btn btn-white submitSearch"
-                                   href="javascript:$('#searchForm').submit()">查询</a>
+                                   href="javascript:search()">查询</a>
                                 <a class="btn btn-white resetSearch" href="commissionLog_list.html"
                                    th:href="@{/commissionLogs}">显示全部</a>
                             </div>
@@ -801,6 +801,10 @@
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    function search(){
+        $('input[name=pageNo]').val(1);
+        $('#searchForm').submit();
+    }
 </script>
 <script type="application/javascript">
     jQuery(document).ready(function () {

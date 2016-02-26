@@ -126,7 +126,7 @@ public class BalanceLogServiceImpl implements BalanceLogService {
                 predicates.add(cb.lessThan(root.get("createTime").as(Date.class), endTime));
             }
             if(logSearch.getAgent() > 0){
-                predicates.add(cb.equal(root.get("agent").get("id").as(Integer.class), logSearch.getAgent()));
+                predicates.add(cb.equal(root.get("agent").get("id").as(Long.class), logSearch.getAgent()));
             }
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         });

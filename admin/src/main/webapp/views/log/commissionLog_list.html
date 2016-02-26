@@ -353,7 +353,7 @@
 
                     <form id="searchForm" action="commissionLog_list.html" th:action="@{/commissionLogs}" method="get"
                           th:object="${logSearch}">
-                        <input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>
+                        <input type="hidden" name="pageNo" id="pageNo" value="1" th:value="${currentPage}"/>
 
                         <p>
 
@@ -385,7 +385,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>
+                                <a class="btn btn-white submitSearch" href="javascript:search()">查询</a>
                                 <a class="btn btn-white resetSearch" href="commissionLog_list.html"
                                    th:href="@{/commissionLogs}">显示全部</a>
                             </div>
@@ -807,6 +807,10 @@
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    function search(){
+        $("#pageNo").val(1);
+        $('#searchForm').submit();
+    }
 </script>
 <script type="application/javascript">
     jQuery(document).ready(function () {

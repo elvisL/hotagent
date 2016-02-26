@@ -119,6 +119,7 @@ public class AgentListPage extends AbstractPage {
                         .findFirst().get().getLevelName());
     }
 
+    @SuppressWarnings("Duplicates")
     public void validateSearchResult(AgentSearch randomSearch) {
         long itemSize = agentsTable.findElements(By.tagName("tr")).size() - 1;
         long pageBtnSize = pageBtn.size() - 4;

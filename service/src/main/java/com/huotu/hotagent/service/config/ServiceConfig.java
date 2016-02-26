@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Created by cwb on 2016/1/25.
  */
 @Configuration
-@ComponentScan("com.huotu.hotagent.service.service")
+@ComponentScan("com.huotu.hotagent.service")
 @EnableScheduling
 @EnableTransactionManagement
 @EnableJpaRepositories(
