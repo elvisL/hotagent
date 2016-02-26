@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 客户
@@ -76,5 +77,12 @@ public class Customer {
      */
     @Column(name = "saleNum")
     private int saleNum;
+
+    /**
+     * 创建时间
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createTime;
+
 
 }

@@ -77,7 +77,8 @@
                         <th th:text="${agentProduct.productName}" >产品名称</th>
                         <th th:text="${agentProduct.productPrice}">代理价格</th>
                         <th th:text="${agentProduct.account}">销售总额</th>
-                        <td><a th:href="@{addCustomer(id=${agentProduct.productId})}"><i class="fa fa-plus"></i>新增客户</a></td>
+                        <td><a th:href="@{addCustomer(id=${agentProduct.productId})}">新增客户</a>
+                        <a th:href="@{customerList(id=${agentProduct.productId})}">查看详情</a></td>
                     </tr>
                     </tbody>
                 </table>
