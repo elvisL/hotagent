@@ -10,4 +10,5 @@ import org.springframework.data.domain.Page;
 public interface CommissionLogService {
     Page<CommissionLog> findAll(int pageIndex, int pageSize, LogSearch logSearch);
 
+    void save(CommissionLog log);
 }

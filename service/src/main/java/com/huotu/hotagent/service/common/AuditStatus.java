@@ -17,7 +17,8 @@ import com.huotu.hotagent.common.ienum.ICommonEnum;
 public enum AuditStatus implements ICommonEnum {
 
     APPLYING(0,"申请中"),
-    PROCESSED(1,"已审核");
+    PROCESSED(1,"通过"),
+    FAIL(2,"失败");
 
     private int value;
     private String name;

@@ -60,4 +60,9 @@ public class CommissionLogServiceImpl implements CommissionLogService{
         });
         return commissionLogRepository.findAll(specification,new PageRequest(pageIndex - 1, pageSize, new Sort(Sort.Direction.DESC, "id")));
     }
+
+    @Override
+    public void save(CommissionLog log) {
+        commissionLogRepository.save(log);
+    }
 }

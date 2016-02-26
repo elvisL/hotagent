@@ -32,6 +32,9 @@ public class CustomMethodArgumentResolver implements HandlerMethodArgumentResolv
         if("1".equals(statusValue)) {
             return AuditStatus.PROCESSED;
         }
+        if("2".equals(statusValue)) {
+            return AuditStatus.FAIL;
+        }
         return null;
     }
 }

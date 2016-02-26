@@ -366,6 +366,7 @@
                                 <td>
                                     <a onclick="showDetail(this)" th:attr="id=${withdraw.id}">查看</a>
                                     <a onclick="changeAuditStatus(this,1)" th:attr="id=${withdraw.id}">通过</a>
+                                    <a onclick="changeAuditStatus(this,2)" th:attr="id=${withdraw.id}">不通过</a>
                                 </td>
                             </tr>
                             <tr>
@@ -383,20 +384,21 @@
                             </tbody>
                         </table>
                     </div><!-- table-responsive -->
-                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
-                    <ul style="float: right;" class="pagination pagination-split">
-                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                        <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li><a href="#">1</a></li>
+                    <p style="float: left;margin: 20px 0;">
+                        共<!--/*-->10<!--*/--><!--/*/[[${totalPages}]]/*/-->页
+                    </p>
+                    <ul class="pagination nomargin pull-right">
+                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(${currentPage-1})|">上一页</a></li>
+                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(1)|">首页</a></li>
+                        <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#" th:href="|javascript:jump(${page})|" th:text="${page}">1</a></li>
+                        <!--/*-->
                         <li class="active"><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
                         <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                        <!--*/-->
+                        <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${totalPages})|">尾页</a></li>
+                        <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${currentPage+1})|">下一页</a></li>
                     </ul>
                 </div><!-- panel-body -->
             </div><!-- panel -->
@@ -750,7 +752,10 @@
         $.ajax({
             url:"/withdraws/"+id.toString()+"/edit",
             type:"POST",
-            data:"auditStatus="+status.toString(),
+            data:{
+                "auditStatus":status.toString(),
+                "commission":
+            },
             dataType:"json",
             success:function(data) {
                 if(data.code == 2000) {
@@ -778,44 +783,10 @@
     }
 </script>
 <script type="application/javascript">
-    jQuery(document).ready(function () {
-        var paginate = new paging($(".pagination"), pageNo, totalPages, totalRecords, 8);
-        paginate.init(function (p) {
-            location.href = "/withdraws?pageNo="+p;
-        });
-
-        // Date Picker
-        $('input[name=beginTime]').datepicker({
-            dateFormat: "yy-mm-dd",
-            onClose: function (selectedDate) {
-                $("#endTime").datepicker("option", "minDate", selectedDate);
-            }
-        });
-
-        $("input[name=endTime]").datepicker({
-            dateFormat: "yy-mm-dd",
-            onClose: function (selectedDate) {
-                $("#beginTime").datepicker("option", "maxDate", selectedDate);
-            }
-        });
-
-        var currentLevelId = $("input[name=level]").val();
-        if (currentLevelId != "" && currentLevelId != null)
-            $("#levelSelectBtn").html($("#levelSelect a[level=" + currentLevelId + "]").html());
-        var currentAgentType = $("input[name=type]").val();
-        if (currentAgentType != "" && currentAgentType != null);
-        $("#typeSelectBtn").html($("#typeSelect a[type-value=" + currentAgentType + "]").html());
-
-        $("#typeSelect li a").click(function () {
-            $("#typeSelectBtn").html($(this).html());
-            $("input[name=agentType]").val($(this).attr("type-value"));
-        });
-
-        $("#levelSelect li a").click(function () {
-            $("#levelSelectBtn").html($(this).html());
-            $("input[name=agentLevel]").val($(this).attr("level"));
-        });
-    });
+    function jump(obj) {
+        $("input[name=pageNo]").val(obj);
+        $("#searchForm").submit();
+    }
 </script>
 </body>
 </html>
