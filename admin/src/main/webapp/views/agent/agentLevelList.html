@@ -375,19 +375,21 @@
                             </tr>
                             </tbody>
                         </table>
-                        <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
+                        <p style="float: left;margin: 20px 0;">
+                            共<!--/*-->10<!--*/--><!--/*/[[${totalPages}]]/*/-->页
+                        </p>
                         <ul class="pagination nomargin pull-right">
-                            <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo='+${currentPage-1}">上一页</a></li>
-                            <li class="disabled" th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? '?pageNo=1'">首页</a></li>
-                            <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#" th:href="'?pageNo='+${page}" th:text="${page}">1</a></li>
+                            <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(${currentPage-1})|">上一页</a></li>
+                            <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(1)|">首页</a></li>
+                            <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#" th:href="|javascript:jump(${page})|" th:text="${page}">1</a></li>
                             <!--/*-->
                             <li class="active"><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
                             <li><a href="#">4</a></li>
                             <li><a href="#">5</a></li>
                             <!--*/-->
-                            <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? '?pageNo='+${totalPages}">尾页</a></li>
-                            <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? '?pageNo='+${currentPage+1}">下一页</a></li>
+                            <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${totalPages})|">尾页</a></li>
+                            <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${currentPage+1})|">下一页</a></li>
                         </ul>
                     </div><!-- table-responsive -->
                 </div><!-- panel-body -->
@@ -730,7 +732,10 @@
 <script th:inline="javascript">
     var currentPage = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
-
+    function jump(obj) {
+        $("input[name=pageNo]").val(obj);
+        $("#searchForm").submit();
+    }
 </script>
 </body>
 </html>
