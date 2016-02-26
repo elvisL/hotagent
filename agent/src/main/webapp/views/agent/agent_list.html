@@ -140,7 +140,7 @@
                                 <!--</div>&lt;!&ndash; /input-group &ndash;&gt;-->
                             <!--</div>-->
                             <!--<div class="col-lg-1">-->
-                                <a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>
+                                <a class="btn btn-white submitSearch" href="javascript:search()">查询</a>
                             <!--</div>-->
 
                             <!--<div class="col-lg-1">-->
@@ -326,6 +326,10 @@
                         ,1000);
             }
         })
+    }
+    function search(){
+        $('input[name=pageNo]').val(1);
+        $('#searchForm').submit();
     }
 </script>
 <script type="application/javascript">

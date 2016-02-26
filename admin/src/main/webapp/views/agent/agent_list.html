@@ -355,7 +355,7 @@
                     <h3 class="panel-title">搜索</h3>
 
                     <form id="searchForm" action="agent_list.html" th:action="@{/agents}" method="get" th:object="${agentSearch}">
-                        <input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>
+                        <input type="hidden" name="pageNo" id="pageNo" value="1" th:value="${currentPage}"/>
 
                         <p>
 
@@ -434,7 +434,7 @@
                                 </div><!-- /input-group -->
                             </div>
                             <div class="col-lg-2">
-                                <a class="btn btn-white submitSearch" href="javascript:$('#searchForm').submit()">查询</a>
+                                <a class="btn btn-white submitSearch" href="javascript:search()">查询</a>
                             </div>
 
                             <div class="col-lg-2">
@@ -890,6 +890,10 @@
             area: ['380px', '50%'],
             content: '/agents/'+id
         });
+    }
+    function search(){
+        $("#pageNo").val(1);
+        $('#searchForm').submit();
     }
 </script>
 <script>
