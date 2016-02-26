@@ -11,6 +11,8 @@ package com.huotu.hotagent.service.service.role.agent;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
+import com.huotu.hotagent.service.model.CustomerSearch;
+import org.springframework.data.domain.Page;
 
 /**
  * Created by chendeyu on 2016/1/25.
@@ -22,4 +24,6 @@ public interface CustomerService {
     Customer save(Customer customer);
 
     ApiResult addCustomer(Long id, Customer customer, int count);
+
+    Page<Customer> findAll(int pageIndex, int pageSize,CustomerSearch customerSearch);
 }

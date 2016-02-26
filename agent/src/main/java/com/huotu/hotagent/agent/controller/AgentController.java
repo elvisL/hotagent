@@ -12,6 +12,7 @@ import com.huotu.hotagent.agent.service.StaticResourceService;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
+import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Price;
@@ -38,6 +39,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -153,11 +155,22 @@ public class AgentController {
         agentSearch.setAgentLevel(agent.getLevel().getLevel()+1);
         agentSearch.setParentAgent(Integer.parseInt(agent.getId().toString()));
         Page<Agent> agents = agentService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
+        int totalPages = agents.getTotalPages();
         model.addAttribute("pageSize", agents.getSize());
         model.addAttribute("agents", agents.getContent());
         model.addAttribute("totalRecords", agents.getTotalElements());
         model.addAttribute("totalPages",agents.getTotalPages());
         model.addAttribute("currentPage", pageNo);
+        model.addAttribute("hasNext",agents.hasNext());
+        model.addAttribute("hasPrevious",agents.hasPrevious());
+        int pageBtnNum = totalPages > SysConstant.DEFAULT_PAGE_BUTTON_NUM ? SysConstant.DEFAULT_PAGE_BUTTON_NUM : totalPages;
+        int startPageNo = CommonUtils.calculateStartPageNo(pageNo, pageBtnNum, totalPages);
+        List<Integer> pageNos = new ArrayList<>();
+        for(int i=1;i<=pageBtnNum;i++) {
+            pageNos.add(startPageNo);
+            startPageNo++;
+        }
+        model.addAttribute("pageNos", pageNos);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
         return "views/agent/agent_list";
@@ -174,14 +187,13 @@ public class AgentController {
     public ModelAndView editAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         Double huobanMall=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.HUOBAN_MALL).getId()).getPrice();
         Double dsp=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.DSP).getId()).getPrice();
         Double hotEdu=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.HOT_EDU).getId()).getPrice();
         Double thirdPartnar=priceRepository.findByAgent_IdAndProduct_Id(id, productRepository.findByProductType(ProductType.THIRDPARTNAR).getId()).getPrice();
         modelAndView.setViewName("views/agent/agent_edit");
         modelAndView.addObject("agent",agent);
-        modelAndView.addObject("agentLevels",agentLevels);
+        modelAndView.addObject("agentLevel",agent.getLevel());
         modelAndView.addObject("agentTypes",AgentType.values());
         modelAndView.addObject("hotEdu",hotEdu);
         modelAndView.addObject("huobanMall",huobanMall);
@@ -198,6 +210,7 @@ public class AgentController {
     public ModelAndView addAgent(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/agent/agent_add");
+        modelAndView.addObject("agentTypes",AgentType.values());
         return modelAndView;
     }
 
@@ -301,7 +314,7 @@ public class AgentController {
             agent.setCreateTime(date);
             Boolean bl = balanceLogService.importBl(agent, money);
             if (bl==true){
-                Set<Price> priceSet = priceService.setProduct(agent,productPrice);
+                Set<Price> priceSet = priceService.setProduct(agent, productPrice);
                 agent.setPrices(priceSet);
                 loginService.newLogin(agent,agent.getPassword());
                 apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
@@ -323,21 +336,37 @@ public class AgentController {
     @RequestMapping(value = "/saveEditLowerAg ",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveEditLowerAg(@AuthenticationPrincipal Agent Higher,
-                                 Agent agent,int agentLevel,int agentType,
+                                 Agent newAgent,int agentLevel,int agentType,
                                      ProductPrice productPrice) throws Exception{
 
         ApiResult apiResult =null;
         try {
+            Agent agent = agentService.findById(newAgent.getId());
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
             AgentType type = AgentType.getAgentType(agentType);
-            agent.setCreateTime(agentService.findById(agent.getId()).getCreateTime());
+            agent.setName(newAgent.getName());
+            agent.setQualifyUri(newAgent.getQualifyUri());
+            agent.setUsername(newAgent.getUsername());
+            agent.setCity(newAgent.getCity());
+            agent.setDistrict(newAgent.getDistrict());
+            agent.setProvince(newAgent.getProvince());
+            agent.setContacts(newAgent.getContacts());
+            agent.setPhoneNo(newAgent.getPhoneNo());
+            agent.setAddress(newAgent.getAddress());
+            agent.setMail(newAgent.getMail());
+            agent.setQq(newAgent.getQq());
             agent.setType(type);
             agent.setLevel(aLevel);
-            agent.setParent(Higher);
-            agent.setExpandable(false);
             Set<Price> priceSet = priceService.updateProduct(agent,productPrice);
             agent.setPrices(priceSet);
-            loginService.newLogin(agent,agent.getPassword());
+            Boolean bl = (agent.getPassword()).equals(newAgent.getPassword());
+            if(bl){//当密码没改变时，用普通存储办法
+                agent.setPassword(newAgent.getPassword());
+                agentService.save(agent);
+            }
+            else {
+                loginService.newLogin(agent,agent.getPassword());//当密码改变时，加密密码
+            }
             apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
 
         }catch (Exception ex){
@@ -377,20 +406,22 @@ public class AgentController {
 
 
     /**
-     * 检测指定城市是否已经有独家代理
+     * 检测指定城市是否可设置独家代理
      * @param city
      * @return
      */
     @RequestMapping("/checkCity")
     @ResponseBody
     public ApiResult checkCity(String city) {
-        Agent agent = agentService.findByCity(city, AgentType.SOLE);
-        if(agent==null) {
+        List<Agent> agents = agentService.findByCity(city);
+        if(agents.size()==0) {
             return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }
-        return ApiResult.resultWith(ResultCodeEnum.CITY_NOT_AVALIABLE);
+        if(agents.size()==1) {
+            return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+        }
+        return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
     }
-
 
 
 }

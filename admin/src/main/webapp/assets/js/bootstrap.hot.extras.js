@@ -47,8 +47,8 @@ function paging(loadObj, pageNo, totalPages, btnCount) {
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(1,' + callback + ')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(' +  (pageNo - 1) + ',' + callback + ')"><i class="fa fa-angle-left"></i></a></li>');
             }else{
-                this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="#"><span aria-hidden="true">&laquo;</span></a></li>');
-                this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-left"></i></a></li>');
+                //this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="#"><span aria-hidden="true">&laquo;</span></a></li>');
+                //this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-left"></i></a></li>');
             }
 
             var btnPageCount = totalPages % this.btnCount == 0 ? parseInt(totalPages / this.btnCount) : parseInt(totalPages / this.btnCount + 1);//按钮页数
@@ -71,8 +71,8 @@ function paging(loadObj, pageNo, totalPages, btnCount) {
 
             //输出下一页和末页
             if(this.pageNo == totalPages){
-                this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-right"></i></a></li>');
-                this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
+                //this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-right"></i></a></li>');
+                //this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
             }else{
                 this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + (pageNo + 1) + ',' + callback + ')"><i class="fa fa-angle-right"></i></a></li>');
                 this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + totalPages + ',' + callback + ')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');

@@ -11,10 +11,13 @@ package com.huotu.hotagent.service.service.role.agent.impl;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
+import com.huotu.hotagent.common.constant.StringConstant;
+import com.huotu.hotagent.common.utils.StringUtil;
 import com.huotu.hotagent.service.entity.log.BalanceLog;
 import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
+import com.huotu.hotagent.service.model.CustomerSearch;
 import com.huotu.hotagent.service.repository.log.BalanceLogRepository;
 import com.huotu.hotagent.service.repository.log.CommissionLogRepository;
 import com.huotu.hotagent.service.repository.product.PriceRepository;
@@ -24,10 +27,21 @@ import com.huotu.hotagent.service.repository.role.agent.CustomerRepository;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.convert.Jsr310Converters;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Predicate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chendeyu on 2016/1/25.
@@ -138,5 +152,31 @@ public class CustomerServiceImpl implements CustomerService {
         }
         apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         return apiResult;
+    }
+
+    @Override
+    public Page<Customer> findAll(int pageIndex, int pageSize, CustomerSearch customerSearch) {
+        Specification<Customer> specification = ((root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            if (!StringUtils.isEmpty(customerSearch.getCustomerName())) {
+                predicates.add(criteriaBuilder.like(root.get("name").as(String.class), "%" + customerSearch.getCustomerName() + "%"));
+            }
+            if (!StringUtils.isEmpty(customerSearch.getBeginTime())) {
+                Date beginDate = StringUtil.DateFormat(customerSearch.getBeginTime(), StringConstant.DATE_PATTERN);
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createTime").as(Date.class), beginDate));
+            }
+            if (!StringUtils.isEmpty(customerSearch.getEndTime())) {
+                LocalDate endDate = LocalDate.parse(customerSearch.getEndTime(), DateTimeFormatter.ofPattern(StringConstant.DATE_PATTERN));
+                endDate = endDate.plusDays(1);
+                Date endTime = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(endDate);
+                predicates.add(criteriaBuilder.lessThan(root.get("createTime").as(Date.class), endTime));
+            }
+//            if(customerSearch.getAgentId() > 0){
+//                predicates.add(criteriaBuilder.equal(root.get("agent").get("id").as(Long.class), customerSearch.getAgentId()));
+//            }
+            predicates.add(criteriaBuilder.equal(root.get("productId").as(Long.class), customerSearch.getProductId()));
+            return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+        });
+        return customerRepository.findAll(specification, new PageRequest(pageIndex - 1, pageSize, new Sort(Sort.Direction.DESC, "customerId")));
     }
 }

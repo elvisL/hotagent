@@ -11,9 +11,12 @@ package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
+import com.huotu.hotagent.common.constant.SysConstant;
+import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
+import com.huotu.hotagent.service.model.CustomerSearch;
 import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
@@ -21,12 +24,16 @@ import com.huotu.hotagent.service.service.role.agent.CustomerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chendeyu on 2016/1/25.
@@ -66,10 +73,101 @@ public class CustomerController {
         return modelAndView;
     }
 
+    /**
+     * 添加客户
+     * */
+    @RequestMapping("/editCustomer")
+    public ModelAndView editCustomer(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("views/customer/customer_edit");
+        Customer customer = customerService.findById(id);
+        modelAndView.addObject("customer",customer);
+        return modelAndView;
+    }
 
 
     /**
-     *保存商户
+     * 客户详情
+     * */
+    @RequestMapping("/customerDetail/{id}")
+    public ModelAndView customerDetail(@PathVariable Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("views/customer/customer_detail");
+        Customer customer = customerService.findById(id);
+        Product product = productService.findOne(customer.getProductId());
+        modelAndView.addObject("customer",customer);
+        modelAndView.addObject("product",product);
+        return modelAndView;
+    }
+
+    /**
+     * 客户列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/customerList", method = RequestMethod.GET)
+    public String AgentList(@AuthenticationPrincipal Agent agent,
+                            @RequestParam(required = true) Long id,
+                            @RequestParam(required = false, defaultValue = "1") int pageNo,
+                            CustomerSearch customerSearch,
+                            Model model
+    ) {
+
+        model.addAttribute("customerSearch", customerSearch);
+        customerSearch.setProductId(id);
+        customerSearch.setAgentId(agent.getId());
+        Page<Customer> customers = customerService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, customerSearch);
+        int totalPages = customers.getTotalPages();
+        model.addAttribute("pageSize", customers.getSize());
+        model.addAttribute("customers", customers.getContent());
+        model.addAttribute("totalRecords", customers.getTotalElements());
+        model.addAttribute("totalPages",customers.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("hasNext",customers.hasNext());
+        model.addAttribute("hasPrevious",customers.hasPrevious());
+        model.addAttribute("cid",id);
+        int pageBtnNum = totalPages > SysConstant.DEFAULT_PAGE_BUTTON_NUM ? SysConstant.DEFAULT_PAGE_BUTTON_NUM : totalPages;
+        int startPageNo = CommonUtils.calculateStartPageNo(pageNo, pageBtnNum, totalPages);
+        List<Integer> pageNos = new ArrayList<>();
+        for(int i=1;i<=pageBtnNum;i++) {
+            pageNos.add(startPageNo);
+            startPageNo++;
+        }
+        model.addAttribute("pageNos", pageNos);
+        return "views/customer/customer_list";
+    }
+
+
+    /**
+     *保存商户（修改）
+     */
+    @RequestMapping(value = "/updateCustomer",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult updateCustomer(@AuthenticationPrincipal Agent agent,
+                                  Customer newCustomer) throws Exception{
+
+        ApiResult apiResult =null;
+        try {
+            Customer customer = customerService.findById(newCustomer.getCustomerId());
+            customer.setCompany(newCustomer.getCompany());
+            customer.setContacts(newCustomer.getContacts());
+            customer.setLoginName(newCustomer.getLoginName());
+            customer.setName(newCustomer.getName());
+            customer.setPhoneNo(newCustomer.getPhoneNo());
+            customerService.save(customer);
+            apiResult=  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
+        }
+        return apiResult;
+    }
+
+
+
+    /**
+     *保存商户(新增)
      */
     @RequestMapping(value = "/saveCustomer",method = RequestMethod.POST)
     @ResponseBody
@@ -79,6 +177,7 @@ public class CustomerController {
         ApiResult apiResult =null;
         try {
             customer.setAgent(agent);
+            customer.setCreateTime(new Date());
             customer.setSaleNum(count);
             apiResult=  customerService.addCustomer(agent.getId(),customer,count);
 

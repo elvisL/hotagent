@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!--
+  ~ 版权所有:杭州火图科技有限公司
+  ~ 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+  ~
+  ~ (c) Copyright Hangzhou Hot Technology Co., Ltd.
+  ~ Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+  ~ 2013-2016. All rights reserved.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png">
+
+    <title>代理商总后台</title>
+
+    <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
+    <link href="http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.6.2/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='showProducts')">
+
+
+    </div><!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar" th:replace="views/common/header :: header">
+
+
+
+        </div><!-- headerbar -->
+
+        <div class="pageheader">
+            <h2><i class="fa fa-search"></i> 客户列表</h2>
+        </div>
+
+        <div class="contentpanel">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">搜索</h3>
+
+                    <form id="searchForm" action="agent_list.html" th:action="@{/customerList}" method="get" th:object="${customerSearch}">
+                        <input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>
+
+                        <p>
+
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <span class="input-group-addon">客户姓名</span>
+                                    <input type="hidden" id="id" name="id" th:value="${cid}">
+                                    <input type="text" name="customerName" th:value="*{customerName}"
+                                           class="form-control"
+                                           aria-label="...">
+                                </div>
+                            </div>
+                            <!-- /input-group -->
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">创建时间</span>
+                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime"
+                                           th:value="*{beginTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime"
+                                           th:value="*{endTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn btn-white submitSearch"
+                                   href="javascript:search()">查询</a>
+                                <a class="btn btn-white resetSearch" href="balanceLog_list.html"
+                                   th:href="@{/customerList(id=${cid})}">显示全部</a>
+                            </div>
+                        </div>
+                        </p>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb30">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>客户</th>
+                                <th>销售数量</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+
+                            <tr th:each="customer,customerStat:${customers}">
+                                <td th:text="${customerStat.index+1}"></td>
+                                <td th:text="${customer.name}">火图科技</td>
+                                <td th:text="${customer.saleNum}">3</td>
+                                <td th:text="${#dates.format(customer.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
+                                <td>
+                                    <a onclick="editCustomer(this)" th:attr="id=${customer.customerId}">修改</a>
+                                    <a onclick="showDetail(this)" th:attr="id=${customer.customerId}">查看详情</a>
+                                    <!--<a onclick="Import(this)" th:attr="id=${agent.id}">充值</a>-->
+                                    <!--<a th:if="${agent.accountNonLocked}" th:attr="id=${agent.id}" th:value="1" onclick="lockAgent(this)"  th:text="冻结" ></a>-->
+                                    <!--<a th:if="${agent.accountNonLocked}==false" th:attr="id=${agent.id}" th:value="0" onclick="lockAgent(this)"  th:text="解冻"></a>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>火图科技</td>
+                                <td>独家代理</td>
+                                <td>一级代理商</td>
+                                <td>总部</td>
+                                <td>杭州</td>
+                                <td>1000</td>
+                                <td>88</td>
+                                <td>2015-12-12 00:00:00</td>
+                                <td>活动</td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>火图科技</td>
+                                <td>独家代理</td>
+                                <td>一级代理商</td>
+                                <td>总部</td>
+                                <td>杭州</td>
+                                <td>1000</td>
+                                <td>88</td>
+                                <td>2015-12-12 00:00:00</td>
+                                <td>活动</td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                    <p style="float: left;margin: 20px 0;">
+                        共<!--/*-->10<!--*/--><!--/*/[[${totalPages}]]/*/-->页
+                    </p>
+                    <ul class="pagination nomargin pull-right">
+                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(${currentPage-1})|">上一页</a></li>
+                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(1)|">首页</a></li>
+                        <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#" th:href="|javascript:jump(${page})|" th:text="${page}">1</a></li>
+                        <!--/*-->
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <!--*/-->
+                        <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${totalPages})|">尾页</a></li>
+                        <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${currentPage+1})|">下一页</a></li>
+                    </ul>
+                </div><!-- panel-body -->
+            </div><!-- panel -->
+
+        </div><!-- contentpanel -->
+
+    </div><!-- mainpanel -->
+
+
+</section>
+
+<!--基本js-->
+<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
+<script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
+<script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../../assets/js/modernizr.min.js" th:src="@{/assets/js/modernizr.min.js}"></script>
+<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+<script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
+<script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
+<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+
+<!--一些控件-->
+<!--<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>-->
+
+<!--框架基础js-->
+<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+
+<script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
+<script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
+
+<script type="application/javascript" th:inline="javascript">
+    var pageNo = /*[[${currentPage}]]*/ 1;
+    var totalPages = /*[[${totalPages}]]*/ 2;
+    var totalRecords = /*[[${totalRecords}]]*/ 10;
+</script>
+<script>
+    //修改
+    function editCustomer(obj) {
+        var id = $(obj).attr("id");
+        location.href = "/editCustomer?id=" + id ;
+    }
+
+    //详情
+    function showDetail(obj) {
+        var id = $(obj).attr("id");
+        layer.open({
+            type: 2,
+            title: '客户详情',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['880px', '680px'],
+            content: '/customerDetail/'+id
+        });
+    }
+    function jump(obj) {
+        $("input[name=pageNo]").val(obj);
+        $("#searchForm").submit();
+    }
+
+    function search(){
+        $("#pageNo").val(1);
+        $('#searchForm').submit();
+    }
+
+
+</script>
+<script type="application/javascript">
+    jQuery(document).ready(function () {
+//        var paginate = new paging($(".pagination"), pageNo, totalPages, totalRecords, 8);
+//        paginate.init(function (p) {
+//            $('input[name=pageNo]').val(p);
+//            $('#searchForm').submit();
+//        });
+
+        // Date Picker
+        $('input[name=beginTime]').datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function (selectedDate) {
+                $("#endTime").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("input[name=endTime]").datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function (selectedDate) {
+                $("#beginTime").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

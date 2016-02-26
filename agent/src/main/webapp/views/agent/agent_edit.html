@@ -93,7 +93,7 @@
 
                             <div class="col-sm-3">
                                 <select name="level" id="level"  title="代理商等级" class="form-control input mb10" th:remove="all-but-first">
-                                    <option th:each="agentLevel:${agentLevels}" th:value="${agentLevel.level}" th:text="${agentLevel.levelName}" th:selected="${agent}!=null ? ${agent.level.level}==${agentLevel.level}">一级代理商</option>
+                                    <option  th:value="${agentLevel.level}" th:text="${agentLevel.levelName}" th:selected="${agent}!=null ? ${agent.level.level}==${agentLevel.level}">二级代理商</option>
                                     <option>二级代理商</option>
                                 </select>
                             </div>
@@ -294,31 +294,31 @@
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 <script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
-<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
+<script src="../../assets/js/agent/agent-add.js" th:src="@{/assets/js/agent/agent-add.js}"></script>
 <script th:inline="javascript">
-//    $("select[name=type]").blur(checkAreaAvaliable);
-//    function checkAreaAvaliable() {
-//        var type = $("select[name=type]").val();
-//        if (type == 1) {
-//            var city = $("select[name=city]").val();
-//            $.ajax({
-//                url: "/checkCity",
-//                data: "city=" + encodeURI(city),
-//                dataType: "json",
-//                success: function (data) {
-//                    if (data.code != 2000) {
-//                        layer.alert("此城市已经有代理，无法设为独家代理");
-//                    } else {
-////                        $("select[name=type]").closest('.form-group').removeClass('has-error');
-//                        return false;
-//                    }
-//                }
-//            })
-//        } else {
-//            $("select[name=type]").closest('.form-group').removeClass('has-error');
-//            return true;
-//        }
-//    }
+    $("select[name=type]").blur(checkAreaAvaliable);
+    function checkAreaAvaliable() {
+        var type = $("select[name=type]").val();
+        if (type == 1) {
+            var city = $("select[name=city]").val();
+            $.ajax({
+                url: "/checkCity",
+                data: "city=" + encodeURI(city),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code != 2000) {
+                        layer.alert("此城市已经有代理，无法设为独家代理");
+                    } else {
+//                        $("select[name=type]").closest('.form-group').removeClass('has-error');
+                        return false;
+                    }
+                }
+            })
+        } else {
+            $("select[name=type]").closest('.form-group').removeClass('has-error');
+            return true;
+        }
+    }
     $(function () {
         editHandler.pageInit();
     });
@@ -413,7 +413,7 @@
                         layer.msg("请上传图片", {time: 2000});
                     }
                     else{
-                        submitAgent()
+                        submitAgent();
                         return false;
                     }
 
@@ -424,10 +424,10 @@
             });
         },
         submit: function () {
-//            var av = checkAreaAvaliable();
-//            if(av) {
-                $("#editForm").submit();
-//            }
+            var av = checkAreaAvaliable();
+            if(av) {
+            submitAgent();
+            }
         }
     }
 </script>
