@@ -16,12 +16,8 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png"
           th:href="@{/assets/images/favicon.png}">
-
     <title>Bracket Responsive Bootstrap3 Admin</title>
-
-
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
-
     <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css"
           th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
@@ -344,13 +340,16 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">是否可发展下级代理</label>
 
+
                             <div class="col-sm-3">
-                                <div class="radio-inline"><label><input type="radio" name="expandable"
-                                                                        th:checked="${agent}!=null ? ${agent.expandable} : true"
-                                                                        value="true">是</label></div>
-                                <div class="radio"><label><input type="radio" name="expandable"
-                                                                 th:checked="${agent}!=null ? !${agent.expandable}"
-                                                                 value="false">否</label></div>
+                                <div class="rdio rdio-success">
+                                    <input type="radio" name="expandable" th:checked="${agent}!=null ? ${agent.expandable} : true" id="canexpandable" value="true">
+                                    <label for="canexpandable">是</label>
+                                </div>
+                                <div class="rdio rdio-success">
+                                    <input type="radio" name="expandable" id="noexpandable" th:checked="${agent}!=null ? !${agent.expandable}" value="false">
+                                    <label for="noexpandable">否</label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -771,6 +770,7 @@
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
 <script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}">
 </script>
+
 <script th:inline="javascript">
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
