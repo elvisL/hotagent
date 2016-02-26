@@ -187,14 +187,13 @@ public class AgentController {
     public ModelAndView editAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
-        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         Double huobanMall=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.HUOBAN_MALL).getId()).getPrice();
         Double dsp=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.DSP).getId()).getPrice();
         Double hotEdu=priceRepository.findByAgent_IdAndProduct_Id(id,productRepository.findByProductType(ProductType.HOT_EDU).getId()).getPrice();
         Double thirdPartnar=priceRepository.findByAgent_IdAndProduct_Id(id, productRepository.findByProductType(ProductType.THIRDPARTNAR).getId()).getPrice();
         modelAndView.setViewName("views/agent/agent_edit");
         modelAndView.addObject("agent",agent);
-        modelAndView.addObject("agentLevels",agentLevels);
+        modelAndView.addObject("agentLevel",agent.getLevel());
         modelAndView.addObject("agentTypes",AgentType.values());
         modelAndView.addObject("hotEdu",hotEdu);
         modelAndView.addObject("huobanMall",huobanMall);
@@ -211,6 +210,7 @@ public class AgentController {
     public ModelAndView addAgent(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/agent/agent_add");
+        modelAndView.addObject("agentTypes",AgentType.values());
         return modelAndView;
     }
 
@@ -344,7 +344,8 @@ public class AgentController {
             Agent agent = agentService.findById(newAgent.getId());
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
             AgentType type = AgentType.getAgentType(agentType);
-            agent.setName(agent.getName());
+            agent.setName(newAgent.getName());
+            agent.setQualifyUri(newAgent.getQualifyUri());
             agent.setUsername(newAgent.getUsername());
             agent.setCity(newAgent.getCity());
             agent.setDistrict(newAgent.getDistrict());

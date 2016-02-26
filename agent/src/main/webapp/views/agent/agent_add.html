@@ -90,12 +90,36 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">代理类型</label>
+                            <label class="col-sm-3 control-label">代理区域</label>
+
+                            <div id="area">
+                                <div class="col-sm-1">
+                                    <select name="province" id="province" class="form-control mb10 prov">
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="city" id="city" class="form-control mb10 city">
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="district" id="district" class="form-control  mb10 dist">
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理商类型</label>
 
                             <div class="col-sm-3">
-                                <select name="type" id="type" title="代理类型" class="form-control mb10">
-                                    <option th:value="0" th:text="普通代理">普通代理</option>
-                                    <option th:value="1" th:text="独家代理">独家代理</option>
+                                <select name="type" id="type" title="代理商类型" class="form-control input mb10"
+                                        th:remove="all-but-first">
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}"
+                                            th:text="${agentType.name}"
+                                            th:selected="${agent}!=null ? ${agent.type.value}==${agentType.value}">独家代理
+                                    </option>
+                                    <option>普通代理</option>
                                 </select>
                             </div>
                         </div>
@@ -129,25 +153,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代理区域</label>
 
-                            <div id="area">
-                                <div class="col-sm-1">
-                                    <select name="type" id="province" class="form-control mb10 prov">
-                                    </select>
-                                </div>
-                                <div class="col-sm-1">
-                                    <select name="type" id="city" class="form-control mb10 city">
-                                    </select>
-                                </div>
-                                <div class="col-sm-1">
-                                    <select name="type" id="district" class="form-control  mb10 dist">
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人</label>
@@ -309,6 +315,30 @@
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/js/agent/agent-add.js" th:src="@{/assets/js/agent/agent-add.js}"></script>
 <script type="text/javascript">
+    $("select[name=type]").blur(checkAreaAvaliable);
+    function checkAreaAvaliable() {
+        var type = $("select[name=type]").val();
+        if (type == 1) {
+            var city = $("select[name=city]").val();
+            $.ajax({
+                url: "/checkCity",
+                data: "city=" + encodeURI(city),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code != 2000) {
+                        layer.alert("此城市已经有代理，无法设为独家代理");
+                    } else {
+//                        $("select[name=type]").closest('.form-group').removeClass('has-error');
+                        return false;
+                    }
+                }
+            })
+        } else {
+            $("select[name=type]").closest('.form-group').removeClass('has-error');
+            return true;
+        }
+    }
+
     $(function () {
         editHandler.pageInit();
     });
@@ -410,7 +440,16 @@
             });
         },
         submit: function () {
-            $("#editForm").submit();
+            var av = checkAreaAvaliable();
+            if (av) {
+                if($("#qualifyUri").val() == ''||$("#qualifyUri").val()==null)
+                {
+                    layer.msg("请上传图片", {time: 2000});
+                }
+                else {
+                    submitAgent();
+                }
+            }
         }
     }
 </script>
