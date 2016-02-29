@@ -41,13 +41,15 @@
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
-        </div><!-- logopanel -->
+        </div>
+        <!-- logopanel -->
 
         <div class="leftpanelinner">
             <!-- This is only visible to small devices -->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media userlogged">
-                    <img alt="" src="../images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
+                    <img alt="" src="../images/photos/loggeduser.png" class="media-object"
+                         th:src="@{/assets/images/photos/loggeduser.png}">
 
                     <div class="media-body">
                         <h4>John Doe</h4>
@@ -70,17 +72,23 @@
                 <li agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
                     <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                     <ul class="children" style="display: block;">
-                        <li agent:active="agentList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 代理商列表</span></a></li>
-                        <li agent:active="agentEdit"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
-                        <li agent:active="agentLevel"><a href="form-validation.html"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
+                        <li agent:active="agentList"><a href="general-forms.html"><i class="fa fa-caret-right"></i>
+                            代理商列表</span></a></li>
+                        <li agent:active="agentEdit"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加代理商</a>
+                        </li>
+                        <li agent:active="agentLevel"><a href="form-validation.html"><i class="fa fa-caret-right"></i>
+                            代理商级别</a></li>
                     </ul>
                 </li>
-                <li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
+                <li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a>
+                </li>
                 <li agent:activeparent="'operatorList,addOperator'" class="nav-parent">
                     <a href=""><i class="fa fa-edit"></i> <span>操作员管理</span></a>
                     <ul class="children">
-                        <li agent:active="operatorList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 操作员列表</a></li>
-                        <li agent:active="addOperator"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加操作员</a></li>
+                        <li agent:active="operatorList"><a href="general-forms.html"><i class="fa fa-caret-right"></i>
+                            操作员列表</a></li>
+                        <li agent:active="addOperator"><a href="form-layouts.html"><i class="fa fa-caret-right"></i>
+                            添加操作员</a></li>
                     </ul>
                 </li>
             </ul>
@@ -97,44 +105,54 @@
                 <ul>
                     <li>
                         <div>
-                            <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;"
+                                                                               class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;"
+                                                                               class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;"
+                                                                           class="custom-datainfo">100</h4>
                         </div>
                     </li>
                 </ul>
-            </div><!-- infosummary -->
+            </div>
+            <!-- infosummary -->
 
-        </div><!-- leftpanelinner -->
-    </div><!-- leftpanel -->
+        </div>
+        <!-- leftpanelinner -->
+    </div>
+    <!-- leftpanel -->
 
     <div class="mainpanel">
 
@@ -148,7 +166,8 @@
                     <li>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <img src="../images/photos/loggeduser.png" alt="" th:src="@{/assets/images/photos/loggeduser.png}"/>
+                                <img src="../images/photos/loggeduser.png" alt=""
+                                     th:src="@{/assets/images/photos/loggeduser.png}"/>
                                 John Doe
                                 <span class="caret"></span>
                             </button>
@@ -159,9 +178,11 @@
                         </div>
                     </li>
                 </ul>
-            </div><!-- header-right -->
+            </div>
+            <!-- header-right -->
 
-        </div><!-- headerbar -->
+        </div>
+        <!-- headerbar -->
 
         <div class="pageheader">
             <h2><i class="fa fa-home"></i> Horizontal Menu <span>Subtitle goes here...</span></h2>
@@ -179,7 +200,8 @@
             <!-- content goes here... -->
         </div>
 
-    </div><!-- mainpanel -->
+    </div>
+    <!-- mainpanel -->
 
     <div class="rightpanel">
         <!-- Nav tabs -->
@@ -205,7 +227,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Los Angeles, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -218,7 +241,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>San Francisco, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -230,7 +254,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Bangkok, Thailand</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -242,7 +267,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -254,7 +280,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
 
@@ -272,7 +299,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Los Angeles, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -284,7 +312,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>San Francisco, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -296,7 +325,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Bangkok, Thailand</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -308,7 +338,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -320,7 +351,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -332,7 +364,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -344,7 +377,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
             </div>
@@ -361,7 +395,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Los Angeles, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -373,7 +408,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>San Francisco, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -385,7 +421,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Bangkok, Thailand</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -397,7 +434,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -409,7 +447,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
             </div>
@@ -426,7 +465,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Hi hello, ctc?... would you mind if I go to your...</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -438,7 +478,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>This is to inform you that your product that we...</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -450,7 +491,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Are you willing to have a long term relat...</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
             </div>
@@ -490,10 +532,13 @@
                     </div>
                 </div>
 
-            </div><!-- tab-pane -->
+            </div>
+            <!-- tab-pane -->
 
-        </div><!-- tab-content -->
-    </div><!-- rightpanel -->
+        </div>
+        <!-- tab-content -->
+    </div>
+    <!-- rightpanel -->
 
 </section>
 

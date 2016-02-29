@@ -68,7 +68,7 @@ public class AgentController {
             Model model
     ) {
         model.addAttribute("agentSearch", agentSearch);
-        Page<Agent> agents = agentService.findAll(pageNo, 2, agentSearch);
+        Page<Agent> agents = agentService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, agentSearch);
         int totalPages = agents.getTotalPages();
         model.addAttribute("pageSize", agents.getSize());
         model.addAttribute("agents", agents.getContent());

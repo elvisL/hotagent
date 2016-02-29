@@ -9,11 +9,14 @@ import com.huotu.hotagent.service.common.LogType;
 import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.record.WithdrawRecord;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.entity.role.agent.Login;
 import com.huotu.hotagent.service.service.log.CommissionLogService;
 import com.huotu.hotagent.service.service.record.WithdrawRecordService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -88,21 +91,25 @@ public class WithdrawController {
     @RequestMapping(value = "/withdraws/{id}/edit",method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public ApiResult changeAuditStatus(@PathVariable Long id,double commission,String memo,AuditStatus status) {
+    public ApiResult changeAuditStatus(@PathVariable Long id,
+                                       @RequestParam(required = false,defaultValue = "0") double commission,
+                                       @RequestParam(required = false,defaultValue = "") String memo,
+                                       AuditStatus status) {
         WithdrawRecord record = withdrawRecordService.getSpecifiedRecord(id);
         if(status==AuditStatus.FAIL) {
             Agent agent = record.getAgent();
-            agent.setCommission(agent.getCommission() + commission);
-            agentService.save(agent);
             CommissionLog log = new CommissionLog();
             log.setCreateTime(new Date());
             log.setAgent(agent);
             log.setImportMoney(commission);
             log.setMoney(commission);
+            agent.setCommission(agent.getCommission() + commission);
+            agentService.save(agent);
             log.setMemo(memo);
             log.setLogType(LogType.AUDIT);
             logService.save(log);
         }
+        record.setReply(memo);
         record.setAuditStatus(status);
         withdrawRecordService.save(record);
         return  ApiResult.resultWith(ResultCodeEnum.SUCCESS);

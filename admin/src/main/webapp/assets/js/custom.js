@@ -82,7 +82,7 @@ jQuery(document).ready(function () {
     jQuery('.toggle-chat1').toggles({on: false});
 
     // Sparkline
-    jQuery('#sidebar-chart').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
+    /*jQuery('#sidebar-chart').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
         type: 'bar',
         height: '30px',
         barColor: '#428BCA'
@@ -110,7 +110,7 @@ jQuery(document).ready(function () {
         type: 'bar',
         height: '30px',
         barColor: '#F0AD4E'
-    });
+    });*/
 
 
     // Minimize Button in Panels
