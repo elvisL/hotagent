@@ -89,15 +89,15 @@ public class BalanceLogListPage extends AbstractPage {
             //获取内容区每一行的每一列
             List<WebElement> tds = tableTrs.get(i + 1).findElements(By.tagName("td"));
             //agentName
-            assertThat(tds.get(1).getText()).isEqualTo((searchBalanceLogs.get(i).getAgent() != null ? searchBalanceLogs.get(i).getAgent().getName() : ""));
+            assertThat(tds.get(1).getText().replaceAll(" ","")).isEqualTo((searchBalanceLogs.get(i).getAgent() != null ? searchBalanceLogs.get(i).getAgent().getName().replaceAll(" ","") : ""));
             //customerName
-            assertThat(tds.get(2).getText()).isEqualTo(searchBalanceLogs.get(i).getCustomer() != null ? searchBalanceLogs.get(i).getCustomer().getName() : "");
+            assertThat(tds.get(2).getText().replaceAll(" ","")).isEqualTo(searchBalanceLogs.get(i).getCustomer() != null ? searchBalanceLogs.get(i).getCustomer().getName().replaceAll(" ","") : "");
             //money
             assertThat(Double.valueOf(tds.get(3).getText())).isEqualTo(searchBalanceLogs.get(i).getMoney());
             //createTime
             assertThat(tds.get(4).getText()).isEqualTo(sf.format(searchBalanceLogs.get(i).getCreateTime()));
             //memo
-            assertThat(tds.get(5).getText()).isEqualTo(searchBalanceLogs.get(i).getMemo());
+            assertThat(tds.get(5).getText().replaceAll(" ","")).isEqualTo(searchBalanceLogs.get(i).getMemo().replaceAll(" ",""));
         }
     }
 
@@ -122,15 +122,15 @@ public class BalanceLogListPage extends AbstractPage {
             //获取内容区每一行的每一列
             List<WebElement> tds = tableTrs.get(i + 1).findElements(By.tagName("td"));
             //agentName
-            assertThat(tds.get(1).getText()).isEqualTo((balanceLogs.get(i).getAgent() != null ? balanceLogs.get(i).getAgent().getName() : ""));
+            assertThat(tds.get(1).getText().replaceAll(" ","")).isEqualTo((balanceLogs.get(i).getAgent() != null ? balanceLogs.get(i).getAgent().getName().replaceAll(" ","") : ""));
             //customerName
-            assertThat(tds.get(2).getText()).isEqualTo(balanceLogs.get(i).getCustomer() != null ? balanceLogs.get(i).getCustomer().getName() : "");
+            assertThat(tds.get(2).getText().replaceAll(" ","")).isEqualTo(balanceLogs.get(i).getCustomer() != null ? balanceLogs.get(i).getCustomer().getName().replaceAll(" ","") : "");
             //money
             assertThat(Double.valueOf(tds.get(3).getText())).isEqualTo(balanceLogs.get(i).getMoney());
             //createTime
             assertThat(tds.get(4).getText()).isEqualTo(sf.format(balanceLogs.get(i).getCreateTime()));
             //memo
-            assertThat(tds.get(5).getText()).isEqualTo(balanceLogs.get(i).getMemo());
+            assertThat(tds.get(5).getText().replaceAll(" ","")).isEqualTo(balanceLogs.get(i).getMemo().replaceAll(" ",""));
         }
     }
 

@@ -423,7 +423,7 @@
                             <!--@thymesVar id="balanceLogs" type="java.util.List<com.huotu.hotagent.service.entity.log.BalanceLog>"-->
                             <!--*/-->
                             <tr th:each="balanceLog,balanceLogStat:${balanceLogs}">
-                                <td th:text="${balanceLogStat.index+1}">1</td>
+                                <td th:text="${balanceLogStat.count}">1</td>
                                 <td th:text="${balanceLog.agent!=null} ? ${balanceLog.agent.name}:''">一级代理商</td>
                                 <!--<td th:text="${balanceLog.support != null} ? ${balanceLog.support.name}:''">二级代理商</td>-->
                                 <td th:text="${balanceLog.customer != null}?${balanceLog.customer.name}:''">客户名称</td>
@@ -823,7 +823,7 @@
 </script>
 <script type="application/javascript">
     jQuery(document).ready(function () {
-        var paginate = new paging($(".pagination"), pageNo, totalPages, totalRecords, 8);
+        var paginate = new paging($(".pagination"), pageNo, totalPages, 7);
         paginate.init(function (p) {
             $('input[name=pageNo]').val(p);
             $('#searchForm').submit();

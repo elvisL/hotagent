@@ -89,15 +89,15 @@ public class CommissionLogListPage  extends AbstractPage {
             //获取内容区每一行的每一列
             List<WebElement> tds = tableTrs.get(i + 1).findElements(By.tagName("td"));
             //agentName
-            assertThat(tds.get(1).getText()).isEqualTo((searchCommissionLogs.get(i).getAgent() != null ? searchCommissionLogs.get(i).getAgent().getName() : ""));
+            assertThat(tds.get(1).getText().replaceAll(" ","")).isEqualTo((searchCommissionLogs.get(i).getAgent() != null ? searchCommissionLogs.get(i).getAgent().getName().replaceAll(" ","") : ""));
             //customerName
-            assertThat(tds.get(2).getText()).isEqualTo(searchCommissionLogs.get(i).getCustomer() != null ? searchCommissionLogs.get(i).getCustomer().getName() : "");
+            assertThat(tds.get(2).getText().replaceAll(" ","")).isEqualTo(searchCommissionLogs.get(i).getCustomer() != null ? searchCommissionLogs.get(i).getCustomer().getName().replaceAll(" ","") : "");
             //money
             assertThat(Double.valueOf(tds.get(3).getText())).isEqualTo(searchCommissionLogs.get(i).getMoney());
             //createTime
             assertThat(tds.get(4).getText()).isEqualTo(sf.format(searchCommissionLogs.get(i).getCreateTime()));
             //memo
-            assertThat(tds.get(5).getText()).isEqualTo(searchCommissionLogs.get(i).getMemo());
+            assertThat(tds.get(5).getText().replaceAll(" ","")).isEqualTo(searchCommissionLogs.get(i).getMemo().replaceAll(" ",""));
         }
     }
 
@@ -122,15 +122,15 @@ public class CommissionLogListPage  extends AbstractPage {
             //获取内容区每一行的每一列
             List<WebElement> tds = tableTrs.get(i + 1).findElements(By.tagName("td"));
             //agentName
-            assertThat(tds.get(1).getText()).isEqualTo((commissionLogs.get(i).getAgent() != null ? commissionLogs.get(i).getAgent().getName() : ""));
+            assertThat(tds.get(1).getText().replaceAll(" ","")).isEqualTo((commissionLogs.get(i).getAgent() != null ? commissionLogs.get(i).getAgent().getName().replaceAll(" ","") : ""));
             //customerName
-            assertThat(tds.get(2).getText()).isEqualTo(commissionLogs.get(i).getCustomer() != null ? commissionLogs.get(i).getCustomer().getName() : "");
+            assertThat(tds.get(2).getText().replaceAll(" ","")).isEqualTo(commissionLogs.get(i).getCustomer() != null ? commissionLogs.get(i).getCustomer().getName().replaceAll(" ","") : "");
             //money
             assertThat(Double.valueOf(tds.get(3).getText())).isEqualTo(commissionLogs.get(i).getMoney());
             //createTime
             assertThat(tds.get(4).getText()).isEqualTo(sf.format(commissionLogs.get(i).getCreateTime()));
             //memo
-            assertThat(tds.get(5).getText()).isEqualTo(commissionLogs.get(i).getMemo());
+            assertThat(tds.get(5).getText().replaceAll(" ","")).isEqualTo(commissionLogs.get(i).getMemo().replaceAll(" ",""));
         }
     }
 

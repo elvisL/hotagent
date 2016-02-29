@@ -46,34 +46,25 @@ function paging(loadObj, pageNo, totalPages, btnCount) {
                 //输出首页和上一页按钮
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(1,' + callback + ')" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>');
                 this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="javascript:goTo(' +  (pageNo - 1) + ',' + callback + ')"><i class="fa fa-angle-left"></i></a></li>');
+            }
+
+            var btnStart = parseInt(this.btnCount / 2) ;//从哪个索引开始变换
+            this.btnCount = Math.min(totalPages,this.btnCount);
+
+            if(this.pageNo > this.totalPages - btnStart){
+                this.currentBtnPage = this.totalPages - this.btnCount + 1;
             }else{
-                //this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="#"><span aria-hidden="true">&laquo;</span></a></li>');
-                //this.obj.append('<li ' + (this.pageNo == 1 ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-left"></i></a></li>');
+                this.currentBtnPage =  Math.max(this.pageNo - btnStart,1);
             }
 
-            var btnPageCount = totalPages % this.btnCount == 0 ? parseInt(totalPages / this.btnCount) : parseInt(totalPages / this.btnCount + 1);//按钮页数
-            var btnStart = parseInt(this.btnCount / 2) + 1;//从哪个索引开始变换
-
-            if (this.pageNo - this.currentBtnPage >= btnStart) {
-                this.currentBtnPage++;
-            }
-            if (this.currentBtnPage + 1 > btnPageCount) {
-                this.currentBtnPage = btnPageCount - 1;
-            }
-            if (totalPages <= this.btnCount) {
-                this.btnCount = totalPages;
-            }
 
             //输出中间八个按钮
-            for (var i = this.currentBtnPage + 1; i <= this.btnCount + this.currentBtnPage; i++) {
+            for (var i = this.currentBtnPage; i < this.btnCount + this.currentBtnPage ; i++) {
                 this.obj.append('<li ' + (this.pageNo == i ? 'class="active"' : '') + '><a href="javascript:goTo(' + i + ',' + callback + ')">' + i + '</a></li>');
             }
 
             //输出下一页和末页
-            if(this.pageNo == totalPages){
-                //this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="#"><i class="fa fa-angle-right"></i></a></li>');
-                //this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
-            }else{
+            if(this.pageNo != totalPages){
                 this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + (pageNo + 1) + ',' + callback + ')"><i class="fa fa-angle-right"></i></a></li>');
                 this.obj.append('<li ' + (pageNo == totalPages ? 'class="disabled"' : '') + '><a href="javascript:goTo(' + totalPages + ',' + callback + ')" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>');
             }

@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.SystemClock;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class ProductListPage extends AbstractPage {
     private WebElement productsTable;
     @FindBy(id = "totalRecordSpan")
     private WebElement totalRecord;
+    @FindBy(id = "editProduct")
+    private WebElement editProduct;
     @FindBy(css = "input[id=edit_name]")
     private WebElement editName;
     @FindBy(css = "input[id=edit_basePrice]")
@@ -68,11 +72,9 @@ public class ProductListPage extends AbstractPage {
         List<WebElement> tableTrs = productsTable.findElements(By.tagName("tr"));
         WebElement edit = tableTrs.get(1).findElements(By.xpath("//td/a")).get(0);
         edit.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //等待直到修改窗口显示
+        WebDriverWait driverWait = new WebDriverWait(webDriver,10);
+        editProduct = driverWait.until(ExpectedConditions.visibilityOf(editProduct));
         System.out.println(editName.getAttribute("value"));
         System.out.println(editBasePrice.getAttribute("value"));
         System.out.println(editProductDesc.getText());
