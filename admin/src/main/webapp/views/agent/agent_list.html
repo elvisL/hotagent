@@ -22,7 +22,6 @@
     <title>代理商总后台</title>
 
     <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
-    <link href="http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -45,14 +44,16 @@
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
-        </div><!-- logopanel -->
+        </div>
+        <!-- logopanel -->
 
         <div class="leftpanelinner">
 
             <!-- This is only visible to small devices -->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media userlogged">
-                    <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
+                    <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object"
+                         th:src="@{/assets/images/photos/loggeduser.png}">
 
                     <div class="media-body">
                         <h4>John Doe</h4>
@@ -102,49 +103,59 @@
                 <ul>
                     <li>
                         <div>
-                            <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;"
+                                                                               class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;"
+                                                                               class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
+                            <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;"
+                                                                           class="custom-datainfo">100</h4>
                         </div>
                     </li>
                 </ul>
-            </div><!-- infosummary -->
+            </div>
+            <!-- infosummary -->
 
-        </div><!-- leftpanelinner -->
-    </div><!-- leftpanel -->
+        </div>
+        <!-- leftpanelinner -->
+    </div>
+    <!-- leftpanel -->
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="common/header :: header">
-
+        <div class="headerbar" th:include="common/header :: header">
+            <!--/*-->
             <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
             <form class="searchform" action="../index.html" method="post">
@@ -163,31 +174,38 @@
                                 <h5 class="title">2 Newly Registered Users</h5>
                                 <ul class="dropdown-list user-list">
                                     <li class="new">
-                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user1.png" alt=""/></a></div>
+                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user1.png"
+                                                                           alt=""/></a></div>
                                         <div class="desc">
-                                            <h5><a href="">Draniem Daamul (@draniem)</a> <span class="badge badge-success">new</span></h5>
+                                            <h5><a href="">Draniem Daamul (@draniem)</a> <span
+                                                    class="badge badge-success">new</span></h5>
                                         </div>
                                     </li>
                                     <li class="new">
-                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user2.png" alt=""/></a></div>
+                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user2.png"
+                                                                           alt=""/></a></div>
                                         <div class="desc">
-                                            <h5><a href="">Zaham Sindilmaca (@zaham)</a> <span class="badge badge-success">new</span></h5>
+                                            <h5><a href="">Zaham Sindilmaca (@zaham)</a> <span
+                                                    class="badge badge-success">new</span></h5>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user3.png" alt=""/></a></div>
+                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user3.png"
+                                                                           alt=""/></a></div>
                                         <div class="desc">
                                             <h5><a href="">Weno Carasbong (@wenocar)</a></h5>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user4.png" alt=""/></a></div>
+                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user4.png"
+                                                                           alt=""/></a></div>
                                         <div class="desc">
                                             <h5><a href="">Nusja Nawancali (@nusja)</a></h5>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user5.png" alt=""/></a></div>
+                                        <div class="thumb"><a href=""><img src="../../assets/images/photos/user5.png"
+                                                                           alt=""/></a></div>
                                         <div class="desc">
                                             <h5><a href="">Lane Kitmari (@lane_kitmare)</a></h5>
                                         </div>
@@ -336,9 +354,11 @@
                         </button>
                     </li>
                 </ul>
-            </div><!-- header-right -->
-
-        </div><!-- headerbar -->
+            </div>
+            <!-- header-right -->
+            <!--*/-->
+        </div>
+        <!-- headerbar -->
 
         <div class="pageheader">
             <h2><i class="fa fa-search"></i> 代理商列表</h2>
@@ -351,10 +371,12 @@
                     <div class="panel-btns">
                         <a href="" class="panel-close">&times;</a>
                         <a href="" class="minimize">&minus;</a>
-                    </div><!-- panel-btns -->
+                    </div>
+                    <!-- panel-btns -->
                     <h3 class="panel-title">搜索</h3>
 
-                    <form id="searchForm" action="agent_list.html" th:action="@{/agents}" method="get" th:object="${agentSearch}">
+                    <form id="searchForm" action="agent_list.html" th:action="@{/agents}" method="get"
+                          th:object="${agentSearch}">
                         <input type="hidden" name="pageNo" id="pageNo" value="1" th:value="${currentPage}"/>
 
                         <p>
@@ -365,19 +387,24 @@
                                 <span class="input-group-addon">
                                     代理商姓名
                                 </span>
-                                    <input type="text" name="agentName" th:value="*{agentName}" class="form-control" aria-label="...">
-                                </div><!-- /input-group -->
+                                    <input type="text" name="agentName" th:value="*{agentName}" class="form-control"
+                                           aria-label="...">
+                                </div>
+                                <!-- /input-group -->
                             </div>
                             <div>
                                 <div class="input-group">
                                 <span class="input-group-addon">
                                     创建时间
                                 </span>
-                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime" th:value="*{beginTime}">
+                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime"
+                                           th:value="*{beginTime}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime" th:value="*{endTime}">
+                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime"
+                                           th:value="*{endTime}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                </div><!-- /input-group -->
+                                </div>
+                                <!-- /input-group -->
                             </div>
                         </div>
 
@@ -393,16 +420,21 @@
                                 </span>
 
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="*{agentType}==-1 ? '请选择':(*{agentType}==0 ? '普通代理':'独家代理')">请选择 <span class="caret"></span></button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn"
+                                                style="width: 128px;"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                th:text="*{agentType}==-1 ? '请选择':(*{agentType}==0 ? '普通代理':'独家代理')">请选择
+                                            <span class="caret"></span></button>
                                         <ul id="typeSelect" class="dropdown-menu dropdown-menu-right">
                                             <li><a href="#" type-value="-1">请选择</a></li>
                                             <li><a href="#" type-value="0">普通代理</a></li>
                                             <li><a href="#" type-value="1">独家代理</a></li>
                                         </ul>
                                         <input type="hidden" name="agentType" th:value="*{agentType}"/>
-                                    </div><!-- /btn-group -->
-                                </div><!-- /input-group -->
+                                    </div>
+                                    <!-- /btn-group -->
+                                </div>
+                                <!-- /input-group -->
                             </div>
                             <div class="col-lg-4">
                                 <div class="input-group">
@@ -411,7 +443,8 @@
                                 </span>
 
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" id="levelSelectBtn" style="width: 163px;"
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                id="levelSelectBtn" style="width: 163px;"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <!--/*-->
                                             请选择
@@ -425,20 +458,24 @@
                                             <li><a href="#" level="-1">请选择</a></li>
 
                                             <li th:each="agentLevel:${agentLevels}">
-                                                <a href="#" th:attr="level=${agentLevel.level}" level="0"  th:text="${agentLevel.levelName}">一级代理商</a>
+                                                <a href="#" th:attr="level=${agentLevel.level}" level="0"
+                                                   th:text="${agentLevel.levelName}">一级代理商</a>
                                             </li>
                                         </ul>
 
                                         <input type="hidden" name="agentLevel" th:value="*{agentLevel}"/>
-                                    </div><!-- /btn-group -->
-                                </div><!-- /input-group -->
+                                    </div>
+                                    <!-- /btn-group -->
+                                </div>
+                                <!-- /input-group -->
                             </div>
                             <div class="col-lg-2">
                                 <a class="btn btn-white submitSearch" href="javascript:search()">查询</a>
                             </div>
 
                             <div class="col-lg-2">
-                                <a class="btn btn-white resetSearch" href="agent_list.html" th:href="@{/agents}">显示全部</a>
+                                <a class="btn btn-white resetSearch" href="agent_list.html"
+                                   th:href="@{/agents}">显示全部</a>
                             </div>
                         </div>
                         </p>
@@ -473,9 +510,12 @@
                                 <td th:text="${agent.province+'/'+agent.city}">杭州</td>
                                 <td th:text="${agent.balance}">1000</td>
                                 <td th:text="${agent.commission}">88</td>
-                                <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
+                                <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12
+                                    00:00:00
+                                </td>
                                 <td th:text="${agent.getStatus()}">活动</td>
-                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a>&nbsp;&nbsp;<a onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a></td>
+                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a>&nbsp;&nbsp;<a
+                                        onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a></td>
                             </tr>
                             <tr>
                                 <td>1</td>
@@ -509,29 +549,42 @@
                             </tr>
                             </tbody>
                         </table>
-                    </div><!-- table-responsive -->
+                    </div>
+                    <!-- table-responsive -->
                     <p style="float: left;margin: 20px 0;">
                         共<!--/*-->10<!--*/--><!--/*/[[${totalPages}]]/*/-->页
                     </p>
                     <ul class="pagination nomargin pull-right">
-                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(${currentPage-1})|">上一页</a></li>
-                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(1)|">首页</a></li>
-                        <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#" th:href="|javascript:jump(${page})|" th:text="${page}">1</a></li>
+                        <li th:if="${hasPrevious}"><a href="#"
+                                                      th:href="${hasPrevious} ? |javascript:jump(${currentPage-1})|">上一页</a>
+                        </li>
+                        <li th:if="${hasPrevious}"><a href="#" th:href="${hasPrevious} ? |javascript:jump(1)|">首页</a>
+                        </li>
+                        <li th:each="page:${pageNos}" th:class="${page}==${currentPage} ? active"><a href="#"
+                                                                                                     th:href="|javascript:jump(${page})|"
+                                                                                                     th:text="${page}">1</a>
+                        </li>
                         <!--/*-->
                         <li class="active"><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
                         <li><a href="#">5</a></li>
                         <!--*/-->
-                        <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${totalPages})|">尾页</a></li>
-                        <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${currentPage+1})|">下一页</a></li>
+                        <li th:if="${hasNext}"><a href="#"
+                                                  th:href="${hasNext} ? |javascript:jump(${totalPages})|">尾页</a></li>
+                        <li th:if="${hasNext}"><a href="#" th:href="${hasNext} ? |javascript:jump(${currentPage+1})|">下一页</a>
+                        </li>
                     </ul>
-                </div><!-- panel-body -->
-            </div><!-- panel -->
+                </div>
+                <!-- panel-body -->
+            </div>
+            <!-- panel -->
 
-        </div><!-- contentpanel -->
+        </div>
+        <!-- contentpanel -->
 
-    </div><!-- mainpanel -->
+    </div>
+    <!-- mainpanel -->
 
     <div class="rightpanel">
         <!-- Nav tabs -->
@@ -543,6 +596,7 @@
         </ul>
 
         <!-- Tab panes -->
+        <!--/*-->
         <div class="tab-content">
             <div class="tab-pane active" id="rp-alluser">
                 <h5 class="sidebartitle">Online Users</h5>
@@ -557,7 +611,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Los Angeles, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -570,7 +625,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>San Francisco, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -582,7 +638,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Bangkok, Thailand</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -594,7 +651,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -606,7 +664,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
 
@@ -624,7 +683,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Los Angeles, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -636,7 +696,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>San Francisco, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -648,7 +709,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Bangkok, Thailand</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -660,7 +722,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -672,7 +735,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -684,7 +748,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -696,7 +761,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
             </div>
@@ -713,7 +779,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Los Angeles, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -725,7 +792,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>San Francisco, CA</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -737,7 +805,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Bangkok, Thailand</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -749,7 +818,8 @@
                                 <strong>Renov Leongal</strong>
                                 <small>Cebu City, Philippines</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li class="online">
                         <div class="media">
@@ -761,7 +831,8 @@
                                 <strong>Weno Carasbong</strong>
                                 <small>Tokyo, Japan</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
             </div>
@@ -778,7 +849,8 @@
                                 <strong>Eileen Sideways</strong>
                                 <small>Hi hello, ctc?... would you mind if I go to your...</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -790,7 +862,8 @@
                                 <strong>Zaham Sindilmaca</strong>
                                 <small>This is to inform you that your product that we...</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                     <li>
                         <div class="media">
@@ -802,7 +875,8 @@
                                 <strong>Nusja Nawancali</strong>
                                 <small>Are you willing to have a long term relat...</small>
                             </div>
-                        </div><!-- media -->
+                        </div>
+                        <!-- media -->
                     </li>
                 </ul>
             </div>
@@ -842,10 +916,14 @@
                     </div>
                 </div>
 
-            </div><!-- tab-pane -->
+            </div>
+            <!-- tab-pane -->
 
-        </div><!-- tab-content -->
-    </div><!-- rightpanel -->
+        </div>
+        <!--*/-->
+        <!-- tab-content -->
+    </div>
+    <!-- rightpanel -->
 
 </section>
 
@@ -855,13 +933,9 @@
 <script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
 <script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
 <script src="../../assets/js/modernizr.min.js" th:src="@{/assets/js/modernizr.min.js}"></script>
-<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
 <script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
 <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
-
-<!--一些控件-->
-<!--<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>-->
 
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
@@ -888,10 +962,10 @@
             shadeClose: true,
             shade: 0.8,
             area: ['380px', '50%'],
-            content: '/agents/'+id
+            content: '/agents/' + id
         });
     }
-    function search(){
+    function search() {
         $("#pageNo").val(1);
         $('#searchForm').submit();
     }

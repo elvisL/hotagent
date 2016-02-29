@@ -365,8 +365,8 @@
                                 <td th:text="${withdraw.auditStatus.name}">申请中</td>
                                 <td>
                                     <a onclick="showDetail(this)" th:attr="id=${withdraw.id}">查看</a>
-                                    <a onclick="changeAuditStatus(this,1)" th:attr="id=${withdraw.id}">通过</a>
-                                    <a onclick="changeAuditStatus(this,2)" th:attr="id=${withdraw.id}">不通过</a>
+                                    <a th:if="${withdraw.auditStatus.value==0}" onclick="changeAuditStatus(this,1)" th:attr="id=${withdraw.id},commission=${withdraw.money}">通过</a>
+                                    <a th:if="${withdraw.auditStatus.value==0}" onclick="changeAuditStatus(this,2)" th:attr="id=${withdraw.id},commission=${withdraw.money}">不通过</a>
                                 </td>
                             </tr>
                             <tr>
@@ -417,6 +417,7 @@
         </ul>
 
         <!-- Tab panes -->
+        <!--/*-->
         <div class="tab-content">
             <div class="tab-pane active" id="rp-alluser">
                 <h5 class="sidebartitle">Online Users</h5>
@@ -719,6 +720,7 @@
             </div><!-- tab-pane -->
 
         </div><!-- tab-content -->
+        <!--*/-->
     </div><!-- rightpanel -->
 
 </section>
@@ -734,6 +736,7 @@
 <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
+<script src="../../assets/layer/extend/layer.ext.js" th:src="@{/assets/layer/extend/layer.ext.js}"></script>
 
 
 <!--框架基础js-->
@@ -748,27 +751,57 @@
 </script>
 <script>
     function changeAuditStatus(obj,status) {
-        var id = $(obj).attr("id");
-        $.ajax({
-            url:"/withdraws/"+id.toString()+"/edit",
-            type:"POST",
-            data:{
-                "auditStatus":status.toString(),
-                "commission":
-            },
-            dataType:"json",
-            success:function(data) {
-                if(data.code == 2000) {
-                    location.reload();
-                }else {
-                    alert(data.msg);
-                }
+        if(status==2) {
+            layer.prompt({
+                title:"请输入拒绝理由",
+                formType:2
+            },function(memo) {
+                var id = $(obj).attr("id");
+                var commission = $(obj).attr("commission");
+                $.ajax({
+                    url:"/withdraws/"+id.toString()+"/edit",
+                    type:"POST",
+                    data:{
+                        "auditStatus":status.toString(),
+                        "commission":commission,
+                        "memo":memo
+                    },
+                    dataType:"json",
+                    success:function(data) {
+                        if(data.code == 2000) {
+                            location.reload();
+                        }else {
+                            layer.msg(data.msg);
+                        }
 
-            },
-            error:function(e) {
-                console.log(e.toString());
-            }
-        })
+                    },
+                    error:function(e) {
+                        console.log(e.toString());
+                    }
+                })
+            });
+        }else {
+            var id = $(obj).attr("id");
+            $.ajax({
+                url:"/withdraws/"+id.toString()+"/edit",
+                type:"POST",
+                data:{
+                    "auditStatus":status.toString()
+                },
+                dataType:"json",
+                success:function(data) {
+                    if(data.code == 2000) {
+                        location.reload();
+                    }else {
+                        layer.msg(data.msg);
+                    }
+
+                },
+                error:function(e) {
+                    console.log(e.toString());
+                }
+            })
+        }
     }
     function showDetail(obj) {
         var id = $(obj).attr("id");
