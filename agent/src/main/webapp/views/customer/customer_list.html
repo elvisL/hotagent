@@ -214,12 +214,13 @@
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var customerUrl = /*[[@{/}]]*/"/";
 </script>
 <script>
     //修改
     function editCustomer(obj) {
         var id = $(obj).attr("id");
-        location.href = "/editCustomer?id=" + id ;
+        location.href = customerUrl + "editCustomer?id=" + id ;
     }
 
     //详情
@@ -231,7 +232,7 @@
             shadeClose: true,
             shade: 0.8,
             area: ['880px', '680px'],
-            content: '/customerDetail/'+id
+            content:customerUrl + 'customerDetail/'+id
         });
     }
     function jump(obj) {

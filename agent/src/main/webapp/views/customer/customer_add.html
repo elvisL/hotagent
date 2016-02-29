@@ -157,6 +157,11 @@
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
+<script type="application/javascript" th:inline="javascript">
+    var customerUrl = /*[[@{/}]]*/"/";
+</script>
+
+
 <script type="text/javascript">
     $(function () {
         editHandler.pageInit();
@@ -244,7 +249,7 @@
 
     function Import(){
         $.ajax({
-            url: "/saveCustomer",
+            url: customerUrl+"saveCustomer",
             data: {
                 name:$("#name").val(),
                 company:$("#company").val(),

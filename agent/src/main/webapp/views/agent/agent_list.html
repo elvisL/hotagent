@@ -272,11 +272,12 @@
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var agentUrl = /*[[@{/}]]*/"/";
 </script>
 <script>
     function editAgent(obj) {
         var id = $(obj).attr("id");
-        location.href = "/editAgent?id=" + id;
+        location.href = agentUrl+"editAgent?id=" + id;
     }
     //详情
     function showDetail(obj) {
@@ -287,7 +288,7 @@
             shadeClose: true,
             shade: 0.8,
             area: ['580px', '50%'],
-            content: '/lowAgentDetail/'+id
+            content: agentUrl+'lowAgentDetail/'+id
         });
     }
 
@@ -300,7 +301,7 @@
             shadeClose: true,
             shade: 0.8,
             area: ['998px', '666px'],
-            content: '/agentImport/'+id
+            content: agentUrl+'agentImport/'+id
         });
     }
 
@@ -318,7 +319,7 @@
 
         $.ajax({
             type: "POST",
-            url: "lockAgent" ,
+            url: agentUrl+"lockAgent" ,
             dataType: "json",
             data:{
                 id:id,

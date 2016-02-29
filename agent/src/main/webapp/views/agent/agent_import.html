@@ -139,6 +139,10 @@
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
+<script type="application/javascript" th:inline="javascript">
+    var agentUrl = /*[[@{/}]]*/"/";
+</script>
+
 <script type="text/javascript">
     $(function () {
         editHandler.pageInit();
@@ -203,7 +207,7 @@
 <script>
       function Import(){
         $.ajax({
-            url: "/importBl",
+            url: agentUrl+"importBl",
             data: {
                 money:$("#money").val(),
                 id:$("#id").val(),

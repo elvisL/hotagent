@@ -295,6 +295,7 @@
 <script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/js/agent/agent-add.js" th:src="@{/assets/js/agent/agent-add.js}"></script>
+
 <script th:inline="javascript">
     $("select[name=type]").blur(checkAreaAvaliable);
     function checkAreaAvaliable() {
@@ -302,7 +303,7 @@
         if (type == 1) {
             var city = $("select[name=city]").val();
             $.ajax({
-                url: "/checkCity",
+                url: agentUrl+"checkCity",
                 data: "city=" + encodeURI(city),
                 dataType: "json",
                 success: function (data) {
@@ -325,6 +326,7 @@
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
     var dist = /*[[${agent!=null ? agent.district : "滨江区"}]]*/ "滨江区";
+    var agentUrl = /*[[@{/}]]*/"/";
     $("#area").citySelect({
         prov:prov,
         city:city,
@@ -435,7 +437,7 @@
 <script>
     function submitAgent(){
         $.ajax({
-            url: "/saveEditLowerAg",
+            url: agentUrl+"saveEditLowerAg",
             data: {
                 id:$("#id").val(),
                 name:$("#name").val(),

@@ -131,6 +131,11 @@
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
+<script type="application/javascript" th:inline="javascript">
+    var withdrawUrl = /*[[@{/}]]*/"/";
+</script>
+
+
 <script type="text/javascript">
     $(function () {
         editHandler.pageInit();
@@ -168,7 +173,7 @@
                 },
                 submitHandler: function (form, ev) {
                     $.ajax({
-                        url: "/applyWithdraw",
+                        url: withdrawUrl+"applyWithdraw",
                         data: {
                             money:$("#money").val(),
                             message: $("#message").val(),

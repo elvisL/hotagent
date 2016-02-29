@@ -314,6 +314,9 @@
         th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/js/agent/agent-add.js" th:src="@{/assets/js/agent/agent-add.js}"></script>
+<script type="application/javascript" th:inline="javascript">
+    var agentUrl = /*[[@{/}]]*/"/";
+</script>
 <script type="text/javascript">
     $("select[name=type]").blur(checkAreaAvaliable);
     function checkAreaAvaliable() {
@@ -321,7 +324,7 @@
         if (type == 1) {
             var city = $("select[name=city]").val();
             $.ajax({
-                url: "/checkCity",
+                url: agentUrl+"checkCity",
                 data: "city=" + encodeURI(city),
                 dataType: "json",
                 success: function (data) {
@@ -457,7 +460,7 @@
 <script>
     function submitAgent() {
         $.ajax({
-            url: "/saveAddLowerAg",
+            url: agentUrl+"saveAddLowerAg",
             data: {
                 name: $("#name").val(),
                 agentLevel: $("#agentLevel").val(),
