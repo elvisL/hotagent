@@ -21,7 +21,7 @@ public enum ResultCodeEnum {
     DATA_BAD_PARSER(6000, "数据解析失败"),
     SIGN_ERROR(3000, "签名错误"),
     NO_SIGN(3001, "签名参数未传"),
-    LOGINNAME_NOT_AVAILABLE(100, "用户名已存在"),
+    LOGINNAME_NOT_AVAILABLE(1000, "用户名已存在"),
     AUTHORITY_NULL(7000, "请设置权限"),
     SAVE_DATA_ERROR(4000, "数据保存出错"),
     IMPORT_ERROR(4001, "余额不足"),

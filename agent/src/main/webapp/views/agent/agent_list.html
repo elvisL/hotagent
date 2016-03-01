@@ -311,12 +311,9 @@
         $("#searchForm").submit();
     }
 
-    //冻结，解冻
-    function lockAgent(obj) {
-
-        var id = $(obj).attr("id");
-        var bl = $(obj).attr("value");
-
+    function lock(id,bl){
+//        var id = $(obj).attr("id");
+//        var bl = $(obj).attr("value");
         $.ajax({
             type: "POST",
             url: agentUrl+"lockAgent" ,
@@ -333,6 +330,32 @@
                         ,1000);
             }
         })
+    }
+
+    //冻结，解冻
+    function lockAgent(obj) {
+
+        var id = $(obj).attr("id");
+        var bl = $(obj).attr("value");
+        if(bl == 1){
+        layer.msg('确定冻结该代理商吗', {
+            time: 0 //不自动关闭
+            ,btn: ['确认', '否']
+            ,yes: function(index){
+                layer.close(index);
+                lock(id,bl);
+            }
+        });}
+        else{
+            layer.msg('确定解冻该代理商吗', {
+                time: 0 //不自动关闭
+                ,btn: ['确认', '否']
+                ,yes: function(index){
+                    layer.close(index);
+                    lock(id,bl);
+                }
+            });
+        }
     }
     function search(){
         $('input[name=pageNo]').val(1);

@@ -314,6 +314,10 @@ public class AgentController {
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
             AgentType type = AgentType.getAgentType(agentType);
             agent.setType(type);
+            if (agentService.findByUsername(agent.getUsername())!=null){
+                apiResult= ApiResult.resultWith(ResultCodeEnum.LOGINNAME_NOT_AVAILABLE);
+                return  apiResult;
+            }
             agent.setLevel(aLevel);
             agent.setParent(Higher);
             agent.setExpandable(false);

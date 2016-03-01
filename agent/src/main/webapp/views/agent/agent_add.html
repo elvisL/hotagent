@@ -498,6 +498,10 @@
                         layer.msg("您的账户余额不足", {time: 2000});
                         $("#balance").val("");
                         break;
+                    case 1000:
+                        layer.msg("用户名已存在", {time: 2000});
+                        $("#username").val("");
+                        break;
                 }
             },
             error: function () {
