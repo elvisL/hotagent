@@ -9,7 +9,7 @@ function imgUpload() {
     var qualifyUri = $("#qualifyUri").val();
     $.ajaxFileUpload
     ({
-        url: 'uploadImg',
+        url: url + 'uploadImg',
         fileElementId: 'qualify',
         dataType: 'json',
         data:{
@@ -26,13 +26,14 @@ function imgUpload() {
         }
     });
 }
-$("select[name=type]").blur(checkAreaAvaliable);
+$("select[name=type]").change(checkAreaAvaliable);
+$("select[name=city]").change(checkAreaAvaliable);
 function checkAreaAvaliable() {
     var type = $("select[name=type]").val();
     var city = $("select[name=city]").val();
     var avaliable = true;
     $.ajax({
-        url: "/checkCity",
+        url: url + "checkCity",
         data: "city=" + encodeURI(city),
         dataType: "json",
         async:false,
@@ -79,7 +80,7 @@ $("#editForm").validate({
             required: true,
             maxlength: 50,
             remote:{
-                url:"checkUsername",
+                url:url + "checkUsername",
                 type:"post",
                 data:{
                     username: function () {

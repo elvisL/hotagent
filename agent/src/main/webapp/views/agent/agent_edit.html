@@ -77,7 +77,9 @@
                             <label class="col-sm-3 control-label">账号</label>
 
                             <div class="col-sm-3">
-                                <input type="text" name="username" id="username"  th:value="${agent}!=null ? ${agent.username} : ''" th:readonly="${agent}!=null ? readonly" title="账号" placeholder="账号" class="form-control"/>
+                                <input type="text" name="username" id="username" th:value="${agent}!=null ? ${agent.username} : ''"
+                                       th:readonly="${agent}!=null ? readonly" title="账号" placeholder="账号"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -295,29 +297,44 @@
 <script src="../../assets/js/cityselect/jquery.cityselect.js" th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/js/agent/agent-add.js" th:src="@{/assets/js/agent/agent-add.js}"></script>
+
 <script th:inline="javascript">
-    $("select[name=type]").blur(checkAreaAvaliable);
+    $("select[name=type]").change(checkAreaAvaliable);
+    $("select[name=city]").change(checkAreaAvaliable);
     function checkAreaAvaliable() {
         var type = $("select[name=type]").val();
+        var available = false;
         if (type == 1) {
             var city = $("select[name=city]").val();
             $.ajax({
-                url: "/checkCity",
+                url: agentUrl+"checkCity",
                 data: "city=" + encodeURI(city),
                 dataType: "json",
                 success: function (data) {
-                    if (data.code != 2000) {
-                        layer.alert("此城市已经有代理，无法设为独家代理");
-                    } else {
-//                        $("select[name=type]").closest('.form-group').removeClass('has-error');
-                        return false;
+                    if (data.code == 2000) {
+                        $("select[name=type]").closest('.form-group').removeClass('has-error');
+                        avaliable = true;
+                    } else if(data.code == 6002) {
+                        layer.alert(data.msg);
+                        $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
+                        avaliable = false;
+                    }else if(data.code == 6003) {
+                        if(type==1) {
+                            layer.alert(data.msg);
+                            $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
+                            avaliable = false;
+                        }else {
+                            $("select[name=type]").closest('.form-group').removeClass('has-error');
+                            avaliable = true;
+                        }
                     }
                 }
             })
         } else {
             $("select[name=type]").closest('.form-group').removeClass('has-error');
-            return true;
+            available = true;
         }
+        return available;
     }
     $(function () {
         editHandler.pageInit();
@@ -325,6 +342,7 @@
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
     var dist = /*[[${agent!=null ? agent.district : "滨江区"}]]*/ "滨江区";
+    var agentUrl = /*[[@{/}]]*/ "/";
     $("#area").citySelect({
         prov:prov,
         city:city,
@@ -424,8 +442,8 @@
             });
         },
         submit: function () {
-            var av = checkAreaAvaliable();
-            if(av) {
+            var available = checkAreaAvaliable();
+            if (available && $("#editForm").validate().form()) {
             submitAgent();
             }
         }
@@ -435,7 +453,7 @@
 <script>
     function submitAgent(){
         $.ajax({
-            url: "/saveEditLowerAg",
+            url: agentUrl+"saveEditLowerAg",
             data: {
                 id:$("#id").val(),
                 name:$("#name").val(),
@@ -466,7 +484,7 @@
                     case 2000:
                         layer.msg("添加成功,2秒后将自动代理商列表",{time: 2000});
                         setTimeout(function(){
-                                    window.location.href="http://"+window.location.host+"/"+"agentList";
+                                    window.location.href="http://"+window.location.host+agentUrl+"agentList";
                                 }
                                 ,1000);
                         break;

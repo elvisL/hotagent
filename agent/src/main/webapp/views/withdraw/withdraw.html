@@ -36,7 +36,7 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='personal')">
+    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='withdraw')">
 
     </div><!-- leftpanel -->
 
@@ -89,9 +89,9 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理商留言</label>
                                 <div class="col-sm-7">
-                                    <textarea id="message" name="message"  class="form-control" rows="5"></textarea>
+                                    <textarea id="message" name="message"  class="form-control" rows="5" cols="60"></textarea>
                                 </div>
-                            </div>
+                        </div>
 
 
 
@@ -131,6 +131,11 @@
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
+<script type="application/javascript" th:inline="javascript">
+    var withdrawUrl = /*[[@{/}]]*/"/";
+</script>
+
+
 <script type="text/javascript">
     $(function () {
         editHandler.pageInit();
@@ -168,7 +173,7 @@
                 },
                 submitHandler: function (form, ev) {
                     $.ajax({
-                        url: "/applyWithdraw",
+                        url: withdrawUrl+"applyWithdraw",
                         data: {
                             money:$("#money").val(),
                             message: $("#message").val(),
@@ -186,7 +191,12 @@
                                             ,1000);
                                     break;
                                 case 4000:
-                                    layer.msg("申请失败，请联系管理员", {time: 2000});
+                                    layer.msg("余额不足", {time: 2000});
+                                    $("#money").val("");
+                                    $("#messgae").val("");
+                                    break;
+                                case 4002:
+                                    layer.msg("申请失败，本月申请次数不足", {time: 2000});
                                     $("#money").val("");
                                     $("#messgae").val("");
                                     break;

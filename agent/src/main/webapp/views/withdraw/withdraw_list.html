@@ -8,17 +8,20 @@
   ~ 2013-2016. All rights reserved.
   -->
 
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="agents" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.Agent>"*/-->
+<!--/*@thymesVar id="agentSearch" type="com.huotu.hotagent.service.model.AgentSearch"*/-->
+<!--/*@thymesVar id="agentLevels" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.AgentLevel>"*/-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png">
 
-    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <title>提现列表</title>
 
-    <link href="../css/style.default.css" rel="stylesheet">
+    <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,7 +30,7 @@
     <![endif]-->
 </head>
 
-<body class="horizontal-menu-sidebar">
+<body>
 
 
 <!-- Preloader -->
@@ -37,147 +40,137 @@
 
 <section>
 
-    <div class="leftpanel" th:fragment="left (activeMenu)">
+    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='withdrawList')">
 
         <div class="logopanel">
             <h1>代理商管理后台</h1>
         </div><!-- logopanel -->
 
-        <div class="leftpanelinner">
-            <!-- This is only visible to small devices -->
-            <div class="visible-xs hidden-sm hidden-md hidden-lg">
-                <div class="media userlogged">
-                    <img alt="" src="../images/photos/loggeduser.png" class="media-object" th:src="@{/assets/images/photos/loggeduser.png}">
-
-                    <div class="media-body">
-                        <h4>John Doe</h4>
-                        <span>"Life is so..."</span>
-                    </div>
-                </div>
-
-                <h5 class="sidebartitle actitle">Account</h5>
-                <ul class="nav nav-pills nav-stacked nav-bracket mb30">
-                    <li><a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-                    <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a></li>
-                    <li><a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
-                    <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
-                </ul>
-            </div>
-
-            <h5 class="sidebartitle">Navigation</h5>
-            <ul class="nav nav-pills nav-stacked nav-bracket">
-                <li agent:active="index"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
-                <li agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
-                    <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
-                    <ul class="children" style="display: block;">
-                        <li agent:active="agentList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 代理商列表</span></a></li>
-                        <li agent:active="agentEdit"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
-                        <li agent:active="agentLevel"><a href="form-validation.html"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
-                    </ul>
-                </li>
-                <li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
-                <li agent:activeparent="'operatorList,addOperator'" class="nav-parent">
-                    <a href=""><i class="fa fa-edit"></i> <span>操作员管理</span></a>
-                    <ul class="children">
-                        <li agent:active="operatorList"><a href="general-forms.html"><i class="fa fa-caret-right"></i> 操作员列表</a></li>
-                        <li agent:active="addOperator"><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加操作员</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <style>
-                .custom-datainfo {
-                    margin: 0;
-                    font-size: 16px;
-                    color: #fff;
-                    opacity: 0.7;
-                }
-            </style>
-            <div class="infosummary">
-                <h5 class="sidebartitle">Information Summary</h5>
-                <ul>
-                    <li>
-                        <div>
-                            <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;" class="custom-datainfo">100</h4>
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- infosummary -->
-
-        </div><!-- leftpanelinner -->
     </div><!-- leftpanel -->
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:fragment="header">
-
-            <a class="menutoggle"><i class="fa fa-bars"></i></a>
-
-
-            <div class="header-right">
-                <ul class="headermenu">
-                    <li>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <img src="../images/photos/loggeduser.png" alt="" th:src="@{/assets/images/photos/loggeduser.png}"/>
-                                John Doe
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> 修改密码</a></li>
-                                <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i> 注销登录</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- header-right -->
+        <div class="headerbar" th:replace="views/common/header :: header">
 
         </div><!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-home"></i> Horizontal Menu <span>Subtitle goes here...</span></h2>
-
-            <div class="breadcrumb-wrapper">
-                <span class="label">You are here:</span>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Bracket</a></li>
-                    <li class="active">Horizontal Menu</li>
-                </ol>
-            </div>
+            <h2><i class="fa fa-search"></i> 提现申请列表</h2>
         </div>
 
         <div class="contentpanel">
-            <!-- content goes here... -->
-        </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">搜索</h3>
+
+                    <form id="searchForm" action="balanceLog_list.html" th:action="@{/withdrawList}" method="get"
+                          th:object="${withdrawSearch}">
+                        <input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>
+
+                        <p>
+
+                        <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                               <span class="input-group-addon">
+                                    申请状态
+                                </span>
+
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="*{auditStatus}==-1 ? '请选择':(*{auditStatus}==0 ? '申请中':(*{auditStatus}==1 ? '通过':'失败'))">请选择 <span class="caret"></span></button>
+                                    <ul id="typeSelect" class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" type-value="-1">请选择</a></li>
+                                        <li><a href="#" type-value="0">申请中</a></li>
+                                        <li><a href="#" type-value="1">通过</a></li>
+                                        <li><a href="#" type-value="2">失败</a></li>
+                                    </ul>
+                                    <input type="hidden" name="auditStatus" th:value="*{auditStatus}"/>
+                                </div><!-- /btn-group -->
+                            </div><!-- /input-group -->
+                        </div>
+                            <!-- /input-group -->
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">创建时间</span>
+                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime"
+                                           th:value="*{beginTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime"
+                                           th:value="*{endTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn btn-white submitSearch"
+                                   href="javascript:search()">查询</a>
+                                <a class="btn btn-white resetSearch" href="balanceLog_list.html"
+                                   th:href="@{/withdrawList}">显示全部</a>
+                            </div>
+                        </div>
+                        </p>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb30">
+                            <thead>
+                            <tr>
+                                <th>提现金额</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
+                                <th>管理员回复</th>
+                            </tr>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+
+                            <tr th:each="withdraw:${withdrawRecords}">
+                                <td th:text="${withdraw.money}">100</td>
+                                <td th:text="${#dates.format(withdraw.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
+                                <td th:text="${withdraw.auditStatus.name}">申请中</td>
+                                <td th:text="${withdraw.reply}">通过啦</td>
+                            </tr>
+                            <tr>
+                                <td>火图科技</td>
+                                <td>100</td>
+                                <td>申请中</td>
+                                <td>查看</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>火图科技</td>
+                                <td>独家代理</td>
+                                <td>一级代理商</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                    <p style="float: left;margin: 20px 0;">
+                        共<!--/*-->10<!--*/--><!--/*/[[${totalPages}]]/*/-->页
+                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
+                    <ul style="float: right;" class="pagination pagination-split">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    </ul>
+                </div><!-- panel-body -->
+            </div><!-- panel -->
+
+        </div><!-- contentpanel -->
 
     </div><!-- mainpanel -->
 
@@ -191,6 +184,7 @@
         </ul>
 
         <!-- Tab panes -->
+        <!--/*-->
         <div class="tab-content">
             <div class="tab-pane active" id="rp-alluser">
                 <h5 class="sidebartitle">Online Users</h5>
@@ -493,19 +487,86 @@
             </div><!-- tab-pane -->
 
         </div><!-- tab-content -->
+        <!--*/-->
     </div><!-- rightpanel -->
 
 </section>
 
+<!--基本js-->
+<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
+<script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
+<script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../../assets/js/modernizr.min.js" th:src="@{/assets/js/modernizr.min.js}"></script>
+<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+<script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
+<script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
+<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
+<script src="../../assets/libs/layer/extend/layer.ext.js" th:src="@{/assets/libs/layer/extend/layer.ext.js}"></script>
 
-<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/modernizr/2.6.2/modernizr.min.js"></script>
-<script src="http://cdn.bootcss.com/retina.js/1.3.0/retina.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js"></script>
-<script src="../js/jquery.cookies.js"></script>
-<script src="../js/custom.js"></script>
+
+<!--框架基础js-->
+<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+<script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
+<script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
+
+<script type="application/javascript" th:inline="javascript">
+    var pageNo = /*[[${currentPage}]]*/ 1;
+    var totalPages = /*[[${totalPages}]]*/ 2;
+    var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var withdrawUrl = /*[[@{/}]]*/"/";
+</script>
+
+<script type="application/javascript">
+    function search(){
+        $('input[name=pageNo]').val(1);
+        $('#searchForm').submit();
+    }
+
+    function jump(obj) {
+        $("input[name=pageNo]").val(obj);
+        $("#searchForm").submit();
+    }
+
+    jQuery(document).ready(function () {
+        var paginate = new paging($(".pagination"), pageNo, totalPages, 7);
+        paginate.init(function (p) {
+            $('input[name=pageNo]').val(p);
+            $('#searchForm').submit();
+        });
+
+        // Date Picker
+        $('input[name=beginTime]').datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function (selectedDate) {
+                $("#endTime").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("input[name=endTime]").datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function (selectedDate) {
+                $("#beginTime").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+        var currentLevelId = $("input[name=level]").val();
+        if (currentLevelId != "" && currentLevelId != null)
+            $("#levelSelectBtn").html($("#levelSelect a[level=" + currentLevelId + "]").html());
+        var auditStatus = $("input[name=type]").val();
+        if (auditStatus != "" && auditStatus != null);
+        $("#typeSelectBtn").html($("#typeSelect a[type-value=" + auditStatus + "]").html());
+
+        $("#typeSelect li a").click(function () {
+            $("#typeSelectBtn").html($(this).html());
+            $("input[name=auditStatus]").val($(this).attr("type-value"));
+        });
+
+
+    });
+
+
+</script>
 </body>
 </html>

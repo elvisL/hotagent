@@ -14,6 +14,7 @@ import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.common.AgentType;
+import com.huotu.hotagent.service.common.Authority;
 import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
@@ -32,6 +33,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -39,10 +41,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by chendeyu on 2016/1/25.
@@ -99,6 +98,7 @@ public class AgentController {
     /**
      *下级代理账户信息详情
      */
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     @RequestMapping(value = "/lowAgentDetail/{id}",method = RequestMethod.GET)
     public String lowAgentDetai(@PathVariable Long id,Model model) throws Exception {
         Agent agent = agentService.findById(id);
@@ -110,6 +110,7 @@ public class AgentController {
     /**
      *代理商充值
      */
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     @RequestMapping(value = "/agentImport/{id}",method = RequestMethod.GET)
     public ModelAndView agentImport(@AuthenticationPrincipal Agent agent,@PathVariable Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
@@ -125,26 +126,12 @@ public class AgentController {
 
 
     /**
-     *代理商提现
-     */
-    @RequestMapping(value = "/withdraw",method = RequestMethod.GET)
-    public ModelAndView withdraw(@AuthenticationPrincipal Agent agent) throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("/views/withdraw/withdraw");
-        modelAndView.addObject("commission",agent.getCommission());
-        return  modelAndView;
-    }
-
-
-
-
-
-    /**
      * 下级代理商列表
      *
      * @return
      */
     @RequestMapping(value = "/agentList", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     public String AgentList(@AuthenticationPrincipal Agent agent,
             @RequestParam(required = false, defaultValue = "1") int pageNo,
             AgentSearch agentSearch,
@@ -184,6 +171,7 @@ public class AgentController {
      *修改代理商
      */
     @RequestMapping("/editAgent")
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     public ModelAndView editAgent(@RequestParam(value = "id", defaultValue = "0") Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agent = agentService.findById(id);
@@ -207,6 +195,7 @@ public class AgentController {
      *新增下级代理商
      */
     @RequestMapping("/addAgent")
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     public ModelAndView addAgent(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/agent/agent_add");
@@ -239,6 +228,7 @@ public class AgentController {
      *冻结下级代理商/解冻
      */
     @RequestMapping(value = "/lockAgent",method = RequestMethod.POST)
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     @ResponseBody
         public ApiResult lockAgent(@RequestParam(value = "id") Long id,int bl) throws Exception{
 
@@ -298,6 +288,7 @@ public class AgentController {
      */
     @RequestMapping(value = "/saveAddLowerAg ",method = RequestMethod.POST)
     @ResponseBody
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     public ApiResult saveAddLowerAg(@AuthenticationPrincipal Agent Higher,
                                  Agent agent,int agentType,int agentLevel,int money,
                                   ProductPrice productPrice) throws Exception{
@@ -308,6 +299,10 @@ public class AgentController {
             AgentLevel aLevel = agentLevelService.findByLevel(agentLevel);
             AgentType type = AgentType.getAgentType(agentType);
             agent.setType(type);
+            if (agentService.findByUsername(agent.getUsername())!=null){
+                apiResult= ApiResult.resultWith(ResultCodeEnum.LOGINNAME_NOT_AVAILABLE);
+                return  apiResult;
+            }
             agent.setLevel(aLevel);
             agent.setParent(Higher);
             agent.setExpandable(false);
@@ -316,6 +311,7 @@ public class AgentController {
             if (bl==true){
                 Set<Price> priceSet = priceService.setProduct(agent, productPrice);
                 agent.setPrices(priceSet);
+                agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_NOEXPANDABLE)));//设置权限
                 loginService.newLogin(agent,agent.getPassword());
                 apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
             }
@@ -335,6 +331,7 @@ public class AgentController {
      */
     @RequestMapping(value = "/saveEditLowerAg ",method = RequestMethod.POST)
     @ResponseBody
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     public ApiResult saveEditLowerAg(@AuthenticationPrincipal Agent Higher,
                                  Agent newAgent,int agentLevel,int agentType,
                                      ProductPrice productPrice) throws Exception{
@@ -383,6 +380,7 @@ public class AgentController {
      */
     @RequestMapping(value = "/importBl",method = RequestMethod.POST)
     @ResponseBody
+    @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     public ApiResult importBl(@AuthenticationPrincipal Agent agent,Long id,double money) throws Exception{
 
         ApiResult apiResult = null;

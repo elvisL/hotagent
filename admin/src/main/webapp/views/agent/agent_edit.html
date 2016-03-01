@@ -178,7 +178,7 @@
         <!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-edit"></i> 代理商管理<span>Subtitle goes here...</span></h2>
+            <h2><i class="fa fa-edit"></i> 代理商管理</h2>
 
         </div>
 
@@ -412,6 +412,7 @@
         </ul>
 
         <!-- Tab panes -->
+        <!--/*-->
         <div class="tab-content">
             <div class="tab-pane active" id="rp-alluser">
                 <h5 class="sidebartitle">Online Users</h5>
@@ -742,6 +743,7 @@
             <!-- tab-pane -->
 
         </div>
+        <!--*/-->
         <!-- tab-content -->
     </div>
     <!-- rightpanel -->
@@ -768,17 +770,18 @@
         th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
+
+
 <script th:inline="javascript">
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
     var dist = /*[[${agent!=null ? agent.district : "滨江区"}]]*/ "滨江区";
+    var url = /*[[@{/}]]*/ "/";
     $("#area").citySelect({
         prov: prov,
         city: city,
         dist: dist
     });
-</script>
-<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}">
 </script>
 </body>
 </html>

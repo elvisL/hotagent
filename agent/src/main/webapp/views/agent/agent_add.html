@@ -51,7 +51,7 @@
         <!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-edit"></i> 代理商管理<span>Subtitle goes here...</span></h2>
+            <h2><i class="fa fa-edit"></i> 代理商管理</h2>
 
         </div>
 
@@ -280,7 +280,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button onclick="editHandler.submit()" class="btn btn-primary">确认</button>
+                            <button onclick="submit()" class="btn btn-primary">确认</button>
                         </div>
                     </div>
                 </div>
@@ -314,29 +314,46 @@
         th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/js/agent/agent-add.js" th:src="@{/assets/js/agent/agent-add.js}"></script>
+<script type="application/javascript" th:inline="javascript">
+    var agentUrl = /*[[@{/}]]*/"/";
+</script>
 <script type="text/javascript">
-    $("select[name=type]").blur(checkAreaAvaliable);
+    $("select[name=type]").change(checkAreaAvaliable);
+    $("select[name=city]").change(checkAreaAvaliable);
     function checkAreaAvaliable() {
         var type = $("select[name=type]").val();
+        var available = false;
         if (type == 1) {
             var city = $("select[name=city]").val();
             $.ajax({
-                url: "/checkCity",
+                url: agentUrl+"checkCity",
                 data: "city=" + encodeURI(city),
                 dataType: "json",
                 success: function (data) {
-                    if (data.code != 2000) {
-                        layer.alert("此城市已经有代理，无法设为独家代理");
-                    } else {
-//                        $("select[name=type]").closest('.form-group').removeClass('has-error');
-                        return false;
+                    if (data.code == 2000) {
+                        $("select[name=type]").closest('.form-group').removeClass('has-error');
+                        available = true;
+                    } else if(data.code == 6002) {
+                        layer.alert(data.msg);
+                        $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
+                        available = false;
+                    }else if(data.code == 6003) {
+                        if(type==1) {
+                            layer.alert(data.msg);
+                            $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
+                            available = false;
+                        }else {
+                            $("select[name=type]").closest('.form-group').removeClass('has-error');
+                            available = true;
+                        }
                     }
                 }
-            })
+            });
         } else {
             $("select[name=type]").closest('.form-group').removeClass('has-error');
-            return true;
+            available = true;
         }
+        return available;
     }
 
     $(function () {
@@ -438,17 +455,17 @@
                     return true;
                 }
             });
-        },
-        submit: function () {
-            var av = checkAreaAvaliable();
-            if (av) {
-                if($("#qualifyUri").val() == ''||$("#qualifyUri").val()==null)
-                {
-                    layer.msg("请上传图片", {time: 2000});
-                }
-                else {
-                    submitAgent();
-                }
+        }
+    }
+    function submit() {
+        var available = checkAreaAvaliable();
+        if (available && $("#editForm").validate().form()) {
+            if($("#qualifyUri").val() == ''||$("#qualifyUri").val()==null)
+            {
+                layer.msg("请上传图片", {time: 2000});
+            }
+            else {
+                submitAgent();
             }
         }
     }
@@ -457,7 +474,7 @@
 <script>
     function submitAgent() {
         $.ajax({
-            url: "/saveAddLowerAg",
+            url: agentUrl+"saveAddLowerAg",
             data: {
                 name: $("#name").val(),
                 agentLevel: $("#agentLevel").val(),
@@ -487,13 +504,17 @@
                     case 2000:
                         layer.msg("添加成功,2秒后将自动代理商列表", {time: 2000});
                         setTimeout(function () {
-                                    window.location.href = "http://" + window.location.host + "/" + "agentList";
+                                    window.location.href = "http://" + window.location.host + agentUrl + "agentList";
                                 }
                                 , 1000);
                         break;
                     case 4001:
                         layer.msg("您的账户余额不足", {time: 2000});
                         $("#balance").val("");
+                        break;
+                    case 1000:
+                        layer.msg("用户名已存在", {time: 2000});
+                        $("#username").val("");
                         break;
                 }
             },

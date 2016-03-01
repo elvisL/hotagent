@@ -748,6 +748,7 @@
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var url = /*[[@{/}]]*/"/";
 </script>
 <script>
     function changeAuditStatus(obj,status) {
@@ -759,7 +760,7 @@
                 var id = $(obj).attr("id");
                 var commission = $(obj).attr("commission");
                 $.ajax({
-                    url:"/withdraws/"+id.toString()+"/edit",
+                    url:url + "withdraws/"+id.toString()+"/edit",
                     type:"POST",
                     data:{
                         "auditStatus":status.toString(),
@@ -783,7 +784,7 @@
         }else {
             var id = $(obj).attr("id");
             $.ajax({
-                url:"/withdraws/"+id.toString()+"/edit",
+                url:url + "withdraws/"+id.toString()+"/edit",
                 type:"POST",
                 data:{
                     "auditStatus":status.toString()
@@ -811,7 +812,7 @@
             shadeClose: true,
             shade: 0.8,
             area: ['380px', '50%'],
-            content: '/withdraws/'+id
+            content: url +'withdraws/'+id
         });
     }
 </script>

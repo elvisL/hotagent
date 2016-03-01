@@ -272,11 +272,12 @@
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var agentUrl = /*[[@{/}]]*/"/";
 </script>
 <script>
     function editAgent(obj) {
         var id = $(obj).attr("id");
-        location.href = "/editAgent?id=" + id;
+        location.href = agentUrl+"editAgent?id=" + id;
     }
     //详情
     function showDetail(obj) {
@@ -286,8 +287,8 @@
             title: '代理商详情',
             shadeClose: true,
             shade: 0.8,
-            area: ['580px', '50%'],
-            content: '/lowAgentDetail/'+id
+            area: ['580px', '70%'],
+            content: agentUrl+'lowAgentDetail/'+id
         });
     }
 
@@ -300,7 +301,7 @@
             shadeClose: true,
             shade: 0.8,
             area: ['998px', '666px'],
-            content: '/agentImport/'+id
+            content: agentUrl+'agentImport/'+id
         });
     }
 
@@ -310,28 +311,55 @@
         $("#searchForm").submit();
     }
 
-    //冻结，解冻
-    function lockAgent(obj) {
-
-        var id = $(obj).attr("id");
-        var bl = $(obj).attr("value");
-
+    function lock(id,bl){
+//        var id = $(obj).attr("id");
+//        var bl = $(obj).attr("value");
         $.ajax({
             type: "POST",
-            url: "lockAgent" ,
+            url: agentUrl+"lockAgent" ,
             dataType: "json",
             data:{
                 id:id,
                 bl:bl
             },
             success: function (msg) {
-                layer.msg("冻结成功",{time: 2000});
+                if(bl == 1){
+                    layer.msg("冻结成功",{time: 2000});
+                }else{
+                    layer.msg("解冻成功",{time: 2000});
+                }
                 setTimeout(function(){
                             window.location.reload();
                         }
                         ,1000);
             }
         })
+    }
+
+    //冻结，解冻
+    function lockAgent(obj) {
+
+        var id = $(obj).attr("id");
+        var bl = $(obj).attr("value");
+        if(bl == 1){
+        layer.msg('确定冻结该代理商吗', {
+            time: 0 //不自动关闭
+            ,btn: ['确认', '否']
+            ,yes: function(index){
+                layer.close(index);
+                lock(id,bl);
+            }
+        });}
+        else{
+            layer.msg('确定解冻该代理商吗', {
+                time: 0 //不自动关闭
+                ,btn: ['确认', '否']
+                ,yes: function(index){
+                    layer.close(index);
+                    lock(id,bl);
+                }
+            });
+        }
     }
     function search(){
         $('input[name=pageNo]').val(1);

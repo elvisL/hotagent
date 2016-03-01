@@ -15,6 +15,7 @@ import com.huotu.hotagent.common.constant.ResultCodeEnum;
 import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.common.AgentType;
+import com.huotu.hotagent.service.common.Authority;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.model.AgentSearch;
@@ -32,10 +33,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -123,6 +121,7 @@ public class AgentController {
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
     public String AgentEdit(Agent agent) throws Exception{
+        agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_ROOT)));
         loginService.newLogin(agent,agent.getPassword());
         return "redirect:/agents";
     }

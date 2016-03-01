@@ -12,11 +12,12 @@ package com.huotu.hotagent.service.repository.record;
 import com.huotu.hotagent.service.common.AuditStatus;
 import com.huotu.hotagent.service.entity.record.WithdrawRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * Created by allan on 1/30/16.
  */
-public interface WithdrawRepository extends JpaRepository<WithdrawRecord, Long> {
+public interface WithdrawRepository extends JpaRepository<WithdrawRecord, Long>,JpaSpecificationExecutor {
 
     long countByAuditStatus(AuditStatus auditStatus);
 }
