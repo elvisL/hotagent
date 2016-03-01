@@ -48,7 +48,7 @@
         <h5 class="sidebartitle">Navigation</h5>
         <ul id="sidebar" class="nav nav-pills nav-stacked nav-bracket">
             <li agent:active="index"><a href="index.html" th:href="@{/index}"><i class="fa fa-home"></i> <span>首页</span></a></li>
-            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')" agent:activeparent="'agentList,agentEdit,agentLevel'" class="nav-parent">
+            <li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_AGENT')" agent:activeparent="'agentList,agentEdit,agentLevel,balanceLogList,commissionLogList'" class="nav-parent">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">
                     <li agent:active="agentList"><a href="general-forms.html" th:href="@{/agents}"><i class="fa fa-caret-right"></i> 代理商列表</a></li>
