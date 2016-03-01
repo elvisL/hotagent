@@ -126,21 +126,6 @@ public class AgentController {
 
 
     /**
-     *代理商提现
-     */
-    @RequestMapping(value = "/withdraw",method = RequestMethod.GET)
-    public ModelAndView withdraw(@AuthenticationPrincipal Agent agent) throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("/views/withdraw/withdraw");
-        modelAndView.addObject("commission",agent.getCommission());
-        return  modelAndView;
-    }
-
-
-
-
-
-    /**
      * 下级代理商列表
      *
      * @return

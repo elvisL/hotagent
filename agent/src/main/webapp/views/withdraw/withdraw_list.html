@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<!--
+  ~ 版权所有:杭州火图科技有限公司
+  ~ 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+  ~
+  ~ (c) Copyright Hangzhou Hot Technology Co., Ltd.
+  ~ Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+  ~ 2013-2016. All rights reserved.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="agents" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.Agent>"*/-->
+<!--/*@thymesVar id="agentSearch" type="com.huotu.hotagent.service.model.AgentSearch"*/-->
+<!--/*@thymesVar id="agentLevels" type="java.util.List<com.huotu.hotagent.service.entity.role.agent.AgentLevel>"*/-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png">
+
+    <title>提现列表</title>
+
+    <link href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.6.2/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.1.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='withdrawList')">
+
+        <div class="logopanel">
+            <h1>代理商管理后台</h1>
+        </div><!-- logopanel -->
+
+    </div><!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar" th:replace="views/common/header :: header">
+
+        </div><!-- headerbar -->
+
+        <div class="pageheader">
+            <h2><i class="fa fa-search"></i> 提现申请列表</h2>
+        </div>
+
+        <div class="contentpanel">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div><!-- panel-btns -->
+                    <h3 class="panel-title">搜索</h3>
+
+                    <form id="searchForm" action="balanceLog_list.html" th:action="@{/withdrawList}" method="get"
+                          th:object="${withdrawSearch}">
+                        <input type="hidden" name="pageNo" value="1" th:value="${currentPage}"/>
+
+                        <p>
+
+                        <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                               <span class="input-group-addon">
+                                    申请状态
+                                </span>
+
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" id="typeSelectBtn" style="width: 128px;"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="*{auditStatus}==-1 ? '请选择':(*{auditStatus}==0 ? '申请中':(*{auditStatus}==1 ? '通过':'失败'))">请选择 <span class="caret"></span></button>
+                                    <ul id="typeSelect" class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" type-value="-1">请选择</a></li>
+                                        <li><a href="#" type-value="0">申请中</a></li>
+                                        <li><a href="#" type-value="1">通过</a></li>
+                                        <li><a href="#" type-value="2">失败</a></li>
+                                    </ul>
+                                    <input type="hidden" name="auditStatus" th:value="*{auditStatus}"/>
+                                </div><!-- /btn-group -->
+                            </div><!-- /input-group -->
+                        </div>
+                            <!-- /input-group -->
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">创建时间</span>
+                                    <input type="text" class="form-control" placeholder="起始时间" name="beginTime"
+                                           th:value="*{beginTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" placeholder="结束时间" name="endTime"
+                                           th:value="*{endTime}">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn btn-white submitSearch"
+                                   href="javascript:search()">查询</a>
+                                <a class="btn btn-white resetSearch" href="balanceLog_list.html"
+                                   th:href="@{/withdrawList}">显示全部</a>
+                            </div>
+                        </div>
+                        </p>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb30">
+                            <thead>
+                            <tr>
+                                <th>提现金额</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
+                                <th>管理员回复</th>
+                            </tr>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+
+                            <tr th:each="withdraw:${withdrawRecords}">
+                                <td th:text="${withdraw.money}">100</td>
+                                <td th:text="${#dates.format(withdraw.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
+                                <td th:text="${withdraw.auditStatus.name}">申请中</td>
+                                <td th:text="${withdraw.reply}">通过啦</td>
+                            </tr>
+                            <tr>
+                                <td>火图科技</td>
+                                <td>100</td>
+                                <td>申请中</td>
+                                <td>查看</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>火图科技</td>
+                                <td>独家代理</td>
+                                <td>一级代理商</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                    <p style="float: left;margin: 20px 0;">
+                        共<!--/*-->10<!--*/--><!--/*/[[${totalPages}]]/*/-->页
+                    <p style="float: left;margin: 20px 0;">共<span id="totalRecordSpan" th:text="${totalRecords}">100</span>条</p>
+                    <ul style="float: right;" class="pagination pagination-split">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    </ul>
+                </div><!-- panel-body -->
+            </div><!-- panel -->
+
+        </div><!-- contentpanel -->
+
+    </div><!-- mainpanel -->
+
+    <div class="rightpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+            <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+            <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+            <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <!--/*-->
+        <div class="tab-content">
+            <div class="tab-pane active" id="rp-alluser">
+                <h5 class="sidebartitle">Online Users</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/userprofile.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user1.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <span class="pull-right badge badge-danger">2</span>
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                </ul>
+
+                <div class="mb30"></div>
+
+                <h5 class="sidebartitle">Offline Users</h5>
+                <ul class="chatuserlist">
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="rp-favorites">
+                <h5 class="sidebartitle">Favorites</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user1.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user5.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="rp-history">
+                <h5 class="sidebartitle">History</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Hi hello, ctc?... would you mind if I go to your...</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user2.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>This is to inform you that your product that we...</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="images/photos/user3.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Are you willing to have a long term relat...</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane pane-settings" id="rp-settings">
+
+                <h5 class="sidebartitle mb20">Settings</h5>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Offline Users</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Enable History</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Full Name</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle-chat1 toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Location</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+            </div><!-- tab-pane -->
+
+        </div><!-- tab-content -->
+        <!--*/-->
+    </div><!-- rightpanel -->
+
+</section>
+
+<!--基本js-->
+<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
+<script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
+<script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../../assets/js/modernizr.min.js" th:src="@{/assets/js/modernizr.min.js}"></script>
+<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+<script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
+<script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
+<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
+<script src="../../assets/libs/layer/extend/layer.ext.js" th:src="@{/assets/libs/layer/extend/layer.ext.js}"></script>
+
+
+<!--框架基础js-->
+<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+<script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
+<script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
+
+<script type="application/javascript" th:inline="javascript">
+    var pageNo = /*[[${currentPage}]]*/ 1;
+    var totalPages = /*[[${totalPages}]]*/ 2;
+    var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var withdrawUrl = /*[[@{/}]]*/"/";
+</script>
+
+<script type="application/javascript">
+    function search(){
+        $('input[name=pageNo]').val(1);
+        $('#searchForm').submit();
+    }
+
+    function jump(obj) {
+        $("input[name=pageNo]").val(obj);
+        $("#searchForm").submit();
+    }
+
+    jQuery(document).ready(function () {
+        var paginate = new paging($(".pagination"), pageNo, totalPages, 7);
+        paginate.init(function (p) {
+            $('input[name=pageNo]').val(p);
+            $('#searchForm').submit();
+        });
+
+        // Date Picker
+        $('input[name=beginTime]').datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function (selectedDate) {
+                $("#endTime").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("input[name=endTime]").datepicker({
+            dateFormat: "yy-mm-dd",
+            onClose: function (selectedDate) {
+                $("#beginTime").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+        var currentLevelId = $("input[name=level]").val();
+        if (currentLevelId != "" && currentLevelId != null)
+            $("#levelSelectBtn").html($("#levelSelect a[level=" + currentLevelId + "]").html());
+        var auditStatus = $("input[name=type]").val();
+        if (auditStatus != "" && auditStatus != null);
+        $("#typeSelectBtn").html($("#typeSelect a[type-value=" + auditStatus + "]").html());
+
+        $("#typeSelect li a").click(function () {
+            $("#typeSelectBtn").html($(this).html());
+            $("input[name=auditStatus]").val($(this).attr("type-value"));
+        });
+
+
+    });
+
+
+</script>
+</body>
+</html>
