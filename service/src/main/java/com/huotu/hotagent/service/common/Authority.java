@@ -19,7 +19,8 @@ public enum Authority implements ICommonEnum {
     MANAGER_AGENT("MANAGER_AGENT", "代理商管理"),
     MANAGER_PRODUCT("MANAGER_PRODUCT", "产品管理"),
     MANAGER_WITHDRAW("MANAGER_WITHDRAW", "提现管理"),
-    AGENT_ROOT("AGENT_ROOT", "代理商");
+    AGENT_ROOT("AGENT_ROOT", "一级代理商（拥有下级代理）"),
+    AGENT_NOEXPANDABLE("AGENT_NOEXPANDABLE", "二级代理商（不拥有下级代理）");
 
     private String value;
     private String name;

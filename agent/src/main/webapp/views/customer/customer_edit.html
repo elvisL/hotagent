@@ -64,6 +64,7 @@
 
                     <form id="editForm" th:method="post" class="form-horizontal form-bordered">
                         <input type="hidden" id="customerId" name="customerId" th:value="${customer}!=null ? ${customer.customerId}">
+                        <input type="hidden" id="productId" name="productId" th:value="${customer}!=null ? ${customer.productId}">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">客户名称<span class="asterisk">*</span></label>
 
@@ -223,9 +224,9 @@
                 var index=parseInt(msg.code);
                 switch (index) {
                     case 2000:
-                        layer.msg("修改成功,2秒后将自动返回产品页面",{time: 2000});
+                        layer.msg("修改成功,2秒后将自动返回客户列表",{time: 2000});
                         setTimeout(function(){
-//                                    window.location.href="http://"+window.location.host+"/"+"showProducts";
+                                    window.location.href=customerUrl+"customerList?id="+$("#productId").val();
                                 }
                                 ,1000);
                         break;

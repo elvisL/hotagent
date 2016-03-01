@@ -18,8 +18,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -136,12 +136,23 @@ public class Agent extends Login {
     @Column(name = "expandable")
     private boolean expandable = true;
 
+    @Lob
+    private Set<Authority> authorities = new HashSet<>();
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Arrays.asList(
+//                new SimpleGrantedAuthority("ROLE_" + Authority.AGENT_ROOT.getValue())
+//        );
+//    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(
-                new SimpleGrantedAuthority("ROLE_" + Authority.AGENT_ROOT.getValue())
-        );
+        Set<SimpleGrantedAuthority> simpleGrantedAuthorities = new HashSet<>();
+        authorities.forEach(authority -> simpleGrantedAuthorities.add(new SimpleGrantedAuthority(authority.getValue())));
+        return simpleGrantedAuthorities;
     }
+
 
     public String getStatus() {
         if(!isAccountNonLocked()) {
