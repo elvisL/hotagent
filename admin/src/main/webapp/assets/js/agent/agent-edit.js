@@ -77,7 +77,16 @@ $("#editForm").validate({
         name: "required",
         username: {
             required: true,
-            maxlength: 50
+            maxlength: 50,
+            remote:{
+                url:"checkUsername",
+                type:"post",
+                data:{
+                    username: function () {
+                        return $("#username").val();
+                    }
+                }
+            }
         },
         password: {
             required: true,

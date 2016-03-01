@@ -21,7 +21,7 @@ import java.util.Date;
  * Created by allan on 1/27/16.
  */
 @Entity
-@Table(name = "age_login")
+@Table(name = "age_login",uniqueConstraints = @UniqueConstraint(columnNames ={"username"}))
 @Setter
 @Getter
 @Inheritance

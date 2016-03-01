@@ -145,6 +145,16 @@ public class AgentController {
         return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
     }
 
+    @RequestMapping("/checkUsername")
+    @ResponseBody
+    public String checkUsername(String username) {
+        Agent agent = agentService.findByUsername(username);
+        if(agent==null) {
+            return "true";
+        }
+        return "已经有同名的账号";
+    }
+
     @RequestMapping("/uploadImg")
     @ResponseBody
     @SuppressWarnings("Duplicates")

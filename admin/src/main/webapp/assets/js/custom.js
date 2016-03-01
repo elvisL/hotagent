@@ -77,9 +77,9 @@ jQuery(document).ready(function () {
     });
 
     // Form Toggles
-    jQuery('.toggle').toggles({on: true});
+    /*jQuery('.toggle').toggles({on: true});
 
-    jQuery('.toggle-chat1').toggles({on: false});
+    jQuery('.toggle-chat1').toggles({on: false});*/
 
     // Sparkline
     /*jQuery('#sidebar-chart').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
@@ -308,7 +308,7 @@ jQuery(document).ready(function () {
 
 
     // Sticky Header
-    if (jQuery.cookie('sticky-header'))
+    /*if (jQuery.cookie('sticky-header'))
         jQuery('body').addClass('stickyheader');
 
     // Sticky Left Panel
@@ -333,7 +333,7 @@ jQuery(document).ready(function () {
     var fnt = jQuery.cookie('change-font');
     if (fnt) {
         jQuery('head').append('<link id="fontswitch" rel="stylesheet" href="css/font.' + fnt + '.css" />');
-    }
+    }*/
 
     // Check if leftpanel is collapsed
     if (jQuery('body').hasClass('leftpanel-collapsed'))
