@@ -13,6 +13,7 @@ import com.huotu.hotagent.admin.config.thymeleaf.dialects.HotAgentDialect;
 import com.huotu.hotagent.admin.interceptor.AgentModelResolver;
 import com.huotu.hotagent.admin.interceptor.CustomMethodArgumentResolver;
 import com.huotu.hotagent.common.constant.StringConstant;
+import com.huotu.hotagent.common.utils.ArrayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -25,11 +26,16 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
+import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.util.ArrayUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -49,8 +55,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
      * 静态资源处理,加在这里
      */
     private static String[] STATIC_RESOURCE_PATH = {
-            "assets",
-            "image"
+            "assets"
     };
 
     @Autowired
@@ -58,29 +63,13 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
-    private ThymeleafViewResolver thymeleafViewResolver;
+    private ViewResolver htmlViewResolver;
+    @Autowired
+    private ViewResolver javascriptViewResolver;
     @Autowired
     private AgentModelResolver agentModelResolver;
     @Autowired
     private CustomMethodArgumentResolver customMethodArgumentResolver;
-
-    @SuppressWarnings("Duplicates")
-    public String[] staticResourcePathPatterns() {
-        String[] ignoring;
-        int startIndex = 0;
-        if (environment.acceptsProfiles("development")) {
-            ignoring = new String[MVCConfig.STATIC_RESOURCE_PATH.length + 2];
-            ignoring[startIndex++] = "/**/*.html";
-            ignoring[startIndex++] = "/mock/**";
-        } else {
-            ignoring = new String[MVCConfig.STATIC_RESOURCE_PATH.length];
-        }
-        for (String path : MVCConfig.STATIC_RESOURCE_PATH) {
-            ignoring[startIndex++] = "/" + path + "/**";
-        }
-        return ignoring;
-    }
-
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
@@ -102,50 +91,78 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * thymeleaf解析器
-     *
-     * @return
-     */
-    @Bean
-    @SuppressWarnings("Duplicates")
-    public ThymeleafViewResolver thymeleafViewResolver() {
-        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-        SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
-
-        SpringResourceTemplateResolver springResourceTemplateResolver = new SpringResourceTemplateResolver();
-        springResourceTemplateResolver.setOrder(1);
-        springResourceTemplateResolver.setPrefix("/views/");
-        springResourceTemplateResolver.setSuffix(".html");
-        springResourceTemplateResolver.setApplicationContext(applicationContext);
-        springResourceTemplateResolver.setCharacterEncoding(StringConstant.UTF8);
-        //设置缓存
-        if (environment.acceptsProfiles("development")) {
-            springResourceTemplateResolver.setCacheable(false);
-        }
-
-        springTemplateEngine.setTemplateResolver(springResourceTemplateResolver);
-        springTemplateEngine.setAdditionalDialects(new HashSet<>(Arrays.asList(
-                new HotAgentDialect(),
-                new SpringSecurityDialect()
-        )));
-
-        resolver.setTemplateEngine(springTemplateEngine);
-        resolver.setOrder(1);
-        resolver.setCharacterEncoding(StringConstant.UTF8);
-        resolver.setContentType("text/html; charset=UTF-8");
-        return resolver;
-    }
-
-    /**
      * 注册视图解析器
      *
      * @param registry
      */
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.viewResolver(thymeleafViewResolver);
+        registry.viewResolver(htmlViewResolver);
+        registry.viewResolver(javascriptViewResolver);
     }
 
+    /**
+     * html解析器
+     *
+     * @return
+     */
+    @Bean
+    @SuppressWarnings("Duplicates")
+    public ViewResolver htmlViewResolver() {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine(htmlTemplateResolver()));
+        resolver.setOrder(1);
+        resolver.setContentType("text/html");
+        resolver.setCharacterEncoding(StringConstant.UTF8);
+        return resolver;
+    }
+
+    /**
+     * javascript 解析器
+     * @return
+     */
+    @Bean
+    @SuppressWarnings("Duplicates")
+    public ViewResolver javascriptViewResolver() {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine(javascriptTemplateResolver()));
+        resolver.setContentType("application/javascript");
+        resolver.setCharacterEncoding(StringConstant.UTF8);
+        resolver.setViewNames(ArrayUtil.array("*.js"));
+        return resolver;
+    }
+    private ITemplateEngine templateEngine(ITemplateResolver templateResolver) {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.setAdditionalDialects(new HashSet<>(Arrays.asList(
+                new HotAgentDialect(),
+                new SpringSecurityDialect()
+        )));
+        engine.setTemplateResolver(templateResolver);
+        return engine;
+    }
+    private ITemplateResolver htmlTemplateResolver() {
+        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+        resolver.setPrefix("/views/");
+        resolver.setSuffix(".html");
+        resolver.setApplicationContext(applicationContext);
+        resolver.setCharacterEncoding(StringConstant.UTF8);
+        //设置缓存
+        if (environment.acceptsProfiles("development")) {
+            resolver.setCacheable(false);
+        }
+        return resolver;
+    }
+    private ITemplateResolver javascriptTemplateResolver() {
+        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+        resolver.setApplicationContext(applicationContext);
+        resolver.setCharacterEncoding(StringConstant.UTF8);
+        resolver.setTemplateMode(TemplateMode.JAVASCRIPT);
+        //设置缓存
+        if (environment.acceptsProfiles("development")) {
+            resolver.setCacheable(false);
+        }
+        return resolver;
+    }
     /**
      * for upload
      */

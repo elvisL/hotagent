@@ -114,41 +114,7 @@
 <script src="../assets/js/msgresource/jquery.validation.message-zh_cn.js" th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
 
 <script src="../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
-<script type="text/javascript">
-    $(function () {
-        loginHandler.initPage();
-    });
-    var loginHandler = {
-        initPage: function () {
-            $("input[name=username]").focus();
 
-            $("#loginForm").validate({
-                ignoreTitle: true,
-                highlight: function (element) {
-                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                },
-                success: function (element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                    $(element).remove();
-                },
-                onfocusout: function (element) {
-                    $(element).valid();
-                },
-                rules: {
-                    username: "required",
-                    password: "required"
-                },
-                messages: {
-                    username: "请输入管理员帐号",
-                    password: "请输入登录密码"
-                }
-            });
-        },
-        login: function () {
-            $("#loginForm").submit();
-        }
-    }
-</script>
 
 </body>
 </html>

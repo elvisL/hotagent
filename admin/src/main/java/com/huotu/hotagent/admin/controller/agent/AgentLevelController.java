@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * �����̼���
+ * 代理商级别
  * Created by cwb on 2016/2/25.
  */
 @Controller

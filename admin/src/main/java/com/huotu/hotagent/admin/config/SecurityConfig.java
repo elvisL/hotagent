@@ -64,8 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests()
-                .antMatchers(STATIC_RESOURCE_PATH)
-                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()

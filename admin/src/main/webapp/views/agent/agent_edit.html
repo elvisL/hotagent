@@ -768,9 +768,6 @@
         th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
 <script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
-<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}">
-</script>
-
 <script th:inline="javascript">
     var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
@@ -780,6 +777,8 @@
         city: city,
         dist: dist
     });
+</script>
+<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}">
 </script>
 </body>
 </html>
