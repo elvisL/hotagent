@@ -351,7 +351,7 @@
                             <tr>
                                 <th>级别名称</th>
                                 <th>级别描述</th>
-                                <th>操作</th>
+                                <!--<th>操作</th>-->
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
@@ -359,9 +359,9 @@
                             <tr th:each="agentLevel:${levelList}">
                                 <td th:text="${agentLevel.levelName}">火图科技</td>
                                 <td th:text="${agentLevel.levelDesc}">100</td>
-                                <td>
+                                <!--<td>
                                     <a onclick="showDetail(this)" th:attr="id=${agentLevel.levelId}">查看</a>
-                                </td>
+                                </td>-->
                             </tr>
                             <tr>
                                 <td>火图科技</td>

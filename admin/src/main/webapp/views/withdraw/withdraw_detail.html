@@ -6,26 +6,26 @@
     <link href="../../assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <ul style="list-style: none" data-th-object="${record}">
-                <li>
+<div class="col-sm-6 col-md-4">
+    <div class="panel panel-default panel-alt widget-messaging">
+        <div class="panel-body">
+            <ul class="list-group"  data-th-object="${record}">
+                <li class="list-group-item">
                     提现金额：<span data-th-text="*{money}">火图科技</span>
                 </li>
-                <li>
+                <li class="list-group-item">
                     审核状态：<span data-th-text="*{auditStatus.name}">一级代理商</span>
                 </li>
-                <li>
+                <li class="list-group-item">
                     申请时间：<span data-th-text="*{#dates.format(createTime,'yyyy-MM-dd HH:mm:ss')}">独家代理</span>
                 </li>
-                <li>
+                <li class="list-group-item">
                     所属代理商：<span data-th-text="*{agent.name}">13205713331</span>
                 </li>
-                <li>
+                <li class="list-group-item">
                     代理商留言：<span data-th-text="*{message}">浙江省</span>
                 </li>
-                <li>
+                <li class="list-group-item">
                     管理员回复：<span data-th-text="*{reply}">何芸</span>
                 </li>
             </ul>

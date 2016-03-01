@@ -812,7 +812,6 @@
             dataType: "json",
             success: function (result) {
                 if(result.code == 2000){
-//                    alert(result.data.id);
                     $("#edit_id").val(result.data.id);
                     $("#edit_name").val(result.data.name);
                     $("#edit_basePrice").val(result.data.basePrice);
@@ -825,27 +824,29 @@
 
     function submitEdit(){
         var dataPara = getFormJson($("#editProductForm"));
-        layer.load();
-        $.ajax({
-            type: "POST",
-            url:productUrl + "editPrudcut",
-            data: dataPara,
-            dataType: "json",
-            success:function(result){
-                if(result.code == 2000){
-                    layer.msg('保存成功');
-                    $("#searchForm").submit();
-                    $("#editProduct").modal("hide");
-                }else{
-                    layer.msg('保存失败');
+        if(pageInit()){
+            layer.load();
+            $.ajax({
+                type: "POST",
+                url:productUrl + "editPrudcut",
+                data: dataPara,
+                dataType: "json",
+                success:function(result){
+                    if(result.code == 2000){
+                        layer.msg('保存成功');
+                        $("#searchForm").submit();
+                        $("#editProduct").modal("hide");
+                    }else{
+                        layer.msg('保存失败');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     function pageInit() {
         //表单验证初始化
-        $("#editProductForm").validate({
+        return $("#editProductForm").validate({
             ignoreTitle: true,
             highlight: function (element) {
                 $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -886,7 +887,7 @@
                     maxlength:'长度不能超过250'
                 }
             }
-        })
+        }).form();
     }
 
 

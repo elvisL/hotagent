@@ -287,7 +287,7 @@
             title: '代理商详情',
             shadeClose: true,
             shade: 0.8,
-            area: ['580px', '50%'],
+            area: ['580px', '70%'],
             content: agentUrl+'lowAgentDetail/'+id
         });
     }
@@ -323,7 +323,11 @@
                 bl:bl
             },
             success: function (msg) {
-                layer.msg("冻结成功",{time: 2000});
+                if(bl == 1){
+                    layer.msg("冻结成功",{time: 2000});
+                }else{
+                    layer.msg("解冻成功",{time: 2000});
+                }
                 setTimeout(function(){
                             window.location.reload();
                         }
