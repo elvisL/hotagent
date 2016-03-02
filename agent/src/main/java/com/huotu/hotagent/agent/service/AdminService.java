@@ -30,6 +30,7 @@ public class AdminService {
         agentStatistics.setBalance(agentStaService.balance(id));
         agentStatistics.setCommission(agentStaService.commission(id));
         agentStatistics.setAgentNumWithLevel(agentStaService.agentNumWithLevel(id));
+        agentStatistics.setUnPassWithdraw(agentStaService.unPassWithdraw(id));
         return agentStatistics;
     }
 }

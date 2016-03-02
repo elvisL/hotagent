@@ -18,7 +18,8 @@ import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.standard.processor.AbstractStandardExpressionAttributeTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 菜单选中与否class解析器
@@ -51,7 +52,17 @@ public abstract class ActiveMenuProcessor extends AbstractStandardExpressionAttr
         String newClass = hitClasses();
         String activeMenus = (String) context.getVariable("activeMenu");
         String[] attributeValues = attributeValue.split(",");
-        if (Arrays.asList(attributeValues).contains(activeMenus)) {
+        List<String> strs = new ArrayList<>();
+        for(String attr :attributeValues) {
+            if(attr.startsWith("'")){
+                attr = attr.substring(1);
+            }
+            if(attr.endsWith("'")) {
+                attr = attr.substring(0,attr.indexOf("'"));
+            }
+            strs.add(attr);
+        }
+        if (strs.contains(activeMenus)) {
             elementAttributes.setAttribute(HTML_ATTR_NAME, currentClass + newClass);
         } else {
             if (currentClass.equals("")) {

@@ -14,10 +14,14 @@ import com.huotu.hotagent.service.entity.record.WithdrawRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
+
 /**
  * Created by allan on 1/30/16.
  */
 public interface WithdrawRepository extends JpaRepository<WithdrawRecord, Long>,JpaSpecificationExecutor {
 
     long countByAuditStatus(AuditStatus auditStatus);
+
+    List<WithdrawRecord> findByAgent_IdAndAuditStatus(Long id,AuditStatus auditStatus);
 }

@@ -189,13 +189,13 @@
                         success: function (msg) {
                             var index=parseInt(msg.code);
                             switch (index) {
-                                case 200:
+                                case 2000:
                                     layer.msg("保存成功", {time: 2000});
                                     $("#password").val("");
                                     $("#newPassword").val("");
                                     $("#CnewPassword").val("");
                                     break;
-                                case 400:
+                                case 4000:
                                     layer.msg("密码错误，请重新输入", {time: 2000});
                                     $("#password").val("");
                                     $("#newPassword").val("");
