@@ -48,25 +48,21 @@
         <h5 class="sidebartitle">Navigation</h5>
         <ul id="sidebar" class="nav nav-pills nav-stacked nav-bracket">
             <li agent:active="index"><a href="index.html" th:href="@{/index}"><i class="fa fa-home"></i> <span>首页</span></a></li>
-            <!--<li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_WITHDRAW')" agent:active="withdraw"><a href="index.html"><i class="fa fa-th-list"></i> <span>提现管理</span></a></li>-->
-            <!--<li sec:authorize="hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')" agent:active="product"><a href="index.html"><i class="fa fa-th-list"></i> <span>产品管理</span></a></li>-->
-            <!--<li agent:active="statistics"><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>-->
-            <li agent:active="personal"><a href="index.html"> <i class="fa fa-th-list"></i> <span>个人中心</span></a></li>
-            <li sec:authorize="hasAnyAuthority('AGENT_ROOT')" agent:active="statistics" agent:activeparent="'agentList,addAgent'" class="nav-parent">
+            <li sec:authorize="hasAnyAuthority('AGENT_ROOT')"  agent:activeparent="'agentList,addAgent'" class="nav-parent nav-active">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">
                     <li agent:active="agentList"><a href="general-forms.html" th:href="@{/agentList}"><i class="fa fa-caret-right"></i> 代理商列表</a></li>
                     <li agent:active="addAgent"><a href="form-layouts.html" th:href="@{/addAgent}"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
                 </ul>
             </li>
-            <li sec:authorize="hasAnyAuthority('AGENT_ROOT')" agent:active="statistics" agent:activeparent="'withdrawList,withdraw'" class="nav-parent">
+            <li sec:authorize="hasAnyAuthority('AGENT_ROOT')" agent:activeparent="'withdrawList,withdraw'" class="nav-parent nav-active">
                 <a href=""><i class="fa fa-edit"></i> <span>提现管理</span></a>
                 <ul class="children" style="display: block;">
                     <li agent:active="withdrawList"><a href="general-forms.html" th:href="@{/withdrawList}"><i class="fa fa-caret-right"></i> 提现列表</a></li>
                     <li agent:active="withdraw"><a href="form-layouts.html" th:href="@{/withdraw}"><i class="fa fa-caret-right"></i> 申请提现</a></li>
                 </ul>
             </li>
-            <li  agent:active="statistics" agent:activeparent="'balanceLogList,commissionLogList'" class="nav-parent">
+            <li agent:activeparent="'balanceLogList,commissionLogList'" class="nav-parent nav-active">
                 <a href=""><i class="fa fa-edit"></i> <span>日志管理</span></a>
                 <ul class="children" style="display: block;">
                     <li agent:active="balanceLogList" ><a href="general-forms.html" th:href="@{/balanceLogs}"><i class="fa fa-caret-right"></i> 余额日志列表</a></li>
