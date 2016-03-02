@@ -25,8 +25,8 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.6.2/html5shiv.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.1.0/respond.min.js"></script>
+    <script src="http://cdn.bootcss.com/html5shiv/3.6.2/html5shiv.js" th:src="@{/assets/js/html5shiv.js}"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.1.0/respond.min.js" th:src="@{/assets/js/respond.min.js}"></script>
     <![endif]-->
 </head>
 
@@ -354,6 +354,7 @@
                                 <th>代理商名称</th>
                                 <th>提现金额</th>
                                 <th>状态</th>
+                                <th>代理商留言</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -363,6 +364,7 @@
                                 <td th:text="${withdraw.agent.name}">火图科技</td>
                                 <td th:text="${withdraw.money}">100</td>
                                 <td th:text="${withdraw.auditStatus.name}">申请中</td>
+                                <td th:text="${withdraw.message}">提现！</td>
                                 <td>
                                     <a onclick="showDetail(this)" th:attr="id=${withdraw.id}">查看</a>
                                     <a th:if="${withdraw.auditStatus.value==0}" onclick="changeAuditStatus(this,1)" th:attr="id=${withdraw.id},commission=${withdraw.money}">通过</a>
@@ -373,13 +375,15 @@
                                 <td>火图科技</td>
                                 <td>100</td>
                                 <td>申请中</td>
+                                <td>提现</td>
                                 <td>查看</td>
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>火图科技</td>
                                 <td>独家代理</td>
-                                <td>一级代理商</td>
+                                <td>提现</td>
+                                <td>查看</td>
                             </tr>
                             </tbody>
                         </table>
