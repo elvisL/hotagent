@@ -52,5 +52,12 @@ public interface AgentStaService {
      */
     double commission(Long id);
 
+    /**
+     * 提现申请中的金额
+     *
+     * @return
+     */
+    double unPassWithdraw(Long id);
+
 
 }

@@ -36,5 +36,7 @@ public class AgentStatistics {
      */
     private double commission;
 
+    private double unPassWithdraw;
+
 
 }

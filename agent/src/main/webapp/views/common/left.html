@@ -69,8 +69,8 @@
             <li  agent:active="statistics" agent:activeparent="'balanceLogList,commissionLogList'" class="nav-parent">
                 <a href=""><i class="fa fa-edit"></i> <span>日志管理</span></a>
                 <ul class="children" style="display: block;">
-                    <li agent:active="balanceLogList"><a href="general-forms.html" th:href="@{/balanceLogs}"><i class="fa fa-caret-right"></i> 余额日志列表</a></li>
-                    <li agent:active="commissionLogList"><a href="general-forms.html" th:href="@{/commissionLogs}"><i class="fa fa-caret-right"></i> 佣金日志列表</a></li>
+                    <li agent:active="balanceLogList" ><a href="general-forms.html" th:href="@{/balanceLogs}"><i class="fa fa-caret-right"></i> 余额日志列表</a></li>
+                    <li agent:active="commissionLogList" sec:authorize="hasAnyAuthority('AGENT_ROOT')" ><a href="general-forms.html" th:href="@{/commissionLogs}"><i class="fa fa-caret-right"></i> 佣金日志列表</a></li>
                 </ul>
             </li>
 
