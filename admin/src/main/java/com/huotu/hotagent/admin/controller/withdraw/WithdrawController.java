@@ -104,12 +104,12 @@ public class WithdrawController {
             log.setImportMoney(commission);
             log.setMoney(commission);
             agent.setCommission(agent.getCommission() + commission);
+            record.setReply(memo);
             agentService.save(agent);
             log.setMemo(memo);
             log.setLogType(LogType.AUDIT);
             logService.save(log);
         }
-        record.setReply(memo);
         record.setAuditStatus(status);
         withdrawRecordService.save(record);
         return  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
