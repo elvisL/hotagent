@@ -137,6 +137,9 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
                 Date endTime = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(endDate);
                 predicates.add(cb.lessThan(root.get("createTime").as(Date.class), endTime));
             }
+            if(withdrawSearch.getAgentId() > 0){
+                predicates.add(cb.equal(root.get("agent").get("id").as(Long.class), withdrawSearch.getAgentId()));
+            }
 
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         });

@@ -13,5 +13,6 @@ public class WithdrawSearch {
     private int auditStatus=-1;
     private String beginTime;
     private String endTime;
+    private long agentId;
 
 }

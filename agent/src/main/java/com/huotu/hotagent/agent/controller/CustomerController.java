@@ -65,8 +65,10 @@ public class CustomerController {
         Double balance = agentService.findById(agent.getId()).getBalance();//账户总额
         int flag = agent.getLevel().getLevel();//0为一级，1为2级
         Product product = productService.findOne(id);
+//        List<Product> productList =  productService.findAll();
         Double price = priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), id).getPrice();
         modelAndView.addObject("product",product);
+//        modelAndView.addObject("productList",productList);
         modelAndView.addObject("price",price);
         modelAndView.addObject("balance",balance);
         modelAndView.addObject("flag",flag);
@@ -74,7 +76,7 @@ public class CustomerController {
     }
 
     /**
-     * 添加客户
+     * 修改客户
      * */
     @RequestMapping("/editCustomer")
     public ModelAndView editCustomer(@AuthenticationPrincipal Agent agent,Long id) throws Exception{

@@ -51,8 +51,9 @@ public class WithdrawController {
      */
     @PreAuthorize("hasAnyAuthority('AGENT_ROOT')")
     @RequestMapping(value = "/withdrawList",method = RequestMethod.GET)
-    public ModelAndView withdrawList(@RequestParam(required = false, defaultValue = "1") int pageNo,WithdrawSearch withdrawSearch) {
+    public ModelAndView withdrawList(@AuthenticationPrincipal Agent agent,@RequestParam(required = false, defaultValue = "1") int pageNo,WithdrawSearch withdrawSearch) {
         ModelAndView modelAndView =  new ModelAndView();
+        withdrawSearch.setAgentId(agent.getId());
         Page<WithdrawRecord> withdrawRecords = withdrawRecordService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, withdrawSearch);
         modelAndView.addObject("withdrawSearch", withdrawSearch);
         modelAndView.addObject("pageSize", withdrawRecords.getSize());

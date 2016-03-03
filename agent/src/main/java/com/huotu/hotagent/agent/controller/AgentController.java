@@ -90,8 +90,9 @@ public class AgentController {
     @RequestMapping("/agentDetail")
     public ModelAndView agentDetail(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("/views/agent/agent_detail");
-        modelAndView.addObject("agent",agent);
+        Agent agentDetail = agentService.findById(agent.getId());
+        modelAndView.setViewName("/views/agent/agent_personal");
+        modelAndView.addObject("agent",agentDetail);
         return modelAndView;
     }
 
@@ -307,9 +308,9 @@ public class AgentController {
             agent.setParent(Higher);
             agent.setExpandable(false);
             agent.setCreateTime(date);
-            Boolean bl = balanceLogService.importBl(agent, money);
-            if (bl==true){
-                Set<Price> priceSet = priceService.setPrices(agent, productPrice);
+            Boolean bl = balanceLogService.importBl(agent, money);//向下级代理商充值
+            if (bl==true){//如果余额足够
+                Set<Price> priceSet = priceService.setPrices(agent, productPrice);//设置产品价格
                 agent.setPrices(priceSet);
                 agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_NOEXPANDABLE)));//设置权限
                 loginService.newLogin(agent,agent.getPassword());
@@ -354,7 +355,7 @@ public class AgentController {
             agent.setQq(newAgent.getQq());
             agent.setType(type);
             agent.setLevel(aLevel);
-            Set<Price> priceSet = priceService.updatePrices(agent, productPrice);
+            Set<Price> priceSet = priceService.updatePrices(agent, productPrice);//修改产品价格
             agent.setPrices(priceSet);
             Boolean bl = (agent.getPassword()).equals(newAgent.getPassword());
             if(bl){//当密码没改变时，用普通存储办法
@@ -386,7 +387,7 @@ public class AgentController {
         ApiResult apiResult = null;
         Agent lowAgent = agentService.findById(id);
         try {
-            Boolean bl=balanceLogService.importBl(lowAgent,money);
+            Boolean bl=balanceLogService.importBl(lowAgent,money);//向下级代理商充值
             if(bl==true){
                 apiResult =  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
             }

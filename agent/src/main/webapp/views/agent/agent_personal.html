@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+  ~ 版权所有:杭州火图科技有限公司
+  ~ 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+  ~
+  ~ (c) Copyright Hangzhou Hot Technology Co., Ltd.
+  ~ Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+  ~ 2013-2016. All rights reserved.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
+
+    <title>代理商详情</title>
+
+    <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+
+
+</head>
+
+<body>
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='personal')">
+
+        <div class="logopanel">
+            <h1>代理商管理后台</h1>
+        </div><!-- logopanel -->
+
+    </div><!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar" th:replace="views/common/header :: header">
+
+        </div><!-- headerbar -->
+        <div class="pageheader">
+            <h2><i class="fa fa-edit"></i> 个人中心</h2>
+
+        </div>
+
+        <div class="contentpanel">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div>
+                    <h4 class="panel-title">代理商详情</h4>
+                </div>
+        <!-- headerbar -->
+
+
+                <div class="panel-body">
+                    <ul class="list-group"  data-th-object="${agent}">
+                        <li class="list-group-item">
+                            代理商名称：<span data-th-text="*{name}">火图科技</span>
+                        </li>
+                        <li class="list-group-item">
+                            代理商级别：<span data-th-text="*{level.levelName}">一级代理商</span>
+                        </li>
+                        <li class="list-group-item">
+                            代理类型：<span data-th-text="*{type.name}">独家代理</span>
+                        </li>
+                        <li class="list-group-item">
+                            代理区域：<span data-th-text="*{province+' '+city+' '+district}">浙江省</span>
+                        </li>
+                        <li class="list-group-item">
+                            联系人：<span data-th-text="*{contacts}">何芸</span>
+                        </li>
+                        <li class="list-group-item">
+                            联系方式：<span data-th-text="*{phoneNo}">13205713331</span>
+                        </li>
+                        <li class="list-group-item">
+                            邮箱：<span data-th-text="*{mail}">13205713331@qq.com</span>
+                        </li>
+                        <li class="list-group-item">
+                            联系地址：<span data-th-text="*{address}">13205713331@qq.com</span>
+                        </li>
+                        <li class="list-group-item">
+                            QQ：<span data-th-text="*{qq}">444444444</span>
+                        </li>
+                        <li class="list-group-item">
+                            是否可发展下级代理：<span data-th-text="*{expandable==true ? '是':'否'}">是</span>
+                        </li>
+                        <li class="list-group-item">
+                            账户余额：<span style="color: red" data-th-text="*{balance}">10000元</span>
+                        </li>
+                        <li class="list-group-item">
+                            账户佣金：<span style="color: red" data-th-text="*{commission}">10000元</span>
+                        </li>
+                        <li class="list-group-item">
+                            企业资质：<img src="img/a.jpg" data-th-src="*{qualifyUri}" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
+<script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+<script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
+<script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
+</body>
+</html>

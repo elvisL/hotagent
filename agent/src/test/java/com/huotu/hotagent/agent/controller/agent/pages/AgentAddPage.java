@@ -20,6 +20,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AgentAddPage extends AbstractPage {
 
+
     @FindBy(css = "button[class~=btn-primary]")
     private WebElement submitButton;
     @FindBy(css = "#editForm")
@@ -39,6 +40,7 @@ public class AgentAddPage extends AbstractPage {
     public void validate() {
         
     }
+
 
     /**
      * 提交表单
