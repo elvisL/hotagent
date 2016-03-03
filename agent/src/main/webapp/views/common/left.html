@@ -48,6 +48,7 @@
         <h5 class="sidebartitle">Navigation</h5>
         <ul id="sidebar" class="nav nav-pills nav-stacked nav-bracket">
             <li agent:active="index"><a href="index.html" th:href="@{/index}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+            <li agent:active="personal"><a href="index.html" th:href="@{/agentDetail}"> <i class="fa fa-th-list"></i> <span>个人中心</span></a></li>
             <li sec:authorize="hasAnyAuthority('AGENT_ROOT')"  agent:activeparent="'agentList,addAgent'" class="nav-parent nav-active">
                 <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
                 <ul class="children" style="display: block;">

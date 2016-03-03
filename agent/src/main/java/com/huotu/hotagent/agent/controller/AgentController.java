@@ -90,8 +90,9 @@ public class AgentController {
     @RequestMapping("/agentDetail")
     public ModelAndView agentDetail(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("/views/agent/agent_detail");
-        modelAndView.addObject("agent",agent);
+        Agent agentDetail = agentService.findById(agent.getId());
+        modelAndView.setViewName("/views/agent/agent_personal");
+        modelAndView.addObject("agent",agentDetail);
         return modelAndView;
     }
 
