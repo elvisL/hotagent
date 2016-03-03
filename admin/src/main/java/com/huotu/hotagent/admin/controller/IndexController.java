@@ -39,6 +39,7 @@ public class IndexController {
         return "redirect:/login";
     }
 
+
     @RequestMapping(value = {"", "/", "/index"})
     public String index(Model model) {
         model.addAttribute("statistics", adminService.statisticsModel());
