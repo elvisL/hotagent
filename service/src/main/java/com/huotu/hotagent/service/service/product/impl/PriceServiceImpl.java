@@ -59,7 +59,6 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    @Transactional(value = "transactionManager")
     public Set<Price> setProduct(Agent agent,ProductPrice productPrice) {
         //1.伙伴商城
         Price huobanMall = new Price();
@@ -90,7 +89,6 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    @Transactional(value = "transactionManager")
     public Set<Price> updateProduct(Agent agent, ProductPrice productPrice) {
         Price HUOBAN_MALL =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), productRepository.findByProductType(ProductType.HUOBAN_MALL).getId());
         HUOBAN_MALL.setPrice(productPrice.getHuobanMall());
