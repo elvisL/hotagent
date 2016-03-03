@@ -125,7 +125,7 @@ public class Agent extends Login {
     private String qualifyUri;
 
     /**
-     * 产品价格序列化
+     * 产品价格
      */
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<Price> prices;
@@ -139,13 +139,6 @@ public class Agent extends Login {
     @Lob
     private Set<Authority> authorities = new HashSet<>();
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return Arrays.asList(
-//                new SimpleGrantedAuthority("ROLE_" + Authority.AGENT_ROOT.getValue())
-//        );
-//    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> simpleGrantedAuthorities = new HashSet<>();
@@ -153,6 +146,9 @@ public class Agent extends Login {
         return simpleGrantedAuthorities;
     }
 
+    public void addAuthority(Authority authority) {
+        authorities.add(authority);
+    }
 
     public String getStatus() {
         if(!isAccountNonLocked()) {

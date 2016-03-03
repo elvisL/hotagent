@@ -310,7 +310,7 @@ public class AgentController {
             agent.setCreateTime(date);
             Boolean bl = balanceLogService.importBl(agent, money);//向下级代理商充值
             if (bl==true){//如果余额足够
-                Set<Price> priceSet = priceService.setProduct(agent, productPrice);//设置产品价格
+                Set<Price> priceSet = priceService.setPrices(agent, productPrice);//设置产品价格
                 agent.setPrices(priceSet);
                 agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_NOEXPANDABLE)));//设置权限
                 loginService.newLogin(agent,agent.getPassword());
@@ -355,7 +355,7 @@ public class AgentController {
             agent.setQq(newAgent.getQq());
             agent.setType(type);
             agent.setLevel(aLevel);
-            Set<Price> priceSet = priceService.updateProduct(agent,productPrice);//修改产品价格
+            Set<Price> priceSet = priceService.updatePrices(agent, productPrice);//修改产品价格
             agent.setPrices(priceSet);
             Boolean bl = (agent.getPassword()).equals(newAgent.getPassword());
             if(bl){//当密码没改变时，用普通存储办法

@@ -24,7 +24,6 @@ public interface ProductService {
 
     Product findOne(Long id);
 
-    List<Product> findAllProducts(Long id);
 
     Product save(Product product);
 
