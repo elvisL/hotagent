@@ -22,7 +22,6 @@ public class AdminService {
     @Autowired
     private AgentStaService agentStaService;
 
-
     public AgentStatistics agentStatistics(Long id) {
         AgentStatistics agentStatistics = new AgentStatistics();
         agentStatistics.setAgentCommission(agentStaService.countCommission(id));
