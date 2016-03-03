@@ -171,9 +171,9 @@ public class CustomerServiceImpl implements CustomerService {
                 Date endTime = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(endDate);
                 predicates.add(criteriaBuilder.lessThan(root.get("createTime").as(Date.class), endTime));
             }
-//            if(customerSearch.getAgentId() > 0){
-//                predicates.add(criteriaBuilder.equal(root.get("agent").get("id").as(Long.class), customerSearch.getAgentId()));
-//            }
+            if(customerSearch.getAgentId() > 0){
+                predicates.add(criteriaBuilder.equal(root.get("agent").get("id").as(Long.class), customerSearch.getAgentId()));
+            }
             predicates.add(criteriaBuilder.equal(root.get("productId").as(Long.class), customerSearch.getProductId()));
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         });

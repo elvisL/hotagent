@@ -77,40 +77,40 @@ jQuery(document).ready(function () {
     });
 
     // Form Toggles
-    jQuery('.toggle').toggles({on: true});
+    /*jQuery('.toggle').toggles({on: true});
 
-    jQuery('.toggle-chat1').toggles({on: false});
+     jQuery('.toggle-chat1').toggles({on: false});*/
 
     // Sparkline
-    jQuery('#sidebar-chart').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
-        type: 'bar',
-        height: '30px',
-        barColor: '#428BCA'
-    });
+    /*jQuery('#sidebar-chart').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
+     type: 'bar',
+     height: '30px',
+     barColor: '#428BCA'
+     });
 
-    jQuery('#sidebar-chart2').sparkline([1, 3, 4, 5, 4, 10, 8, 5, 7, 6, 9, 3], {
-        type: 'bar',
-        height: '30px',
-        barColor: '#D9534F'
-    });
+     jQuery('#sidebar-chart2').sparkline([1, 3, 4, 5, 4, 10, 8, 5, 7, 6, 9, 3], {
+     type: 'bar',
+     height: '30px',
+     barColor: '#D9534F'
+     });
 
-    jQuery('#sidebar-chart3').sparkline([5, 9, 3, 8, 4, 10, 8, 5, 7, 6, 9, 3], {
-        type: 'bar',
-        height: '30px',
-        barColor: '#1CAF9A'
-    });
+     jQuery('#sidebar-chart3').sparkline([5, 9, 3, 8, 4, 10, 8, 5, 7, 6, 9, 3], {
+     type: 'bar',
+     height: '30px',
+     barColor: '#1CAF9A'
+     });
 
-    jQuery('#sidebar-chart4').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
-        type: 'bar',
-        height: '30px',
-        barColor: '#428BCA'
-    });
+     jQuery('#sidebar-chart4').sparkline([4, 3, 3, 1, 4, 3, 2, 2, 3, 10, 9, 6], {
+     type: 'bar',
+     height: '30px',
+     barColor: '#428BCA'
+     });
 
-    jQuery('#sidebar-chart5').sparkline([1, 3, 4, 5, 4, 10, 8, 5, 7, 6, 9, 3], {
-        type: 'bar',
-        height: '30px',
-        barColor: '#F0AD4E'
-    });
+     jQuery('#sidebar-chart5').sparkline([1, 3, 4, 5, 4, 10, 8, 5, 7, 6, 9, 3], {
+     type: 'bar',
+     height: '30px',
+     barColor: '#F0AD4E'
+     });*/
 
 
     // Minimize Button in Panels
@@ -308,32 +308,32 @@ jQuery(document).ready(function () {
 
 
     // Sticky Header
-    if (jQuery.cookie('sticky-header'))
-        jQuery('body').addClass('stickyheader');
+    /*if (jQuery.cookie('sticky-header'))
+     jQuery('body').addClass('stickyheader');
 
-    // Sticky Left Panel
-    if (jQuery.cookie('sticky-leftpanel')) {
-        jQuery('body').addClass('stickyheader');
-        jQuery('.leftpanel').addClass('sticky-leftpanel');
-    }
+     // Sticky Left Panel
+     if (jQuery.cookie('sticky-leftpanel')) {
+     jQuery('body').addClass('stickyheader');
+     jQuery('.leftpanel').addClass('sticky-leftpanel');
+     }
 
-    // Left Panel Collapsed
-    if (jQuery.cookie('leftpanel-collapsed')) {
-        jQuery('body').addClass('leftpanel-collapsed');
-        jQuery('.menutoggle').addClass('menu-collapsed');
-    }
+     // Left Panel Collapsed
+     if (jQuery.cookie('leftpanel-collapsed')) {
+     jQuery('body').addClass('leftpanel-collapsed');
+     jQuery('.menutoggle').addClass('menu-collapsed');
+     }
 
-    // Changing Skin
-    var c = jQuery.cookie('change-skin');
-    if (c) {
-        jQuery('head').append('<link id="skinswitch" rel="stylesheet" href="css/style.' + c + '.css" />');
-    }
+     // Changing Skin
+     var c = jQuery.cookie('change-skin');
+     if (c) {
+     jQuery('head').append('<link id="skinswitch" rel="stylesheet" href="css/style.' + c + '.css" />');
+     }
 
-    // Changing Font
-    var fnt = jQuery.cookie('change-font');
-    if (fnt) {
-        jQuery('head').append('<link id="fontswitch" rel="stylesheet" href="css/font.' + fnt + '.css" />');
-    }
+     // Changing Font
+     var fnt = jQuery.cookie('change-font');
+     if (fnt) {
+     jQuery('head').append('<link id="fontswitch" rel="stylesheet" href="css/font.' + fnt + '.css" />');
+     }*/
 
     // Check if leftpanel is collapsed
     if (jQuery('body').hasClass('leftpanel-collapsed'))
