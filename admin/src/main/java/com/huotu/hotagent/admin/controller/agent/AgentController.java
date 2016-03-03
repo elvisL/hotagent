@@ -69,6 +69,7 @@ public class AgentController {
 
     /**
      * 代理商列表
+     *
      * @return
      */
     @RequestMapping(value = "/agents", method = RequestMethod.GET)
@@ -84,16 +85,16 @@ public class AgentController {
         model.addAttribute("pageSize", agents.getSize());
         model.addAttribute("agents", agents.getContent());
         model.addAttribute("totalRecords", agents.getTotalElements());
-        model.addAttribute("totalPages",totalPages);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", pageNo);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
-        model.addAttribute("hasNext",agents.hasNext());
-        model.addAttribute("hasPrevious",agents.hasPrevious());
+        model.addAttribute("hasNext", agents.hasNext());
+        model.addAttribute("hasPrevious", agents.hasPrevious());
         int pageBtnNum = totalPages > SysConstant.DEFAULT_PAGE_BUTTON_NUM ? SysConstant.DEFAULT_PAGE_BUTTON_NUM : totalPages;
         int startPageNo = CommonUtils.calculateStartPageNo(pageNo, pageBtnNum, totalPages);
         List<Integer> pageNos = new ArrayList<>();
-        for(int i=1;i<=pageBtnNum;i++) {
+        for (int i = 1; i <= pageBtnNum; i++) {
             pageNos.add(startPageNo);
             startPageNo++;
         }
@@ -101,49 +102,52 @@ public class AgentController {
         return "agent/agent_list";
     }
 
-    @RequestMapping(value = "/agents/{id}",method = RequestMethod.GET)
-    public String showAgentDetail(@PathVariable Long id,Model model) throws Exception {
+    @RequestMapping(value = "/agents/{id}", method = RequestMethod.GET)
+    public String showAgentDetail(@PathVariable Long id, Model model) throws Exception {
         Agent agent = agentService.findById(id);
         agent.setQualifyUri(staticResourceService.getResource(agent.getQualifyUri()).toString());
-        model.addAttribute("agent",agent);
+        model.addAttribute("agent", agent);
         return "agent/agent_detail";
     }
 
     /**
      * 修改代理商页面
+     *
      * @param model
      * @param id
      * @return
      */
-    @RequestMapping(value = "/editAgentForm/{id}", method = RequestMethod.GET)
-    public String editAgentForm(Model model,@PathVariable Long id) {
+    @RequestMapping(value = "/agentEdit/{id}", method = RequestMethod.GET)
+    public String editAgentForm(Model model, @PathVariable Long id) {
         Agent agent = agentService.findById(id);
         Set<Price> prices = agent.getPrices();
-        model.addAttribute("agent",agent);
-        model.addAttribute("prices",prices);
+        model.addAttribute("agent", agent);
+        model.addAttribute("prices", prices);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
-        model.addAttribute("agentLevels",agentLevels);
-        model.addAttribute("agentTypes",AgentType.values());
+        model.addAttribute("agentLevels", agentLevels);
+        model.addAttribute("agentTypes", AgentType.values());
         return "agent/agent_edit";
     }
 
     /**
      * 新增代理商页面
+     *
      * @param model
      * @return
      */
-    @RequestMapping(value = "/newAgentForm",method = RequestMethod.GET)
+    @RequestMapping(value = "/newAgent", method = RequestMethod.GET)
     public String newAgentForm(Model model) {
         Set<Price> prices = priceService.getBasePrices();
-        model.addAttribute("prices",prices);
+        model.addAttribute("prices", prices);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
-        model.addAttribute("agentLevels",agentLevels);
-        model.addAttribute("agentTypes",AgentType.values());
+        model.addAttribute("agentLevels", agentLevels);
+        model.addAttribute("agentTypes", AgentType.values());
         return "agent/agent_new";
     }
 
     /**
      * 新增代理商
+     *
      * @param name
      * @param username
      * @param password
@@ -160,17 +164,17 @@ public class AgentController {
      * @param qq
      * @param qualifyUri
      * @param expandable
-     * @param prices 字符串数组，单个元素的结构形如"1|5000","|"前的数字代表productId，后面的代表价格
+     * @param prices     字符串数组，单个元素的结构形如"1|5000","|"前的数字代表productId，后面的代表价格
      * @return
      */
-    @RequestMapping(value = "/agents",method = RequestMethod.POST)
+    @RequestMapping(value = "/agents", method = RequestMethod.POST)
     @Transactional
     public String createNewAgent(String name,
                                  String username,
                                  String password,
                                  AgentLevel level,
                                  AgentType type,
-                                 @RequestParam(required = false,defaultValue = "0") double balance,
+                                 @RequestParam(required = false, defaultValue = "0") double balance,
                                  String province,
                                  String city,
                                  String district,
@@ -180,8 +184,8 @@ public class AgentController {
                                  String mail,
                                  String qq,
                                  String qualifyUri,
-                                 @RequestParam(required = false,defaultValue = "1") boolean expandable,
-                                 String... prices){
+                                 @RequestParam(required = false, defaultValue = "1") boolean expandable,
+                                 String... prices) {
         Agent agent = new Agent();
         agent.setCreateTime(new Date());
         agent.addAuthority(Authority.AGENT_ROOT);
@@ -200,7 +204,7 @@ public class AgentController {
         agent.setQq(qq);
         agent.setQualifyUri(qualifyUri);
         agent.setExpandable(expandable);
-        for(String price : prices) {
+        for (String price : prices) {
             Price pe = new Price();
             pe.setAgent(agent);
             String[] strs = price.split("|");
@@ -208,12 +212,13 @@ public class AgentController {
             pe.setProduct(product);
             pe.setPrice(Double.parseDouble(strs[1]));
         }
-        loginService.newLogin(agent,password);
+        loginService.newLogin(agent, password);
         return "redirect:/agents";
     }
 
     /**
      * 修改代理商
+     *
      * @param level
      * @param type
      * @param province
@@ -226,10 +231,10 @@ public class AgentController {
      * @param qq
      * @param qualifyUri
      * @param expandable
-     * @param prices 字符串数组，单个元素的结构形如"1|5000","|"前的数字代表productId，后面的代表价格
+     * @param prices     字符串数组，单个元素的结构形如"1|5000","|"前的数字代表productId，后面的代表价格
      * @return
      */
-    @RequestMapping(value = "/agents/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/agents/{id}", method = RequestMethod.POST)
     @Transactional
     public String editAgent(@PathVariable Long id,
                             AgentLevel level,
@@ -244,7 +249,7 @@ public class AgentController {
                             String mail,
                             String qq,
                             String qualifyUri,
-                            @RequestParam(required = false,defaultValue = "1") boolean expandable,
+                            @RequestParam(required = false, defaultValue = "1") boolean expandable,
                             String... prices) {
         Agent agent = agentService.findById(id);
         agent.setName(name);
@@ -260,7 +265,7 @@ public class AgentController {
         agent.setQq(qq);
         agent.setQualifyUri(qualifyUri);
         agent.setExpandable(expandable);
-        for(String price : prices) {
+        for (String price : prices) {
             Price pe = new Price();
             pe.setAgent(agent);
             String[] strs = price.split("|");
@@ -273,6 +278,7 @@ public class AgentController {
 
     /**
      * 充值
+     *
      * @param id
      * @param money
      * @return
@@ -280,18 +286,19 @@ public class AgentController {
     @RequestMapping("/recharge")
     @ResponseBody
     @Transactional
-    public ApiResult recharge(Long id,@RequestParam(defaultValue = "0") double money) {
+    public ApiResult recharge(Long id, @RequestParam(defaultValue = "0") double money) {
         Agent agent = agentService.findById(id);
-        if(money<0) {
+        if (money < 0) {
             return ApiResult.resultWith(ResultCodeEnum.CAN_NOT_BE_NEGATIVE);
         }
-        agent.setBalance(agent.getBalance()+money);
+        agent.setBalance(agent.getBalance() + money);
         agentService.save(agent);
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 
     /**
      * 修改密码
+     *
      * @param id
      * @param password
      * @return
@@ -299,12 +306,12 @@ public class AgentController {
     @RequestMapping("/resetPassword")
     @ResponseBody
     @Transactional
-    public ApiResult resetPassword(Long id,String password) {
+    public ApiResult resetPassword(Long id, String password) {
         Agent agent = agentService.findById(id);
-        if(StringUtils.isEmpty(password)) {
+        if (StringUtils.isEmpty(password)) {
             return ApiResult.resultWith(ResultCodeEnum.PASSWORD_NULL);
         }
-        loginService.newLogin(agent,password);
+        loginService.newLogin(agent, password);
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 
@@ -316,7 +323,7 @@ public class AgentController {
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
     @Transactional
-    public String AgentEdit(Agent agent,ProductPrice productPrice) throws Exception{
+    public String AgentEdit(Agent agent, ProductPrice productPrice) throws Exception {
         agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_ROOT)));
         Set<Price> prices = priceService.setPrices(agent, productPrice);
         agent.setPrices(prices);
@@ -326,6 +333,7 @@ public class AgentController {
 
     /**
      * 检测指定城市是否可设置独家代理
+     *
      * @param city
      * @return
      */
@@ -333,10 +341,10 @@ public class AgentController {
     @ResponseBody
     public ApiResult checkCity(String city) {
         List<Agent> agents = agentService.findByCity(city);
-        if(agents.size()==0) {
+        if (agents.size() == 0) {
             return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }
-        if(agents.size()==1) {
+        if (agents.size() == 1) {
             return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
         }
         return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
@@ -346,7 +354,7 @@ public class AgentController {
     @ResponseBody
     public String checkUsername(String username) {
         Agent agent = agentService.findByUsername(username);
-        if(agent==null) {
+        if (agent == null) {
             return "true";
         }
         return "已经有同名的账号";
@@ -355,17 +363,17 @@ public class AgentController {
     @RequestMapping("/uploadImg")
     @ResponseBody
     @SuppressWarnings("Duplicates")
-    public ApiResult uploadImg(MultipartFile qualify,String qualifyUri) throws Exception {
+    public ApiResult uploadImg(MultipartFile qualify, String qualifyUri) throws Exception {
         //delete img
-        if(qualify.getSize()==0) {
+        if (qualify.getSize() == 0) {
             staticResourceService.deleteResource(qualifyUri);
-            return ApiResult.resultWith(ResultCodeEnum.SUCCESS,"");
+            return ApiResult.resultWith(ResultCodeEnum.SUCCESS, "");
         }
         if (ImageIO.read(qualify.getInputStream()) == null) {
             return ApiResult.resultWith(ResultCodeEnum.NOT_IMG);
         }
         //change img
-        if(!StringUtils.isEmpty(qualifyUri)) {
+        if (!StringUtils.isEmpty(qualifyUri)) {
             staticResourceService.deleteResource(qualifyUri);
         }
         String fileName = qualify.getOriginalFilename();
@@ -373,7 +381,7 @@ public class AgentController {
         String path = StaticResourceService.AGENT_IMG + UUID.randomUUID().toString() + "." + suffix;
         staticResourceService.uploadResource(path, qualify.getInputStream());
         String fullPath = staticResourceService.getResource(path).toString();
-        return ApiResult.resultWith(ResultCodeEnum.SUCCESS,Arrays.asList(path,fullPath).toArray());
+        return ApiResult.resultWith(ResultCodeEnum.SUCCESS, Arrays.asList(path, fullPath).toArray());
     }
 
 }

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<!--
+  ~ 版权所有:杭州火图科技有限公司
+  ~ 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+  ~
+  ~ (c) Copyright Hangzhou Hot Technology Co., Ltd.
+  ~ Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+  ~ 2013-2016. All rights reserved.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png"
+          th:href="@{/assets/images/favicon.png}">
+    <title>Bracket Responsive Bootstrap3 Admin</title>
+    <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+    <link rel="stylesheet" href="../../assets/css/bootstrap-fileupload.min.css"
+          th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
+
+</head>
+
+<body>
+
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+    <div class="leftpanel" th:replace="common/left :: left (activeMenu='agentEdit')">
+
+        <div class="logopanel">
+            <h1>代理商管理后台</h1>
+        </div>
+        <!-- logopanel -->
+
+        <div class="leftpanelinner">
+
+            <!-- This is only visible to small devices -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media userlogged">
+                    <img alt="" src="../../assets/images/photos/loggeduser.png" class="media-object"
+                         th:src="@{/assets/images/photos/loggeduser.png}">
+
+                    <div class="media-body">
+                        <h4>John Doe</h4>
+                        <span>"Life is so..."</span>
+                    </div>
+                </div>
+
+                <h5 class="sidebartitle actitle">Account</h5>
+                <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+                    <li><a href="profile.html"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a></li>
+                    <li><a href=""><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
+                    <li><a href="signout.html"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <h5 class="sidebartitle">导航</h5>
+            <ul class="nav nav-pills nav-stacked nav-bracket">
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="nav-parent nav-active active">
+                    <a href=""><i class="fa fa-edit"></i> <span>代理商管理</span></a>
+                    <ul class="children" style="display: block;">
+                        <li class="active"><a href="agent-list.html.html"><i class="fa fa-caret-right"></i> 代理商列表</a>
+                        </li>
+                        <li><a href="agent_edit.html.html"><i class="fa fa-caret-right"></i> 添加代理商</a></li>
+                        <li><a href="form-validation.html"><i class="fa fa-caret-right"></i> 代理商级别</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html"><i class="fa fa-th-list"></i> <span>数据统计</span></a></li>
+                <li class="nav-parent">
+                    <a href=""><i class="fa fa-edit"></i> <span>操作员管理</span></a>
+                    <ul class="children" style="display: block;">
+                        <li><a href="general-forms.html"><i class="fa fa-caret-right"></i> 操作员列表</a></li>
+                        <li><a href="form-layouts.html"><i class="fa fa-caret-right"></i> 添加操作员</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <style>
+                .custom-datainfo {
+                    margin: 0;
+                    font-size: 16px;
+                    color: #fff;
+                    opacity: 0.7;
+                }
+            </style>
+            <div class="infosummary">
+                <h5 class="sidebartitle">Information Summary</h5>
+                <ul>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">今日新增代理商总数</span> <h4 style="float: right;"
+                                                                               class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">本月新增代理商总数</span> <h4 style="float: right;"
+                                                                               class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">一级代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">下级代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">普通代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">独家代理总数</span> <h4 style="float: right;"
+                                                                            class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="custom-datainfo">总代理费用</span> <h4 style="float: right;"
+                                                                           class="custom-datainfo">100</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- infosummary -->
+
+        </div>
+        <!-- leftpanelinner -->
+    </div>
+    <!-- leftpanel -->
+
+    <div class="mainpanel">
+
+        <div class="headerbar" th:replace="common/header :: header">
+
+            <a class="menutoggle"><i class="fa fa-bars"></i></a>
+
+
+            <div class="header-right">
+                <ul class="headermenu">
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="../../assets/images/photos/loggeduser.png"
+                                     th:src="@{/assets/images/photos/loggeduser.png}"/>
+                                John Doe
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="profile.html"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
+                                <li><a href="signin.html"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- header-right -->
+
+        </div>
+        <!-- headerbar -->
+
+        <div class="pageheader">
+            <h2><i class="fa fa-edit"></i> 代理商管理</h2>
+
+        </div>
+
+        <div class="contentpanel">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="" class="panel-close">&times;</a>
+                        <a href="" class="minimize">&minus;</a>
+                    </div>
+                    <h4 class="panel-title">添加代理商</h4>
+                </div>
+                <div class="panel-body panel-body-nopadding">
+
+                    <form id="editForm" action="agent_edit.html" th:action="@{/agents}" th:method="post"
+                          class="form-horizontal form-bordered">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理商名称</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="name" title="代理商名称"
+                                       placeholder="代理商名称" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">账号</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="username" id="username"
+                                        title="账号" placeholder="账号"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码</label>
+
+                            <div class="col-sm-3">
+                                <input type="password" name="password"
+                                        title="密码" placeholder="密码"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理商等级</label>
+
+                            <div class="col-sm-3">
+                                <select name="level" title="代理商等级" class="form-control input-sm mb10"
+                                        th:remove="all-but-first">
+                                    <option th:each="agentLevel:${agentLevels}" th:value="${agentLevel.level}"
+                                            th:text="${agentLevel.levelName}">
+                                        一级代理商
+                                    </option>
+                                    <option>二级代理商</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理区域</label>
+
+                            <div id="area">
+                                <div class="col-sm-1">
+                                    <select name="province" class="form-control input-sm mb10 prov">
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="city" class="form-control input-sm mb10 city">
+                                    </select>
+                                </div>
+                                <div class="col-sm-1">
+                                    <select name="district" class="form-control input-sm mb10 dist">
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代理商类型</label>
+
+                            <div class="col-sm-3">
+                                <select name="type" title="代理商类型" class="form-control input-sm mb10"
+                                        th:remove="all-but-first">
+                                    <option th:each="agentType:${agentTypes}" th:value="${agentType.value}"
+                                            th:text="${agentType.name}">独家代理
+                                    </option>
+                                    <option>普通代理</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">充值金额</label>
+
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="balance" id="balance"
+                                           title="充值金额" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系人</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="contacts"
+                                       placeholder="联系人" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手机号</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="phoneNo"
+                                       placeholder="手机号" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系地址</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="address"
+                                       placeholder="联系地址" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="mail"
+                                       placeholder="电子邮箱" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">QQ</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="qq"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否可发展下级代理</label>
+
+
+                            <div class="col-sm-3">
+                                <div class="rdio rdio-success">
+                                    <input type="radio" name="expandable" id="canexpandable" value="1">
+                                    <label for="canexpandable">是</label>
+                                </div>
+                                <div class="rdio rdio-success">
+                                    <input type="radio" name="expandable" id="noexpandable" value="0">
+                                    <label for="noexpandable">否</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" th:each="price:${prices}">
+                            <label class="col-sm-3 control-label" th:text="${price.product.name}">伙伴商城价格</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="prices" th:value="${price.product.basePrice}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/*-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">DSP广告</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="dsp" id="dsp" th:value="${dsp!=null} ? ${dsp}" title="DSP广告价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">云商学院</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="hotEdu" id="hotEdu" th:value="${hotEdu!=null} ? ${hotEdu}" title="云商学院价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代运营</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="thirdPartnar" th:value="${thirdPartnar!=null} ? ${thirdPartnar}" id="thirdPartnar" title="代运营价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!--*/-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">企业资质</label>
+
+                            <div class="col-sm-6">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                    <div class="row">
+                                        <div class="col-xs-6 col-md-3">
+                                            <img id="previewImg">
+                                            <input type="hidden" name="qualifyUri" id="qualifyUri" value="">
+                                        </div>
+                                    </div>
+                                    <div class="input-append">
+                                        <div class="uneditable-input">
+                                            <i class="glyphicon glyphicon-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                    <span class="btn btn-default btn-file">
+                                      <span class="fileupload-new">Select file</span>
+                                      <span class="fileupload-exists">Change</span>
+                                      <input type="file" name="qualify" id="qualify">
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                <!-- panel-body -->
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button onclick="submit()" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- panel-footer -->
+
+            </div>
+            <!-- panel -->
+        </div>
+        <!-- contentpanel -->
+    </div>
+    <!-- mainpanel -->
+
+    <div class="rightpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#rp-alluser" data-toggle="tab"><i class="fa fa-users"></i></a></li>
+            <li><a href="#rp-favorites" data-toggle="tab"><i class="fa fa-heart"></i></a></li>
+            <li><a href="#rp-history" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+            <li><a href="#rp-settings" data-toggle="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <!--/*-->
+        <div class="tab-content">
+            <div class="tab-pane active" id="rp-alluser">
+                <h5 class="sidebartitle">Online Users</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/userprofile.png"
+                                     th:src="@{/assets/images/photos/userprofile.png}" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user1.png"
+                                     th:src="@{/assets/images/photos/user1.png}" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <span class="pull-right badge badge-danger">2</span>
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user2.png"
+                                     th:src="@{/assets/images/photos/user2.png}" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user3.png"
+                                     th:src="@{/assets/images/photos/user3.png}" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user4.png"
+                                     th:src="@{/assets/images/photos/user4.png}" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+
+                <div class="mb30"></div>
+
+                <h5 class="sidebartitle">Offline Users</h5>
+                <ul class="chatuserlist">
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user5.png"
+                                     th:src="@{/assets/images/photos/user5.png}" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user2.png"
+                                     th:src="@{/assets/images/photos/user2.png}" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="rp-favorites">
+                <h5 class="sidebartitle">Favorites</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user2.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Los Angeles, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user1.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>San Francisco, CA</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Bangkok, Thailand</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Renov Leongal</strong>
+                                <small>Cebu City, Philippines</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user5.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Weno Carasbong</strong>
+                                <small>Tokyo, Japan</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="rp-history">
+                <h5 class="sidebartitle">History</h5>
+                <ul class="chatuserlist">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user4.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Eileen Sideways</strong>
+                                <small>Hi hello, ctc?... would you mind if I go to your...</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user2.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Zaham Sindilmaca</strong>
+                                <small>This is to inform you that your product that we...</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                    <li>
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="../../assets/images/photos/user3.png" class="media-object">
+                            </a>
+
+                            <div class="media-body">
+                                <strong>Nusja Nawancali</strong>
+                                <small>Are you willing to have a long term relat...</small>
+                            </div>
+                        </div>
+                        <!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane pane-settings" id="rp-settings">
+
+                <h5 class="sidebartitle mb20">Settings</h5>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Offline Users</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Enable History</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Full Name</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle-chat1 toggle-success"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-8 control-label">Show Location</label>
+
+                    <div class="col-xs-4 control-label">
+                        <div class="toggle toggle-success"></div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- tab-pane -->
+
+        </div>
+        <!--*/-->
+        <!-- tab-content -->
+    </div>
+    <!-- rightpanel -->
+
+</section>
+<script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
+<script src="../../assets/js/jquery-migrate-1.2.1.min.js" th:src="@{/assets/js/jquery-migrate-1.2.1.min.js}"></script>
+<script src="../../assets/js/jquery-ui-1.10.3.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.min.js}"></script>
+<script src="../../assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+<script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
+<script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
+<script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+
+<script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
+<script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
+
+<script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js"
+        th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
+
+<script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
+<script src="../../assets/js/cityselect/jquery.cityselect.js"
+        th:src="@{/assets/js/cityselect/jquery.cityselect.js}"></script>
+<script src="../../assets/js/ajaxfileupload.js" th:src="@{/assets/js/ajaxfileupload.js}"></script>
+
+<script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
+
+<script th:inline="javascript">
+    var prov = /*[[${agent!=null ? agent.province : "浙江"}]]*/ "浙江";
+    var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
+    var dist = /*[[${agent!=null ? agent.district : "滨江区"}]]*/ "滨江区";
+    var url = /*[[@{/}]]*/ "/";
+    $("#area").citySelect({
+        prov: prov,
+        city: city,
+        dist: dist
+    });
+</script>
+<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
+</body>
+</html>
