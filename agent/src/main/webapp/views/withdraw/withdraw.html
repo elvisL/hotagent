@@ -121,7 +121,6 @@
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
 
 <script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
-<script src="../../assets/js/bootstrap-fileupload.min.js" th:src="@{/assets/js/bootstrap-fileupload.min.js}"></script>
 <script src="../../assets/js/bootstrap-timepicker.min.js" th:src="@{/assets/js/bootstrap-timepicker.min.js}"></script>
 
 <script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
@@ -184,7 +183,7 @@
                                 case 2000:
                                     layer.msg("提交申请成功", {time: 2000});
                                     setTimeout(function(){
-                                                window.location.href="http://"+window.location.host+"/"+"withdraw";
+                                                window.location.href=withdrawUrl+"withdraw";
                                             }
                                             ,1000);
                                     break;
