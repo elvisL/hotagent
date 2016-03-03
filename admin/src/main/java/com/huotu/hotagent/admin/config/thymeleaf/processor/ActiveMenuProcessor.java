@@ -46,6 +46,7 @@ public abstract class ActiveMenuProcessor extends AbstractStandardExpressionAttr
      */
     abstract String hitClasses();
 
+    @SuppressWarnings("Duplicates")
     @Override
     protected void doProcess(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName, String attributeValue, String attributeTemplateName, int attributeLine, int attributeCol, Object expressionResult, IElementTagStructureHandler structureHandler) {
         IElementAttributes elementAttributes = tag.getAttributes();

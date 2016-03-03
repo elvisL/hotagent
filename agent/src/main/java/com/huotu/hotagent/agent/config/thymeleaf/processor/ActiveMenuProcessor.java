@@ -19,6 +19,7 @@ import org.thymeleaf.standard.processor.AbstractStandardExpressionAttributeTagPr
 import org.thymeleaf.templatemode.TemplateMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -45,6 +46,7 @@ public abstract class ActiveMenuProcessor extends AbstractStandardExpressionAttr
      */
     abstract String hitClasses();
 
+    @SuppressWarnings("Duplicates")
     @Override
     protected void doProcess(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName, String attributeValue, String attributeTemplateName, int attributeLine, int attributeCol, Object expressionResult, IElementTagStructureHandler structureHandler) {
         IElementAttributes elementAttributes = tag.getAttributes();

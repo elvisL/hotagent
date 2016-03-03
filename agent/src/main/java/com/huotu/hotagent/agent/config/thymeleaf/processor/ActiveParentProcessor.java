@@ -15,7 +15,7 @@ import org.thymeleaf.dialect.IProcessorDialect;
  * Created by allan on 1/24/16.
  */
 public class ActiveParentProcessor extends ActiveMenuProcessor {
-    private static final String ACTIVE_CLASSES = " nav-active active";
+    private static final String ACTIVE_CLASSES = " active";
     private static final String ATTR_NAME = "activeparent";
 
     public ActiveParentProcessor(IProcessorDialect dialect, String dialectPrefix) {
