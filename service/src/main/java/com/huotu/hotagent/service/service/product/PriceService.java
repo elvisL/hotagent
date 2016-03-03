@@ -14,9 +14,11 @@ import java.util.Set;
  */
 public interface PriceService {
     List<AgentProduct> productList(List<Product> products,Long agentId);
-    Set<Price> setProduct(Agent agent,ProductPrice productPrice);
-    Set<Price> updateProduct(Agent agent,ProductPrice productPrice);
+    Set<Price> setPrices(Agent agent, ProductPrice productPrice);
+    Set<Price> updatePrices(Agent agent, ProductPrice productPrice);
 
 
+    void save(Price price);
 
+    Set<Price> getBasePrices();
 }

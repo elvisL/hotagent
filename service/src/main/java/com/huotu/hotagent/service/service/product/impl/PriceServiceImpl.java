@@ -59,8 +59,7 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    @Transactional(value = "transactionManager")
-    public Set<Price> setProduct(Agent agent,ProductPrice productPrice) {
+    public Set<Price> setPrices(Agent agent, ProductPrice productPrice) {
         //1.伙伴商城
         Price huobanMall = new Price();
         huobanMall.setProduct(productRepository.findByProductType(ProductType.HUOBAN_MALL));
@@ -91,7 +90,7 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     @Transactional(value = "transactionManager")
-    public Set<Price> updateProduct(Agent agent, ProductPrice productPrice) {
+    public Set<Price> updatePrices(Agent agent, ProductPrice productPrice) {
         Price HUOBAN_MALL =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), productRepository.findByProductType(ProductType.HUOBAN_MALL).getId());
         HUOBAN_MALL.setPrice(productPrice.getHuobanMall());
         Price DSP =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), productRepository.findByProductType(ProductType.DSP).getId());
@@ -107,5 +106,23 @@ public class PriceServiceImpl implements PriceService {
         priceSet.add(THIRDPARTNAR);
 
         return priceSet;
+    }
+
+    @Override
+    public void save(Price price) {
+        priceRepository.save(price);
+    }
+
+    @Override
+    public Set<Price> getBasePrices() {
+        Set<Price> prices = new HashSet<>();
+        List<Product> products = productRepository.findAll();
+        for(Product p :products) {
+            Price price = new Price();
+            price.setProduct(p);
+            price.setPrice(p.getBasePrice());
+            prices.add(price);
+        }
+        return prices;
     }
 }

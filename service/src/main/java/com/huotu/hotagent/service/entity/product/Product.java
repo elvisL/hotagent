@@ -47,6 +47,9 @@ public class Product {
     @Column(name = "productDesc")
     private String productDesc;
 
+    /**
+     * 一级代理商统计成本价
+     */
     @Column(precision = 2)
     private double basePrice;
 }

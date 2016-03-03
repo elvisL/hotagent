@@ -16,9 +16,16 @@ import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.common.Authority;
+import com.huotu.hotagent.service.entity.log.BalanceLog;
+import com.huotu.hotagent.service.entity.product.Price;
+import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.model.AgentSearch;
+import com.huotu.hotagent.service.model.ProductPrice;
+import com.huotu.hotagent.service.service.log.BalanceLogService;
+import com.huotu.hotagent.service.service.product.PriceService;
+import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
@@ -27,6 +34,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +60,12 @@ public class AgentController {
     @Autowired
     private LoginService loginService;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BalanceLogService balanceLogService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private PriceService priceService;
+
 
     /**
      * 代理商列表
@@ -97,20 +110,202 @@ public class AgentController {
     }
 
     /**
-     * 代理商新增（修改）页面
-     *
+     * 修改代理商页面
+     * @param model
+     * @param id
      * @return
      */
-    @RequestMapping(value = "/agentEditForm", method = RequestMethod.GET)
-    public String AgentEdit(Model model,Long id) {
-        if(id != null) {
-            Agent agent = agentService.findById(id);
-            model.addAttribute("agent",agent);
-        }
+    @RequestMapping(value = "/editAgentForm/{id}", method = RequestMethod.GET)
+    public String editAgentForm(Model model,@PathVariable Long id) {
+        Agent agent = agentService.findById(id);
+        Set<Price> prices = agent.getPrices();
+        model.addAttribute("agent",agent);
+        model.addAttribute("prices",prices);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels",agentLevels);
         model.addAttribute("agentTypes",AgentType.values());
         return "agent/agent_edit";
+    }
+
+    /**
+     * 新增代理商页面
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/newAgentForm",method = RequestMethod.GET)
+    public String newAgentForm(Model model) {
+        Set<Price> prices = priceService.getBasePrices();
+        model.addAttribute("prices",prices);
+        List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
+        model.addAttribute("agentLevels",agentLevels);
+        model.addAttribute("agentTypes",AgentType.values());
+        return "agent/agent_new";
+    }
+
+    /**
+     * 新增代理商
+     * @param name
+     * @param username
+     * @param password
+     * @param level
+     * @param type
+     * @param balance
+     * @param province
+     * @param city
+     * @param district
+     * @param contacts
+     * @param phoneNo
+     * @param address
+     * @param mail
+     * @param qq
+     * @param qualifyUri
+     * @param expandable
+     * @param prices 字符串数组，单个元素的结构形如"1|5000","|"前的数字代表productId，后面的代表价格
+     * @return
+     */
+    @RequestMapping(value = "/agents",method = RequestMethod.POST)
+    @Transactional
+    public String createNewAgent(String name,
+                                 String username,
+                                 String password,
+                                 AgentLevel level,
+                                 AgentType type,
+                                 @RequestParam(required = false,defaultValue = "0") double balance,
+                                 String province,
+                                 String city,
+                                 String district,
+                                 String contacts,
+                                 String phoneNo,
+                                 String address,
+                                 String mail,
+                                 String qq,
+                                 String qualifyUri,
+                                 @RequestParam(required = false,defaultValue = "1") boolean expandable,
+                                 String... prices){
+        Agent agent = new Agent();
+        agent.setCreateTime(new Date());
+        agent.addAuthority(Authority.AGENT_ROOT);
+        agent.setUsername(username);
+        agent.setName(name);
+        agent.setLevel(level);
+        agent.setType(type);
+        agent.setBalance(balance);
+        agent.setProvince(province);
+        agent.setCity(city);
+        agent.setDistrict(district);
+        agent.setContacts(contacts);
+        agent.setPhoneNo(phoneNo);
+        agent.setAddress(address);
+        agent.setMail(mail);
+        agent.setQq(qq);
+        agent.setQualifyUri(qualifyUri);
+        agent.setExpandable(expandable);
+        for(String price : prices) {
+            Price pe = new Price();
+            pe.setAgent(agent);
+            String[] strs = price.split("|");
+            Product product = productService.findOne(Long.parseLong(strs[0]));
+            pe.setProduct(product);
+            pe.setPrice(Double.parseDouble(strs[1]));
+        }
+        loginService.newLogin(agent,password);
+        return "redirect:/agents";
+    }
+
+    /**
+     * 修改代理商
+     * @param level
+     * @param type
+     * @param province
+     * @param city
+     * @param district
+     * @param contacts
+     * @param phoneNo
+     * @param address
+     * @param mail
+     * @param qq
+     * @param qualifyUri
+     * @param expandable
+     * @param prices 字符串数组，单个元素的结构形如"1|5000","|"前的数字代表productId，后面的代表价格
+     * @return
+     */
+    @RequestMapping(value = "/agents/{id}",method = RequestMethod.POST)
+    @Transactional
+    public String editAgent(@PathVariable Long id,
+                            AgentLevel level,
+                            String name,
+                            AgentType type,
+                            String province,
+                            String city,
+                            String district,
+                            String contacts,
+                            String phoneNo,
+                            String address,
+                            String mail,
+                            String qq,
+                            String qualifyUri,
+                            @RequestParam(required = false,defaultValue = "1") boolean expandable,
+                            String... prices) {
+        Agent agent = agentService.findById(id);
+        agent.setName(name);
+        agent.setLevel(level);
+        agent.setType(type);
+        agent.setProvince(province);
+        agent.setCity(city);
+        agent.setDistrict(district);
+        agent.setContacts(contacts);
+        agent.setPhoneNo(phoneNo);
+        agent.setAddress(address);
+        agent.setMail(mail);
+        agent.setQq(qq);
+        agent.setQualifyUri(qualifyUri);
+        agent.setExpandable(expandable);
+        for(String price : prices) {
+            Price pe = new Price();
+            pe.setAgent(agent);
+            String[] strs = price.split("|");
+            Product product = productService.findOne(Long.parseLong(strs[0]));
+            pe.setProduct(product);
+            pe.setPrice(Double.parseDouble(strs[1]));
+        }
+        return "redirect:/agents";
+    }
+
+    /**
+     * 充值
+     * @param id
+     * @param money
+     * @return
+     */
+    @RequestMapping("/recharge")
+    @ResponseBody
+    @Transactional
+    public ApiResult recharge(Long id,@RequestParam(defaultValue = "0") double money) {
+        Agent agent = agentService.findById(id);
+        if(money<0) {
+            return ApiResult.resultWith(ResultCodeEnum.CAN_NOT_BE_NEGATIVE);
+        }
+        agent.setBalance(agent.getBalance()+money);
+        agentService.save(agent);
+        return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+    }
+
+    /**
+     * 修改密码
+     * @param id
+     * @param password
+     * @return
+     */
+    @RequestMapping("/resetPassword")
+    @ResponseBody
+    @Transactional
+    public ApiResult resetPassword(Long id,String password) {
+        Agent agent = agentService.findById(id);
+        if(StringUtils.isEmpty(password)) {
+            return ApiResult.resultWith(ResultCodeEnum.PASSWORD_NULL);
+        }
+        loginService.newLogin(agent,password);
+        return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 
     /**
@@ -120,9 +315,12 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agents", method = RequestMethod.POST)
-    public String AgentEdit(Agent agent) throws Exception{
+    @Transactional
+    public String AgentEdit(Agent agent,ProductPrice productPrice) throws Exception{
         agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_ROOT)));
-        loginService.newLogin(agent,agent.getPassword());
+        Set<Price> prices = priceService.setPrices(agent, productPrice);
+        agent.setPrices(prices);
+        loginService.newLogin(agent, agent.getPassword());
         return "redirect:/agents";
     }
 

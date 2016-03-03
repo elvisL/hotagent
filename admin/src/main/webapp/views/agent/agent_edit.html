@@ -352,6 +352,46 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group" th:each="price:${prices}">
+                            <label class="col-sm-3 control-label" th:text="${price.product.name}">伙伴商城价格</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="huobanMall" th:name="${price.product}" id="huobanMall" th:value="${}" title="伙伴商城价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/*-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">DSP广告</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="dsp" id="dsp" th:value="${dsp!=null} ? ${dsp}" title="DSP广告价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">云商学院</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="hotEdu" id="hotEdu" th:value="${hotEdu!=null} ? ${hotEdu}" title="云商学院价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">代运营</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">¥</span>
+                                    <input type="number" name="thirdPartnar" th:value="${thirdPartnar!=null} ? ${thirdPartnar}" id="thirdPartnar" title="代运营价格" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!--*/-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">企业资质</label>
 

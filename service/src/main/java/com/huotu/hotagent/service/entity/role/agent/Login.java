@@ -41,12 +41,12 @@ public abstract class Login implements UserDetails, Serializable {
      */
     private String password;
     /**
-     * 账号是否被冻结
+     * 账号冻结情况
      */
     private boolean accountNonLocked = true;
 
     /**
-     * 账号是否过期
+     * 账号过期情况
      */
     private boolean accountNonExpired = true;
 
