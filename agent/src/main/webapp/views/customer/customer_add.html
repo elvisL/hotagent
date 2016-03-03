@@ -219,16 +219,19 @@
                 },
                 submitHandler: function (form, ev) {
                     if($("#flag").val()==0){//一级代理商
-                        if($("#balance").val()<($("#count").val()*$("#price").val())){
-                            layer.msg('余额不足，确定用佣金购买吗', {
-                                time: 0 //不自动关闭
-                                ,btn: ['确认', '否']
-                                ,yes: function(index){
-                                    layer.close(index);
+                                if($("#balance").val()<($("#count").val()*$("#price").val())){
+                                    layer.msg('余额不足，确定用佣金购买吗', {
+                                        time: 0 //不自动关闭
+                                        ,btn: ['确认', '否']
+                                        ,yes: function(index){
+                                            layer.close(index);
+                                            Import();
+                                        }
+                                    });
+                                 }
+                        else{
                                     Import();
                                 }
-                            });
-                        }
                     }
                     else{
                         Import();

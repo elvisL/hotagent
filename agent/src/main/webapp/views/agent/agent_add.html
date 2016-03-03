@@ -387,6 +387,15 @@
                     password: {
                         required: true
                     },
+                    contacts: {
+                        required: true,
+                    },
+                    phoneNo: {
+                        required: true,
+                    },
+                    address: {
+                        required: true,
+                    },
                     balance: {
                         required: true,
                         min: 0,
@@ -408,6 +417,7 @@
                         min: 1000,
                     },
                     mail: {
+                        required: true,
                         email: true
                     }
                 },
@@ -418,9 +428,14 @@
                     password: {
                         required: "请输入密码"
                     },
-                    balance: {
-                        required: "请输入充值金额",
-                        min: "必须大于0",
+                    contacts: {
+                        required: "请输入联系人",
+                    },
+                    phoneNo: {
+                        required: "请输入号码",
+                    },
+                    address: {
+                        required: "请输入地址",
                     },
                     huobanMall: {
                         required: "请输入代理价格",
@@ -439,6 +454,7 @@
                         min: "必须大于1000",
                     },
                     mail: {
+                        required: "请输入邮箱",
                         email: "请输入正确的邮箱"
                     }
                 },

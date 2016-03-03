@@ -307,8 +307,8 @@ public class AgentController {
             agent.setParent(Higher);
             agent.setExpandable(false);
             agent.setCreateTime(date);
-            Boolean bl = balanceLogService.importBl(agent, money);
-            if (bl==true){
+            Boolean bl = balanceLogService.importBl(agent, money);//向下级代理商充值
+            if (bl==true){//如果余额足够
                 Set<Price> priceSet = priceService.setProduct(agent, productPrice);
                 agent.setPrices(priceSet);
                 agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_NOEXPANDABLE)));//设置权限
@@ -386,7 +386,7 @@ public class AgentController {
         ApiResult apiResult = null;
         Agent lowAgent = agentService.findById(id);
         try {
-            Boolean bl=balanceLogService.importBl(lowAgent,money);
+            Boolean bl=balanceLogService.importBl(lowAgent,money);//向下级代理商充值
             if(bl==true){
                 apiResult =  ApiResult.resultWith(ResultCodeEnum.SUCCESS);
             }
