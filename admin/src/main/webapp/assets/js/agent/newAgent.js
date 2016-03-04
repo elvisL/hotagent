@@ -1,19 +1,10 @@
 /**
+ * Created by Administrator on 2016/3/4.
+ */
+/**
  * 新增或修改代理商
  * Created by cwb on 2016/2/18.
  */
-$(function () {
-   $("input[name=prices]").each(function(){
-       var a = $(this);
-       $.each(selectPrices,function(i,v){
-           if(a.attr("pdid")== v.product.id) {
-               a.attr("checked",true);
-           }else{
-               a.attr("checked",false);
-           }
-       })
-   });
-});
 $("#qualify").live("change",function() {
     imgUpload();
 });
@@ -88,6 +79,19 @@ $("#editForm").validate({
     debug: false,
     rules: {
         name: "required",
+        username: {
+            required: true,
+            maxlength: 50,
+            remote:{
+                url:url + "checkUsername",
+                type:"post",
+                data:{
+                    username: function () {
+                        return $("#username").val();
+                    }
+                }
+            }
+        },
         password: {
             required: true,
             minlength: 3
@@ -126,6 +130,9 @@ $("#editForm").validate({
             required:function() {
                 return $("#qualifyUri").val() == '';
             }
+        },
+        prices:{
+            required:true
         }
     },
     messages:{
@@ -154,6 +161,7 @@ function submit() {
         $("#editForm").submit();
     }
 }
+
 function showPrice(obj) {
     var checkbox = $(obj);
     var pdid = checkbox.attr("pdid");

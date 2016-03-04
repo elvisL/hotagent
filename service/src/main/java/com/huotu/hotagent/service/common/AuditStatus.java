@@ -28,6 +28,19 @@ public enum AuditStatus implements ICommonEnum {
         this.name = name;
     }
 
+    public static AuditStatus getAuditStatus(int value) {
+        switch (value) {
+            case 0:
+                return APPLYING;
+            case 1:
+                return PROCESSED;
+            case 2:
+                return FAIL;
+            default:
+                return null;
+        }
+    }
+
     @Override
     public Object getValue() {
         return value;

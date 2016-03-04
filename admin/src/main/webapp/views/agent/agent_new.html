@@ -324,11 +324,9 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">是否可发展下级代理</label>
-
-
                             <div class="col-sm-3">
                                 <div class="rdio rdio-success">
-                                    <input type="radio" name="expandable" id="canexpandable" value="1">
+                                    <input type="radio" name="expandable" id="canexpandable" value="1" checked="checked">
                                     <label for="canexpandable">是</label>
                                 </div>
                                 <div class="rdio rdio-success">
@@ -337,46 +335,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" th:each="price:${prices}">
-                            <label class="col-sm-3 control-label" th:text="${price.product.name}">伙伴商城价格</label>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">¥</span>
-                                    <input type="number" name="prices" th:value="${price.product.basePrice}" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <!--/*-->
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">DSP广告</label>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">¥</span>
-                                    <input type="number" name="dsp" id="dsp" th:value="${dsp!=null} ? ${dsp}" title="DSP广告价格" class="form-control">
+                            <label class="col-sm-3 control-label">选择代理产品</label>
+                            <div class="col-md-6">
+                                <div class="ckbox ckbox-success" th:each="price:${prices}">
+                                    <input type="checkbox" id="checkboxSuccess" onclick="showPrice(this)" name="prices" th:attr="pdid=${price.product.id}" th:id="'product'+ ${price.product.id}" checked="checked">
+                                    <label for="checkboxSuccess" th:for="'product'+ ${price.product.id}" th:text="${price.product.name}">Checkbox Success</label>
+                                    <br>
+                                    <input th:value="${price.price}" th:id="'price'+${price.product.id}" readonly>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">云商学院</label>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">¥</span>
-                                    <input type="number" name="hotEdu" id="hotEdu" th:value="${hotEdu!=null} ? ${hotEdu}" title="云商学院价格" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代运营</label>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">¥</span>
-                                    <input type="number" name="thirdPartnar" th:value="${thirdPartnar!=null} ? ${thirdPartnar}" id="thirdPartnar" title="代运营价格" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <!--*/-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">企业资质</label>
 
@@ -806,6 +775,6 @@
         dist: dist
     });
 </script>
-<script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
+<script src="../../assets/js/agent/newAgent.js" th:src="@{/assets/js/agent/newAgent.js}"></script>
 </body>
 </html>

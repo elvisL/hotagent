@@ -102,6 +102,13 @@ public class AgentController {
         return "agent/agent_list";
     }
 
+    /**
+     * 查看代理商页面
+     * @param id
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/agents/{id}", method = RequestMethod.GET)
     public String showAgentDetail(@PathVariable Long id, Model model) throws Exception {
         Agent agent = agentService.findById(id);
@@ -118,9 +125,11 @@ public class AgentController {
      * @return
      */
     @RequestMapping(value = "/agentEdit/{id}", method = RequestMethod.GET)
-    public String editAgentForm(Model model, @PathVariable Long id) {
+    public String editAgentForm(Model model, @PathVariable Long id) throws Exception{
         Agent agent = agentService.findById(id);
-        Set<Price> prices = agent.getPrices();
+        String fullPath = staticResourceService.getResource(agent.getQualifyUri()).toString();
+        Set<Price> prices = priceService.getBasePrices();
+        model.addAttribute("fullPath",fullPath);
         model.addAttribute("agent", agent);
         model.addAttribute("prices", prices);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
@@ -207,7 +216,7 @@ public class AgentController {
         for (String price : prices) {
             Price pe = new Price();
             pe.setAgent(agent);
-            String[] strs = price.split("|");
+            String[] strs = price.split("\\|");
             Product product = productService.findOne(Long.parseLong(strs[0]));
             pe.setProduct(product);
             pe.setPrice(Double.parseDouble(strs[1]));
@@ -268,7 +277,7 @@ public class AgentController {
         for (String price : prices) {
             Price pe = new Price();
             pe.setAgent(agent);
-            String[] strs = price.split("|");
+            String[] strs = price.split("\\|");
             Product product = productService.findOne(Long.parseLong(strs[0]));
             pe.setProduct(product);
             pe.setPrice(Double.parseDouble(strs[1]));
@@ -321,15 +330,15 @@ public class AgentController {
      * @param agent
      * @return
      */
-    @RequestMapping(value = "/agents", method = RequestMethod.POST)
-    @Transactional
-    public String AgentEdit(Agent agent, ProductPrice productPrice) throws Exception {
-        agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_ROOT)));
-        Set<Price> prices = priceService.setPrices(agent, productPrice);
-        agent.setPrices(prices);
-        loginService.newLogin(agent, agent.getPassword());
-        return "redirect:/agents";
-    }
+//    @RequestMapping(value = "/agents", method = RequestMethod.POST)
+//    @Transactional
+//    public String AgentEdit(Agent agent, ProductPrice productPrice) throws Exception {
+//        agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_ROOT)));
+//        Set<Price> prices = priceService.setPrices(agent, productPrice);
+//        agent.setPrices(prices);
+//        loginService.newLogin(agent, agent.getPassword());
+//        return "redirect:/agents";
+//    }
 
     /**
      * 检测指定城市是否可设置独家代理
