@@ -115,6 +115,12 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.6.0</version>
         </dependency>
+        <!--Gson-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.6.2</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>admin</finalName>

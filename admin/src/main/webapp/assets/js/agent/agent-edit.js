@@ -5,11 +5,12 @@
 $(function () {
    $("input[name=prices]").each(function(){
        var a = $(this);
-       $.each(selectPrices,function(i,v){
-           if(a.attr("pdid")== v.product.id) {
-               a.attr("checked",true);
+       $.each(selectedPrices,function(n,value){
+           if(value == a.attr("pdid")) {
+               a.click();
            }else{
-               a.attr("checked",false);
+               a.click();
+               a.click();
            }
        })
    });
@@ -38,15 +39,18 @@ function imgUpload() {
         }
     });
 }
-$("select[name=type]").change(checkAreaAvaliable);
-$("select[name=city]").change(checkAreaAvaliable);
-function checkAreaAvaliable() {
+$("select[name=type]").change(checkAreaAvaliable(agentId));
+$("select[name=city]").change(checkAreaAvaliable(agentId));
+function checkAreaAvaliable(agentId) {
     var type = $("select[name=type]").val();
     var city = $("select[name=city]").val();
     var avaliable = true;
     $.ajax({
         url: url + "checkCity",
-        data: "city=" + encodeURI(city),
+        data: {
+            city: encodeURI(city),
+            agentId:agentId
+        },
         dataType: "json",
         async:false,
         success: function (data) {
@@ -144,7 +148,7 @@ $("#editForm").validate({
 
 });
 function submit() {
-    var av = checkAreaAvaliable();
+    var av = checkAreaAvaliable(agentId);
     if(av) {
         $("input[name=prices]").each(function() {
             var a = $(this);

@@ -789,7 +789,8 @@
     var city = /*[[${agent!=null ? agent.city : "杭州"}]]*/ "杭州";
     var dist = /*[[${agent!=null ? agent.district : "滨江区"}]]*/ "滨江区";
     var url = /*[[@{/}]]*/ "/";
-    var selectPrices = /*[[${agent.prices}]]*/
+    var selectedPrices = /*[[${selectedPrices}]]*/ "";
+    var agentId = /*[[${agent.id}]]*/ 1;
     $("#area").citySelect({
         prov: prov,
         city: city,

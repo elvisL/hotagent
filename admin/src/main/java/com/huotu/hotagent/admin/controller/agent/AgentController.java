@@ -9,6 +9,11 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.huotu.hotagent.admin.service.StaticResourceService;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
@@ -41,6 +46,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.json.Json;
 import java.util.*;
 
 
@@ -131,6 +137,12 @@ public class AgentController {
         Set<Price> prices = priceService.getBasePrices();
         model.addAttribute("fullPath",fullPath);
         model.addAttribute("agent", agent);
+        Gson gson = new Gson();
+        List<Long> list = new ArrayList<>();
+        for(Price p : agent.getPrices()) {
+            list.add(p.getProduct().getId());
+        }
+        model.addAttribute("selectedPrices",list);
         model.addAttribute("prices", prices);
         List<AgentLevel> agentLevels = agentLevelService.agentLevelList();
         model.addAttribute("agentLevels", agentLevels);
@@ -213,6 +225,7 @@ public class AgentController {
         agent.setQq(qq);
         agent.setQualifyUri(qualifyUri);
         agent.setExpandable(expandable);
+        Set<Price> priceSet = new HashSet<>();
         for (String price : prices) {
             Price pe = new Price();
             pe.setAgent(agent);
@@ -220,7 +233,9 @@ public class AgentController {
             Product product = productService.findOne(Long.parseLong(strs[0]));
             pe.setProduct(product);
             pe.setPrice(Double.parseDouble(strs[1]));
+            priceSet.add(pe);
         }
+        agent.setPrices(priceSet);
         loginService.newLogin(agent, password);
         return "redirect:/agents";
     }
@@ -274,6 +289,7 @@ public class AgentController {
         agent.setQq(qq);
         agent.setQualifyUri(qualifyUri);
         agent.setExpandable(expandable);
+        Set<Price> priceSet = new HashSet<>();
         for (String price : prices) {
             Price pe = new Price();
             pe.setAgent(agent);
@@ -281,7 +297,10 @@ public class AgentController {
             Product product = productService.findOne(Long.parseLong(strs[0]));
             pe.setProduct(product);
             pe.setPrice(Double.parseDouble(strs[1]));
+            priceSet.add(pe);
         }
+        agent.setPrices(priceSet);
+        agentService.save(agent);
         return "redirect:/agents";
     }
 
@@ -324,21 +343,6 @@ public class AgentController {
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 
-    /**
-     * 新增（修改）代理商
-     *
-     * @param agent
-     * @return
-     */
-//    @RequestMapping(value = "/agents", method = RequestMethod.POST)
-//    @Transactional
-//    public String AgentEdit(Agent agent, ProductPrice productPrice) throws Exception {
-//        agent.setAuthorities(new HashSet<>(Arrays.asList(Authority.AGENT_ROOT)));
-//        Set<Price> prices = priceService.setPrices(agent, productPrice);
-//        agent.setPrices(prices);
-//        loginService.newLogin(agent, agent.getPassword());
-//        return "redirect:/agents";
-//    }
 
     /**
      * 检测指定城市是否可设置独家代理
@@ -348,12 +352,19 @@ public class AgentController {
      */
     @RequestMapping("/checkCity")
     @ResponseBody
-    public ApiResult checkCity(String city) {
+    public ApiResult checkCity(String city,@RequestParam(required = false) Long agentId) {
         List<Agent> agents = agentService.findByCity(city);
         if (agents.size() == 0) {
             return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }
         if (agents.size() == 1) {
+            if(agentId!=null) {
+                if(agents.get(0) == agentService.findById(agentId)){
+                    return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+                }else {
+                    return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+                }
+            }
             return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
         }
         return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
