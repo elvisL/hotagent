@@ -132,4 +132,9 @@ public class BalanceLogServiceImpl implements BalanceLogService {
         });
         return balanceLogRepository.findAll(specification,new PageRequest(pageIndex - 1, pageSize, new Sort(Sort.Direction.DESC, "id")));
     }
+
+    @Override
+    public void save(BalanceLog balanceLog) {
+        balanceLogRepository.save(balanceLog);
+    }
 }

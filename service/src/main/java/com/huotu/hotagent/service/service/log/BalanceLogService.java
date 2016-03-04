@@ -12,4 +12,5 @@ public interface BalanceLogService {
     Boolean importBl(Agent lowAgent, double money);
 
     Page<BalanceLog> findAll(int pageIndex, int pageSize, LogSearch logSearch);
+    void save(BalanceLog balanceLog);
 }

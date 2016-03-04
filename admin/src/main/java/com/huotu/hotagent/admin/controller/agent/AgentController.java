@@ -21,6 +21,7 @@ import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.common.Authority;
+import com.huotu.hotagent.service.common.LogType;
 import com.huotu.hotagent.service.entity.log.BalanceLog;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
@@ -314,13 +315,21 @@ public class AgentController {
     @RequestMapping("/recharge")
     @ResponseBody
     @Transactional
-    public ApiResult recharge(Long id, @RequestParam(defaultValue = "0") double money) {
+    public ApiResult recharge(Long id, double money) {
         Agent agent = agentService.findById(id);
         if (money < 0) {
             return ApiResult.resultWith(ResultCodeEnum.CAN_NOT_BE_NEGATIVE);
         }
         agent.setBalance(agent.getBalance() + money);
         agentService.save(agent);
+        BalanceLog log = new BalanceLog();
+        log.setMoney(money);
+        log.setAgent(agent);
+        log.setCreateTime(new Date());
+        log.setLogType(LogType.RECHARGE);
+        log.setImportMoney(money);
+        log.setMemo("向代理商："+agent.getName()+" 充值 "+ money + "元");
+        balanceLogService.save(log);
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 

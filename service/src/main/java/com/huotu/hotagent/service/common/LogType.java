@@ -5,5 +5,5 @@ package com.huotu.hotagent.service.common;
  * Created by cwb on 2016/1/22.
  */
 public enum LogType {
-    SYSTEM,AUDIT
+    SYSTEM,AUDIT,RECHARGE
 }

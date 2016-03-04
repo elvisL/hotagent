@@ -514,8 +514,12 @@
                                     00:00:00
                                 </td>
                                 <td th:text="${agent.getStatus()}">活动</td>
-                                <td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a>&nbsp;&nbsp;<a
-                                        onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a></td>
+                                <td>
+                                    <a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a>&nbsp;&nbsp;
+                                    <a onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a>
+                                    <a onclick="recharge(this)" th:attr="id=${agent.id}">充值</a>
+                                    <a onclick="resetPassword(this)" th:attr="id=${agent.id}">重置密码</a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>1</td>
@@ -940,6 +944,7 @@
 <script src="../../assets/js/bootstrap.hot.extras.js" th:src="@{/assets/js/bootstrap.hot.extras.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
 <script src="../../assets/layer/layer.js" th:src="@{/assets/layer/layer.js}"></script>
+<script src="../../assets/layer/extend/layer.ext.js" th:src="@{/assets/layer/extend/layer.ext.js}"></script>
 
 <script type="application/javascript" th:inline="javascript">
     var pageNo = /*[[${currentPage}]]*/ 1;
@@ -948,6 +953,59 @@
     var url = /*[[@{/}]]*/"/";
 </script>
 <script>
+    function recharge(obj) {
+        var id = $(obj).attr("id");
+        layer.prompt({
+            title:"请输入充值金额",
+            formType:0
+        },function(money) {
+            var reg = new RegExp("^[0-9]*$");
+            if(!reg.test(money)){
+                layer.alert("请输入数字!");
+                return;
+            }
+            $.ajax({
+                url:url + "recharge",
+                type:"POST",
+                data:{
+                    id:id,
+                    money:money
+                },
+                dataType:"json",
+                success:function(data) {
+                    if(data.code == 2000) {
+                        location.reload();
+                    }else {
+                        layer.alert(data.msg);
+                    }
+                }
+            });
+        });
+    }
+    function resetPassword(obj) {
+        var id = $(obj).attr("id");
+        layer.prompt({
+            title:"请输入新密码",
+            formType:1
+        },function(password) {
+            $.ajax({
+                url:url + "resetPassword/",
+                type:"POST",
+                data:{
+                    id:id,
+                    password:password
+                },
+                dataType:"json",
+                success:function(data) {
+                    if(data.code == 2000) {
+                        layer.msg("重置成功");
+                    }else {
+                        layer.alert(data.msg);
+                    }
+                }
+            })
+        });
+    }
     function editAgent(obj) {
         var id = $(obj).attr("id");
         location.href = url + "agentEdit/" + id;
