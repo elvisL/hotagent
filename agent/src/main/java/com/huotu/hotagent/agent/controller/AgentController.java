@@ -25,7 +25,6 @@ import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.repository.product.ProductRepository;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.product.PriceService;
-import com.huotu.hotagent.service.service.record.WithdrawRecordService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
@@ -72,9 +71,6 @@ public class AgentController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private WithdrawRecordService withdrawRecordService;
 
     @Autowired
     private StaticResourceService staticResourceService;

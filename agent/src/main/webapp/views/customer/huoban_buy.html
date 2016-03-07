@@ -16,7 +16,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/png" th:href="@{/assets/images/favicon.png}">
 
-    <title>客户修改</title>
+    <title>新增客户</title>
 
 
     <link rel="stylesheet" href="../../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
@@ -46,7 +46,7 @@
         </div><!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-edit"></i>客户管理</h2>
+            <h2><i class="fa fa-edit"></i> 客户管理</h2>
 
         </div>
 
@@ -58,46 +58,77 @@
                         <a href="" class="panel-close">&times;</a>
                         <a href="" class="minimize">&minus;</a>
                     </div>
-                    <h4 class="panel-title">客户修改</h4>
+                    <h4 class="panel-title">新增客户</h4>
                 </div>
                 <div class="panel-body panel-body-nopadding">
 
                     <form id="editForm" th:method="post" class="form-horizontal form-bordered">
-                        <input type="hidden" id="customerId" name="customerId" th:value="${customer}!=null ? ${customer.customerId}">
-                        <input type="hidden" id="productId" name="productId" th:value="${customer}!=null ? ${customer.productId}">
+                        <input type="hidden" name="balance" id="balance" th:value="${balance}" value="0">
+                        <input type="hidden" name="flag" id="flag" th:value="${flag}" value="0">
+                        <input type="hidden" name="price" id="price" th:value="${price}" value="0">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">客户名称<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="name" title="客户名称" placeholder="客户名称" th:value="${customer}!=null ? ${customer.name}" class="form-control"/>
+                                <input type="text" name="name" id="name" title="客户名称" placeholder="客户名称" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公司名称<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="company" id="company" title="公司名称" placeholder="公司名称"  th:value="${customer}!=null ? ${customer.company}" class="form-control" />
+                                <input type="text" name="company" id="company" title="公司名称" placeholder="公司名称" class="form-control"/>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品名称</label>
+
+                            <div class="col-sm-2">
+                                <select name="product" id="product" title="产品名称" class="form-control mb10">
+                                    <!--<option  th:each="product:${productList}" th:value="${product.id}"  th:text="${product.name}">伙伴商城</option>-->
+                                    <option th:value="${product.id}" th:text="${product.name}">伙伴商城</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品版本</label>
+
+                            <div class="col-sm-2">
+                                <select name="productId" id="productId" title="产品名称" class="form-control mb10">
+                                    <option  th:each="product:${productList}" th:value="${product.id}"  th:text="${product.name}">伙伴商城</option>
+                                    <!--<option th:value="${product.id}" th:text="${product.name}">伙伴商城</option>-->
+                                </select>
+                            </div>
+                        </div>
+
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系方式<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="phoneNo" id="phoneNo" title="联系方式" placeholder="联系方式" th:value="${customer}!=null ? ${customer.phoneNo}" class="form-control" />
+                                <input type="text" name="phoneNo" id="phoneNo" title="联系方式" placeholder="联系方式" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" th:value="${customer}!=null ? ${customer.contacts}"  class="form-control" />
+                                <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" class="form-control"/>
                             </div>
                         </div>
-                        <div class="form-group" th:if="${customer.productId==1}">
+                        <div class="form-group" >
                             <label class="col-sm-3 control-label">伙伴商城登录账号<span class="asterisk">*</span></label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="loginName" id="loginName" title="登录名" th:value="${customer}!=null ? ${customer.loginName}" placeholder="登录账号，多个账号用;隔开" class="form-control"/>
+                                <input type="text" name="loginName" id="loginName" title="登录名" placeholder="登录账号" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="col-sm-3 control-label">伙伴商城登录密码<span class="asterisk">*</span></label>
+
+                            <div class="col-sm-6">
+                                <input type="text" name="loginPassword" id="loginPassword" title="登录密码" placeholder="登录密码" class="form-control"/>
                             </div>
                         </div>
                     </form>
@@ -171,6 +202,12 @@
                     phoneNo: {
                         required : true
                     },
+                    loginName: {
+                        required : true
+                    },
+                    loginPassword: {
+                        required : true
+                    },
                     contacts: {
                         required : true
                     }
@@ -185,14 +222,20 @@
                     phoneNo: {
                         required : "请输入联系方式",
                     },
+                    phoneNo: {
+                        required : "请输入登录账号",
+                    },
+                    phoneNo: {
+                        required : "请输入登录密码",
+                    },
                     contacts: {
                         required : "请输入联系人",
                     }
 
                 },
                 submitHandler: function (form, ev) {
-                        Import();
 
+                    huoban_buy();
                     return false;
                 },
                 invalidHandler: function () {
@@ -207,16 +250,27 @@
 </script>
 <script>
 
-    function Import(){
+    function change(){//用来选择显示伙伴商场登录账号
+        if($("#productId").val()==1){
+            document.getElementById("huoban").style.display="";
+        }
+        else{
+            document.getElementById("huoban").style.display="none";
+        }
+    }
+    function huoban_buy(){
         $.ajax({
-            url: customerUrl+"updateCustomer",
+            url: customerUrl+"saveHuuoban",
             data: {
-                customerId:$("#customerId").val(),
                 name:$("#name").val(),
                 company:$("#company").val(),
+                productId:$("#productId").val(),
+                productList:$("#productList").val(),
+//                count:$("#count").val(),
                 contacts:$("#contacts").val(),
                 phoneNo:$("#phoneNo").val(),
-                loginName:$("#loginName").val()
+                loginName:$("#loginName").val(),
+                loginPassword:$("#loginPassword").val()
             },
             type: "POST",
             dataType: 'json',
@@ -224,15 +278,14 @@
                 var index=parseInt(msg.code);
                 switch (index) {
                     case 2000:
-                        layer.msg("修改成功,2秒后将自动返回客户列表",{time: 2000});
+                        layer.msg("添加成功,2秒后将自动返回产品页面",{time: 2000});
                         setTimeout(function(){
-                                    window.location.href=customerUrl+"customerList?id="+$("#productId").val();
+                                    window.location.href=customerUrl+"showProducts";
                                 }
                                 ,1000);
                         break;
                     case 4001:
-//                        layer.msg("您的账户余额不足", {time: 2000});
-//                        $("#count").val("");
+                        layer.msg("您的账户余额不足", {time: 2000});
                         break;
                 }
             },

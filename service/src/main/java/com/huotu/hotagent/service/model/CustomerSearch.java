@@ -18,5 +18,6 @@ public class CustomerSearch {
     private String beginTime;
     private String endTime;
     private Long agentId;
+    private boolean aBoolean;//判断是否为伙伴商场,true为是伙伴商场
 
 }

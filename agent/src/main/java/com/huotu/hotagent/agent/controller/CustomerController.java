@@ -56,22 +56,22 @@ public class CustomerController {
     private PriceRepository priceRepository;
 
     /**
-    * 添加客户
+    * 添加客户(伙伴商城除外)
    * */
     @RequestMapping("/addCustomer")
     public ModelAndView addCustomer(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/customer_add");
-        Double balance = agentService.findById(agent.getId()).getBalance();//账户总额
-        int flag = agent.getLevel().getLevel();//0为一级，1为2级
         Product product = productService.findOne(id);
-//        List<Product> productList =  productService.findAll();
-        Double price = priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), id).getPrice();
         modelAndView.addObject("product",product);
+//        Double balance = agentService.findById(agent.getId()).getBalance();//账户总额
+//        int flag = agent.getLevel().getLevel();//0为一级，1为2级
+//        List<Product> productList =  productService.findAll();
+//        Double price = priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), id).getPrice();
 //        modelAndView.addObject("productList",productList);
-        modelAndView.addObject("price",price);
-        modelAndView.addObject("balance",balance);
-        modelAndView.addObject("flag",flag);
+//        modelAndView.addObject("price",price);
+//        modelAndView.addObject("balance",balance);当有二级代理商时游泳
+//        modelAndView.addObject("flag",flag);
         return modelAndView;
     }
 
@@ -87,6 +87,67 @@ public class CustomerController {
         return modelAndView;
     }
 
+    /**
+     * 购买伙伴商城
+     * */
+    @RequestMapping("/huobanBuy")
+    public ModelAndView huobanBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("views/customer/huoban_buy");
+        List<Product> productList  = productService.findByParentId(id);
+        Product product = productService.findOne(id);
+        modelAndView.addObject("product",product);
+        modelAndView.addObject("productList",productList);
+//        Customer customer = customerService.findById(id);
+//        modelAndView.addObject("customer",customer);
+        return modelAndView;
+    }
+
+    /**
+     * 购买DSP
+     * */
+    @RequestMapping("/dspBuy")
+    public ModelAndView dspBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("views/customer/dsp_buy");
+        Product product = productService.findOne(id);
+        modelAndView.addObject("product",product);
+//        Customer customer = customerService.findById(id);
+//        modelAndView.addObject("customer",customer);
+        return modelAndView;
+    }
+
+    /**
+     * 购买云商学院
+     * */
+    @RequestMapping("/hoteduBuy")
+    public ModelAndView hoteduBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("views/customer/hotedu_buy");
+        Product product = productService.findOne(id);
+        modelAndView.addObject("product",product);
+//        Customer customer = customerService.findById(id);
+//        modelAndView.addObject("customer",customer);
+        return modelAndView;
+    }
+
+    /**
+     * 购买水土代运营
+     * */
+    @RequestMapping("/thirdpartnarBuy")
+    public ModelAndView thirdpartnarBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("views/customer/thirdpartnar_buy");
+        Product product = productService.findOne(id);
+        modelAndView.addObject("product",product);
+//        Customer customer = customerService.findById(id);
+//        modelAndView.addObject("customer",customer);
+        return modelAndView;
+    }
+
+
+
+
 
     /**
      * 客户详情
@@ -96,7 +157,7 @@ public class CustomerController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/customer_detail");
         Customer customer = customerService.findById(id);
-        Product product = productService.findOne(customer.getProductId());
+        Product product = productService.findOne(customer.getProduct().getId());
         modelAndView.addObject("customer",customer);
         modelAndView.addObject("product",product);
         return modelAndView;
@@ -116,7 +177,14 @@ public class CustomerController {
     ) {
 
         model.addAttribute("customerSearch", customerSearch);
+        List<Product>  productList = productService.findByParentId(id);
         customerSearch.setProductId(id);
+        if (productList.size()==0){//如果true则为普通产品，false为伙伴商城
+            customerSearch.setABoolean(false);
+        }
+        else{
+            customerSearch.setABoolean(true);
+        }
         customerSearch.setAgentId(agent.getId());
         Page<Customer> customers = customerService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, customerSearch);
         int totalPages = customers.getTotalPages();
@@ -189,6 +257,29 @@ public class CustomerController {
         }
         return apiResult;
     }
+
+    /**
+     *保存商户(伙伴商城购买)
+     */
+    @RequestMapping(value = "/saveHuuoban",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult saveHuuoban(@AuthenticationPrincipal Agent agent,
+                                  Customer customer) throws Exception{
+
+        ApiResult apiResult =null;
+        try {
+            customer.setAgent(agent);
+            customer.setCreateTime(new Date());
+            customer.setSaleNum(1);
+            apiResult=  customerService.addCustomer(agent.getId(),customer,1);
+
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            apiResult = ApiResult.resultWith(ResultCodeEnum.SAVE_DATA_ERROR);
+        }
+        return apiResult;
+    }
+
 
 
 }

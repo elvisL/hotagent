@@ -14,6 +14,8 @@ import com.huotu.hotagent.service.entity.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by allan on 1/25/16.
  */
@@ -21,5 +23,7 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findByProductType(ProductType productType);
+
+    List<Product> findByParent_Id(Long id);
 
 }

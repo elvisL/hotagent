@@ -42,6 +42,12 @@ public class ProductServiceImpl implements ProductService {
         return  product;
     }
 
+    @Override
+    public List<Product> findByParentId(Long id) {
+        List<Product>  productList = productRepository.findByParent_Id(id) ;
+        return productList;
+    }
+
 
     @Override
     public Product save(Product product) {

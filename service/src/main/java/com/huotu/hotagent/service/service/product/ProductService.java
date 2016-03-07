@@ -10,7 +10,6 @@
 package com.huotu.hotagent.service.service.product;
 
 import com.huotu.hotagent.service.entity.product.Product;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -24,6 +23,7 @@ public interface ProductService {
 
     Product findOne(Long id);
 
+    List<Product> findByParentId(Long id);
 
     Product save(Product product);
 

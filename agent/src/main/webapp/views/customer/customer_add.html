@@ -46,7 +46,7 @@
         </div><!-- headerbar -->
 
         <div class="pageheader">
-            <h2><i class="fa fa-edit"></i> 产品管理</h2>
+            <h2><i class="fa fa-edit"></i> 客户管理</h2>
 
         </div>
 
@@ -63,9 +63,9 @@
                 <div class="panel-body panel-body-nopadding">
 
                     <form id="editForm" th:method="post" class="form-horizontal form-bordered">
-                        <input type="hidden" name="balance" id="balance" th:value="${balance}" value="0">
-                        <input type="hidden" name="flag" id="flag" th:value="${flag}" value="0">
-                        <input type="hidden" name="price" id="price" th:value="${price}" value="0">
+                        <!--<input type="hidden" name="balance" id="balance" th:value="${balance}" value="0">-->
+                        <!--<input type="hidden" name="flag" id="flag" th:value="${flag}" value="0">-->
+                        <!--<input type="hidden" name="price" id="price" th:value="${price}" value="0">-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">客户名称<span class="asterisk">*</span></label>
 
@@ -115,13 +115,7 @@
                                 <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" class="form-control"/>
                             </div>
                         </div>
-                        <div class="form-group" id="huoban" th:if="${product.id==1}">
-                            <label class="col-sm-3 control-label">伙伴商城登录账号<span class="asterisk">*</span></label>
 
-                            <div class="col-sm-6">
-                                <input type="text" name="loginName" id="loginName" title="登录名" placeholder="登录账号，多个账号用;隔开" class="form-control"/>
-                            </div>
-                        </div>
                     </form>
 
                 </div><!-- panel-body -->
@@ -219,24 +213,25 @@
 
                 },
                 submitHandler: function (form, ev) {
-                    if($("#flag").val()==0){//一级代理商
-                                if($("#balance").val()<($("#count").val()*$("#price").val())){
-                                    layer.msg('余额不足，确定用佣金购买吗', {
-                                        time: 0 //不自动关闭
-                                        ,btn: ['确认', '否']
-                                        ,yes: function(index){
-                                            layer.close(index);
-                                            Import();
-                                        }
-                                    });
-                                 }
-                        else{
-                                    Import();
-                                }
-                    }
-                    else{
-                        Import();
-                    }
+//                    if($("#flag").val()==0){//一级代理商
+//                                if($("#balance").val()<($("#count").val()*$("#price").val())){
+//                                    layer.msg('余额不足，确定用佣金购买吗', {
+//                                        time: 0 //不自动关闭
+//                                        ,btn: ['确认', '否']
+//                                        ,yes: function(index){
+//                                            layer.close(index);
+//                                            Import();
+//                                        }
+//                                    });
+//                                 }
+//                        else{
+//                                    Import();
+//                                }
+//                    }
+//                    else{
+//                        Import();
+//                    }
+                    Import();
                     return false;
                 },
                 invalidHandler: function () {
@@ -251,14 +246,6 @@
 </script>
 <script>
 
-    function change(){//用来选择显示伙伴商场登录账号
-        if($("#productId").val()==1){
-            document.getElementById("huoban").style.display="";
-        }
-        else{
-            document.getElementById("huoban").style.display="none";
-        }
-    }
     function Import(){
         $.ajax({
             url: customerUrl+"saveCustomer",

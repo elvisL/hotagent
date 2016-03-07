@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.service.entity.role.agent;
 
+import com.huotu.hotagent.service.entity.product.Product;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,11 +42,13 @@ public class Customer {
      */
     @Column(name = "company")
     private String company;
+
     /**
      * 产品id
      */
-    @Column(name = "productId")
-    private Long productId;
+    @OneToOne
+    @JoinColumn(name = "productId")
+    private Product product;
 
     /**
      * 所属代理商
@@ -71,6 +74,12 @@ public class Customer {
      */
     @Column(name = "loginName")
     private String loginName;
+
+    /**
+     * 伙伴商城登录密码
+     */
+    @Column(name = "loginPassword")
+    private String loginPassword;
 
     /**
      * 销售数量

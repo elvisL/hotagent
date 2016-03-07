@@ -52,4 +52,12 @@ public class Product {
      */
     @Column(precision = 2)
     private double basePrice;
+
+
+    /**
+     * 父级产品
+     */
+    @OneToOne
+    @JoinColumn(name = "parentId")
+    private Product parent;
 }

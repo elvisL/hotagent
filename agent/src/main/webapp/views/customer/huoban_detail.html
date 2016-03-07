@@ -28,7 +28,7 @@
 </head>
 <body>
 
-    <div class="contentpanel">
+<div class="contentpanel">
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -54,16 +54,7 @@
                         <input type="text" name="company" id="company" title="公司名称" placeholder="公司名称"  th:value="${customer}!=null ? ${customer.company}" class="form-control" readonly/>
                     </div>
                 </div>
-                <div class="form-group" th:if="${product.parent==null}">
-                    <label class="col-sm-3 control-label">产品版本</label>
-
-                    <div class="col-sm-2">
-                        <select name="product1" id="product1" title="产品名称" class="form-control mb10" >
-                            <option th:value="${product.id}" th:text="${product.name}">伙伴商城</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group" th:if="${product.parent!=null}">
+                <div class="form-group">
                     <label class="col-sm-3 control-label">产品名称</label>
 
                     <div class="col-sm-2">
@@ -72,7 +63,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group" th:if="${product.parent!=null}">
+                <div class="form-group">
                     <label class="col-sm-3 control-label">产品版本</label>
 
                     <div class="col-sm-2">
@@ -106,23 +97,20 @@
                         <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" th:value="${customer}!=null ? ${customer.contacts}"  class="form-control" readonly/>
                     </div>
                 </div>
-                <div class="form-group" th:if="${product.parent!=null}">
+                <div class="form-group">
                     <label class="col-sm-3 control-label">伙伴商城登录账号<span class="asterisk">*</span></label>
 
                     <div class="col-sm-6">
-                        <input type="text" name="loginName" id="loginName" title="登录名" th:value="${customer}!=null ? ${customer.loginName}" placeholder="登录账号，多个账号用;隔开" class="form-control" readonly/>
+                        <input type="text" name="loginName" id="loginName" title="登录名" th:value="${customer}!=null ? ${customer.loginName}" placeholder="登录账号" class="form-control" readonly/>
                     </div>
                 </div>
-
-                <div class="form-group" th:if="${product.parent!=null}">
+                <div class="form-group">
                     <label class="col-sm-3 control-label">伙伴商城登录密码<span class="asterisk">*</span></label>
 
                     <div class="col-sm-6">
                         <input type="text" name="loginPassword" id="loginPassword" title="登录名" th:value="${customer}!=null ? ${customer.loginPassword}" placeholder="登录密码" class="form-control" readonly/>
                     </div>
                 </div>
-
-
             </form>
 
         </div><!-- panel-body -->
