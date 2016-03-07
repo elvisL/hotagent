@@ -40,7 +40,7 @@ public class Price {
     /**
      * 代理的产品
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
     private Product product;
 

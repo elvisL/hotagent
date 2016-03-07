@@ -57,7 +57,7 @@ public class Product {
     /**
      * 父级产品
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "parentId")
     private Product parent;
 }
