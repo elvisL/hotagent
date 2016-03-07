@@ -9,11 +9,7 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.huotu.hotagent.admin.service.StaticResourceService;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
@@ -28,7 +24,6 @@ import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
 import com.huotu.hotagent.service.model.AgentSearch;
-import com.huotu.hotagent.service.model.ProductPrice;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.product.ProductService;
@@ -38,7 +33,6 @@ import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -47,7 +41,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.json.Json;
 import java.util.*;
 
 
@@ -210,7 +203,7 @@ public class AgentController {
                                  String... prices) {
         Agent agent = new Agent();
         agent.setCreateTime(new Date());
-        agent.addAuthority(Authority.AGENT_ROOT);
+        agent.addAuthority(Authority.AGENT_NOEXPANDABLE);
         agent.setUsername(username);
         agent.setName(name);
         agent.setLevel(level);

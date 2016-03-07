@@ -50,6 +50,7 @@ public class Customer {
     @JoinColumn(name = "productId")
     private Product product;
 
+
     /**
      * 所属代理商
      */
