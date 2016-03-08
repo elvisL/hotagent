@@ -17,6 +17,8 @@ public interface PriceService {
     Set<Price> setPrices(Agent agent, ProductPrice productPrice);
     Set<Price> updatePrices(Agent agent, ProductPrice productPrice);
 
+    List<Price> findByAgentId(Long id);
+
 
     void save(Price price);
 
