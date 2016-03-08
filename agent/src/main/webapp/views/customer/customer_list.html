@@ -220,7 +220,15 @@
     //修改
     function editCustomer(obj) {
         var id = $(obj).attr("id");
-        location.href = customerUrl + "editCustomer?id=" + id ;
+        layer.open({
+            type: 2,
+            title: '客户修改',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['900px', '780px'],
+            content:customerUrl + "editCustomer?id=" + id
+        })
+
     }
 
     //详情
@@ -231,7 +239,7 @@
             title: '客户详情',
             shadeClose: true,
             shade: 0.8,
-            area: ['880px', '680px'],
+            area: ['900px', '780px'],
             content:customerUrl + 'customerDetail/'+id
         });
     }

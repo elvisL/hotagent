@@ -36,19 +36,19 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='showProducts')">
-    </div><!-- leftpanel -->
+    <!--<div class="leftpanel" th:replace="views/common/left :: left (activeMenu='showProducts')">-->
+    <!--</div>&lt;!&ndash; leftpanel &ndash;&gt;-->
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="views/common/header :: header">
+        <!--<div class="headerbar" th:replace="views/common/header :: header">-->
 
-        </div><!-- headerbar -->
+        <!--</div>&lt;!&ndash; headerbar &ndash;&gt;-->
 
-        <div class="pageheader">
-            <h2><i class="fa fa-edit"></i> 客户管理</h2>
+        <!--<div class="pageheader">-->
+            <!--<h2><i class="fa fa-edit"></i> 客户管理</h2>-->
 
-        </div>
+        <!--</div>-->
 
         <div class="contentpanel">
 
@@ -264,9 +264,12 @@
                 var index=parseInt(msg.code);
                 switch (index) {
                     case 2000:
-                        layer.msg("添加成功,2秒后将自动返回产品页面",{time: 2000});
+                        layer.msg("添加成功,2秒后将自动关闭页面",{time: 2000});
                         setTimeout(function(){
-                                    window.location.href=customerUrl+"showProducts";
+                                    var layerIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+//                                    parent.layer.close(layerIndex);
+                                    parent.location.reload();
+//                                    window.location.href=customerUrl+"showProducts";
                                 }
                                 ,1000);
                         break;

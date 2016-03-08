@@ -51,7 +51,7 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView();
         List<Price> priceList = priceService.findByAgentId(agent.getId());
         List<Product> productList  =  new ArrayList<>();
-        if (productList.size()!=0){
+        if (priceList.size()!=0){
             for(Price price : priceList){
                 if (price.getProduct().getParent()==null){
                     productList.add(price.getProduct());

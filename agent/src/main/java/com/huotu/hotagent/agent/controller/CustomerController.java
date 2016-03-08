@@ -83,7 +83,15 @@ public class CustomerController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/customer_edit");
         Customer customer = customerService.findById(id);
+        long productId;
+        if (customer.getProduct().getParent()!=null){//当产品有父产品时则是伙伴商场
+            productId =customer.getProduct().getParent().getId();
+        }
+        else {
+            productId = customer.getProduct().getId();
+        }
         modelAndView.addObject("customer",customer);
+        modelAndView.addObject("productId",productId);
         return modelAndView;
     }
 
@@ -103,47 +111,6 @@ public class CustomerController {
         return modelAndView;
     }
 
-    /**
-     * 购买DSP
-     * */
-    @RequestMapping("/dspBuy")
-    public ModelAndView dspBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("views/customer/dsp_buy");
-        Product product = productService.findOne(id);
-        modelAndView.addObject("product",product);
-//        Customer customer = customerService.findById(id);
-//        modelAndView.addObject("customer",customer);
-        return modelAndView;
-    }
-
-    /**
-     * 购买云商学院
-     * */
-    @RequestMapping("/hoteduBuy")
-    public ModelAndView hoteduBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("views/customer/hotedu_buy");
-        Product product = productService.findOne(id);
-        modelAndView.addObject("product",product);
-//        Customer customer = customerService.findById(id);
-//        modelAndView.addObject("customer",customer);
-        return modelAndView;
-    }
-
-    /**
-     * 购买水土代运营
-     * */
-    @RequestMapping("/thirdpartnarBuy")
-    public ModelAndView thirdpartnarBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("views/customer/thirdpartnar_buy");
-        Product product = productService.findOne(id);
-        modelAndView.addObject("product",product);
-//        Customer customer = customerService.findById(id);
-//        modelAndView.addObject("customer",customer);
-        return modelAndView;
-    }
 
 
 
@@ -221,7 +188,7 @@ public class CustomerController {
             Customer customer = customerService.findById(newCustomer.getCustomerId());
             customer.setCompany(newCustomer.getCompany());
             customer.setContacts(newCustomer.getContacts());
-            customer.setLoginName(newCustomer.getLoginName());
+//            customer.setLoginName(newCustomer.getLoginName());
             customer.setName(newCustomer.getName());
             customer.setPhoneNo(newCustomer.getPhoneNo());
             customerService.save(customer);
@@ -242,13 +209,14 @@ public class CustomerController {
     @RequestMapping(value = "/saveCustomer",method = RequestMethod.POST)
     @ResponseBody
     public ApiResult saveCustomer(@AuthenticationPrincipal Agent agent,
-                                    Customer customer,int count) throws Exception{
+                                    Customer customer,long productId,int count) throws Exception{
 
         ApiResult apiResult =null;
         try {
             customer.setAgent(agent);
             customer.setCreateTime(new Date());
             customer.setSaleNum(count);
+            customer.setProduct(productService.findOne(productId));
             apiResult=  customerService.addCustomer(agent.getId(),customer,count);
 
         }catch (Exception ex){
@@ -261,16 +229,17 @@ public class CustomerController {
     /**
      *保存商户(伙伴商城购买)
      */
-    @RequestMapping(value = "/saveHuuoban",method = RequestMethod.POST)
+    @RequestMapping(value = "/saveHuoban",method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult saveHuuoban(@AuthenticationPrincipal Agent agent,
-                                  Customer customer) throws Exception{
+    public ApiResult saveHuoban(@AuthenticationPrincipal Agent agent,
+                                  Customer customer,long productId) throws Exception{
 
         ApiResult apiResult =null;
         try {
             customer.setAgent(agent);
             customer.setCreateTime(new Date());
             customer.setSaleNum(1);
+            customer.setProduct(productService.findOne(productId));
             apiResult=  customerService.addCustomer(agent.getId(),customer,1);
 
         }catch (Exception ex){

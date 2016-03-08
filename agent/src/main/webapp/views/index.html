@@ -20,6 +20,7 @@
 
 
     <link rel="stylesheet" href="../assets/css/style.default.css" th:href="@{/assets/css/style.default.css}"/>
+    <link rel="stylesheet" href="../../assets/libs/layer/skin/layer.css" th:href="@{/assets/libs/layer/skin/layer.css}"/>
 
     <link rel="stylesheet" href="../assets/css/bootstrap-fileupload.min.css" th:href="@{/assets/css/bootstrap-fileupload.min.css}"/>
 
@@ -117,9 +118,8 @@
             <!--</div>-->
 
             <div class="row">
-
                 <div class="col-sm-6 col-md-3">
-                    <div class="panel panel-primary panel-stat">
+                    <div class="panel panel-danger panel-stat">
                         <div class="panel-heading">
 
                             <div class="stat">
@@ -138,6 +138,99 @@
                         </div>
                     </div>
                 </div>
+            </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-3" th:each="productList:${productList}">
+                        <div class="panel panel-success panel-stat">
+                            <div class="panel-heading">
+
+                                <div class="stat">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <img src="../assets/images/is-document.png" alt="">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h1 class="index-commission" th:text="${productList.name}">伙伴商城</h1>
+                                            <a th:if="${productList.id!=1}"  onclick="addCustomer(this)" th:attr="id=${productList.id}"><h2 >新增商户</h2></a>
+                                            <a th:if="${productList.id==1}" onclick="huobanBuy(this)" th:attr="id=${productList.id}"><h2 >新增商户</h2></a>
+                                            <!--<a onclick="showDetail(this)" th:attr="id=${productList.id}"><h2 >查看详情</h2></a>-->
+                                            <a th:href="@{customerList(id=${productList.id})}"><h2 >查看详情</h2></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="col-sm-6 col-md-3">-->
+                        <!--<div class="panel panel-success panel-stat">-->
+                            <!--<div class="panel-heading">-->
+
+                                <!--<div class="stat">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-4">-->
+                                            <!--<img src="../assets/images/is-document.png" alt="">-->
+                                        <!--</div>-->
+                                        <!--<div class="col-xs-8">-->
+                                            <!--<h1 class="index-commission" >DSP广告</h1>-->
+                                            <!--<small class="stat-label">账户佣金</small>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-6 col-md-3">-->
+                        <!--<div class="panel panel-success panel-stat">-->
+                            <!--<div class="panel-heading">-->
+
+                                <!--<div class="stat">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-4">-->
+                                            <!--<img src="../assets/images/is-document.png" alt="">-->
+                                        <!--</div>-->
+                                        <!--<div class="col-xs-8">-->
+                                            <!--<h1 class="index-commission" >云商学院</h1>-->
+                                            <!--<small class="stat-label">账户佣金</small>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-6 col-md-3">-->
+                        <!--<div class="panel panel-success panel-stat">-->
+                            <!--<div class="panel-heading">-->
+
+                                <!--<div class="stat">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-4">-->
+                                            <!--<img src="../assets/images/is-document.png" alt="">-->
+                                        <!--</div>-->
+                                        <!--<div class="col-xs-8">-->
+                                            <!--<h1 class="index-commission" >代运营</h1>-->
+                                            <!--<small class="stat-label">账户佣金</small>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+
+
+
 
                 <!--<div class="col-sm-6 col-md-3">-->
                     <!--<div class="panel panel-primary panel-stat">-->
@@ -198,10 +291,53 @@
 <script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
 <script src="../../assets/js/retina.min.js" th:src="@{/assets/js/retina.min.js}"></script>
 <script src="../../assets/js/jquery.cookies.js" th:src="@{/assets/js/jquery.cookies.js}"></script>
+<script src="../../assets/libs/layer/layer.js" th:src="@{/assets/libs/layer/layer.js}"></script>
 
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 
 <script type="text/javascript">
+
+    var indexUrl = /*[[@{/}]]*/"/";
+
+    //购买产品
+    function addCustomer(obj) {
+        var id = $(obj).attr("id");
+        layer.open({
+            type: 2,
+            title: '产品销售',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['880px', '680px'],
+            content:indexUrl + 'addCustomer?id='+id
+        });
+    }
+
+    //购买伙伴商场
+    function huobanBuy(obj) {
+        var id = $(obj).attr("id");
+        layer.open({
+            type: 2,
+            title: '产品销售',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['880px', '680px'],
+            content:indexUrl + 'huobanBuy?id='+id
+        });
+    }
+
+
+    //详情
+//    function showDetail(obj) {
+//        var id = $(obj).attr("id");
+//        layer.open({
+//            type: 2,
+//            title: '客户详情',
+//            shadeClose: true,
+//            shade: 0.8,
+//            area: ['880px', '680px'],
+//            content:indexUrl + 'customerList?id='+id
+//        });
+//    }
 
 </script>
 

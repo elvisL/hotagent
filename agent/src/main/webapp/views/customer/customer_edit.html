@@ -36,19 +36,19 @@
 </div>
 
 <section>
-    <div class="leftpanel" th:replace="views/common/left :: left (activeMenu='showProducts')">
-    </div><!-- leftpanel -->
+    <!--<div class="leftpanel" th:replace="views/common/left :: left (activeMenu='showProducts')">-->
+    <!--</div>&lt;!&ndash; leftpanel &ndash;&gt;-->
 
     <div class="mainpanel">
 
-        <div class="headerbar" th:replace="views/common/header :: header">
+        <!--<div class="headerbar" th:replace="views/common/header :: header">-->
 
-        </div><!-- headerbar -->
+        <!--</div>&lt;!&ndash; headerbar &ndash;&gt;-->
 
-        <div class="pageheader">
-            <h2><i class="fa fa-edit"></i>客户管理</h2>
+        <!--<div class="pageheader">-->
+            <!--<h2><i class="fa fa-edit"></i>客户管理</h2>-->
 
-        </div>
+        <!--</div>-->
 
         <div class="contentpanel">
 
@@ -64,7 +64,7 @@
 
                     <form id="editForm" th:method="post" class="form-horizontal form-bordered">
                         <input type="hidden" id="customerId" name="customerId" th:value="${customer}!=null ? ${customer.customerId}">
-                        <input type="hidden" id="productId" name="productId" th:value="${customer}!=null ? ${customer.productId}">
+                        <input type="hidden" id="productId" name="productId" th:value="${customer}!=null ? ${productId}">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">客户名称<span class="asterisk">*</span></label>
 
@@ -93,13 +93,13 @@
                                 <input type="text" name="contacts" id="contacts" title="联系人" placeholder="联系人" th:value="${customer}!=null ? ${customer.contacts}"  class="form-control" />
                             </div>
                         </div>
-                        <div class="form-group" th:if="${customer.productId==1}">
-                            <label class="col-sm-3 control-label">伙伴商城登录账号<span class="asterisk">*</span></label>
+                        <!--<div class="form-group" th:if="${customer.productId==1}">-->
+                            <!--<label class="col-sm-3 control-label">伙伴商城登录账号<span class="asterisk">*</span></label>-->
 
-                            <div class="col-sm-6">
-                                <input type="text" name="loginName" id="loginName" title="登录名" th:value="${customer}!=null ? ${customer.loginName}" placeholder="登录账号，多个账号用;隔开" class="form-control"/>
-                            </div>
-                        </div>
+                            <!--<div class="col-sm-6">-->
+                                <!--<input type="text" name="loginName" id="loginName" title="登录名" th:value="${customer}!=null ? ${customer.loginName}" placeholder="登录账号，多个账号用;隔开" class="form-control"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </form>
 
                 </div><!-- panel-body -->
@@ -215,8 +215,7 @@
                 name:$("#name").val(),
                 company:$("#company").val(),
                 contacts:$("#contacts").val(),
-                phoneNo:$("#phoneNo").val(),
-                loginName:$("#loginName").val()
+                phoneNo:$("#phoneNo").val()
             },
             type: "POST",
             dataType: 'json',
@@ -226,13 +225,20 @@
                     case 2000:
                         layer.msg("修改成功,2秒后将自动返回客户列表",{time: 2000});
                         setTimeout(function(){
-                                    window.location.href=customerUrl+"customerList?id="+$("#productId").val();
+//                                    window.location.href=customerUrl+"customerList?id="+$("#productId").val();
+                                    var layerIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                                    parent.location.reload();
                                 }
                                 ,1000);
                         break;
                     case 4001:
-//                        layer.msg("您的账户余额不足", {time: 2000});
-//                        $("#count").val("");
+                        layer.msg("系统繁忙，请稍后再试", {time: 2000});
+                        setTimeout(function(){
+//                                    window.location.href=customerUrl+"customerList?id="+$("#productId").val();
+                                    var layerIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                                    parent.location.reload();
+                                }
+                                ,1000);
                         break;
                 }
             },
