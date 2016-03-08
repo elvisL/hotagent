@@ -100,7 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
             highbalanceLog.setMoney(-money);
             highbalanceLog.setExportMoney(money);
             if(product.getParent()==null){
-            highbalanceLog.setMemo(customer.getName()+" 向 "+customer.getProduct().getName()+" 花费余额 "+money );}
+            highbalanceLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+customer.getProduct().getName()+" 花费余额 "+money );}
             else {
                 highbalanceLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+product.getParent().getName()+"-"+customer.getProduct().getName()+" 花费余额 "+money );
             }
