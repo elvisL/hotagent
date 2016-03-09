@@ -9,11 +9,14 @@
 
 package com.huotu.hotagent.service.entity.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.huotu.hotagent.service.common.ProductType;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 产品
@@ -60,5 +63,11 @@ public class Product {
      */
     @ManyToOne
     @JoinColumn(name = "parentId")
+    @JsonIgnore
     private Product parent;
+
+    @OneToMany(mappedBy = "parent",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Product> children;
+
+
 }

@@ -82,4 +82,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAll() {
         return productRepository.findAll();
     }
+
+    @Override
+    public List<Product> findTops() {
+        return productRepository.findByParent(null);
+    }
 }

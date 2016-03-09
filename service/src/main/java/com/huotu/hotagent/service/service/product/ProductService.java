@@ -36,5 +36,6 @@ public interface ProductService {
 
     List<Product> findAll();
 
+    List<Product> findTops();
 
 }

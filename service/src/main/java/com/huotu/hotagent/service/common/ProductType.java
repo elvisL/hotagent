@@ -9,7 +9,12 @@
 
 package com.huotu.hotagent.service.common;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.huotu.hotagent.common.ienum.ICommonEnum;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 产品类型
@@ -19,9 +24,17 @@ public enum ProductType implements ICommonEnum {
     HUOBAN_MALL(0, "伙伴商城"),
     DSP(1, "DSP广告"),
     HOT_EDU(2, "云商学院"),
-    THIRDPARTNAR(3, "水图代运营"),
-    CESHI(4, "测试商品");
-    // TODO: 1/25/16
+    THIRDPARTNAR(3, "水图代运营");
+
+    private static Map<String,ProductType> valueMap = new HashMap<>();
+
+    static {
+        valueMap.put("0",HUOBAN_MALL);
+        valueMap.put("1",DSP);
+        valueMap.put("2",HOT_EDU);
+        valueMap.put("3",THIRDPARTNAR);
+    }
+
     private Integer value;
     private String name;
 
@@ -29,6 +42,16 @@ public enum ProductType implements ICommonEnum {
         this.value = value;
         this.name = name;
     }
+
+    @JsonValue
+    public String toValue() {
+        return value.toString();
+    }
+    @JsonCreator
+    public ProductType forValue(String value) {
+        return valueMap.get(value);
+    }
+
 
     @Override
     public Integer getValue() {

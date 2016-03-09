@@ -1,28 +1,19 @@
 package com.huotu.hotagent.admin.controller.product;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.huotu.hotagent.admin.model.ProductTreeModel;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
-import com.huotu.hotagent.common.ienum.EnumHelper;
-import com.huotu.hotagent.common.ienum.ICommonEnum;
-import com.huotu.hotagent.common.utils.StringUtil;
-import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Product;
-import com.huotu.hotagent.service.entity.role.agent.Agent;
-import com.huotu.hotagent.service.model.AgentProduct;
-import com.huotu.hotagent.service.model.LogSearch;
 import com.huotu.hotagent.service.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,15 +29,17 @@ public class ProductController {
      */
     @RequestMapping(value = "/showProducts")
     @PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')")
-    public ModelAndView showProducts() throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        List<Product> productList = productService.findAll();
-        ProductType[] productTypeList = ProductType.values();
-        modelAndView.setViewName("product/product_list");
-        modelAndView.addObject("products", productList);
-        modelAndView.addObject("productTypes", productTypeList);
-        return modelAndView;
+    public String showProducts() throws Exception {
+        return "product/product_list";
     }
+
+    @RequestMapping("/products")
+    @ResponseBody
+    public List<Product> getProductTrees() {
+        List<Product> products = productService.findTops();
+        return products;
+    }
+
 
     /**
      * 查看产品信息

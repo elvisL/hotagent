@@ -26,4 +26,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByParent_Id(Long id);
 
+    List<Product> findByParent(Product o);
 }
