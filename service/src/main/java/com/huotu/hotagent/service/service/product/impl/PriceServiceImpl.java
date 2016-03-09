@@ -115,6 +115,12 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
+    public Price findByAgentIdAndProductId(Long aid,Long pid) {
+        Price price = priceRepository.findByAgent_IdAndProduct_Id(aid,pid);
+        return price;
+    }
+
+    @Override
     public void save(Price price) {
         priceRepository.save(price);
     }

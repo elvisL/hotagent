@@ -25,6 +25,7 @@ import java.util.Date;
 @Setter
 @Getter
 @Inheritance
+@Cacheable(false)
 public abstract class Login implements UserDetails, Serializable {
 
     private static final long serialVersionUID = -4886674511959360750L;

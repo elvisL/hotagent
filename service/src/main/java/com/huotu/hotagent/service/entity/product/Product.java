@@ -23,6 +23,7 @@ import javax.persistence.*;
 @Table(name = "age_product", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Getter
 @Setter
+@Cacheable(false)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

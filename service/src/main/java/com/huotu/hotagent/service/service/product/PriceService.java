@@ -19,6 +19,8 @@ public interface PriceService {
 
     List<Price> findByAgentId(Long id);
 
+    Price findByAgentIdAndProductId(Long aid,Long pid);
+
 
     void save(Price price);
 

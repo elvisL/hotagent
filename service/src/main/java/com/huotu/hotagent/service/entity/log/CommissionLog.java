@@ -26,6 +26,7 @@ import java.util.Date;
 @Table(name = "age_commissionLog")
 @Getter
 @Setter
+@Cacheable(false)
 public class CommissionLog {
 
     @Id

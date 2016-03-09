@@ -140,7 +140,7 @@
                 </div>
             </div>
                 <div class="row">
-                    <div class="col-sm-6 col-md-3" th:each="productList:${productList}">
+                    <div class="col-sm-6 col-md-3" th:each="productList:${agentProductList}">
                         <div class="panel panel-success panel-stat">
                             <div class="panel-heading">
 
@@ -150,11 +150,12 @@
                                             <img src="../assets/images/is-document.png" alt="">
                                         </div>
                                         <div class="col-xs-8">
-                                            <h1 class="index-commission" th:text="${productList.name}">伙伴商城</h1>
-                                            <a th:if="${productList.id!=1}"  onclick="addCustomer(this)" th:attr="id=${productList.id}"><h2 >新增商户</h2></a>
-                                            <a th:if="${productList.id==1}" onclick="huobanBuy(this)" th:attr="id=${productList.id}"><h2 >新增商户</h2></a>
+                                            <h1 class="index-commission" th:text="${productList.productName}">伙伴商城</h1>
+                                            <h3>单价: <span style="color: red" th:text="${productList.productPrice}" >5000</span></h3>
+                                            <a th:if="${productList.productId!=1}"  onclick="addCustomer(this)" th:attr="id=${productList.productId}"><h2 >新增商户</h2></a>
+                                            <a th:if="${productList.productId==1}" onclick="huobanBuy(this)" th:attr="id=${productList.productId}"><h2 >新增商户</h2></a>
                                             <!--<a onclick="showDetail(this)" th:attr="id=${productList.id}"><h2 >查看详情</h2></a>-->
-                                            <a th:href="@{customerList(id=${productList.id})}"><h2 >查看详情</h2></a>
+                                            <a th:href="@{customerList(id=${productList.productId})}"><h2 >查看详情</h2></a>
                                         </div>
                                     </div>
 

@@ -30,6 +30,7 @@ import java.util.Set;
 @Table(name = "age_manager")
 @Setter
 @Getter
+@Cacheable(false)
 public class Manager implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

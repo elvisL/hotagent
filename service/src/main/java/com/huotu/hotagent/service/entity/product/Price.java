@@ -23,6 +23,7 @@ import javax.persistence.*;
 @Table(name = "age_price")
 @Getter
 @Setter
+@Cacheable(false)
 public class Price {
 
     @Id

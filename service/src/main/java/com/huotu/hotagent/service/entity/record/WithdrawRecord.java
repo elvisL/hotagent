@@ -25,6 +25,7 @@ import java.util.Date;
 @Table(name = "age_withdrawRecord")
 @Getter
 @Setter
+@Cacheable(false)
 public class WithdrawRecord {
 
     @Id

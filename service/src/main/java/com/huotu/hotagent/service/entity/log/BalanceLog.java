@@ -26,6 +26,7 @@ import java.util.Date;
 @Table(name = "age_balanceLog")
 @Getter
 @Setter
+@Cacheable(false)
 public class BalanceLog {
 
     @Id

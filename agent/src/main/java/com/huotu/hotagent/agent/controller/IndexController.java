@@ -4,6 +4,7 @@ import com.huotu.hotagent.agent.service.AdminService;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
+import com.huotu.hotagent.service.model.AgentProduct;
 import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView();
         List<Price> priceList = priceService.findByAgentId(agent.getId());
         List<Product> productList  =  new ArrayList<>();
+        List<AgentProduct> agentProductList = new ArrayList<>();
         if (priceList.size()!=0){
             for(Price price : priceList){
                 if (price.getProduct().getParent()==null){
@@ -58,9 +60,18 @@ public class IndexController {
                 }
             }
         }
+        if(productList.size()!=0){
+            for (Product product : productList){
+                AgentProduct agentProduct = new AgentProduct();
+                agentProduct.setProductName(product.getName());
+                agentProduct.setProductId(product.getId());
+                agentProduct.setProductPrice(priceService.findByAgentIdAndProductId(agent.getId(),product.getId()).getPrice());//获取对应产品的价格
+                agentProductList.add(agentProduct);
+            }
+        }
 
         modelAndView.addObject("balance", agentService.findById(agent.getId()).getBalance());
-        modelAndView.addObject("productList", productList);
+        modelAndView.addObject("agentProductList", agentProductList);
         modelAndView.setViewName("views/index");
         return  modelAndView;
     }
