@@ -91,6 +91,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">产品单价</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" name="OncePrice" id="OncePrice" th:value="${price}" title="产品单价"  class="form-control" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">需求量<span class="asterisk">*</span></label>
 
                             <div class="col-sm-3">
@@ -264,18 +271,20 @@
                 var index=parseInt(msg.code);
                 switch (index) {
                     case 2000:
-                        layer.msg("添加成功,2秒后将自动关闭页面",{time: 2000});
-                        setTimeout(function(){
-                                    var layerIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
-//                                    parent.layer.close(layerIndex);
-                                    parent.location.reload();
-//                                    window.location.href=customerUrl+"showProducts";
-                                }
-                                ,1000);
+                        layer.msg("添加成功,2秒后将自动关闭页面", {
+                            icon: 1,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            parent.location.reload();
+                        });
                         break;
                     case 4001:
-                        layer.msg("您的账户余额不足", {time: 2000});
-                        $("#count").val("");
+                        layer.msg("您的账户余额不足", {
+                            icon: 2,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            $("#count").val("");
+                        });
                         break;
                 }
             },

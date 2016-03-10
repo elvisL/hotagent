@@ -223,22 +223,20 @@
                 var index=parseInt(msg.code);
                 switch (index) {
                     case 2000:
-                        layer.msg("修改成功,2秒后将自动返回客户列表",{time: 2000});
-                        setTimeout(function(){
-//                                    window.location.href=customerUrl+"customerList?id="+$("#productId").val();
-                                    var layerIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
-                                    parent.location.reload();
-                                }
-                                ,1000);
+                        layer.msg("修改成功,2秒后将自动返回客户列表", {
+                            icon: 1,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            parent.location.reload();
+                        });
                         break;
                     case 4001:
-                        layer.msg("系统繁忙，请稍后再试", {time: 2000});
-                        setTimeout(function(){
-//                                    window.location.href=customerUrl+"customerList?id="+$("#productId").val();
-                                    var layerIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
-                                    parent.location.reload();
-                                }
-                                ,1000);
+                        layer.msg("系统繁忙，请稍后再试", {
+                            icon: 2,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+                            parent.location.reload();
+                        });
                         break;
                 }
             },
