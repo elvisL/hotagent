@@ -8,6 +8,8 @@ import com.huotu.hotagent.service.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +31,9 @@ public class ProductController {
      */
     @RequestMapping(value = "/showProducts")
     @PreAuthorize("hasAnyAuthority('MANAGER_ROOT','MANAGER_PRODUCT')")
-    public String showProducts() throws Exception {
+    public String showProducts(Model model) throws Exception {
+        List<Product> products = productService.findSubs();
+        model.addAttribute("products",products);
         return "product/product_list";
     }
 
@@ -54,6 +58,25 @@ public class ProductController {
             apiResult = ApiResult.resultWith(ResultCodeEnum.SUCCESS, product);
         }
         return apiResult;
+    }
+
+    /**
+     * 修改产品价格
+     * @param id
+     * @param basePrice
+     * @return
+     */
+    @RequestMapping("editProductPrice")
+    @ResponseBody
+    @Transactional
+    public ApiResult editProductPrice(Long id,Double basePrice) {
+        if(id == null || basePrice == null) {
+            return ApiResult.resultWith(ResultCodeEnum.DATA_NULL);
+        }
+        Product product = productService.findOne(id);
+        product.setBasePrice(basePrice);
+        productService.save(product);
+        return ApiResult.resultWith(ResultCodeEnum.EDIT_SUCCESS);
     }
 
     /**
