@@ -16,10 +16,11 @@ import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
+import com.huotu.hotagent.service.model.AgentProduct;
 import com.huotu.hotagent.service.model.CustomerSearch;
 import com.huotu.hotagent.service.repository.product.PriceRepository;
+import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.product.ProductService;
-import com.huotu.hotagent.service.service.role.agent.AgentService;
 import com.huotu.hotagent.service.service.role.agent.CustomerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,8 +47,9 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+
     @Autowired
-    private AgentService agentService;
+    private PriceService priceService;
 
     @Autowired
     private ProductService productService;
@@ -63,7 +65,9 @@ public class CustomerController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/customer_add");
         Product product = productService.findOne(id);
+        Double price = priceService.findByAgentIdAndProductId(agent.getId(), id).getPrice();
         modelAndView.addObject("product",product);
+        modelAndView.addObject("price",price);
 //        Double balance = agentService.findById(agent.getId()).getBalance();//账户总额
 //        int flag = agent.getLevel().getLevel();//0为一级，1为2级
 //        List<Product> productList =  productService.findAll();
@@ -103,9 +107,23 @@ public class CustomerController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/huoban_buy");
         List<Product> productList  = productService.findByParentId(id);
+        List<AgentProduct> agentProductList = new ArrayList<>();
+        Double price = null;
+        if(productList.size()!=0){
+            for (Product product : productList){
+                AgentProduct agentProduct = new AgentProduct();
+                agentProduct.setProductName(product.getName());
+                agentProduct.setProductId(product.getId());
+                agentProduct.setProductPrice(priceService.findByAgentIdAndProductId(agent.getId(),product.getId()).getPrice());//获取对应产品的价格
+                agentProductList.add(agentProduct);
+            }
+            price = agentProductList.get(0).getProductPrice();
+        }
+
         Product product = productService.findOne(id);
         modelAndView.addObject("product",product);
-        modelAndView.addObject("productList",productList);
+        modelAndView.addObject("price",price);
+        modelAndView.addObject("agentProductList",agentProductList);
 //        Customer customer = customerService.findById(id);
 //        modelAndView.addObject("customer",customer);
         return modelAndView;
