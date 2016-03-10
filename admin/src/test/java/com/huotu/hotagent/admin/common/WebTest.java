@@ -46,7 +46,7 @@ import java.util.*;
 @ActiveProfiles("test")
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {MVCConfig.class, ServiceConfig.class})
+@ContextConfiguration(classes = {MVCConfig.class, ServiceConfig.class},value = "")
 @Transactional
 public abstract class WebTest extends SpringWebTest {
     @Autowired

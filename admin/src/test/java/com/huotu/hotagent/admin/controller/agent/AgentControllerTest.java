@@ -77,7 +77,7 @@ public class AgentControllerTest extends AuthenticatedWebTest {
     @LoginAs(isRoot = true)
     public void testAgentEdit() throws Exception {
         Date now = new Date();
-        webDriver.get("http://localhost:8080/agentEditForm");
+        webDriver.get("http://localhost:8080/agentEdit");
         AgentEditPage agentEditPage = initPage(AgentEditPage.class);
         List<AgentLevel> agentLevels = levelRepository.findAll();
         //开始构造一个虚拟的agent
