@@ -20,6 +20,7 @@ import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.manager.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -38,6 +39,7 @@ public class AdminBoot {
     private ManagerService managerService;
 
     @PostConstruct
+    @Transactional
     public void adminBoot() {
         //初始化一个超级管理员
         Manager root = managerService.findByUsername("administrator");
@@ -84,13 +86,13 @@ public class AdminBoot {
             huobanMall.setBasePrice(5000);
 
             Product base = new Product();
-            base.setName("伙伴商城");
+            base.setName("伙伴商城基础版");
             base.setProductType(ProductType.HUOBAN_MALL);
             base.setProductDesc("伙伴商城");
             base.setBasePrice(5000);
 
             Product pro = new Product();
-            pro.setName("伙伴商城");
+            pro.setName("伙伴商城专业版");
             pro.setProductType(ProductType.HUOBAN_MALL);
             pro.setProductDesc("伙伴商城");
             pro.setBasePrice(28000);

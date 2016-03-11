@@ -2,6 +2,7 @@ package com.huotu.hotagent.service.service.log.impl;
 
 import com.huotu.hotagent.common.constant.StringConstant;
 import com.huotu.hotagent.common.utils.StringUtil;
+import com.huotu.hotagent.service.common.LogType;
 import com.huotu.hotagent.service.entity.log.BalanceLog;
 import com.huotu.hotagent.service.entity.log.CommissionLog;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
@@ -136,5 +137,17 @@ public class BalanceLogServiceImpl implements BalanceLogService {
     @Override
     public void save(BalanceLog balanceLog) {
         balanceLogRepository.save(balanceLog);
+    }
+
+    @Override
+    public void createChargeLog(Agent agent, double money) {
+        BalanceLog log = new BalanceLog();
+        log.setMoney(money);
+        log.setAgent(agent);
+        log.setCreateTime(new Date());
+        log.setLogType(LogType.RECHARGE);
+        log.setImportMoney(money);
+        log.setMemo("向代理商："+agent.getName()+" 充值 "+ money + "元");
+        balanceLogRepository.save(log);
     }
 }

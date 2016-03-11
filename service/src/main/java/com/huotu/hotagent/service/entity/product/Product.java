@@ -72,10 +72,11 @@ public class Product {
 
 
     public void addChild(Product product) {
-        if(this.children==null||this.children.size()==0) {
+        if(children==null||children.size()==0) {
             children = new ArrayList<>();
         }
-        this.children.add(product);
+        product.setParent(this);
+        children.add(product);
     }
 
 }

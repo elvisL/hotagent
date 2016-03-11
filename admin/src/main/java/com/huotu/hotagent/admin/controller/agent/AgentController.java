@@ -230,7 +230,8 @@ public class AgentController {
             priceSet.add(pe);
         }
         agent.setPrices(priceSet);
-        loginService.newLogin(agent, password);
+        Agent agent1 = loginService.newLogin(agent, password);
+        balanceLogService.createChargeLog(agent1,balance);
         return "redirect:/agents";
     }
 
@@ -315,14 +316,7 @@ public class AgentController {
         }
         agent.setBalance(agent.getBalance() + money);
         agentService.save(agent);
-        BalanceLog log = new BalanceLog();
-        log.setMoney(money);
-        log.setAgent(agent);
-        log.setCreateTime(new Date());
-        log.setLogType(LogType.RECHARGE);
-        log.setImportMoney(money);
-        log.setMemo("向代理商："+agent.getName()+" 充值 "+ money + "元");
-        balanceLogService.save(log);
+        balanceLogService.createChargeLog(agent,money);
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 

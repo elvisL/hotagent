@@ -13,4 +13,6 @@ public interface BalanceLogService {
 
     Page<BalanceLog> findAll(int pageIndex, int pageSize, LogSearch logSearch);
     void save(BalanceLog balanceLog);
+
+    void createChargeLog(Agent agent, double money);
 }
