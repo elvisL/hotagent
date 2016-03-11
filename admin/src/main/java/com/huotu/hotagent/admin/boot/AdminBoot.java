@@ -84,13 +84,13 @@ public class AdminBoot {
             huobanMall.setBasePrice(5000);
 
             Product base = new Product();
-            huobanMall.setName("伙伴商城");
+            base.setName("伙伴商城");
             base.setProductType(ProductType.HUOBAN_MALL);
             base.setProductDesc("伙伴商城");
             base.setBasePrice(5000);
 
             Product pro = new Product();
-            huobanMall.setName("伙伴商城");
+            pro.setName("伙伴商城");
             pro.setProductType(ProductType.HUOBAN_MALL);
             pro.setProductDesc("伙伴商城");
             pro.setBasePrice(28000);
