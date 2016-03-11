@@ -53,36 +53,13 @@ public class IndexController {
     @RequestMapping(value = {"", "/", "/index","/loginSuccess"})
     public ModelAndView index(@AuthenticationPrincipal Agent agent) {
         ModelAndView modelAndView = new ModelAndView();
-//        List<Price> priceList = priceService.findByAgentId(agent.getId());
-//        List<Product> productList  =  new ArrayList<>();
-//        List<AgentProduct> agentProductList = new ArrayList<>();
-//        if (priceList.size()!=0){
-//            for(Price price : priceList){
-//                if (price.getProduct().getParent()==null){
-//                    productList.add(price.getProduct());
-//                }
-//            }
-//        }
         List<Product> productList = productService.findTops();
         List<Product> products = new ArrayList<>();
         for(Product product : productList) {
             Set<Price> prices = agent.getPrices();
-            for(Price p:prices) {
-                if(p.getProduct().getProductType()==product.getProductType()) {
-                    products.add(product);
-                }
-            }
-        }
-//        if(productList.size()!=0){
-//            for (Product product : productList){
-//                AgentProduct agentProduct = new AgentProduct();
-//                agentProduct.setProductName(product.getName());
-//                agentProduct.setProductId(product.getId());
-//                agentProduct.setProductPrice(priceService.findByAgentIdAndProductId(agent.getId(),product.getId()).getPrice());//获取对应产品的价格
-//                agentProductList.add(agentProduct);
-//            }
-//        }
 
+            products.add(product);
+        }
         modelAndView.addObject("balance", agentService.findById(agent.getId()).getBalance());
         modelAndView.addObject("products", products);
         modelAndView.setViewName("views/index");
