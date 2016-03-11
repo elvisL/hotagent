@@ -22,6 +22,8 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+    Product findByProductTypeAndParent(ProductType productType,Product product);
+
     Product findByProductType(ProductType productType);
 
     List<Product> findByParent_Id(Long id);

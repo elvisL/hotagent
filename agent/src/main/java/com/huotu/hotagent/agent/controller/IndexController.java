@@ -1,6 +1,7 @@
 package com.huotu.hotagent.agent.controller;
 
 import com.huotu.hotagent.agent.service.AdminService;
+import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
@@ -53,13 +54,30 @@ public class IndexController {
     @RequestMapping(value = {"", "/", "/index","/loginSuccess"})
     public ModelAndView index(@AuthenticationPrincipal Agent agent) {
         ModelAndView modelAndView = new ModelAndView();
+
         List<Product> productList = productService.findTops();
+        Product huobanMall = productService.findByProductTypeAndParent(ProductType.HUOBAN_MALL, null);
+        boolean flag = true;
         List<Product> products = new ArrayList<>();
+
         for(Product product : productList) {
             Set<Price> prices = agent.getPrices();
-
-            products.add(product);
+            for(Price p:prices) {
+                if(p.getProduct().getProductType()==product.getProductType()) {
+                    if (product.getId() == huobanMall.getId()){
+                        if(flag){
+                            products.add(product);
+                            flag = false;
+                        }
+                    }
+                    else {
+                        products.add(product);
+                    }
+                }
+            }
         }
+
+
         modelAndView.addObject("balance", agentService.findById(agent.getId()).getBalance());
         modelAndView.addObject("products", products);
         modelAndView.setViewName("views/index");

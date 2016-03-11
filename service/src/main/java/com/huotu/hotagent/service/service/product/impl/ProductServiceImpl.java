@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.service.service.product.impl;
 
+import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.repository.product.ProductRepository;
@@ -41,6 +42,12 @@ public class ProductServiceImpl implements ProductService {
     public Product findOne(Long id) {
         Product product =  productRepository.findOne(id);
         return  product;
+    }
+
+    @Override
+    public Product findByProductTypeAndParent(ProductType productType,Product product) {
+        Product product1 =  productRepository.findByProductTypeAndParent(productType, product);
+        return product1;
     }
 
     @Override
