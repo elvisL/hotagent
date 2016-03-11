@@ -22,9 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * 工程启动时的一些必要操作
@@ -84,6 +82,21 @@ public class AdminBoot {
             huobanMall.setProductType(ProductType.HUOBAN_MALL);
             huobanMall.setProductDesc("伙伴商城");
             huobanMall.setBasePrice(5000);
+
+            Product base = new Product();
+            huobanMall.setName("伙伴商城");
+            base.setProductType(ProductType.HUOBAN_MALL);
+            base.setProductDesc("伙伴商城");
+            base.setBasePrice(5000);
+
+            Product pro = new Product();
+            huobanMall.setName("伙伴商城");
+            pro.setProductType(ProductType.HUOBAN_MALL);
+            pro.setProductDesc("伙伴商城");
+            pro.setBasePrice(28000);
+
+            huobanMall.addChild(base);
+            huobanMall.addChild(pro);
             productService.save(huobanMall);
             //DSP广告
             Product dsp = new Product();

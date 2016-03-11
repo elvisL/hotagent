@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -69,5 +70,12 @@ public class Product {
     @OneToMany(mappedBy = "parent",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Product> children;
 
+
+    public void addChild(Product product) {
+        if(this.children==null) {
+            children = new ArrayList<>();
+        }
+        this.children.add(product);
+    }
 
 }
