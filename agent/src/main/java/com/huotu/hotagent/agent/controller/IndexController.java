@@ -4,8 +4,8 @@ import com.huotu.hotagent.agent.service.AdminService;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
-import com.huotu.hotagent.service.model.AgentProduct;
 import com.huotu.hotagent.service.service.product.PriceService;
+import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by chendeyu on 2016/2/1.
@@ -31,6 +32,8 @@ public class IndexController {
     @Autowired
     private PriceService priceService;
 
+    @Autowired
+    private ProductService productService;
     @Autowired
     private AgentService agentService;
 
@@ -50,28 +53,38 @@ public class IndexController {
     @RequestMapping(value = {"", "/", "/index","/loginSuccess"})
     public ModelAndView index(@AuthenticationPrincipal Agent agent) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Price> priceList = priceService.findByAgentId(agent.getId());
-        List<Product> productList  =  new ArrayList<>();
-        List<AgentProduct> agentProductList = new ArrayList<>();
-        if (priceList.size()!=0){
-            for(Price price : priceList){
-                if (price.getProduct().getParent()==null){
-                    productList.add(price.getProduct());
+//        List<Price> priceList = priceService.findByAgentId(agent.getId());
+//        List<Product> productList  =  new ArrayList<>();
+//        List<AgentProduct> agentProductList = new ArrayList<>();
+//        if (priceList.size()!=0){
+//            for(Price price : priceList){
+//                if (price.getProduct().getParent()==null){
+//                    productList.add(price.getProduct());
+//                }
+//            }
+//        }
+        List<Product> productList = productService.findTops();
+        List<Product> products = new ArrayList<>();
+        for(Product product : productList) {
+            Set<Price> prices = agent.getPrices();
+            for(Price p:prices) {
+                if(p.getProduct().getProductType()==product.getProductType()) {
+                    products.add(product);
                 }
             }
         }
-        if(productList.size()!=0){
-            for (Product product : productList){
-                AgentProduct agentProduct = new AgentProduct();
-                agentProduct.setProductName(product.getName());
-                agentProduct.setProductId(product.getId());
-                agentProduct.setProductPrice(priceService.findByAgentIdAndProductId(agent.getId(),product.getId()).getPrice());//获取对应产品的价格
-                agentProductList.add(agentProduct);
-            }
-        }
+//        if(productList.size()!=0){
+//            for (Product product : productList){
+//                AgentProduct agentProduct = new AgentProduct();
+//                agentProduct.setProductName(product.getName());
+//                agentProduct.setProductId(product.getId());
+//                agentProduct.setProductPrice(priceService.findByAgentIdAndProductId(agent.getId(),product.getId()).getPrice());//获取对应产品的价格
+//                agentProductList.add(agentProduct);
+//            }
+//        }
 
         modelAndView.addObject("balance", agentService.findById(agent.getId()).getBalance());
-        modelAndView.addObject("agentProductList", agentProductList);
+        modelAndView.addObject("products", products);
         modelAndView.setViewName("views/index");
         return  modelAndView;
     }
