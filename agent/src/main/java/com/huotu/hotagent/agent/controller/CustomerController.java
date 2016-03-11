@@ -111,11 +111,12 @@ public class CustomerController {
         Double price = null;
         if(productList.size()!=0){
             for (Product product : productList){
+                if(priceService.findByAgentIdAndProductId(agent.getId(),product.getId())!=null){
                 AgentProduct agentProduct = new AgentProduct();
                 agentProduct.setProductName(product.getName());
                 agentProduct.setProductId(product.getId());
                 agentProduct.setProductPrice(priceService.findByAgentIdAndProductId(agent.getId(),product.getId()).getPrice());//获取对应产品的价格
-                agentProductList.add(agentProduct);
+                agentProductList.add(agentProduct);}
             }
             price = agentProductList.get(0).getProductPrice();
         }
