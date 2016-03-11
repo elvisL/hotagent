@@ -87,7 +87,7 @@ public class AgentController {
     public ModelAndView agentDetail(@AuthenticationPrincipal Agent agent) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         Agent agentDetail = agentService.findById(agent.getId());
-        agent.setQualifyUri(staticResourceService.getResource(agent.getQualifyUri()).toString());
+        agentDetail.setQualifyUri(staticResourceService.getResource(agent.getQualifyUri()).toString());
         modelAndView.setViewName("/views/agent/agent_personal");
         modelAndView.addObject("agent",agentDetail);
         return modelAndView;
