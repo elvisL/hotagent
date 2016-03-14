@@ -82,6 +82,7 @@ $("#editForm").validate({
         username: {
             required: true,
             maxlength: 50,
+            account:true,
             remote:{
                 url:url + "checkUsername",
                 type:"post",
