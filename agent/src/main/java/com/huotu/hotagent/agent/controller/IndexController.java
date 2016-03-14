@@ -52,9 +52,9 @@ public class IndexController {
 
 
     @RequestMapping(value = {"", "/", "/index","/loginSuccess"})
-    public ModelAndView index(@AuthenticationPrincipal Agent agent) {
+    public ModelAndView index(@AuthenticationPrincipal Agent sessionAgent) {
         ModelAndView modelAndView = new ModelAndView();
-
+        Agent agent = agentService.findById(sessionAgent.getId());
         List<Product> productList = productService.findTops();
         Product huobanMall = productService.findByProductTypeAndParent(ProductType.HUOBAN_MALL, null);
         boolean flag = true;
