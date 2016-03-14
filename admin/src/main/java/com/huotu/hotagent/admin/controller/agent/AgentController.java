@@ -17,8 +17,6 @@ import com.huotu.hotagent.common.constant.SysConstant;
 import com.huotu.hotagent.common.utils.CommonUtils;
 import com.huotu.hotagent.service.common.AgentType;
 import com.huotu.hotagent.service.common.Authority;
-import com.huotu.hotagent.service.common.LogType;
-import com.huotu.hotagent.service.entity.log.BalanceLog;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
@@ -341,7 +339,7 @@ public class AgentController {
 
 
     /**
-     * 检测指定城市是否可设置独家代理
+     * 检测指定城市可设置的代理类型
      *
      * @param city
      * @return
@@ -349,21 +347,32 @@ public class AgentController {
     @RequestMapping("/checkCity")
     @ResponseBody
     public ApiResult checkCity(String city,@RequestParam(required = false) Long agentId) {
-        List<Agent> agents = agentService.findByCity(city);
-        if (agents.size() == 0) {
-            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-        }
-        if (agents.size() == 1) {
-            if(agentId!=null) {
-                if(agents.get(0) == agentService.findById(agentId)){
-                    return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-                }else {
-                    return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
-                }
-            }
+       if(hasNormalAgent(city)) {
+           return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
+       }
+        if(hasRoleAgent(city)) {
             return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
         }
-        return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
+        return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+    }
+
+    private boolean hasNormalAgent(String city) {
+        List<Agent> agents = agentService.findByCity(city);
+        if(agents.size()>1) {
+            return true;
+        }
+        if(agents.size()==1 && agents.get(0).getType()==AgentType.NORMAL) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasRoleAgent(String city) {
+        List<Agent> agents = agentService.findByCity(city);
+        if(agents.size()==1 && agents.get(0).getType()==AgentType.SOLE) {
+            return true;
+        }
+        return false;
     }
 
     @RequestMapping("/checkUsername")
