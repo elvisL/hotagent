@@ -342,7 +342,7 @@ public class AgentController {
      */
     @RequestMapping("/checkCity")
     @ResponseBody
-    public ApiResult checkCity(String city,@RequestParam(required = false) Long agentId) {
+    public ApiResult checkCity(String city) {
        if(hasNormalAgent(city)) {
            return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
        }
