@@ -130,7 +130,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button onclick="editHandler.submit()" class="btn btn-primary">确认</button>
+                            <button onclick="editHandler.submit()" class="btn btn-primary" id="jq-agent-Save" th:text="确认"></button>
                         </div>
                     </div>
                 </div><!-- panel-footer -->
@@ -242,6 +242,7 @@
 //                    else{
 //                        Import();
 //                    }
+                    $("#jq-agent-Save").addClass("disabled");
                     Import();
                     return false;
                 },
@@ -256,6 +257,7 @@
     }
 </script>
 <script>
+
 
     function Import(){
         $.ajax({
@@ -288,6 +290,7 @@
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
                             $("#count").val("");
+                            $("#jq-agent-Save").removeClass("disabled");
                         });
                         break;
                 }
