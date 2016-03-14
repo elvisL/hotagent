@@ -97,7 +97,6 @@ $("#editForm").validate({
             required: true,
             minlength: 3
         },
-        level: "required",
         province: "required",
         city: "required",
         district: "required",
@@ -126,7 +125,6 @@ $("#editForm").validate({
             required: true,
             number: true
         },
-        expandable: "required",
         qualifyUri: {
             required:function() {
                 return $("#qualifyUri").val() == '';

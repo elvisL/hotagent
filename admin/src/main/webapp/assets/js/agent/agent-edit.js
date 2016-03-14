@@ -39,18 +39,15 @@ function imgUpload() {
         }
     });
 }
-$("select[name=type]").change(checkAreaAvaliable(agentId));
-$("select[name=city]").change(checkAreaAvaliable(agentId));
-function checkAreaAvaliable(agentId) {
+$("select[name=type]").change(checkAreaAvaliable);
+$("select[name=city]").change(checkAreaAvaliable);
+function checkAreaAvaliable() {
     var type = $("select[name=type]").val();
     var city = $("select[name=city]").val();
     var avaliable = true;
     $.ajax({
         url: url + "checkCity",
-        data: {
-            city: encodeURI(city),
-            agentId:agentId
-        },
+        data: "city=" + encodeURI(city),
         dataType: "json",
         async:false,
         success: function (data) {
@@ -96,7 +93,6 @@ $("#editForm").validate({
             required: true,
             minlength: 3
         },
-        level: "required",
         province: "required",
         city: "required",
         district: "required",
@@ -125,7 +121,6 @@ $("#editForm").validate({
             required: true,
             number: true
         },
-        expandable: "required",
         qualifyUri: {
             required:function() {
                 return $("#qualifyUri").val() == '';
@@ -148,7 +143,7 @@ $("#editForm").validate({
 
 });
 function submit() {
-    var av = checkAreaAvaliable(agentId);
+    var av = checkAreaAvaliable();
     if(av) {
         $("input[name=prices]").each(function() {
             var a = $(this);

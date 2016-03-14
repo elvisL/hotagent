@@ -164,7 +164,6 @@ public class AgentController {
      * @param name
      * @param username
      * @param password
-     * @param level
      * @param type
      * @param balance
      * @param province
@@ -185,7 +184,6 @@ public class AgentController {
     public String createNewAgent(String name,
                                  String username,
                                  String password,
-                                 AgentLevel level,
                                  AgentType type,
                                  @RequestParam(required = false, defaultValue = "0") double balance,
                                  String province,
@@ -204,7 +202,7 @@ public class AgentController {
         agent.addAuthority(Authority.AGENT_NOEXPANDABLE);
         agent.setUsername(username);
         agent.setName(name);
-        agent.setLevel(level);
+        agent.setLevel(agentLevelService.findByLevel(0));
         agent.setType(type);
         agent.setBalance(balance);
         agent.setProvince(province);
@@ -236,7 +234,6 @@ public class AgentController {
     /**
      * 修改代理商
      *
-     * @param level
      * @param type
      * @param province
      * @param city
@@ -254,7 +251,6 @@ public class AgentController {
     @RequestMapping(value = "/agents/{id}", method = RequestMethod.POST)
     @Transactional
     public String editAgent(@PathVariable Long id,
-                            AgentLevel level,
                             String name,
                             AgentType type,
                             String province,
@@ -270,7 +266,7 @@ public class AgentController {
                             String... prices) {
         Agent agent = agentService.findById(id);
         agent.setName(name);
-        agent.setLevel(level);
+        agent.setLevel(agentLevelService.findByLevel(0));
         agent.setType(type);
         agent.setProvince(province);
         agent.setCity(city);
@@ -346,7 +342,7 @@ public class AgentController {
      */
     @RequestMapping("/checkCity")
     @ResponseBody
-    public ApiResult checkCity(String city,@RequestParam(required = false) Long agentId) {
+    public ApiResult checkCity(String city) {
        if(hasNormalAgent(city)) {
            return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
        }

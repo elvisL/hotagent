@@ -489,11 +489,11 @@
                                 <th></th>
                                 <th>代理商名称</th>
                                 <th>代理商类型</th>
-                                <th>代理商等级</th>
-                                <th>上级代理</th>
+                                <!--<th>代理商等级</th>-->
+                                <!--<th>上级代理</th>-->
                                 <th>区域</th>
                                 <th>账户余额</th>
-                                <th>佣金</th>
+                                <!--<th>佣金</th>-->
                                 <th>创建时间</th>
                                 <th>代理商状态</th>
                                 <th>操作</th>
@@ -505,11 +505,11 @@
                                 <td th:text="${agentStat.index+1}">1</td>
                                 <td th:text="${agent.name}">火图科技</td>
                                 <td th:text="${agent.type.name}">独家代理</td>
-                                <td th:text="${agent.level.levelName}">一级代理商</td>
-                                <td th:text="${agent.parent==null?'总部':agent.parent.name}">总部</td>
+                                <!--<td th:text="${agent.level.levelName}">一级代理商</td>-->
+                                <!--<td th:text="${agent.parent==null?'总部':agent.parent.name}">总部</td>-->
                                 <td th:text="${agent.province+'/'+agent.city}">杭州</td>
                                 <td th:text="${agent.balance}">1000</td>
-                                <td th:text="${agent.commission}">88</td>
+                                <!--<td th:text="${agent.commission}">88</td>-->
                                 <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12
                                     00:00:00
                                 </td>
@@ -525,11 +525,11 @@
                                 <td>1</td>
                                 <td>火图科技</td>
                                 <td>独家代理</td>
-                                <td>一级代理商</td>
+                                <!--<td>一级代理商</td>-->
                                 <td>总部</td>
                                 <td>杭州</td>
                                 <td>1000</td>
-                                <td>88</td>
+                                <!--<td>88</td>-->
                                 <td>2015-12-12 00:00:00</td>
                                 <td>活动</td>
                                 <td>
@@ -540,11 +540,11 @@
                                 <td>1</td>
                                 <td>火图科技</td>
                                 <td>独家代理</td>
-                                <td>一级代理商</td>
+                                <!--<td>一级代理商</td>-->
                                 <td>总部</td>
                                 <td>杭州</td>
                                 <td>1000</td>
-                                <td>88</td>
+                                <!--<td>88</td>-->
                                 <td>2015-12-12 00:00:00</td>
                                 <td>活动</td>
                                 <td>
