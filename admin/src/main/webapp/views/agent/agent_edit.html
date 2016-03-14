@@ -215,19 +215,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">代理商等级</label>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">代理商等级</label>-->
 
-                            <div class="col-sm-3">
-                                <select name="level" title="代理商等级" class="form-control input-sm mb10"
-                                        th:remove="all-but-first">
-                                    <option th:value="0" th:selected="true">
-                                        一级代理商
-                                    </option>
-                                    <option>二级代理商</option>
-                                </select>
-                            </div>
-                        </div>
+                            <!--<div class="col-sm-3">-->
+                                <!--<select name="level" title="代理商等级" class="form-control input-sm mb10"-->
+                                        <!--th:remove="all-but-first">-->
+                                    <!--<option th:value="0" th:selected="true">-->
+                                        <!--一级代理商-->
+                                    <!--</option>-->
+                                    <!--<option>二级代理商</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">代理区域</label>
 
@@ -273,18 +273,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">佣金</label>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">佣金</label>-->
 
-                            <div class="col-sm-2">
-                                <div class="input-group">
-                                    <span class="input-group-addon">¥</span>
-                                    <input type="number" name="commission"
-                                           th:value="${agent.commission}" title="佣金"
-                                           class="form-control" readonly>
-                                </div>
-                            </div>
-                        </div>
+                            <!--<div class="col-sm-2">-->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon">¥</span>-->
+                                    <!--<input type="number" name="commission"-->
+                                           <!--th:value="${agent.commission}" title="佣金"-->
+                                           <!--class="form-control" readonly>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">联系人</label>
 
@@ -325,21 +325,21 @@
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">是否可发展下级代理</label>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">是否可发展下级代理</label>-->
 
 
-                            <div class="col-sm-3">
-                                <div class="rdio rdio-success">
-                                    <input type="radio" name="expandable" th:checked="${agent.expandable}" id="canexpandable" value="true">
-                                    <label for="canexpandable">是</label>
-                                </div>
-                                <div class="rdio rdio-success">
-                                    <input type="radio" name="expandable" id="noexpandable" th:checked="!${agent.expandable}" value="false">
-                                    <label for="noexpandable">否</label>
-                                </div>
-                            </div>
-                        </div>
+                            <!--<div class="col-sm-3">-->
+                                <!--<div class="rdio rdio-success">-->
+                                    <!--<input type="radio" name="expandable" th:checked="${agent.expandable}" id="canexpandable" value="true">-->
+                                    <!--<label for="canexpandable">是</label>-->
+                                <!--</div>-->
+                                <!--<div class="rdio rdio-success">-->
+                                    <!--<input type="radio" name="expandable" id="noexpandable" th:checked="!${agent.expandable}" value="false">-->
+                                    <!--<label for="noexpandable">否</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="col-sm-3 control-label">选择代理产品</label>
                             <div class="col-md-6">
