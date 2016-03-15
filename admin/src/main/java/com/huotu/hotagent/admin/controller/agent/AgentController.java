@@ -129,7 +129,6 @@ public class AgentController {
         Set<Price> prices = priceService.getBasePrices();
         model.addAttribute("fullPath",fullPath);
         model.addAttribute("agent", agent);
-        Gson gson = new Gson();
         List<Long> list = new ArrayList<>();
         for(Price p : agent.getPrices()) {
             list.add(p.getProduct().getId());
@@ -278,7 +277,8 @@ public class AgentController {
         agent.setQq(qq);
         agent.setQualifyUri(qualifyUri);
         agent.setExpandable(expandable);
-        Set<Price> priceSet = new HashSet<>();
+        Set<Price> priceSet = agent.getPrices();
+        priceSet.clear();
         for (String price : prices) {
             Price pe = new Price();
             pe.setAgent(agent);
@@ -329,7 +329,7 @@ public class AgentController {
         if (StringUtils.isEmpty(password)) {
             return ApiResult.resultWith(ResultCodeEnum.PASSWORD_NULL);
         }
-        loginService.newLogin(agent, password);
+        loginService.saveNewPassword(agent, password);
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 
@@ -342,20 +342,23 @@ public class AgentController {
      */
     @RequestMapping("/checkCity")
     @ResponseBody
-    public ApiResult checkCity(String city) {
-       if(hasNormalAgent(city)) {
+    public ApiResult checkCity(String city,@RequestParam(required = false) Long agentId) {
+       if(hasNormalAgent(city,agentId)) {
            return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
        }
-        if(hasRoleAgent(city)) {
+        if(hasRoleAgent(city,agentId)) {
             return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
         }
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
     }
 
-    private boolean hasNormalAgent(String city) {
+    private boolean hasNormalAgent(String city,Long agentId) {
         List<Agent> agents = agentService.findByCity(city);
         if(agents.size()>1) {
             return true;
+        }
+        if(agentId!=null && agentId.longValue()==agents.get(0).getId().longValue()) {
+            return false;
         }
         if(agents.size()==1 && agents.get(0).getType()==AgentType.NORMAL) {
             return true;
@@ -363,8 +366,11 @@ public class AgentController {
         return false;
     }
 
-    private boolean hasRoleAgent(String city) {
+    private boolean hasRoleAgent(String city,Long agentId) {
         List<Agent> agents = agentService.findByCity(city);
+        if(agentId!=null && agentId.longValue()==agents.get(0).getId().longValue()) {
+            return false;
+        }
         if(agents.size()==1 && agents.get(0).getType()==AgentType.SOLE) {
             return true;
         }

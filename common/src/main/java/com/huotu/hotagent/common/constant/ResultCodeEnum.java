@@ -33,7 +33,6 @@ public enum ResultCodeEnum {
     CAN_NOT_BE_NEGATIVE(6004,"金额不能为负"),
     EDIT_SUCCESS(2001,"修改成功");
 
-    //todo 其他状态
     private int resultCode;
     private String resultMsg;
 

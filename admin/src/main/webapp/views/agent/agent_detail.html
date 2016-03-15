@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"  lang="en">
 <head lang="en">
     <meta charset="UTF-8">
-    <title>代理商详情</title>
+    <title>代理商总后台</title>
     <link href="../../assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
@@ -13,9 +13,9 @@
                 <li class="list-group-item">
                     代理商名称：<span data-th-text="*{name}">火图科技</span>
                 </li>
-                <li class="list-group-item">
-                    代理商级别：<span data-th-text="*{level.levelName}">一级代理商</span>
-                </li>
+                <!--<li class="list-group-item">-->
+                    <!--代理商级别：<span data-th-text="*{level.levelName}">一级代理商</span>-->
+                <!--</li>-->
                 <li class="list-group-item">
                     代理类型：<span data-th-text="*{type.name}">独家代理</span>
                 </li>
@@ -37,15 +37,15 @@
                 <li class="list-group-item">
                     QQ：<span data-th-text="*{qq}">444444444</span>
                 </li>
-                <li class="list-group-item">
-                    是否可发展下级代理：<span data-th-text="*{expandable==true ? '是':'否'}">是</span>
-                </li>
+                <!--<li class="list-group-item">-->
+                    <!--是否可发展下级代理：<span data-th-text="*{expandable==true ? '是':'否'}">是</span>-->
+                <!--</li>-->
                 <li class="list-group-item">
                     账户余额：<span style="color: red" data-th-text="*{balance}">10000元</span>
                 </li>
-                <li class="list-group-item">
-                    账户佣金：<span style="color: red" data-th-text="*{commission}">10000元</span>
-                </li>
+                <!--<li class="list-group-item">-->
+                    <!--账户佣金：<span style="color: red" data-th-text="*{commission}">10000元</span>-->
+                <!--</li>-->
                 <li class="list-group-item">
                     企业资质：<img src="img/a.jpg" data-th-src="*{qualifyUri}" width="288" height="288"/>
                 </li>

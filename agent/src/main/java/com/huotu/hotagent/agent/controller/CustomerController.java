@@ -108,25 +108,20 @@ public class CustomerController {
         modelAndView.setViewName("views/customer/huoban_buy");
         List<Product> productList  = productService.findByParentId(id);
         List<AgentProduct> agentProductList = new ArrayList<>();
-        Double price = null;
-        if(productList.size()!=0){
-            for (Product product : productList){
-                if(priceService.findByAgentIdAndProductId(agent.getId(),product.getId())!=null){
+        for (Product product : productList){
+            if(priceService.findByAgentIdAndProductId(agent.getId(),product.getId())!=null){
                 AgentProduct agentProduct = new AgentProduct();
                 agentProduct.setProductName(product.getName());
                 agentProduct.setProductId(product.getId());
                 agentProduct.setProductPrice(priceService.findByAgentIdAndProductId(agent.getId(),product.getId()).getPrice());//获取对应产品的价格
-                agentProductList.add(agentProduct);}
+                agentProductList.add(agentProduct);
             }
-            price = agentProductList.get(0).getProductPrice();
         }
-
+        double price = agentProductList.get(0).getProductPrice();
         Product product = productService.findOne(id);
         modelAndView.addObject("product",product);
         modelAndView.addObject("price",price);
         modelAndView.addObject("agentProductList",agentProductList);
-//        Customer customer = customerService.findById(id);
-//        modelAndView.addObject("customer",customer);
         return modelAndView;
     }
 

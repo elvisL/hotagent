@@ -47,7 +47,7 @@ function checkAreaAvaliable() {
     var avaliable = true;
     $.ajax({
         url: url + "checkCity",
-        data: "city=" + encodeURI(city),
+        data: "city=" + encodeURI(city)+"&&agentId="+agentId,
         dataType: "json",
         async:false,
         success: function (data) {
@@ -97,10 +97,6 @@ $("#editForm").validate({
         city: "required",
         district: "required",
         type: "required",
-        balance: {
-            required: true,
-            number: true
-        },
         contacts: {
             required: true,
             maxlength: 50

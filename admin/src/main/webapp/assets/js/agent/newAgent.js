@@ -103,7 +103,8 @@ $("#editForm").validate({
         type: "required",
         balance: {
             required: true,
-            number: true
+            number: true,
+            maxlength:7
         },
         contacts: {
             required: true,

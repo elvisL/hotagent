@@ -159,4 +159,12 @@ public class Agent extends Login {
         }
         return "正常";
     }
+
+    public void addPrice(Price price) {
+        price.setAgent(this);
+        if(prices==null||prices.size()==0) {
+            prices = new HashSet<>();
+        }
+        prices.add(price);
+    }
 }

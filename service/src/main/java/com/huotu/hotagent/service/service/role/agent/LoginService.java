@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.service.service.role.agent;
 
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Login;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -29,4 +30,6 @@ public interface LoginService extends UserDetailsService {
     Login findLoginById(Long id);
 
     Login saveLogin(Login login);
+
+    void saveNewPassword(Login agent, String password);
 }

@@ -9,6 +9,7 @@
 
 package com.huotu.hotagent.service.service.role.agent.impl;
 
+import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Login;
 import com.huotu.hotagent.service.repository.role.agent.LoginRepository;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
@@ -32,7 +33,6 @@ public class LoginServiceImpl implements LoginService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    @Transactional(value = "transactionManager")
     public <T extends Login> T newLogin(T login, CharSequence password) {
         login.setPassword(passwordEncoder.encode(password));
         return loginRepository.saveAndFlush(login);
@@ -46,6 +46,12 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Login saveLogin(Login login) {
         return loginRepository.saveAndFlush(login);
+    }
+
+    @Override
+    public void saveNewPassword(Login login, String password) {
+        login.setPassword(passwordEncoder.encode(password));
+        loginRepository.save(login);
     }
 
     @Override
