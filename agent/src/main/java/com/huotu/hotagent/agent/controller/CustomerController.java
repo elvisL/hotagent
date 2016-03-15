@@ -18,7 +18,6 @@ import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.Customer;
 import com.huotu.hotagent.service.model.AgentProduct;
 import com.huotu.hotagent.service.model.CustomerSearch;
-import com.huotu.hotagent.service.repository.product.PriceRepository;
 import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.CustomerService;
@@ -54,8 +53,7 @@ public class CustomerController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private PriceRepository priceRepository;
+
 
     /**
     * 添加客户(伙伴商城除外)

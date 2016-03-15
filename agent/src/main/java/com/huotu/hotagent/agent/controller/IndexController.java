@@ -1,11 +1,9 @@
 package com.huotu.hotagent.agent.controller;
 
-import com.huotu.hotagent.agent.service.AdminService;
 import com.huotu.hotagent.service.common.ProductType;
 import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
-import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +25,7 @@ import java.util.Set;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private AdminService adminService;
 
-    @Autowired
-    private PriceService priceService;
 
     @Autowired
     private ProductService productService;
@@ -65,7 +59,7 @@ public class IndexController {
             for(Price p:prices) {
                 if(p.getProduct().getProductType()==product.getProductType()) {
                     if (product.getId() == huobanMall.getId()){
-                        if(flag){
+                        if(flag){//如果products里已经有伙伴商场了，则不再添加
                             products.add(product);
                             flag = false;
                         }
