@@ -3,7 +3,9 @@ package com.huotu.hotagent.admin.controller.product;
 import com.huotu.hotagent.admin.model.ProductTreeModel;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
+import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
+import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +27,8 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private PriceService priceService;
 
     /**
      * 产品列表
@@ -74,10 +78,16 @@ public class ProductController {
             return ApiResult.resultWith(ResultCodeEnum.DATA_NULL);
         }
         Product product = productService.findOne(id);
+        List<Price> prices = priceService.findByProduct(product);
+        for(Price price : prices) {
+            price.setPrice(basePrice);
+            priceService.save(price);
+        }
         product.setBasePrice(basePrice);
         productService.save(product);
         return ApiResult.resultWith(ResultCodeEnum.EDIT_SUCCESS);
     }
+
 
     /**
      * 修改产品信息

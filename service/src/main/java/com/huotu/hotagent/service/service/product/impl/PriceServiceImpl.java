@@ -140,4 +140,9 @@ public class PriceServiceImpl implements PriceService {
         }
         return prices;
     }
+
+    @Override
+    public List<Price> findByProduct(Product product) {
+        return priceRepository.findByProduct(product);
+    }
 }

@@ -25,4 +25,6 @@ public interface PriceService {
     void save(Price price);
 
     Set<Price> getBasePrices();
+
+    List<Price> findByProduct(Product product);
 }

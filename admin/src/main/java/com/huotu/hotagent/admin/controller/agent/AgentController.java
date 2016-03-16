@@ -221,7 +221,7 @@ public class AgentController {
             String[] strs = price.split("\\|");
             Product product = productService.findOne(Long.parseLong(strs[0]));
             pe.setProduct(product);
-            pe.setPrice(Double.parseDouble(strs[1]));
+            pe.setPrice(product.getBasePrice());
             priceSet.add(pe);
         }
         agent.setPrices(priceSet);
@@ -285,7 +285,7 @@ public class AgentController {
             String[] strs = price.split("\\|");
             Product product = productService.findOne(Long.parseLong(strs[0]));
             pe.setProduct(product);
-            pe.setPrice(Double.parseDouble(strs[1]));
+            pe.setPrice(product.getBasePrice());
             priceSet.add(pe);
         }
         agent.setPrices(priceSet);

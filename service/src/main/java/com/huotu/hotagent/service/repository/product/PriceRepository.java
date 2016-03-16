@@ -16,4 +16,5 @@ public interface PriceRepository extends JpaRepository<Price,Long> {
     List<Price> findByAgent_Id(Long id);
 
 
+    List<Price> findByProduct(Product product);
 }
