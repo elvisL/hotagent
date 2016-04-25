@@ -47,5 +47,7 @@ public interface AgentService {
 
     Page<Agent> findAll(int pageIndex, int pageSize, AgentSearch agentSearch);
 
-    List<Agent> findByCity(String city);
+    List<Agent> findByCityAndType(String city,AgentType type,Agent agent);
+
+    List<Agent> findByProvinceAndType(String province,AgentType type,Agent agent);
 }

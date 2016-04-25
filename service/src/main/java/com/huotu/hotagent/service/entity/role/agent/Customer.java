@@ -83,6 +83,30 @@ public class Customer {
     private String loginPassword;
 
     /**
+     * 伙伴商城登录域名
+     */
+    @Column(name = "loginUrl")
+    private String loginUrl;
+
+    /**
+     * 商城名称
+     */
+    @Column(name = "mallName")
+    private String mallName;
+
+    /**
+     * 主营产品
+     */
+    @Column(name = "mallProducts")
+    private String mallProducts;
+
+    /**
+     * 运营方式
+     */
+    @Column(name = "operation")
+    private String  operation;
+
+    /**
      * 销售数量
      */
     @Column(name = "saleNum")

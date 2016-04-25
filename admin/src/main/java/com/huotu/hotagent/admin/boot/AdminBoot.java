@@ -85,20 +85,35 @@ public class AdminBoot {
             huobanMall.setProductDesc("伙伴商城");
             huobanMall.setBasePrice(5000);
 
-            Product base = new Product();
-            base.setName("伙伴商城基础版");
-            base.setProductType(ProductType.HUOBAN_MALL);
-            base.setProductDesc("伙伴商城");
-            base.setBasePrice(5000);
+            Product saas = new Product();
+            saas.setName("SAAS云服务基本版+PC");
+            saas.setProductType(ProductType.HUOBAN_MALL);
+            saas.setProductDesc("伙伴商城");
+            saas.setBasePrice(5000);
 
-            Product pro = new Product();
-            pro.setName("伙伴商城专业版");
-            pro.setProductType(ProductType.HUOBAN_MALL);
-            pro.setProductDesc("伙伴商城");
-            pro.setBasePrice(28000);
+            Product saasApp = new Product();
+            saasApp.setName("SAAS云服务高级版+定制APP");
+            saasApp.setProductType(ProductType.HUOBAN_MALL);
+            saasApp.setProductDesc("伙伴商城");
+            saasApp.setBasePrice(28000);
 
-            huobanMall.addChild(base);
-            huobanMall.addChild(pro);
+            Product deploy = new Product();
+            deploy.setName("部署版");
+            deploy.setProductType(ProductType.HUOBAN_MALL);
+            deploy.setProductDesc("伙伴商城");
+            deploy.setBasePrice(28000);
+
+            Product deployApp = new Product();
+            deployApp.setName("部署版+定制APP");
+            deployApp.setProductType(ProductType.HUOBAN_MALL);
+            deployApp.setProductDesc("伙伴商城");
+            deployApp.setBasePrice(28000);
+
+
+            huobanMall.addChild(saas);
+            huobanMall.addChild(saasApp);
+            huobanMall.addChild(deploy);
+            huobanMall.addChild(deployApp);
             productService.save(huobanMall);
             //DSP广告
             Product dsp = new Product();

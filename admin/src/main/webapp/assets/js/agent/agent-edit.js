@@ -41,34 +41,28 @@ function imgUpload() {
 }
 $("select[name=type]").change(checkAreaAvaliable);
 $("select[name=city]").change(checkAreaAvaliable);
+$("select[name=province]").change(checkAreaAvaliable);
 function checkAreaAvaliable() {
     var type = $("select[name=type]").val();
     var city = $("select[name=city]").val();
+    var province = $("select[name=province]").val();
     var avaliable = true;
     $.ajax({
-        url: url + "checkCity",
-        data: "city=" + encodeURI(city)+"&&agentId="+agentId,
+        url: url + "checkCityAndProvince",
+        data: "city=" + encodeURI(city)+"&province="+ encodeURI(province)+"&type="+ encodeURI(type)+"&agentId="+agentId,
         dataType: "json",
         async:false,
         success: function (data) {
             if (data.code == 2000) {
                 $("select[name=type]").closest('.form-group').removeClass('has-error');
                 avaliable = true;
-            } else if(data.code == 6002) {
+            } else {
                 layer.alert(data.msg);
                 $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
                 avaliable = false;
-            }else if(data.code == 6003) {
-                if(type==1) {
-                    layer.alert(data.msg);
-                    $("select[name=type]").closest('.form-group').removeClass('has-success').addClass('has-error')
-                    avaliable = false;
-                }else {
-                    $("select[name=type]").closest('.form-group').removeClass('has-error');
-                    avaliable = true;
-                }
             }
         }
+
 
     });
     return avaliable;

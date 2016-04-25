@@ -139,6 +139,28 @@
                                 <input type="text" name="loginPassword" id="loginPassword" title="登录密码" placeholder="登录密码" class="form-control"/>
                             </div>
                         </div>
+                        <div class="form-group" >
+                            <label class="col-sm-3 control-label">伙伴商城登录域名<span class="asterisk">*</span></label>
+
+                            <div class="col-sm-6">
+                                <input type="text" name="loginUrl" id="loginUrl" title="伙伴商城登录域名" placeholder="伙伴商城登录域名" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="col-sm-3 control-label">商城名称<span class="asterisk">*</span></label>
+
+                            <div class="col-sm-6">
+                                <input type="text" name="mallName" id="mallName" title="商城名称" placeholder="商城名称" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="col-sm-3 control-label">主营产品<span class="asterisk">*</span></label>
+
+                            <div class="col-sm-6">
+                                <input type="text" name="mallProducts" id="mallProducts" title="主营产品" placeholder="主营产品" class="form-control"/>
+                            </div>
+                        </div>
+
                     </form>
 
                 </div><!-- panel-body -->
@@ -217,6 +239,18 @@
                     loginPassword: {
                         required : true
                     },
+                    loginUrl: {
+                        required : true
+                    },
+                    mallName: {
+                        required : true
+                    },
+                    mallProducts: {
+                        required : true
+                    },
+                    operation: {
+                        required : true
+                    },
                     contacts: {
                         required : true
                     }
@@ -236,6 +270,18 @@
                     },
                     loginPassword: {
                         required : "请输入登录密码",
+                    },
+                    loginUrl: {
+                        required : "请输入登录域名",
+                    },
+                    mallName: {
+                        required : "请输入商城名称",
+                    },
+                    mallProducts: {
+                        required : "请输入主营产品",
+                    },
+                    operation: {
+                        required : "请输入运营方式",
                     },
                     contacts: {
                         required : "请输入联系人",
@@ -277,6 +323,10 @@
                 contacts:$("#contacts").val(),
                 phoneNo:$("#phoneNo").val(),
                 loginName:$("#loginName").val(),
+                operation:$("#operation").val(),
+                mallProducts:$("#mallProducts").val(),
+                mallName:$("#mallName").val(),
+                loginUrl:$("#loginUrl").val(),
                 loginPassword:$("#loginPassword").val()
             },
             type: "POST",

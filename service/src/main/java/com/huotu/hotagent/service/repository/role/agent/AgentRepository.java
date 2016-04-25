@@ -42,4 +42,8 @@ public interface AgentRepository extends JpaRepository<Agent, Long>, JpaSpecific
     long countByType(AgentType type);
 
     List<Agent> findByCity(String city);
+
+    List<Agent> findByCityAndType(String city,AgentType agentType);
+
+    List<Agent> findByProvinceAndType(String province,AgentType agentType);
 }

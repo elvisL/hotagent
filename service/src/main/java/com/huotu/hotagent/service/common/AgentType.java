@@ -17,7 +17,8 @@ import com.huotu.hotagent.common.ienum.ICommonEnum;
  */
 public enum AgentType implements ICommonEnum{
     NORMAL(0,"普通代理"),
-    SOLE(1,"独家代理");
+    SOLE(1,"独家代理"),
+    PRO(2,"省级代理");
 
     private Integer value;
     private String name;
@@ -33,6 +34,8 @@ public enum AgentType implements ICommonEnum{
                 return NORMAL;
             case 1:
                 return SOLE;
+            case 2:
+                return PRO;
             default:
                 return null;
         }

@@ -406,18 +406,18 @@ public class AgentController {
      * @param city
      * @return
      */
-    @RequestMapping("/checkCity")
-    @ResponseBody
-    public ApiResult checkCity(String city) {
-        List<Agent> agents = agentService.findByCity(city);
-        if(agents.size()==0) {
-            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-        }
-        if(agents.size()==1) {
-            return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
-        }
-        return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
-    }
+//    @RequestMapping("/checkCity")
+//    @ResponseBody
+//    public ApiResult checkCity(String city) {
+//        List<Agent> agents = agentService.findByCity(city);
+//        if(agents.size()==0) {
+//            return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+//        }
+//        if(agents.size()==1) {
+//            return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+//        }
+//        return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
+//    }
 
 
 }

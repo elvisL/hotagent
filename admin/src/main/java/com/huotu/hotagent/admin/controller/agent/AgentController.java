@@ -9,7 +9,6 @@
 
 package com.huotu.hotagent.admin.controller.agent;
 
-import com.google.gson.Gson;
 import com.huotu.hotagent.admin.service.StaticResourceService;
 import com.huotu.hotagent.common.constant.ApiResult;
 import com.huotu.hotagent.common.constant.ResultCodeEnum;
@@ -338,43 +337,58 @@ public class AgentController {
      * 检测指定城市可设置的代理类型
      *
      * @param city
+     * @param province
+     * @param type
      * @return
      */
-    @RequestMapping("/checkCity")
+    @RequestMapping("/checkCityAndProvince")
     @ResponseBody
-    public ApiResult checkCity(String city,@RequestParam(required = false) Long agentId) {
-       if(hasNormalAgent(city,agentId)) {
-           return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
-       }
-        if(hasRoleAgent(city,agentId)) {
-            return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+    public ApiResult checkCityAndProvince(String city,String province,int type,@RequestParam(required = false) Long agentId) {
+        AgentType normal = AgentType.NORMAL;
+        AgentType sole = AgentType.SOLE;
+        AgentType pro = AgentType.PRO;
+        Agent agent = null;
+        if(agentId!=null){
+             agent = agentService.findById(agentId);
+        }
+        if (type == 0){//当选普通城市
+            if(agentService.findByCityAndType(city,sole,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+            }
+            if(agentService.findByProvinceAndType(province,pro,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.HAS_PRO_ALREADY);
+            }
+            else return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        else if (type == 1){//当选独代城市
+            if(agentService.findByCityAndType(city,normal,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
+            }
+            if(agentService.findByCityAndType(city,sole,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+            }
+            if(agentService.findByProvinceAndType(province,pro,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.HAS_PRO_ALREADY);
+            }
+            else return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        }
+        else if (type == 2){//当选独代省份
+            if(agentService.findByCityAndType(city,normal,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
+            }
+            if(agentService.findByCityAndType(city,sole,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.HAS_SOLE_ALREADY);
+            }
+            if(agentService.findByProvinceAndType(province,pro,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.HAS_PRO_ALREADY);
+            }
+            if(agentService.findByProvinceAndType(province,normal,agent).size()>0){
+                return ApiResult.resultWith(ResultCodeEnum.IS_NORMAL_AGENT_AREA);
+            }
+            else return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         }
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS);
-    }
 
-    private boolean hasNormalAgent(String city,Long agentId) {
-        List<Agent> agents = agentService.findByCity(city);
-        if(agents.size()>1) {
-            return true;
-        }
-        if(agentId!=null && agentId.longValue()==agents.get(0).getId().longValue()) {
-            return false;
-        }
-        if(agents.size()==1 && agents.get(0).getType()==AgentType.NORMAL) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean hasRoleAgent(String city,Long agentId) {
-        List<Agent> agents = agentService.findByCity(city);
-        if(agentId!=null && agentId.longValue()==agents.get(0).getId().longValue()) {
-            return false;
-        }
-        if(agents.size()==1 && agents.get(0).getType()==AgentType.SOLE) {
-            return true;
-        }
-        return false;
     }
 
     @RequestMapping("/checkUsername")
