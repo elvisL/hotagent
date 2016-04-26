@@ -237,17 +237,17 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <select name="city" class="form-control input-sm mb10 city">
+                                    <select name="city" class="form-control input-sm mb10 city" th:style="${agent.type.value!=2}? '' :'display: none' ">
                                     </select>
                                 </div>
                                 <div class="col-sm-1">
-                                    <select name="district" class="form-control input-sm mb10 dist">
+                                    <select name="district" class="form-control input-sm mb10 dist" th:style="${agent.type.value==0}? '' :'display: none' ">
                                     </select>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="agentType">
                             <label class="col-sm-3 control-label">代理商类型</label>
 
                             <div class="col-sm-3">
@@ -780,11 +780,31 @@
     var url = /*[[@{/}]]*/ "/";
     var selectedPrices = /*[[${selectedPrices}]]*/ "";
     var agentId = /*[[${agent.id}]]*/ 1;
+    var agentTypeValue = /*[[${agent.type.value}]]*/ 1;
     $("#area").citySelect({
         prov: prov,
         city: city,
         dist: dist
     });
+    function agentType(){
+        if(agentTypeValue==2){
+            $("select[name=city]").hide();
+            $("select[name=district]").hide();
+        }
+        if(agentTypeValue==1){
+            $("select[name=district]").hide();
+        }
+    }
+//    $("#area").load(function(){
+//        if(agentTypeValue==2){
+//            $("select[name=city]").hide();
+//            $("select[name=district]").hide();
+//        }
+//        if(agentTypeValue==1){
+//            $("select[name=district]").hide();
+//        }
+//    });
+
 </script>
 <script src="../../assets/js/agent/agent-edit.js" th:src="@{/assets/js/agent/agent-edit.js}"></script>
 </body>

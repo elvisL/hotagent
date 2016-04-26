@@ -36,6 +36,18 @@ function checkAreaAvaliable() {
     var type = $("select[name=type]").val();
     var city = $("select[name=city]").val();
     var province = $("select[name=province]").val();
+    if(type == 2){
+        $("select[name=city]").hide();
+        $("select[name=district]").hide();
+    }
+    else if(type == 1){
+        $("select[name=city]").show();
+        $("select[name=district]").hide();
+    }
+    else {
+        $("select[name=city]").show();
+        $("select[name=district]").show();
+    }
     var avaliable = true;
     $.ajax({
         url: url + "checkCityAndProvince",

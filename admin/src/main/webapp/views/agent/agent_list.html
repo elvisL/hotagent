@@ -507,7 +507,9 @@
                                 <td th:text="${agent.type.name}">独家代理</td>
                                 <!--<td th:text="${agent.level.levelName}">一级代理商</td>-->
                                 <!--<td th:text="${agent.parent==null?'总部':agent.parent.name}">总部</td>-->
-                                <td th:text="${agent.province+'/'+agent.city}">杭州</td>
+                                <td th:if="${agent.type.value} == 2" th:text="${agent.province}">杭州</td>
+                                <td th:if="${agent.type.value} == 1" th:text="${agent.province+'/'+agent.city}">杭州</td>
+                                <td th:if="${agent.type.value} == 0" th:text="${agent.province+'/'+agent.city+'/'+agent.district}">杭州</td>
                                 <td th:text="${agent.balance}">1000</td>
                                 <!--<td th:text="${agent.commission}">88</td>-->
                                 <td th:text="${#dates.format(agent.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12

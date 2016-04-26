@@ -72,7 +72,7 @@ var cityjson={"citylist":[{"p":"北京","c":[{"n":"东城区"},{"n":"西城区"}
 			$.each(city_json.citylist[prov_id].c,function(i,city){
 				temp_html+="<option value='"+city.n+"'>"+city.n+"</option>";
 			});
-			city_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
+			city_obj.html(temp_html).attr("disabled",false);
 			distStart();
 		};
 
@@ -100,7 +100,7 @@ var cityjson={"citylist":[{"p":"北京","c":[{"n":"东城区"},{"n":"西城区"}
 			$.each(city_json.citylist[prov_id].c[city_id].a,function(i,dist){
 				temp_html+="<option value='"+dist.s+"'>"+dist.s+"</option>";
 			});
-			dist_obj.html(temp_html).attr("disabled",false).css({"display":"","visibility":""});
+			dist_obj.html(temp_html).attr("disabled",false);
 		};
 
 		var init=function(){

@@ -110,7 +110,7 @@ public class AgentServiceImpl implements AgentService {
         List<Agent> agents = agentRepository.findByCityAndType(city,agentType);
         if (agent != null) {//移除自身
             for (int i = 0; i < agents.size(); i++) {
-                if (agents.get(i) == agent) {
+                if (agents.get(i).getId() == agent.getId()) {
                     agents.remove(i);
                 }
             }
@@ -122,14 +122,14 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public List<Agent> findByProvinceAndType(String province,AgentType agentType,Agent agent) {
         List<Agent> agents = agentRepository.findByProvinceAndType(province, agentType);
-        if (agent != null) {
+        if (agent != null) {//移除自身
             for (int i = 0; i < agents.size(); i++) {
-                if (agents.get(i) == agent) {
+                if (agents.get(i).getId() == agent.getId()) {
                     agents.remove(i);
                 }
             }
         }
-            return agentRepository.findByProvinceAndType(province, agentType);
+            return agents;
     }
     @Override
     public ApiResult delAgent(Long id) {
