@@ -76,7 +76,10 @@
                             代理类型：<span data-th-text="*{type.name}">独家代理</span>
                         </li>
                         <li class="list-group-item">
-                            代理区域：<span data-th-text="*{province+' '+city+' '+district}">浙江省</span>
+                            代理区域：
+                            <span th:if="*{type.value}==2" data-th-text="*{province}">浙江省</span>
+                            <span th:if="*{type.value}==1" data-th-text="*{province+' '+city}">浙江省</span>
+                            <span th:if="*{type.value}==0"data-th-text="*{province+' '+city+' '+district}">浙江省</span>
                         </li>
                         <li class="list-group-item">
                             联系人：<span data-th-text="*{contacts}">何芸</span>
