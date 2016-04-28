@@ -69,6 +69,11 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
+    public long proAgentNum() {
+        return agentRepository.countByType(AgentType.PRO);
+    }
+
+    @Override
     public long unHandleWithdraw() {
         return withdrawRepository.countByAuditStatus(AuditStatus.APPLYING);
     }

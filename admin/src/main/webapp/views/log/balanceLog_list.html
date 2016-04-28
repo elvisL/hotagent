@@ -414,7 +414,7 @@
                                 <th>金额</th>
                                 <th>创建时间</th>
                                 <th>备注</th>
-                                <!--<th>操作</th>-->
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
@@ -429,6 +429,8 @@
                                 <td th:text="${balanceLog.money}>0 ? '+'+${balanceLog.money}:${balanceLog.money}" th:style="${balanceLog.money}>=0?'color:red;':'color:green;'">金额</td>
                                 <td th:text="${#dates.format(balanceLog.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-12-12 00:00:00</td>
                                 <td th:text="${balanceLog.memo}">备注</td>
+                                <td>
+                                    <a th:if="${balanceLog.customer}!=null" onclick="showDetail(this)" th:attr="id=${balanceLog.customer.customerId}"> 查看详情</a></td>
                                 <!--<td><a onclick="editAgent(this)" th:attr="id=${agent.id}">修改</a><a onclick="showDetail(this)" th:attr="id=${agent.id}">查看</a></td>-->
                             </tr>
                             <tr>
@@ -817,9 +819,23 @@
     var pageNo = /*[[${currentPage}]]*/ 1;
     var totalPages = /*[[${totalPages}]]*/ 2;
     var totalRecords = /*[[${totalRecords}]]*/ 10;
+    var agentUrl = /*[[@{/}]]*/"/";
     function search(){
         $("#pageNo").val(1);
         $('#searchForm').submit();
+    }
+
+    //详情
+    function showDetail(obj) {
+        var id = $(obj).attr("id");
+        layer.open({
+            type: 2,
+            title: '客户详情',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['900px', '780px'],
+            content:agentUrl + 'customerDetail/'+id
+        });
     }
 </script>
 <script type="application/javascript">

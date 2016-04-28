@@ -31,6 +31,7 @@ public class AdminService {
         statisticsModel.setAgentNumWithUnder(statisticsService.agentNumWithUnder());
         statisticsModel.setNormalAgentNum(statisticsService.normalAgentNum());
         statisticsModel.setSoleAgentNum(statisticsService.soleAgentNum());
+        statisticsModel.setProAgentNum(statisticsService.proAgentNum());
         statisticsModel.setUnHandleWithdraw(statisticsService.unHandleWithdraw());
         
         return statisticsModel;

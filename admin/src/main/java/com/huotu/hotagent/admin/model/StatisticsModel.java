@@ -40,6 +40,12 @@ public class StatisticsModel {
      * 独家代理总数
      */
     private long soleAgentNum;
+
+    /**
+     * 省级代理总数
+     */
+    private long proAgentNum;
+
     /**
      * 为处理体现申请
      */

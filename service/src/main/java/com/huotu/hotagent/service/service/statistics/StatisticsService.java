@@ -59,6 +59,14 @@ public interface StatisticsService {
     long soleAgentNum();
 
     /**
+     * 省级代理总数
+     *
+     * @return
+     */
+    long proAgentNum();
+
+
+    /**
      * 未处理提现申请数量
      *
      * @return

@@ -20,12 +20,14 @@ import com.huotu.hotagent.service.entity.product.Price;
 import com.huotu.hotagent.service.entity.product.Product;
 import com.huotu.hotagent.service.entity.role.agent.Agent;
 import com.huotu.hotagent.service.entity.role.agent.AgentLevel;
+import com.huotu.hotagent.service.entity.role.agent.Customer;
 import com.huotu.hotagent.service.model.AgentSearch;
 import com.huotu.hotagent.service.service.log.BalanceLogService;
 import com.huotu.hotagent.service.service.product.PriceService;
 import com.huotu.hotagent.service.service.product.ProductService;
 import com.huotu.hotagent.service.service.role.agent.AgentLevelService;
 import com.huotu.hotagent.service.service.role.agent.AgentService;
+import com.huotu.hotagent.service.service.role.agent.CustomerService;
 import com.huotu.hotagent.service.service.role.agent.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +38,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
 import java.util.*;
@@ -62,6 +65,9 @@ public class AgentController {
     private ProductService productService;
     @Autowired
     private PriceService priceService;
+
+    @Autowired
+    private CustomerService customerService;
 
 
     /**
@@ -424,5 +430,21 @@ public class AgentController {
         String fullPath = staticResourceService.getResource(path).toString();
         return ApiResult.resultWith(ResultCodeEnum.SUCCESS, Arrays.asList(path, fullPath).toArray());
     }
+
+
+    /**
+     * 客户详情
+     * */
+    @RequestMapping("/customerDetail/{id}")
+    public ModelAndView customerDetail(@PathVariable Long id) throws Exception{
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("customer/customer_detail");
+        Customer customer = customerService.findById(id);
+        Product product = productService.findOne(customer.getProduct().getId());
+        modelAndView.addObject("customer",customer);
+        modelAndView.addObject("product",product);
+        return modelAndView;
+    }
+
 
 }
