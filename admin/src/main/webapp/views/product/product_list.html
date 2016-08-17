@@ -360,6 +360,11 @@
         <div class="contentpanel">
             <div class="panel panel-default">
                 <div class="table-responsive">
+                    <p style="padding: 10px;text-align: right;">
+                        <button class="btn btn-default" style="padding: 0px 8px;" onclick="productHandler.showEditProductDialog(0)">
+                            新增
+                        </button>
+                    </p>
                     <table class="table table-bordered mb30">
                         <thead>
                         <tr>
@@ -371,12 +376,19 @@
                         </thead>
                         <tbody th:remove="all-but-first">
 
+                        <!--/*@thymesVar id="products" type="java.util.List<com.huotu.hotagent.service.entity.product.Product>"*/-->
                         <tr class="table-bordered" th:each="product:${products}">
-                            <td  th:text="${product.name}">火图科技</td>
+                            <td th:text="${product.name}">火图科技</td>
                             <td th:text="${product.productType.name}">100</td>
                             <td th:text="${product.basePrice}">申请中</td>
                             <td class="table-action">
-                                <a href="#" onclick="editPrice(this)" th:attr="productId=${product.id}">修改价格</a>
+                                <button class="btn btn-default" style="padding: 0px 8px;" onclick="productHandler.showEditProductDialog()"
+                                        th:onclick="|javascript:productHandler.showEditProductDialog(${product.id},'${product.name}',${product.productType.value},${product.basePrice})|">
+                                    修改
+                                </button>
+                                <button class="btn btn-default" style="padding: 0px 8px;" onclick="editPrice(this)" th:attr="productId=${product.id}">
+                                    修改价格
+                                </button>
                             </td>
                         </tr>
                         <tr>
@@ -407,7 +419,58 @@
     <!-- mainpanel -->
 
 </section>
+<!-- Modal -->
+<div class="modal fade" id="edit_product_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal form-bordered" id="pro_edit_form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">编辑产品</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body panel-body-nopadding">
 
+
+                        <input type="hidden" id="productId"/>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品名称</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" name="proName" id="proName" title="产品名称" placeholder="产品名称" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品类型</label>
+
+                            <div class="col-sm-3">
+                                <select style="height:31px;" id="productType" name="productType" class="form-control input-sm mb15">
+                                    <!--/*@thymesVar id="productTypes" type="com.huotu.hotagent.service.common.ProductType[]"*/-->
+                                    <option th:each="productType:${productTypes}" th:value="${productType.value}" th:text="${productType.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品单价</label>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">¥</span>
+                                <input style="width: 100px;" type="number" name="basePrice" id="basePrice" title="产品单价" class="form-control">
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button class="btn btn-primary" id="btn_save">保存</button>
+                </div>
+            </form>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
 
 <!--基本js-->
 <script src="../../assets/js/jquery-1.10.2.min.js" th:src="@{/assets/js/jquery-1.10.2.min.js}"></script>
@@ -417,7 +480,9 @@
 <script src="../../assets/js/modernizr.min.js" th:src="@{/assets/js/modernizr.min.js}"></script>
 <script src="../../assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
 <script src="../../assets/js/toggles.min.js" th:src="@{/assets/js/toggles.min.js}"></script>
-
+<script src="../../assets/js/jquery.validate.min.js" th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script src="../../assets/js/msgresource/jquery.validation.message-zh_cn.js"
+        th:src="@{/assets/js/msgresource/jquery.validation.message-zh_cn.js}"></script>
 <!--框架基础js-->
 <script src="../../assets/js/custom.js" th:src="@{/assets/js/custom.js}"></script>
 <script src="../../assets/js/hot/jquery.utils.js" th:src="@{/assets/js/hot/jquery.utils.js}"></script>
@@ -426,8 +491,87 @@
 <script th:inline="javascript">
     var contextUrl = /*[[@{/}]]*/ "/";
     layer.config({
-        extend:'extend/layer.ext.js'
+        extend: 'extend/layer.ext.js'
     });
+
+    var productHandler = {
+        showEditProductDialog: function (id, name, proType, basePrice) {
+            $("#productId").val(id);
+            if (id > 0) {
+                $("#proName").val(name);
+                $("#productType").val(proType);
+                $("#basePrice").val(basePrice);
+            }
+            $("#edit_product_modal").modal('show');
+        },
+        editProduct: function () {
+            var productId = $("#productId").val();
+            var name = $.trim($('#proName').val());
+            var productType = $("#productType").val();
+            var basePrice = $.trim($("#basePrice").val());
+            var requestData = {
+                id: productId,
+                name: name,
+                productType: productType,
+                basePrice: basePrice
+            };
+            J.GetJsonRespons(contextUrl + 'editProduct', requestData, function (json) {
+                if (json.code == 2000) {
+                    alert("保存成功");
+                    window.location.reload();
+                } else {
+                    $("#btn_save").html("保存");
+                    alert("保存失败");
+                }
+            }, function () {
+            }, "post");
+        }
+    };
+    $(function () {
+//        $("#btn_save").click(function () {
+//            $('#edit_product_modal').submit();
+//        });
+        $("#pro_edit_form").validate({
+            onsubmit: true,
+            onkeyup: false,
+            onclick: false,
+            ignoreTitle: true,
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+                $(element).remove();
+            },
+            onfocusout: function (element) {
+                $(element).valid();
+            },
+            rules: {
+                proName: "required",
+                basePrice: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                proName: {
+                    required: "请输入产品名称"
+                },
+                basePrice: {
+                    required: "请输入产品单价",
+                    number: "请输入合法的金额"
+                }
+            },
+            submitHandler: function () { //通过回掉
+                $("#btn_save").html("提交中");
+                productHandler.editProduct();
+                return false;
+            },
+            invalidHandler: function (form, validator) {  //不通过回调
+                return false;
+            }
+        })
+    })
 </script>
 </body>
 </html>
