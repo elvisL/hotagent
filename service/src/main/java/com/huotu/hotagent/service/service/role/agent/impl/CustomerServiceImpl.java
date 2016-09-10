@@ -52,7 +52,7 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private  AgentService agentService;
+    private AgentService agentService;
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
@@ -85,33 +85,33 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(value = "transactionManager")
-    public ApiResult addCustomer(Long id, Customer customer, int count ) {
+    public ApiResult addCustomer(Long id, Customer customer, int count) {
         ApiResult apiResult = null;
         Agent agent = agentService.findById(id);
         Date date = new Date();
-        Double price =priceRepository.findByAgent_IdAndProduct_Id(agent.getId(),customer.getProduct().getId()).getPrice();//代理商每件产品的价格
-        Double money = count*price;
-        if(agent.getBalance()-money>=0) {//当一级代理商余额足够时
-            Product product =  customer.getProduct();
+        Double price = priceRepository.findByAgent_IdAndProduct_Id(agent.getId(), customer.getProduct().getId()).getPrice();//代理商每件产品的价格
+        Double money = count * price;
+        if (agent.getBalance() - money >= 0) {//当一级代理商余额足够时
+            Product product = customer.getProduct();
             BalanceLog highbalanceLog = new BalanceLog();
             highbalanceLog.setAgent(agent);
             highbalanceLog.setCustomer(customer);
             highbalanceLog.setCreateTime(date);
             highbalanceLog.setMoney(-money);
             highbalanceLog.setExportMoney(money);
-            if(product.getParent()==null){
-            highbalanceLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+customer.getProduct().getName()+" 花费余额 "+money );}
-            else {
-                highbalanceLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+product.getParent().getName()+"-"+customer.getProduct().getName()+" 花费余额 "+money );
-            }
+            highbalanceLog.setMemo(customer.getName() + " 向 " + agent.getName() + " 购买产品 " + customer.getProduct().getName() + " 花费余额 " + money);
+//            if (product.getParent() == null) {
+//                highbalanceLog.setMemo(customer.getName() + " 向 " + agent.getName() + " 购买产品 " + customer.getProduct().getName() + " 花费余额 " + money);
+//            } else {
+//                highbalanceLog.setMemo(customer.getName() + " 向 " + agent.getName() + " 购买产品 " + product.getParent().getName() + "-" + customer.getProduct().getName() + " 花费余额 " + money);
+//            }
 
             agent.setBalance(agent.getBalance() - money);
             agentRepository.save(agent);
             customerRepository.save(customer);
             balanceLogRepository.save(highbalanceLog);
-        }
-        else {
-            if(agent.getBalance()+agent.getCommission()-money>=0){//当余额+佣金大于充值金额时
+        } else {
+            if (agent.getBalance() + agent.getCommission() - money >= 0) {//当余额+佣金大于充值金额时
 
                 BalanceLog highbalanceLog = new BalanceLog();
                 CommissionLog commissionLog = new CommissionLog();
@@ -120,12 +120,12 @@ public class CustomerServiceImpl implements CustomerService {
                 highbalanceLog.setCustomer(customer);
                 highbalanceLog.setMoney(-agent.getBalance());
                 highbalanceLog.setExportMoney(agent.getBalance());
-                highbalanceLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+customer.getProduct().getName()+" 花费余额 "+agent.getBalance() );
+                highbalanceLog.setMemo(customer.getName() + " 向 " + agent.getName() + " 购买产品 " + customer.getProduct().getName() + " 花费余额 " + agent.getBalance());
                 commissionLog.setAgent(agent);
                 commissionLog.setCustomer(customer);
-                commissionLog.setMoney(agent.getBalance()-money);
-                commissionLog.setExportMoney(money-agent.getBalance());
-                commissionLog.setMemo(customer.getName()+" 向 "+agent.getName()+" 购买产品 "+customer.getProduct().getName()+" 花费佣金 "+commissionLog.getExportMoney() );
+                commissionLog.setMoney(agent.getBalance() - money);
+                commissionLog.setExportMoney(money - agent.getBalance());
+                commissionLog.setMemo(customer.getName() + " 向 " + agent.getName() + " 购买产品 " + customer.getProduct().getName() + " 花费佣金 " + commissionLog.getExportMoney());
                 commissionLog.setCreateTime(date);
                 agent.setCommission(agent.getBalance() + agent.getCommission() - money);
                 agent.setBalance(0);
@@ -133,9 +133,8 @@ public class CustomerServiceImpl implements CustomerService {
                 customerRepository.save(customer);
                 balanceLogRepository.save(highbalanceLog);
                 commissionLogRepository.save(commissionLog);
-            }
-            else {
-                apiResult= ApiResult.resultWith(ResultCodeEnum.IMPORT_ERROR);
+            } else {
+                apiResult = ApiResult.resultWith(ResultCodeEnum.IMPORT_ERROR);
                 return apiResult;
             }
         }
@@ -157,7 +156,7 @@ public class CustomerServiceImpl implements CustomerService {
 //            agentRepository.save(agent);
 //
 //        }
-        apiResult= ApiResult.resultWith(ResultCodeEnum.SUCCESS);
+        apiResult = ApiResult.resultWith(ResultCodeEnum.SUCCESS);
         return apiResult;
     }
 
@@ -178,15 +177,10 @@ public class CustomerServiceImpl implements CustomerService {
                 Date endTime = Jsr310Converters.LocalDateToDateConverter.INSTANCE.convert(endDate);
                 predicates.add(criteriaBuilder.lessThan(root.get("createTime").as(Date.class), endTime));
             }
-            if(customerSearch.getAgentId() > 0){
+            if (customerSearch.getAgentId() > 0) {
                 predicates.add(criteriaBuilder.equal(root.get("agent").get("id").as(Long.class), customerSearch.getAgentId()));
             }
-            if (customerSearch.isABoolean()){
-                predicates.add(criteriaBuilder.equal(root.get("product").get("parent").get("id").as(Long.class), customerSearch.getProductId()));
-            }
-            else {
-                predicates.add(criteriaBuilder.equal(root.get("product").get("id").as(Long.class), customerSearch.getProductId()));
-            }
+            predicates.add(criteriaBuilder.equal(root.get("product").get("id").as(Long.class), customerSearch.getProductId()));
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         });
         return customerRepository.findAll(specification, new PageRequest(pageIndex - 1, pageSize, new Sort(Sort.Direction.DESC, "customerId")));

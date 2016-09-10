@@ -57,7 +57,7 @@ public class ProductController {
     @RequestMapping("/products")
     @ResponseBody
     public List<Product> getProductTrees() {
-        List<Product> products = productService.findTops();
+        List<Product> products = productService.findAll();
         return products;
     }
 

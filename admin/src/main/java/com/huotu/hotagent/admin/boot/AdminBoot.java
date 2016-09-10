@@ -23,7 +23,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
 
 /**
  * 工程启动时的一些必要操作
@@ -110,10 +112,15 @@ public class AdminBoot {
             deployApp.setBasePrice(28000);
 
 
-            huobanMall.addChild(saas);
-            huobanMall.addChild(saasApp);
-            huobanMall.addChild(deploy);
-            huobanMall.addChild(deployApp);
+//            huobanMall.addChild(saas);
+//            huobanMall.addChild(saasApp);
+//            huobanMall.addChild(deploy);
+//            huobanMall.addChild(deployApp);
+            productService.save(huobanMall);
+
+            productService.save(saas);
+            productService.save(saasApp);
+            productService.save(deploy);
             productService.save(huobanMall);
             //DSP广告
             Product dsp = new Product();

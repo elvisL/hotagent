@@ -85,13 +85,13 @@ public class CustomerController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/customer_edit");
         Customer customer = customerService.findById(id);
-        long productId;
-        if (customer.getProduct().getParent()!=null){//当产品有父产品时则是伙伴商场
-            productId =customer.getProduct().getParent().getId();
-        }
-        else {
-            productId = customer.getProduct().getId();
-        }
+        long productId = customer.getProduct().getId();
+//        if (customer.getProduct().getParent()!=null){//当产品有父产品时则是伙伴商场
+//            productId =customer.getProduct().getParent().getId();
+//        }
+//        else {
+//            productId = customer.getProduct().getId();
+//        }
         modelAndView.addObject("customer",customer);
         modelAndView.addObject("productId",productId);
         return modelAndView;
@@ -104,7 +104,7 @@ public class CustomerController {
     public ModelAndView huobanBuy(@AuthenticationPrincipal Agent agent,Long id) throws Exception{
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("views/customer/huoban_buy");
-        List<Product> productList  = productService.findByParentId(id);
+        List<Product> productList  = productService.findAll(); //productService.findByParentId(id);
         List<AgentProduct> agentProductList = new ArrayList<>();
         for (Product product : productList){
             if(priceService.findByAgentIdAndProductId(agent.getId(),product.getId())!=null){
@@ -158,12 +158,12 @@ public class CustomerController {
         model.addAttribute("customerSearch", customerSearch);
         List<Product>  productList = productService.findByParentId(id);
         customerSearch.setProductId(id);
-        if (productList.size()==0){//如果true则为普通产品，false为伙伴商城
-            customerSearch.setABoolean(false);
-        }
-        else{
-            customerSearch.setABoolean(true);
-        }
+//        if (productList.size()==0){//如果true则为普通产品，false为伙伴商城
+//            customerSearch.setABoolean(false);
+//        }
+//        else{
+//            customerSearch.setABoolean(true);
+//        }
         customerSearch.setAgentId(agent.getId());
         Page<Customer> customers = customerService.findAll(pageNo, SysConstant.DEFAULT_PAGE_SIZE, customerSearch);
         int totalPages = customers.getTotalPages();

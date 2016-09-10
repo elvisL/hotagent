@@ -17,7 +17,6 @@ import com.huotu.hotagent.service.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -46,14 +45,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findByProductTypeAndParent(ProductType productType,Product product) {
-        Product product1 =  productRepository.findByProductTypeAndParent(productType, product);
-        return product1;
+//        Product product1 =  productRepository.findByProductTypeAndParent(productType, product);
+//        return product1;
+        return null;
     }
 
     @Override
     public List<Product> findByParentId(Long id) {
-        List<Product>  productList = productRepository.findByParent_Id(id) ;
-        return productList;
+        return null;
     }
 
 
@@ -93,18 +92,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findTops() {
-        return productRepository.findByParent(null);
+        return null;
     }
 
     @Override
     public List<Product> findSubs() {
         List<Product> products = productRepository.findAll();
-        for(Iterator iterator = products.iterator();iterator.hasNext();) {
-            Product product = (Product)iterator.next();
-            if(product.getChildren().size()!=0) {
-                iterator.remove();
-            }
-        }
+//        for(Iterator iterator = products.iterator();iterator.hasNext();) {
+//            Product product = (Product)iterator.next();
+//            if(product.getChildren().size()!=0) {
+//                iterator.remove();
+//            }
+//        }
         return products;
     }
 }

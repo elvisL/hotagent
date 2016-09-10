@@ -1,3 +1,12 @@
+/*
+ * 版权所有:杭州火图科技有限公司
+ * 地址:浙江省杭州市滨江区西兴街道阡陌路智慧E谷B幢4楼
+ *
+ * (c) Copyright Hangzhou Hot Technology Co., Ltd.
+ * Floor 4,Block B,Wisdom E Valley,Qianmo Road,Binjiang District
+ * 2013-2016. All rights reserved.
+ */
+
 package com.huotu.hotagent.service.service.product.impl;
 
 import com.huotu.hotagent.service.common.ProductType;
@@ -16,7 +25,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by chendeyu on 2016/2/2.
@@ -126,12 +138,12 @@ public class PriceServiceImpl implements PriceService {
     public Set<Price> getBasePrices() {
         Set<Price> prices = new HashSet<>();
         List<Product> products = productRepository.findAll();
-        for(Iterator iterator = products.iterator();iterator.hasNext();) {
-            Product product = (Product)iterator.next();
-            if(product.getChildren().size()!=0) {
-                iterator.remove();
-            }
-        }
+//        for(Iterator iterator = products.iterator();iterator.hasNext();) {
+//            Product product = (Product)iterator.next();
+//            if(product.getChildren().size()!=0) {
+//                iterator.remove();
+//            }
+//        }
         for(Product p :products) {
             Price price = new Price();
             price.setProduct(p);
